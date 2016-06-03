@@ -1,0 +1,6 @@
+# Tex intermediate outputs
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
