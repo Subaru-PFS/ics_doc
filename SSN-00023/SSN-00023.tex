@@ -1,0 +1,749 @@
+\documentclass[a4paper,notitlepage]{article}
+\usepackage{ssn-format}
+\title{PFS AG and A\&G control flow and interface}
+\author{Atsushi Shimono}
+\date{2016--05--18}
+\begin{document}
+
+%\drafttrue
+\SSNID{00023}
+\SSNREV{001}
+\SSNCATEGORY{ICS}
+\SSNChangeRecord{
+    Rev.1 / First Release / 2016--05--18
+}
+\SSNReference{(none)}
+\SSNAttachment{(none)}
+\SSNWritten{Atsushi Shimono}
+
+\ssnhead
+
+\section{Abstract}
+
+This note is overview of communications around AG camera, such as command and 
+its flow or sequence, data management including status, and data conversion. 
+Also refer SSN-00006 (rev.2) for details of individual interface details to 
+external of PFS systems, both to Gen2 and MLP1. And refer PFS-SE-IPMU-00015 
+(rev.1) for calculations on propagation of errors, on measuring InR angle and 
+positioner bench tilt.
+
+\section{Overview}
+
+\subsection{Required functionality}
+
+AG cameras will be used for wide variety of functionalities, but with the same 
+hardware at different times or in parallel (or dual-use of output data). For 
+the most of usage during scientific observations, only acquired image and/or 
+measured centroid values (center position, image size) are used and error 
+values converted from these acquired values are generated and sent to other 
+systems, such as telescope or Gen2. For some operation during commissioning, 
+special data analysis will be applied on acquired images by special dedicated 
+software.
+
+\begin{itemize}
+  \item Field acquisition
+  \begin{itemize}
+    \item Right after Cobra positioning sequence, at least two single exposures 
+      (measurement and check) but not continuously
+    \item 1 to 10(??) sec single integration, up to several stars over 6 cameras
+    \item Convert with (RA, Dec, PA), send (RA, Dec) error to Gen2
+  \end{itemize}
+  \item AG
+  \begin{itemize}
+    \item While exposure (+right before/after)
+    \item Normally 1 sec integration, one star on one camera, up to several (2?) cameras?
+    \item Convert with telescope status from MLP1, send (EL, Az) error to MLP1; return dInR to Gen2 if InR error detected
+    \item Send packed image to V-LAN, and combined FITS file to Gen2
+  \end{itemize}
+  \item Focusing
+  \begin{itemize}
+    \item Before exposure, and while exposure
+    \item 10 sec integration, one pair of stars on one camera -- one at each step window, up to several(?) cameras
+    \item Calculate only focus difference, send to Gen2 if any
+  \end{itemize}
+  \item Others
+  \begin{itemize}
+    \item AG camera is considered to be used for POpt2 flexure measurement
+    \item Image output is required from AG camera, special software will be prepared for data analysis
+  \end{itemize}
+\end{itemize}
+
+\subsection{System modules}
+
+\begin{figure}[htb]
+  \begin{center}
+    \includegraphics{ag_system_modules.eps}
+  \end{center}
+  \caption{Schematic diagram for system modules on AG/A\&G and their functionalities}
+  \label{fig:system_modules}
+\end{figure}
+
+\subsection{Data conversion}
+
+\begin{itemize}
+  \item Coordinates to be used
+  \begin{itemize}
+    \item AGC -- Pixel coordinate per each AG camera: (i, j)\_k(AG)
+    \item F3C -- (Approximated) cobra bench physical coordinate: (x, y)\_F3C
+    \begin{itemize}
+      \item Named as Fixed Fiducial Fiber (F3) Coordinate
+      \item Relay point for coordinate conversion, and fixed for any observation conditions over all physical components on cobra bench
+    \end{itemize}
+    \item Delta sky coordinate: d(RA, Dec)
+    \item Telescope pointing: (EL, Az), d(EL, Az)
+    \item Others: dInR, hexapod (dz, dTheta\_x, dTheta\_y)
+  \end{itemize}
+  \item Conversions between coordinates
+  \begin{itemize}
+    \item (i, j)\_k(AG) and (x, y)\_F3C
+    \begin{itemize}
+      \item Physically mapped conversion
+      \item Parameters: temperature of each AG camera, step window
+    \end{itemize}
+    \item (x, y)\_F3C and d(RA, Dec)
+    \begin{itemize}
+      \item Use parameters the same as used for target position conversion (at ETS)
+    \end{itemize}
+    \item d(RA, Dec) to d(EL, Az)
+    \begin{itemize}
+      \item Telescope pointing will be provided from MLP1 via serial communication in 1 Hz
+      \item Convert using the latest pointing information
+    \end{itemize}
+  \end{itemize}
+  \item Coordinates to be used at (specific) software modules
+  \begin{itemize}
+    \item Input and output of AGCC will be only AGC -- (i, j)\_k(AG)
+    \item MLP1 side submodule of MAC will handle d(EL, Az)
+  \end{itemize}
+\end{itemize}
+
+\begin{figure}[htb]
+  \begin{center}
+    \includegraphics{ag_coord_conv.eps}
+  \end{center}
+  \caption{Schematic diagram for coordinates and their conversions on AG}
+  \label{fig:coord_conv}
+\end{figure}
+
+
+\section{Requirements, Conditions, and Tradeoffs}
+
+\subsection{Measured or calculated values and status management}
+
+Function of the MHS
+\begin{itemize}
+  \item Status pushed to the MHS will be archived, automatically by archiver service
+  \item Actor can register to monitor statuses from any actor, locally
+  \item (TBC) actor seems to get event on status updated
+\end{itemize}
+
+Implementation trades and requirements
+
+\begin{itemize}
+  \item Even if actor will put measured or calculated values in command, should push as status also for archive
+  \item Trigger between actors
+  \begin{itemize}
+    \item Trigger using command is on the same flow as status (or status is one format of command), so "hopefully" no back and forth
+    \item Actor can get the newest statuses at any timing
+    \begin{itemize}
+      \item So push status -> issue trigger command -> check status at commanded actor would work in timing manor
+      \item Local processing should be faster than status update (e.g. take data from device), so this event flow would not have miss-lock
+    \end{itemize}
+    \item If actor get event on status updated, we could even use status update event as trigger
+    \begin{itemize}
+      \item If this works, we will not need to issue trigger command, just status push is fine
+      \begin{itemize}
+        \item Event by status, but not by command to specific actor
+      \end{itemize}
+      \item Need to care of order to push status
+      \begin{itemize}
+        \item e.g. push measured AG object values first, and push one readout finished status
+        \item Of course, as normal multi-threading, need to care of timing over network and library
+      \end{itemize}
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+\subsection{AG camera readout}
+
+Operational requirements
+\begin{itemize}
+  \item Need both continuous operation (Auto Guide) and snapshot (field acquisition)
+  \item Continuous operation to be stopped at anytime
+  \begin{itemize}
+    \item Integration could be interrupted by observer, for various reasons, e.g. wrong operation, weather changed.
+  \end{itemize}
+  \item Operational mode need to be capable of changing at anytime
+  \begin{itemize}
+    \item AG integration period need to be changed on demand, e.g. by sky condition
+  \end{itemize}
+\end{itemize}
+
+Implementation trades
+\begin{itemize}
+  \item Two layered operation -- sequence to group cameras
+  \begin{itemize}
+    \item To keep isochronous operation for exposure, need to have some additional layer for setup
+    \item In any way, to keep timing of "exposure start" among cameras with different exposure time is quite difficult, we might not need to consider of.
+    \begin{itemize}
+      \item Readout time is fixed for full image transfer, so we might be possible to do something, but quite not easy
+    \end{itemize}
+  \end{itemize}
+  \item Will "partial readout" be used? -- might be yes??
+  \begin{itemize}
+    \item AG camera is not possible to readout two partial region, only one rectangular area is selectable
+    \item Continuous focusing check will need two separated object, at both stepped field
+    \item On field acquisition, we’d better to readout full frame?, for safe and/or operator use
+    \item AG could be fine with a single object, normally.
+    \begin{itemize}
+      \item It is CCD, so gain will not much, but have some gain on cost (of readout time), fraction need to be studied
+    \end{itemize}
+    \item In any operation, we need to specify spot measurement region (and its origin?), we can use them as region definition for partial readout
+    \item In total, gain by implementation of partial readout would not be much
+    \begin{itemize}
+      \item Region for spot measurement could be used for partial readout definition, so small penalty as command interface
+      \begin{itemize}
+        \item Like, just add a flag for partial readout
+      \end{itemize}
+      \item Readout time could differ a bit by position of partial readout on the detector, need to think on timing (if we take specific interval way)
+      \begin{itemize}
+        \item Full frame readout will have fixed time, we can specify exposure time considering readout by xx sec interval minus xx sec readout to xx sec exposure, but we might not be so serious for fixed interval operation
+      \end{itemize}
+      \item Output image file would be fixed size.
+      \item So, it depends on implementation of AG camera controller.
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+\subsection{Image handling}
+
+Constraints and background
+\begin{itemize}
+  \item ICS has one shared storage (via NFS), all image data will be shared via NFS storage
+  \begin{itemize}
+    \item Only filename will be shared over the MHS
+  \end{itemize}
+  \item Push to external will be transferred from NFS storage, directly (FTP or push) or read \& push by software module
+\end{itemize}
+
+Operational requirements
+\begin{itemize}
+  \item Sending to V-LAN has 3 channels (RPC targets) with 1s to 255sec interval, which will be specified via serial communication to MLP1
+  \begin{itemize}
+    \item Interval is defined as "send image by each XX step"
+  \end{itemize}
+  \item Sending to Gen2 by multiple HDU FITS file
+  \begin{itemize}
+    \item By request or at all time is not well defined, but assuming at all time
+    \item Not general way (AG FITS files have no specified frame ID), but a special way for AG FITS files
+  \end{itemize}
+\end{itemize}
+
+Implementation trades
+\begin{itemize}
+  \item Format of image saved by AGCC
+  \begin{itemize}
+    \item It is 16bit, so FITS(-lied) data structure should be sole option
+    \item One file per camera or composited file (per sequence or at the time)?
+    \begin{itemize}
+      \item Readout from AG cameras and output to telescope are not synced
+      \item For archive and processing, both could be doable, but one per camera might easier to check "the camera"
+      \begin{itemize}
+        \item Multiple HDU FITS is possible, but easy to find with "filename"
+        \item Or keep HDU ID for specific camera unique: HDU 1 for camera 1, HDU 2 for camera 2, … etc., at any time / any file
+      \end{itemize}
+      \item Using composited files makes operation simpler
+      \begin{itemize}
+        \item To Gen2, can send the file directly
+        \item To V-LAN, conversion is simple from one FITS file to one image, and can get values from FITS header
+      \end{itemize}
+    \end{itemize}
+    \item Size is around 2MB per HDU, up to \~43GB/h at most -- 1Hz and 6 cameras
+    \begin{itemize}
+      \item Overhead of null image would be small, like 0x0 or 1x1 image will be only the smallest header size
+    \end{itemize}
+    \item So, composited file seems to be the best option, for ease of operation
+  \end{itemize}
+  \item To send images to external system -- V-LAN and Gen2
+  \begin{itemize}
+    \item V-LAN is better to have dedicated thread
+    \begin{itemize}
+      \item V-LAN timing is not synchronized to instrument operation
+      \item Target network is specified LAN, but not sheared with other components, this makes hardware limitation
+      \item At each time to send image to V-LAN, read specified image files, composite and send as RPC
+    \end{itemize}
+    \item Sending to Gen2 might be both AG and focus check (TBD)
+    \begin{itemize}
+      \item Need to compose images into multiple HDU FITS file, if we select one file per one camera option
+      \item Having one module to perform both "compose into FITS file" and "push to Gen2" is easier to implement?
+      \begin{itemize}
+        \item Command "send image to Gen2" with file names on NFS storage
+        \item Depends on how integration to g2cam is difficult, by means of threading etc.
+      \end{itemize}
+    \end{itemize}
+  \end{itemize}
+  \item One file per camera or one FITS over all cameras?
+  \begin{itemize}
+    \item If AG camera controller is on a single actor, one FITS over all cameras is simpler
+    \begin{itemize}
+      \item Current configuration is yes, not sure for dependency to hardware design
+      \begin{itemize}
+        \item e.g. need to have more than one USB conversion connections to AG cameras
+        \item If we will have multiple AG actor, timing (synchronization) among actors could be more difficult
+      \end{itemize}
+    \end{itemize}
+    \item It could be possible to design actors to dealt with both, or say to design interfaces among actors
+    \begin{itemize}
+      \item Better to bear in mind on this, in any case
+    \end{itemize}
+  \end{itemize}
+  \item FITS header
+  \begin{itemize}
+    \item Header shall include normal operational parameters at least, like time taken, exposure time
+    \item WCS is fine with one at the "AG camera" field center?
+    \begin{itemize}
+      \item Differential of distortion is \~1\% level, and will be not harmful for analysis
+    \end{itemize}
+    \item Measured values and region configurations better to be included
+    \begin{itemize}
+      \item Only values on AGC or F3C are fine.
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+\subsection{"Origin point" for auto guide}
+
+Background
+\begin{itemize}
+  \item PFS need to stop telescope movement during Cobra positioning, therefore need to perform fine field acquisition after Cobra positioning and final MCS image acquisition finished.
+  \begin{itemize}
+    \item So, procedure will be "Cobra positioning finished" -> "fine field acquisition" -> "AG start"
+    \item If AG starts right after field acquisition, isn’t it possible to use the position at first image as origin of guiding?
+    \begin{itemize}
+      \item Of course need to specify an object at certain area (or position w/ small error circle)
+      \item Error from fine adjustment calculation of various operational parameters, e.g. ADC, step window, could have error, but these are applied on "the image taken by AG camera". 
+      \item In any case, we need to calculate fine target positions with adjustment calculation, so this will not help consideration of (minor) errors
+    \end{itemize}
+  \end{itemize}
+  \item How much recalculation of position is needed, is unclear
+  \begin{itemize}
+    \item Telescope status changes time by time, although most of items (e.g. telescope pointing direction, ADC position) will change slowly but not in a sudden change
+    \item This should be a trade of "change" and effect to accuracy as "error"
+  \end{itemize}
+  \item Open tracking in a few second have an error in \~<10 mas level, and negligible
+  \item Differential difference of spatial error signal on conversion is 2nd order displacement, and well small than measurement accuracy
+  \begin{itemize}
+    \item Atmospheric dispersion difference per target wavelength, or differential movement against pointing target are able to write only as a function of telescope status , and can get values from static lockup table.
+    \item So, d(RA, Dec) x scale factor (at AG camera point) + correction from these configurational errors, need to be calculated.
+  \end{itemize}
+\end{itemize}
+
+Implementation trades
+\begin{itemize}
+  \item Error trade is between centroid measurement of acquired image, and calculation error of target position
+  \begin{itemize}
+    \item Calculation error of target position includes error in operational parameter
+    \item Seems in similar range
+  \end{itemize}
+  \item If target position calculation has error, first AG image will act as the final fine field acquisition
+  \begin{itemize}
+    \item Of course, we can use the same object for both the final field acquisition and auto guide star
+    \item (this should be better on error propagation point of view??)
+  \end{itemize}
+  \item So, just use position (centroid) of object taken in the first frame as the guiding target
+\end{itemize}
+
+\subsection{Combining multiple error signals into one output for field acquisition or AutoGuide}
+
+Background
+\begin{itemize}
+  \item Telescope tracking error need to be fixed on the sky coordinate, and we need to convert measured error on AG camera pixel coordinate into it.
+  \item If only with one object for measurement, conversion of error vector is possible to be done with local conversion matrix, but not simple when we have more than two objects.
+  \begin{itemize}
+    \item Ideally, combining, simple or weighted average, on the sky coordinate is better on this conversion point of view.
+    \begin{itemize}
+      \item But not simple for other errors and its propagations.
+    \end{itemize}
+    \item For distortion, conversion factor difference between innermost and outermost of AG camera detector is about 0.5\%
+    \begin{itemize}
+      \item 251.19mm at 0.76deg (330.51 mm/deg), 247.63mm at 0.75deg (330.18 mm/deg), 244.01mm at 0.74deg (329.85 mm/deg), 240.56mm at 0.73deg (329.53 mm/deg), 237.03mm at 0.72deg (329.21 mm/deg), 233.52mm at 0.71deg (328.91 mm/deg), 330.51/328.91=1.0049
+    \end{itemize}
+    \item Differential conversion difference from other factors might be smaller than this.
+    \begin{itemize}
+      \item Atmospheric dispersion need to be considered per each origin position and is a correction to origin but not coordinate conversion. 
+    \end{itemize}
+    \item If we combine at F3C and convert to the sky, we might use value of representative point (e.g. radii of AG camera center), and it makes differential error.
+    \begin{itemize}
+      \item From distortion calculation, 0.25\% in maximum.
+    \end{itemize}
+    \item For calculation of InR error, distortion is mainly in radial direction, so error propagation will be smaller than parallel displacement
+  \end{itemize}
+  \item Conversion of target object position from delta sky delta-(RA, Dec) to F3C or AGC is not an issue
+  \begin{itemize}
+    \item The same procedure as conversion for normal target object
+    \item We need to care of wavelength of AG camera filter for AG objects, but in any case we need to think about wavelength dependency
+  \end{itemize}
+\end{itemize}
+
+Implementation trades
+\begin{itemize}
+  \item Trade between
+  \begin{itemize}
+    \item Combine error vector on F3C and convert error vector into sky
+    \begin{itemize}
+      \item F3C is equivalent to AGCC, just rotate and magnification
+    \end{itemize}
+    \item Convert data point on AGCC to sky, calculate error vector and combine at sky coordinate
+  \end{itemize}
+  \item For AG, \~1\% of error vector is small enough, so can take either way
+  \begin{itemize}
+    \item At most \~100mas level error shall be detected during auto guide, so 1mas is well smaller than measurement error.
+  \end{itemize}
+  \item For field acquisition
+  \begin{itemize}
+    \item Fiber core is around 1arcsec at field edge, and we need to fix position at level of \~2\% (\~20mas, \~2.5um); estimated error is one order lower
+    \item In reality, if we detect large pointing error like >5 arcsec, we would execute field "fine" acquisition after first rough acquisition
+    \item Therefore, we can take either way.
+  \end{itemize}
+\end{itemize}
+
+
+\subsection{Synchronization between AG camera readout (exposure) and MLP1 interface}
+
+Background
+\begin{itemize}
+  \item AG camera readout and MLP1 interface is not synced
+  \begin{itemize}
+    \item MLP1 communication is invoked from MLP1, like in 1Hz, and AG camera runs continuously by specified exposure time and readout time by hardware
+    \item Conversion parameters related on telescope status is provided from MLP1 via serial communication, and conversion from d(RA, Dec) to d(EL, Az) need to use telescope status provided from MLP1
+    \begin{itemize}
+      \item Origin of calculation (EL, Az) changes by time, so need to use the newest value
+    \end{itemize}
+  \end{itemize}
+  \item Guide error signal d(EL, Az) will be put into telescope movement with some delay function
+  \begin{itemize}
+    \item Except for first guide error signal -- to catch the target asap
+  \end{itemize}
+\end{itemize}
+
+Implementation ideas and trades
+\begin{itemize}
+  \item Just use the latest value from components
+  \begin{itemize}
+    \item Error signal need to be renewed by 1Hz -- period of serial communication to MLP1, which is well short
+    \item Data output interval from AG camera could be the largest, timing is better to be considered at the later stage -- at module to send serial data
+    \begin{itemize}
+      \item Error data to serial communication has timestamp of error observed, so delay will be considered at MLP1
+    \end{itemize}
+  \end{itemize}
+  \item Conversion at (serial communication) interface module to MLP1
+  \begin{itemize}
+    \item Most restricted (or frequent) timing is at serial interface to MLP1
+  \end{itemize}
+\end{itemize}
+
+
+\section{Interface design}
+
+\subsection{Functional requirements on interface design}
+
+\subsubsection{IIC}
+\begin{itemize}
+  \item IIC is the commander of sequences, internal operation should be self sustained
+  \item Interruption will be commanded from IIC (e.g. stop of sequence), just need to deal with hardware error
+\end{itemize}
+
+\subsubsection{AGCC}
+\begin{itemize}
+  \item Accept multiple sequence in multiple commands
+  \item Measure spot in specified regions, up to two per camera
+  \item Push status per sequence
+  \begin{itemize}
+    \item e.g. stat\_seq1 = x,y,statistics,….. (12 placeholders)
+  \end{itemize}
+  \item Save (full size) images to storage, push the newest filename as status
+  \begin{itemize}
+    \item e.g. fits\_seq1 = agcc\_1\_20160222091502.fits
+    \item If separated files option, this will be fits\_cam1 etc.
+  \end{itemize}
+\end{itemize}
+
+\subsubsection{MAC}
+\begin{itemize}
+  \item Two thread: AGCC side and MLP1 side
+  \begin{itemize}
+    \item Might need to have V-LAN thread, but TBD
+  \end{itemize}
+  \item Have one SHM to share between two threads -- AGCC-side and MLP1-side
+  \begin{itemize}
+    \item V-LAN and Gen2 is just push from actor, one way sharing of status is a requirement
+  \end{itemize}
+  \item Once AGCC thread get status from AGCC, write it to SHM
+  \begin{itemize}
+    \item And send to Gen2, if required (TBC)
+    \begin{itemize}
+      \item AG FITS files to Gen2 is a single way stream from actor to Gen2
+      \begin{itemize}
+        \item Both even for FTP option or data push option
+      \end{itemize}
+    \end{itemize}
+  \end{itemize}
+  \item MLP1 thread accept command from MLP1 and reply
+  \begin{itemize}
+    \item Also need to continue sending image to V-LAN (another thread?)
+    \begin{itemize}
+      \item Network is a different, but on the same machine
+    \end{itemize}
+    \item Convert the newest error status in SHM using telescope status at the time, reply to serial
+    \begin{itemize}
+      \item This can have up to 1 timing mismatch of AGCC output (e.g. updated right after SHM read)
+      \item No timing mismatch on telescope point of view
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+\subsection{AGCC}
+
+Setting regions of analysis (Note: Readout is full-frame, not sub-region.)
+
+\begin{itemize}
+  \item SetRegion camera\_id=X,regions=x1,y1,d1,x2,y2,d2
+  \begin{itemize}
+    \item x, y = center of the sub-region (box), d = box width (square)
+    \item Regions will be reused on multiple run?
+    \item Max. two sub-regions can be defined per camera.
+  \end{itemize}
+\end{itemize}
+
+Image acquisition
+\begin{itemize}
+  \item StartSequence seq\_id=X,exposuretime=X,count=X,cameras=1,2,3
+  \item StopSequence seq\_id=X
+  \begin{itemize}
+    \item "seq\_id" is an ID of sequence, 1 to 6, need to choose the smallest available number by caller 
+    \item If running seq\_id or camera IDs already in use are specified, need to return error
+    \item "exposuretime" is a real integration time without readout time
+    \item Count: The total number of exposures to be taken. If this is set 0, the sequence continues until a stop command is sent explicitly.
+    \begin{itemize}
+      \item Even before reached to count number, sequence need to stop by StopSequence command
+    \end{itemize}
+    \item Internally, Frame ID need to be counter -- Integer incremented from 1 as an image is taken.
+    \begin{itemize}
+      \item Could be used for output image file name
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+Configuration
+\begin{itemize}
+  \item SetTemperature target=X, setting camera detector temperature
+  \begin{itemize}
+    \item Could be identical over all cameras??
+  \end{itemize}
+  \item To know which sequence or camera is active?
+  \begin{itemize}
+    \item InUseSequence sequence\_id=X
+    \item InUseCamera camera\_id=X
+    \item Better to check by status (TBC)
+  \end{itemize}
+  \item etc …
+\end{itemize}
+
+Output as status
+\begin{itemize}
+  \item Spot measurement results per each exposure
+  \begin{itemize}
+    \item "Spot" = Each stellar image
+    \item To characterize the stellar image by the position, size, elongation, etc. The list of parameters are to be fully defined.
+    \item stat\_seq1 x1,y1,dx1,dy1,…… (max. 2 stars per camera -- max. 12 sets in total)
+    \item fits\_seq1 <filename>
+  \end{itemize}
+  \item Telemetry for periodical update
+  \begin{itemize}
+    \item By several minutes interval
+  \end{itemize}
+  \item Including temperature of each detector, sequence under running
+\end{itemize}
+
+
+\subsection{MAC}
+
+MAC will only handle AutoGuide sequence
+\begin{itemize}
+  \item TBC for synchronization between AG and focusing
+  \begin{itemize}
+    \item Like using the same sequence both for AG and focusing, if estimated exposure time is the same
+    \item Requirement on object (S/N, object per detector) is quite different, might not be the case
+  \end{itemize}
+  \item Start of AG will be commanded from both IIC and MLP1
+  \begin{itemize}
+    \item From IIC, start for sequence of exposure will be commanded
+    \item From MLP1, a flag for outputting guide error signal will be provided
+  \end{itemize}
+  \item Sharing information pushed from external via SHM over MAC actor is enough
+  \begin{itemize}
+    \item As tradeoff study, no serious timing is required
+    \item Better to push information from MLP1 as statuses over MHS, for monitoring and debugging purpose
+    \begin{itemize}
+      \item How frequently is a question. Not need to push by 1Hz (update interval from MLP1)?
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+Interface over the MHS is just to accept commands and to get status update
+\begin{itemize}
+  \item As mentioned, pushed status updates could be taken as command
+  \item Auto guide will follow starting of a sequence, accept start and stop with sequence ID is enough
+  \begin{itemize}
+    \item Command from IIC as the same timing as commanding to AGCC
+  \end{itemize}
+\end{itemize}
+
+Interface to the MLP1 is in fixed interval operation
+\begin{itemize}
+  \item 1Hz stream continues all over the time, including active or inactive flag (from MLP1)
+  \item Conversion need to be performed using the newest parameter both from MLP1 and AGCC
+  \begin{itemize}
+    \item Trigger from MLP1
+  \end{itemize}
+\end{itemize}
+
+Interface to V-LAN and Gen2 is just push from MAC
+\begin{itemize}
+  \item To V-LAN, need to sync with MLP1 parameter
+  \begin{itemize}
+    \item But no other trigger than MLP1 parameter
+    \item On trigger, composite the newest data into RPC image, and send to V-LAN
+  \end{itemize}
+  \item To Gen2, push every FITS file
+  \begin{itemize}
+    \item Could have separate command via IIC, but just push from MAC to Gen2 without any reply
+  \end{itemize}
+\end{itemize}
+
+
+\section{System sequence implementation}
+
+\subsection{Field acquisition}
+
+Field acquisition is simple as a sequence, just go and back without any interlock to other subsystems. This will be repeated many times, at least two -- first measurement and last validation of field acquisition. 
+
+Sequence implementation
+
+\begin{itemize}
+  \item Gen2 -> IIC: specific DD command to execute field acquisition (TBD)
+  \begin{itemize}
+    \item This DD command need to be defined in any case for system performance check or validation and for emergency use, but in normal operation IIC sequence to point a next target will invoke this sequence, in automatic operation.
+    \item Since there is no internal interaction nor interlock to other sequence of IIC, define this sequence as command in IIC, and call from upper level sequence or DD command exporter could work.
+  \end{itemize}
+  \item IIC: check status of AGCC, target camera is not running sequence
+  \item IIC -> AGCC: SetRegion 
+  \begin{itemize}
+    \item specify target object area
+  \end{itemize}
+  \item IIC -> AGCC: StartSequence with count=1
+  \begin{itemize}
+    \item Just one time read, since need to move telescope pointing after measurement
+  \end{itemize}
+  \item AGCC -> IIC (status, command return)
+  \item IIC: convert from d(i, j)\_AGC to d(RA, Dec)\_sky and dInR, through d(x, y)\_F3C
+  \begin{itemize}
+    \item Every small differential errors need to be counted, like difference of wavelength between AGC filter and target. But these should be calculated by ETC before setting reference object position for field acquisition, following optimization order from observer.
+    \item If only one object is specified, only d(RA, Dec)\_sky will be calculated, with setting dInR = 0.
+    \item From trade study, we can simply convert to d(RA, Dec) only using error vector
+  \end{itemize}
+  \item IIC -> Gen2: push FITS image of AG cameras
+  \begin{itemize}
+    \item Even this sequence is called from IIC sequence, an acquired FITS image need to be pushed to Gen2
+  \end{itemize}
+\end{itemize}
+
+
+\subsection{Focus check}
+
+Focus check will run both before exposure start and during exposure. Since we need well stabilized image, we’d better to get image under AutoGuide, but never under slewing like field acquisition. Output to Gen2 will be a special flow, but will be handled by specific handler in IIC or g2t, this sequence only need to push values to IIC. 
+We need two objects in each stepped part of the same AG camera detector, and need at least three AG cameras for field tilt detection.
+
+Sequence implementation
+\begin{itemize}
+  \item Gen2 -> IIC: specific DD command to execute this sequence
+  \begin{itemize}
+    \item Similar to field acquisition
+  \end{itemize}
+  \item IIC: check status of AGCC, target camera is not running sequence
+  \item IIC -> AGCC: SetRegion 
+  \begin{itemize}
+    \item specify target object area
+  \end{itemize}
+  \item IIC -> AGCC: StartSequence with count=x
+  \begin{itemize}
+    \item Count will be 0 (continuous) normally, we will keep running focus check during exposure, and that will continue once we start focus check before exposure starts
+  \end{itemize}
+  \item AGCC -> IIC (as status)
+  \item IIC: convert from two spot sizes to focus error value
+  \begin{itemize}
+    \item Also push calculate result to status for archive
+    \item Judge whether focus movement is required or not
+  \end{itemize}
+  \item IIC -> Gen2: command to move hexapod if required
+  \begin{itemize}
+    \item From IIC (or sequencer), just call command provided in g2t or IIC for Gen2 callback flow
+  \end{itemize}
+  \item Gen2 (or sequence in IIC) -> IIC: stop focus check continuous operation
+\end{itemize}
+
+
+\subsection{AutoGuide}
+
+Auto guide will be consisted with various modules, due that system need to connect to various external systems, but mostly these are just output without interaction, so sequence or data flow around AGCC will be simple. Also timing for these data flow is mostly one direction (and simple!), except for MLP1 connection. 
+
+Sequence implementation
+\begin{itemize}
+  \item Gen2 -> IIC: specific DD command to execute this sequence (similar to others)
+  \begin{itemize}
+    \item We might not run only Auto Guide sequence except some special case, but could use during commissioning. 
+  \end{itemize}
+  \item IIC: check status of AGCC, target camera is not running sequence
+  \item IIC -> AGCC: SetRegion 
+  \begin{itemize}
+    \item specify target object area
+  \end{itemize}
+  \item IIC -> AGCC: StartSequence with count=x
+  \begin{itemize}
+    \item Count will be 0 (continuous)
+  \end{itemize}
+  \item IIC -> MAC: StartAG with seq=x
+  \begin{itemize}
+    \item Sequence ID is the same as one commanded to AGCC
+  \end{itemize}
+  \item Continuous operation
+  \begin{itemize}
+    \item AGCC -> MHS (as status)
+    \item MAC: monitor AGCC status update, send status to MLP1, send image to V-LAN and Gen2
+    \begin{itemize}
+      \item MAC should push values from MLP1 (telescope status) to MHS in some period?
+      \item Communication to MLP1 is continuous, at any time.
+    \end{itemize}
+  \end{itemize}
+  \item Gen2 -> IIC or IIC internally: stop AG
+  \begin{itemize}
+    \item In normal sequence, triggered on shutter closed timing
+  \end{itemize}
+  \item IIC -> AGCC, MAC: StopSequence
+\end{itemize}
+
+
+\begin{figure}[htb]
+  \begin{center}
+    \includegraphics{ag_autoguide_sequence.eps}
+  \end{center}
+  \caption{Command sequence on Auto Guide operation}
+  \label{fig:autoguide_sequence}
+\end{figure}
+
+
+
+
+
+\end{document}
+
