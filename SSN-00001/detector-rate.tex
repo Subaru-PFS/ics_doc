@@ -1,0 +1,124 @@
+\documentclass[a4paper,notitlepage]{article}
+\usepackage{ssn-format}
+\title{Data rate from reading out detectors}
+\author{PFS ICS Team}
+\date{2012--08--28}
+\begin{document}
+
+\SSNID{00001}
+\SSNREV{001}
+\SSNCATEGORY{DCR, IIC}
+\SSNChangeRecord{Rev.001 / First Release / 2012--08--28}
+\SSNReference{(none)}
+\SSNAttachment{(none)}
+\SSNWritten{PFS ICS Team}
+
+\ssnhead
+
+\section{Abstract}
+
+To design computer hardware system including network connections for detector 
+system of PFS, we need to study how much data rate is assumed for the entire 
+system. 
+In this study report, we will summarize estimated data rates for detector 
+systems and perform some trade-off study of existing (consumer) 
+hardware system. 
+
+
+\section{Operational condition and estimated data rate}
+
+\subsection{Operational condition}
+
+Based on the CoDR Technical Document of the PFS project, 
+operational conditions are summarized as Table.~\ref{datarate-cond}.
+
+\begin{table}[htb]
+\caption{Operational conditions of detectors}
+\label{datarate-cond}
+\begin{center}
+\begin{tabular}{c||r|r|l}
+   & CCD & IR detector & unit \\
+  \hline
+  Chip format & 2k x 4k (8M) & 4k x 4k (16M) & pixels \\
+  Chip per dewar & 2 & 1 & chips / dewar \\
+  Total dewars in system & 8 & 4 & dewars \\
+  Readout channel & 4 & 32 & channels / chip \\
+  Readout speed & 75kHz & 300kHz & (1000 pixels / sec) \\
+  \hline
+  Datasize per chip & 16MB & 32MB & per chip \\
+  Total datasize per frame & 256MB & 128MB & (all spectrograph) \\
+\end{tabular}
+\end{center}
+\end{table}
+
+
+\subsection{Estimated data rate for CCD}
+
+For CCD, since all readout will be destructive, we will readout only once 
+per exposure. This readout will occur just after its exposure.
+
+Total data size is 256MB per exposure which will be readout in 28.0 sec, 
+and estimated data rate is 73 Mbps in total (all spectrographs).
+
+
+\subsection{Estimated data rate for IR detector}
+
+For IR detector, we will use two methods: Fowler sampling, up-the ramp. 
+Still by data rate point of view, these two are the same -- we can concentrate 
+on the maximum data rate. This ignores costs for real time data processing for 
+finalizing as one data frame, though. 
+
+The maximum data rate is one for up-the ramp sampling, which is continuous 
+data flow with the specified readout speed. 
+With the readout speed of 300 kHz, 9.6M pixels per sec per detctor will be 
+read, and this corresponds to data flow of 153.6 Mbps per detector. 
+In total (4 detectors in 4 spectrograph), required data bandwidth is 
+614 Mbps.
+
+\subsection{Network connection for component control}
+
+From data rate point of view, required bandwidth of network connection for 
+detector system (and spectrograph system) is quite low amount comparing to 
+the other connections described in previous sections. 
+
+
+\section{Candidates of computer hardware system}
+
+\subsection{Network connection}
+
+Currently, since we have not yet fixed our control hardware topology design, 
+we cannot fix network connection requirement. 
+Since the most strict requirement on network connections will be lines 
+between the IR 3rd floor of the telescope dome and the conputer room at the 
+control building, this section will concentrate on this point. 
+
+Assuming direct 1Gbps fiber connection between readout electroncis system 
+and data storage computer, effective data rate will be 500Mbps or so per 
+connection. 
+For final images without up-ramp sampling of IR detectors, 
+data rate in total will be less than this. 
+To include up-ramp sampling of 614Mbps, 
+we might be better to have multiple (at least two) 1Gbps fiber connection 
+considering safety buffer and worst case, such as having one 1Gbps fiber 
+connection per two spectrographs and two in total. 
+Since up-ramp data flow is only during exposure, we can share these connections 
+for CCD readout. 
+
+
+\subsection{Temporary storage}
+
+For storage side, (continuous writting of) 0.6Gbps is not a problem. 
+We can have many options, including
+
+\begin{itemize}
+  \item Local temporary storage (SSD etc.) per each data storage computer
+  \item Large and high performance data storage server shared by entire system
+\end{itemize}
+
+To make the final hardware design (or its proposal), 
+we need to perform trade-off studies more in detail, including further back-end 
+systems such as a FITS handling system. 
+
+
+\end{document}
+
