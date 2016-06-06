@@ -1,0 +1,182 @@
+%!PS-Adobe-3.0 EPSF-3.0
+%%Creator: Atsushi Shimono
+%%Title: TEMPLATE
+%%CreationDate: Sun Jan 16 00:00:00 2005
+%%BoundingBox: 0 0 500 350
+%%DocumentData: Clean7Bit
+%%LanguageLevel: 2
+%%EndComments
+%%%BeginProlog
+%%%EndProlog
+%%Page: 1 1
+
+/L {moveto rlineto currentpoint stroke moveto} bind def
+/C {rlineto currentpoint stroke moveto} bind def
+/D {moveto 0 0 rlineto currentpoint stroke moveto} bind def
+/LW {5 mul setlinewidth} bind def
+/BP {newpath moveto} bind def
+/LP /rlineto load def
+/EP {rlineto closepath eofill} bind def
+/MB {gsave translate MFAC dup scale 1 setlinewidth 2 setlinecap 0 setlinejoin newpath} bind def
+/ME /grestore load def
+/CC {0 360 arc stroke} bind def
+/FC {0 360 arc fill} bind def
+/G {1024 div setgray} bind def
+/K {3 -1 roll 1024 div 3 -1 roll 1024 div 3 -1 roll 1024 div setrgbcolor} bind def
+
+/B {CS newpath moveto} def
+/F {moveto 0 setlinecap} def
+/C {CS M 1 1 3 {pop 3 1 roll 255 div} for SET_COLOUR} def
+/CS {currentpoint stroke} def
+/CF {currentpoint eofill} def
+/L {lineto} def /l {rlineto} def /M {moveto} def /m {rmoveto} def
+/P {currentpoint 0 1 rlineto stroke moveto} def
+/T {currentlinecap exch 1 setlinecap show setlinecap} def
+errordict /nocurrentpoint {pop 0 0 M currentpoint} put
+/SET_COLOUR statusdict begin /processcolors where
+  {pop processcolors 1 gt} {false} ifelse
+  {(setrgbcolor)} {(pop pop pop)} ifelse cvx end def
+/cshow {CS M dup stringwidth pop -2 div 0 m show} def
+
+/Helvetica findfont
+10 scalefont setfont
+
+gsave
+
+0.2 LW
+
+% SOSS
+200 300 M 100 0 l 0 48 l -100 0 l 0 -48 l
+250 339 M (<<device>>) cshow
+250 328 M (:SOSS) cshow
+210 305 M 80 0 l 0 20 l -80 0 l 0 -20 l
+250 310 M (:Gen2 Servers) cshow
+
+% IIC
+150 150 M 200 0 l 0 125 l -200 0 l 0 -125 l
+250 260 M (<<device>>) cshow
+250 248 M (:ICS Central Server) cshow
+170 215 M 160 0 l 0 25 l -160 0 l 0 -25 l
+250 225 M (:IIC) cshow
+170 185 M 160 0 l 0 25 l -160 0 l 0 -25 l
+250 195 M (:MHS) cshow
+170 155 M 70 0 l 0 25 l -70 0 l 0 -25 l
+205 165 M (:EAD) cshow
+260 155 M 70 0 l 0 25 l -70 0 l 0 -25 l
+295 165 M (:ELD) cshow
+
+% Storage
+stroke
+gsave
+190 80 translate
+1 0.2 scale
+60 60 60 CC
+stroke
+grestore
+190 90 M 0 -40 l
+310 90 M 0 -40 l
+250 70 M (<<device>>) cshow
+250 58 M (:Storage) cshow
+stroke
+gsave
+190 40 translate
+1 0.2 scale
+60 60 60 180 360 arc stroke
+stroke
+grestore
+
+% line
+250 275 M 0 25 l
+255 280 M (<<RPC>>) show
+250 104 M 0 46 l
+255 115 M (<<iSCSI ?>>) show
+
+% DCR
+ 5 260 M 120 0 l 0 60 l -120 0 l 0 -60 l
+65 305 M (<<device>>) cshow
+65 290 M (:DCR  \(1 .. 4\)) cshow
+10 265 M 30 0 l 0 20 l -30 0 l 0 -20 l
+25 270 M (CCD) cshow
+45 265 M 30 0 l 0 20 l -30 0 l 0 -20 l
+60 270 M (CCD) cshow
+85 265 M 30 0 l 0 20 l -30 0 l 0 -20 l
+100 270 M (IR) cshow
+
+% SMC
+ 5 210 M 120 0 l 0 40 l -120 0 l 0 -40 l
+65 235 M (<<device>>) cshow
+65 220 M (:SMC) cshow
+
+% FIS
+ 5 160 M 120 0 l 0 40 l -120 0 l 0 -40 l
+65 185 M (<<device>>) cshow
+65 170 M (:FIS) cshow
+
+% AGC
+395 240 M 100 0 l 0 40 l -100 0 l 0 -40 l
+445 265 M (<<device>>) cshow
+445 250 M (:AGC) cshow
+
+% PFICS
+395 155 M 100 0 l 0 75 l -100 0 l 0 -75 l
+445 215 M (<<device>>) cshow
+445 200 M (:PFICS) cshow
+400 160 M 90 0 l 0 35 l -90 0 l 0 -35 l
+445 180 M (:FFIS) cshow
+445 165 M (:MPS, COBRA) cshow
+
+% MCS
+395  70 M 100 0 l 0 40 l -100 0 l 0 -40 l
+445  95 M (<<device>>) cshow
+445  80 M (:MCS) cshow
+
+125 290 M 25 -40 l
+125 230 M 25 -10 l
+125 190 M 25  20 l
+
+350 250 M 45 10 l
+350 220 M 45 -30 l
+350 190 M 45 -100 l
+
+stroke
+[2 2] 0 setdash
+
+% SVC
+ 5 110 M 120 0 l 0 40 l -120 0 l 0 -40 l
+65 135 M (<<device>>) cshow
+65 120 M (:SVC) cshow
+
+% SPF
+ 5  60 M 120 0 l 0 40 l -120 0 l 0 -40 l
+65  85 M (<<device>>) cshow
+65  70 M (:SPF) cshow
+
+125 130 M 25 60 l
+125  80 M 25 90 l
+
+
+stroke
+
+[4 4] 0 setdash
+
+135 340 M 0 -320 l
+70 330 M (IR 3rd Floor) cshow
+
+365 140 M 0 -120 l
+365 140 M 130 0 l
+435 40 M (Cs cargo) cshow
+
+250 20 M (Ctrl bldg. 2nd Fl) cshow
+
+stroke
+
+[8 8] 0 setdash
+
+365 340 M 0 -200 l 
+435 310 M (\(or POpt2\)) cshow
+
+
+stroke
+showpage
+grestore
+%%EOF

@@ -1,0 +1,363 @@
+\documentclass[a4paper,notitlepage]{article}
+\usepackage{ssn-format}
+\title{List of ICS subsystems and its controllable hardwares}
+\author{PFS ICS}
+%\date{201X--XX--XX}
+\begin{document}
+
+\drafttrue
+\SSNID{00000}
+\SSNREV{000}
+\SSNCATEGORY{ICS}
+\SSNChangeRecord{}
+\SSNReference{(none)}
+\SSNAttachment{(none)}
+\SSNWritten{}
+
+\ssnhead
+
+\section{Abstract}
+
+This is not well organized ICD, but is written to have mutual understanding 
+for entire PFS ICS subsystems kept updated with hardware development. 
+Each interface shall be defined as a separated ICD in detail, and link to 
+them will be included in this document. 
+
+For this purpose, this document will contain following items: 
+\begin{itemize}
+  \item brief description per each subsystem
+  \item summary of controllable hardware instances
+  \item relationship to other subsystems, including database and storage
+\end{itemize}
+
+\section{Summary: List of subsystems and relations}
+
+\subsection{Summary list}
+
+Table.~\ref{summary-list-subsystem} 
+shows list of subsystems, 
+place and category (detector, motor etc) of its hardware, 
+and its relations to common services (database, storage). 
+
+\begin{table}[htb]
+\caption{Summary of responsibilities on coordinate transformation}
+\label{summary-list-subsystem}
+\begin{center}
+\begin{tabular}{c||c|c||c|c||l}
+Name & Place & Category & DB & Storage & Note \\
+\hline
+IIC & Ctrl & --- & x & x &  \\
+MHS & Ctrl & --- &   &   &  \\
+Environment (Status) archive database service & Ctrl & --- &   &   &  \\
+Event logger database service & Ctrl & --- &   &   &  \\
+Detector control and readout system &  &  &   &   &  \\
+Vacuum and Cryogenic Control System &  &  &   &   &  \\
+Spectrograph temperature monitoring system &  &  &   &   &  \\
+Mechanism control system &  &  &   &   &  \\
+PFICS &  &  &   &   &  \\
+Acquisition and Guidance camera system &  &  &   &   &  \\
+(Fixed) Fiducial fiber back illuminating system &  &  &   &   &  \\
+MCS &  &  &   &   &  \\
+\end{tabular}
+\end{center}
+\end{table}
+
+List of places (of target hardware):
+\begin{description}
+  \item[Ctrl] Control building only, means no dedicated hardware
+  \item[PFI] Prime Focus Instrument
+  \item[SpS] Spectrograph floor
+  \item[Cs] Cassegrain focus (Metrology camera container)
+\end{description}
+
+\section{Subsystem definitions without hardware}
+
+This section lists control subsystem which does not have its hardware, 
+like database system or logging system. 
+
+Normally, from the Subaru telescope (or SOSS) side, ICS or IIC will be visible 
+as so called 'OBCP'. Also, except for some required direct connections to MLP, 
+this ICS or IIC will the only peer from the PFS instrument control software. 
+These connections are summarized in Figure.~\tbd.
+
+
+\subsection{ICS --- Instrument Control System}
+
+This is not a subsystem but 
+ICS includes everything of the PFS instrument control software systems 
+including every subsystem 
+control software. ICS will include any required engineering software 
+including graphical user interfaces, command-line user interfaces, or 
+network data API, but will not include any connected systems at the SSF 
+such as an on-site data reduction pipeline or a targeting software 
+instance. 
+
+
+\subsection{IIC --- Instrument Interface and Controller}
+
+IIC has two roles: 
+the only interface of the ICS to the Subaru telescope control system 
+including Gen2, TCS, MLP1 and any other possible candidates; the master 
+controller and sequencer for the entire ICS.
+
+\subsection{MHS --- Messaging Hub Server}
+
+MHS is the only central communication hub 
+system in entire ICS and every controllable subsystems and environment 
+monitoring systems will connect to this communication hub for sending or 
+recieving commands to peers, sharing status messages, arising operational 
+or environmental alerts, etc.
+
+MHS will be the only central messaging exchange system for entire PFS 
+instrument including every controllable subsystems. 
+To coordinate instrument control in a proper way, 
+following requirements are applied to a selection of PFS MHS. 
+
+\begin{itemize}
+  \item MHS should be a star-liked message transfer and delivery system, 
+    and does not require any (messy) multi-point to multi-point connection.
+  \item MHS should have a capability per each peer to set / select 
+    a list of acceptable peers, from which commands should be accepted and 
+    otherwise should be rejected, as a configuration. 
+    This could be implemented at the MHS side or at peers' side as a wrapper 
+    layor; both could be accpetable.
+  \item MHS should have a capability to attach external log servers as its 
+    peers for every messages through the MHS. 
+  \item MHS shuold have a capability to set a 'blocking flag' by each peer 
+    to specify peers whose commands should be acceptable, on demand.
+\end{itemize}
+
+For a 'blocking flag', we need to be careful on the system deadlock, 
+especially while defining interfaces. 
+
+
+\subsection{Environment (Status) archive database service}
+
+This service does not have controllable hardware, and will act as a sub 
+service module of IIC. 
+This service will receive status update messages from each subsystem, 
+archive these statuses with each timestamp into database server, 
+and forward status to the SOSS status server in the defined protocol. 
+%
+\footnote{In the previous document this was noted as following, but need to 
+be reconsidered: 
+This will not work on submitting requests of statuses to SOSS from PFS ICS 
+including subsystems (via MHS).}
+
+\subsection{Event logger database service}
+
+This service is an archiver of every message exchanged through MHS. 
+
+This service itself does not have any relationship with other systems 
+(DRP or targeting software), 
+but its database server should be accessible from these other systems.
+\footnote{Really??}
+
+
+\section{Subsystem definitions with hardware at Spectrograph floor}
+
+Note: this part is based on LAM document (need to update)
+
+\subsection{Detector control and readout system}
+
+Including detector readout, detector temperature sensor and heater.
+
+\paragraph{Definition and subsystem hardware}
+DCR will include every controllable hardware within dewar and detector systems, 
+which will include detector movement (tilt?) mechanisms, cryostat vacuum and 
+cooling system. 
+\paragraph{Peers required to communicate}
+DCR should receive commands from IIC, and should transfer retrieved data from 
+detector subsystems to the data archive system (SOSS Data Server; STARS) of 
+the Subaru telescope through IIC. 
+\paragraph{Remarks}
+Considering amount of controllable hardwares, this subsystem could be divided 
+into two or more subsystems: detector control and any others. 
+
+
+\subsection{Vacuum and Cryogenic Control System}
+
+Including ion pump, pressure gauge, cryo cooler, temperature sensor.
+
+\subsection{Spectrograph temperature monitoring system}
+
+
+\subsection{Spectrograph Mechanism control system}
+
+including dithering stage, shutter and back illumination, red grating 
+exchange mechanism.
+
+\subsubsection{SMC --- Shutter mechanisms controller}
+\paragraph{Definition and subsystem hardware}
+SMC will control shutter mechanisms (one per each spectrograph) to open or 
+to close. 
+\paragraph{Peers required to communicate}
+SMC should receive commands from IIC. 
+\paragraph{Remarks}
+This shutter is a mechanism to: 
+\begin{itemize}
+  \item control an exposure time by shielding detectors from fiber outputs
+  \item shield detectors from light source for fiber back illumination
+  \item back illuminate science fibers by reflecting light with a diffuse 
+    reflector mounted on shutter plate
+\end{itemize}
+Since this shutter is the only mechanism to shield detectors from fiber and 
+light source for fiber back illuminator, SMC and its parent control system 
+(assuming IIC) should control: 
+\begin{itemize}
+  \item OPEN during exposure
+  \item CLOSE during detectors' reading out and light source illumination
+\end{itemize}
+
+\subsubsection{FIS --- Fiber back illuminating system}
+\paragraph{Definition and subsystem hardware}
+FIS will turn on/off and adjust brightness of back illuminating light source 
+for science fibers. 
+\paragraph{Peers required to communicate}
+FIS should receive commands both from IIC and PFICS. 
+\paragraph{Remarks}
+Since back illuminating light source for science fibers should not be turned 
+on while shutter is open (except for engineering or test purpose), IIC should 
+coordinate to block control of FIS depending on a status of SMC. 
+
+
+\section{Subsystem definitions with hardware at PFI}
+
+Note: PFI part by JPL+CIT is collected into PFICS
+
+\subsection{PFICS --- PFI control software}
+
+Including MPS (COBRA positioner movement planning software) as its 
+subsystem.
+
+\subsubsection{PFICS --- Prime Focus Instrument Control Software}
+\paragraph{Definition and subsystem hardware}
+PFICS will also be a master controller for everything related with COBRA 
+positioners, and this should work in close collaboration with MPS. 
+Also, since this includes 'movement planning and sequencing', PFICS is 
+required to issue commands to required subsystems for alignment of 
+positioners, including turning on and off FIS, getting list of measured 
+positions from MCS. 
+\paragraph{Peers required to communicate}
+PFICS should receive commands from IIC, and should send commands to all related 
+external subsystems like MCS and FIS, and to all subsystems under this PFICS 
+like MPS. 
+Also, these communication interface design should consider of on-site 
+engineering operations from IIC (or the Subaru). 
+\paragraph{Remarks}
+This is a CIT part of (so called) COBRA positioner controller, and also 
+includes communication interface between IIC and controllable PFI parts (and 
+their environment monitoring). 
+
+\subsubsection{MPS --- COBRA Positioner movement planning software}
+\paragraph{Definition and subsystem hardware}
+Everything related to controlling positioners themselves.
+\paragraph{Peers required to communicate}
+MPS should receive commands from PFICS. 
+\paragraph{Remarks}
+This is a JPL part of (so called) COBRA positioner controller.
+
+
+\subsection{Acquisition and Guidance camera system}
+
+\subsubsection{AGC --- Acquisition and Guidance camera system}
+\paragraph{Definition and subsystem hardware}
+AGC should control Acquisition and Guidance camera system to meet 
+requirements from procedures of both Acquisition and Auto 
+Guiding. 
+Also, for engineering, integration and testing purpose, AGC might need to work 
+in cooporate with PFICS. 
+\paragraph{Peers required to communicate}
+AGC should receive commands from IIC, and should transfer measured guide 
+signal (target field positioning error for Acquisition and Guidance per 
+request, guider error for Auto Guiding in commanded rate) back to IIC. 
+IIC should apply coordinate transformation and transfer to suitable peer, 
+such as OCS or MLP1. 
+
+(TBD) Also, if requested by an operator, 
+AGC should transfer retrieved raw data image to a handling system (VGW). 
+\paragraph{Remarks}
+Especially for Auto Guiding feature, data transfer should work in strict 
+timing. 
+AGC might be required to connect and to work in cooporate with IIC in deeply. 
+
+
+\subsection{(Fixed) Fiducial fiber back illuminating system}
+
+\subsubsection{FFIS --- Fixed fiducial fibers' back illuminating system}
+\paragraph{Definition and subsystem hardware}
+FFIS will turn on/off back illuminating light source for fixed fiducial fiber. 
+This illuminating light source is assumed to be mounted in PFI. 
+\paragraph{Peers required to communicate}
+FFIS should receive commands from PFICS. 
+FFIS might receive blocking request from IIC, especially during exposure 
+(to reduce failure mode). 
+\paragraph{Remarks}
+Back illuminating light source for fixed fiducial fibers should not be turned 
+on while exposure is ongoing. 
+PFICS (or IIC) should coordinate to block control of FFIS. 
+
+
+\section{Subsystem definitions with hardware at Cs}
+
+\subsection{MCS --- Metrology camera system}
+
+MCS should control its detector system, camera lens system, and (narrow band) 
+filter system. Also from data retrieved from its detector system, MCS should 
+pick spots and measure their centroids. 
+
+\subsubsection{Peers required to communicate}
+MCS should receive commands both from IIC and PFICS. 
+
+(TBD) Also, if requested by an operator, 
+MCS should transfer retrieved raw data image to the data archive system 
+(STARS) or a handling system (VGW). 
+
+\subsubsection{Remarks}
+Although, the data format used for external interfaces will not be raw 
+images but be list of (x, y) values for spots, having raw images may be useful 
+to check on error (failure mode both detected and non detected) or later 
+with using another pipeline etc. 
+
+
+\section{Possible additionals on subsystem definitions}
+
+Following subsystems are proposed, but yet fixed as final plan. 
+
+\subsection{Slit viewing camera system}
+
+
+\subsection{Fiber monitoring system}
+
+
+\section{Matrix between control subsystems and controllable hardwares in product tree}
+
+Table.~\ref{matrix-control-pt}
+represents the matrix between software control subsystems and 
+hardware product tree.
+
+\begin{table}[htb]
+\caption{Matrix between software and hardware}
+\label{matrix-control-pt}
+\begin{center}
+\begin{tabular}{l|l||c||l}
+Tree & target hardware & Software & Note \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+
+
+
+
+
+
+\section{Terminology}
+
+\begin{description}
+  \item[ICS] Instrument Control Software
+\end{description}
+
+
+\end{document}

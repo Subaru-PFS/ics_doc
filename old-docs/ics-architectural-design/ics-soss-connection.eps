@@ -1,0 +1,129 @@
+%!PS-Adobe-3.0 EPSF-3.0
+%%Creator: Atsushi Shimono
+%%Title: TEMPLATE
+%%CreationDate: Sun Jan 16 00:00:00 2005
+%%BoundingBox: 0 0 505 300
+%%DocumentData: Clean7Bit
+%%LanguageLevel: 2
+%%EndComments
+%%%BeginProlog
+%%%EndProlog
+%%Page: 1 1
+
+/L {moveto rlineto currentpoint stroke moveto} bind def
+/C {rlineto currentpoint stroke moveto} bind def
+/D {moveto 0 0 rlineto currentpoint stroke moveto} bind def
+/LW {5 mul setlinewidth} bind def
+/BP {newpath moveto} bind def
+/LP /rlineto load def
+/EP {rlineto closepath eofill} bind def
+/MB {gsave translate MFAC dup scale 1 setlinewidth 2 setlinecap 0 setlinejoin newpath} bind def
+/ME /grestore load def
+/CC {0 360 arc stroke} bind def
+/FC {0 360 arc fill} bind def
+/G {1024 div setgray} bind def
+/K {3 -1 roll 1024 div 3 -1 roll 1024 div 3 -1 roll 1024 div setrgbcolor} bind def
+
+/B {CS newpath moveto} def
+/F {moveto 0 setlinecap} def
+/C {CS M 1 1 3 {pop 3 1 roll 255 div} for SET_COLOUR} def
+/CS {currentpoint stroke} def
+/CF {currentpoint eofill} def
+/L {lineto} def /l {rlineto} def /M {moveto} def /m {rmoveto} def
+/P {currentpoint 0 1 rlineto stroke moveto} def
+/T {currentlinecap exch 1 setlinecap show setlinecap} def
+errordict /nocurrentpoint {pop 0 0 M currentpoint} put
+/SET_COLOUR statusdict begin /processcolors where
+  {pop processcolors 1 gt} {false} ifelse
+  {(setrgbcolor)} {(pop pop pop)} ifelse cvx end def
+/cshow {CS M dup stringwidth pop -2 div 0 m show} def
+
+/Helvetica findfont
+10 scalefont setfont
+
+gsave
+
+0.2 LW
+
+stroke
+
+[4 4] 0 setdash
+
+stroke
+
+[] 0 setdash
+
+gsave
+0 0 translate
+1 1 scale
+%
+stroke
+grestore
+
+
+70 10 M 140 0 l 0 250 l -140 0 l 0 -250 l
+140 265 M (SOSS) cshow
+360 10 M 140 0 l 0 250 l -140 0 l 0 -250 l
+430 265 M (OBCP / IIC) cshow
+
+80 20 M 120 0 l 0 30 l -120 0 l 0 -30 l
+140 30 M (SOSS Data Server) cshow
+80 35 M -25 0 l 7 4 l 0 -8 m -7 4 l
+5 20 M 50 0 l 0 30 l -50 0 l 0 -30 l
+30 30 M (STARS) cshow
+
+370 15 M 120 0 l 0 20 l -120 0 l 0 -20 l
+430 20 M (Data clinet in OBCP) cshow
+370 25 M -170 10 l 8 3 l -1 -6 m -7 3 l
+290 10 M (Data push request) cshow
+380 40 M 100 0 l 0 20 l -100 0 l 0 -20 l
+430 45 M (FTP Server) cshow
+380 50 M -180 -15 l 
+290 55 M (Data pull via FTP from SOSS) cshow
+
+80 70 M 120 0 l 0 50 l -120 0 l 0 -50 l
+140 75 M (Status Distri. Service) cshow
+90 90 M 100 0 l 0 25 l -100 0 l 0 -25 l
+140 100 M (Status Server) cshow
+90 100 M -7 4 l 0 -8 m 7 4 l -60 0 l 0 95 l
+
+370 70 M 120 0 l 0 50 l -120 0 l 0 -50 l
+430 90 M (Status Client in OBCP) cshow
+370 110 M -180 0 l 7 4 l 0 -8 m -7 4 l
+280 115 M (Status push update) cshow
+370 90 M -170 0 l 7 4 l 0 -8 m -7 4 l
+280 95 M (Status request) cshow
+200 82 M 170 0 l -7 4 l 0 -8 m 7 4 l
+280 70 M (Status send) cshow
+
+80 130 M 120 0 l 0 90 l -120 0 l 0 -90 l
+140 135 M (Command Dispatcher) cshow
+90 147 M 100 0 l 0 20 l -100 0 l 0 -20 l
+140 152 M ('OPE'rational file) cshow
+90 175 M 100 0 l 0 20 l -100 0 l 0 -20 l
+140 180 M ('SK'elton file) cshow
+140 175 M 0 -8 l
+140 195 M 0 15 l
+140 210 M -85 0 l
+5 195 M 50 0 l 0 30 l -50 0 l 0 -30 l
+30 205 M (TSC) cshow
+90 230 M 100 0 l 0 20 l -100 0 l 0 -20 l
+140 235 M (OBS, OBC, VGW, ...) cshow
+140 210 M 0 20 l
+140 210 M 80 0 l 10 10 l 0 -20 m -10 10 l
+
+370 180 M 120 0 l 0 60 l -120 0 l 0 -60 l
+430 205 M (OBCP Command Server) cshow
+230 220 M 140 0 l -7 4 l 0 -8 m 7 4 l
+300 225 M (Command to exec) cshow
+230 200 M 7 4 l 0 -8 m -7 4 l 140 0 l
+300 185 M (Resultant message) cshow
+
+400 145 M 90 0 l 0 20 l -90 0 l 0 -20 l
+445 150 M (Sub components) cshow
+440 165 M 0 15 l
+
+stroke
+showpage
+grestore
+%%EOF
