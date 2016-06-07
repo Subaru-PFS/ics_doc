@@ -2,7 +2,7 @@
 %%Creator: Atsushi Shimono
 %%Title: TEMPLATE
 %%CreationDate: Sun Jan 16 00:00:00 2005
-%%BoundingBox: 0 0 400 150
+%%BoundingBox: 0 20 450 80
 %%DocumentData: Clean7Bit
 %%LanguageLevel: 2
 %%EndComments
@@ -38,6 +38,17 @@ errordict /nocurrentpoint {pop 0 0 M currentpoint} put
   {(setrgbcolor)} {(pop pop pop)} ifelse cvx end def
 /cshow {CS M dup stringwidth pop -2 div 0 m show} def
 /lshow {CS M dup stringwidth pop -1 div 0 m show} def
+/arrowhead {
+  /y exch def /x exch def x y
+  gsave
+    currentpoint
+    4 2 roll exch 4 -1 roll exch
+    sub 3 1 roll sub exch
+    atan rotate dup scale 
+    -7 2 rlineto 1 -2 rlineto -1 -2 rlineto closepath fill
+  grestore
+  x y lineto
+} def
 
 /Helvetica findfont
 10 scalefont setfont
@@ -62,9 +73,41 @@ stroke
 grestore
 
 newpath
-250 100 moveto
-(PLACEHOLDER) cshow
 
+5 40 moveto
+70 0 rlineto 0 15 rlineto -70 0 rlineto 0 -15 rlineto stroke
+40 45 moveto
+(\(i, j\)_k\(AG\)) cshow
+
+130 40 moveto
+70 0 rlineto 0 15 rlineto -70 0 rlineto 0 -15 rlineto stroke
+165 45 moveto
+(\(x, y\)_F3C) cshow
+
+75 48 moveto 1.5 100 48 arrowhead
+130 48 moveto 1.5 100 48 arrowhead
+
+255 60 moveto
+70 0 rlineto 0 15 rlineto -70 0 rlineto 0 -15 rlineto stroke
+290 65 moveto
+(d\(RA, Dec\)) cshow
+
+200 48 moveto 1.5 225 57 arrowhead
+255 68 moveto 1.5 225 57 arrowhead
+
+375 60 moveto
+70 0 rlineto 0 15 rlineto -70 0 rlineto 0 -15 rlineto stroke
+410 65 moveto
+(d\(EL, Az\)) cshow
+
+375 68 moveto 1.5 325 68 arrowhead
+
+255 25 moveto
+70 0 rlineto 0 15 rlineto -70 0 rlineto 0 -15 rlineto stroke
+290 30 moveto
+(dInR) cshow
+
+255 33 moveto 1.5 200 48 arrowhead
 
 stroke
 showpage

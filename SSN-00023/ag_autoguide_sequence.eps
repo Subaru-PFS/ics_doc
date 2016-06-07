@@ -2,7 +2,7 @@
 %%Creator: Atsushi Shimono
 %%Title: TEMPLATE
 %%CreationDate: Sun Jan 16 00:00:00 2005
-%%BoundingBox: 0 0 400 150
+%%BoundingBox: 0 0 450 300
 %%DocumentData: Clean7Bit
 %%LanguageLevel: 2
 %%EndComments
@@ -38,6 +38,26 @@ errordict /nocurrentpoint {pop 0 0 M currentpoint} put
   {(setrgbcolor)} {(pop pop pop)} ifelse cvx end def
 /cshow {CS M dup stringwidth pop -2 div 0 m show} def
 /lshow {CS M dup stringwidth pop -1 div 0 m show} def
+/rbox {/r exch def /y exch def /x exch def moveto
+  /rx x r 2 mul sub def /ry y r 2 mul sub def
+  r 0 rmoveto rx 0 rlineto r r rmoveto 0 ry rlineto r -1 mul r rmoveto 
+  rx -1 mul 0 rlineto r -1 mul r -1 mul rmoveto 0 ry -1 mul rlineto
+  r 0 rmoveto currentpoint r -1 mul 0 rmoveto r 180 270 arc
+  rx r rmoveto currentpoint 0 r -1 mul rmoveto r 270 0 arc
+  r -1 mul ry rmoveto currentpoint r 0 rmoveto r 0 90 arc
+  rx -1 mul r -1 mul rmoveto currentpoint 0 r rmoveto r 90 180 arc stroke
+} bind def
+/arrowhead {
+  /y exch def /x exch def x y
+  gsave
+    currentpoint
+    4 2 roll exch 4 -1 roll exch
+    sub 3 1 roll sub exch
+    atan rotate dup scale 
+    -7 2 rlineto 1 -2 rlineto -1 -2 rlineto closepath fill
+  grestore
+  x y lineto
+} def
 
 /Helvetica findfont
 10 scalefont setfont
@@ -61,9 +81,115 @@ gsave
 stroke
 grestore
 
-newpath
-250 100 moveto
-(PLACEHOLDER) cshow
+5 250 moveto
+45 0 rlineto 0 45 rlineto -45 0 rlineto 0 -45 rlineto
+27 270 moveto
+(AGCC) cshow
+75 250 moveto
+45 0 rlineto 0 45 rlineto -45 0 rlineto 0 -45 rlineto
+97 270 moveto
+(MHS) cshow
+145 250 moveto
+190 0 rlineto 0 45 rlineto -190 0 rlineto 0 -45 rlineto
+240 280 moveto
+(MAC) cshow
+390 250 moveto
+50 0 rlineto 0 45 rlineto -50 0 rlineto 0 -45 rlineto
+415 270 moveto
+(MLP1) cshow
+%
+150 265 moveto
+70 0 rlineto 0 20 rlineto -70 0 rlineto 0 -20 rlineto
+185 270 moveto
+(MAC-MHS) cshow
+260 265 moveto
+70 0 rlineto 0 20 rlineto -70 0 rlineto 0 -20 rlineto
+295 270 moveto
+(MAC-MLP1) cshow
+gsave
+0.1 LW
+240 258 translate
+3 1 scale
+newpath 0 0 6.5 0 360 arc stroke
+grestore
+240 255 moveto
+(SHM) cshow
+360 278 moveto
+(serial) cshow
+
+gsave
+0 255 255 C
+50 275 moveto 1.5 65 275 arrowhead
+75 275 moveto 1.5 65 275 arrowhead
+120 275 moveto 1.5 140 275 arrowhead
+150 275 moveto 1.5 140 275 arrowhead
+220 270 moveto 230 264 lineto
+260 270 moveto 250 264 lineto
+330 275 moveto 1.5 360 275 arrowhead
+390 275 moveto 1.5 360 275 arrowhead
+stroke
+grestore
+
+97 220 moveto
+(Start AG operation \(from IIC\)) cshow
+27 215 moveto 1.5 92 215 arrowhead
+185 215 moveto 1.5 102 215 arrowhead
+97 200 moveto
+(Push measured spot statistics) cshow
+185 195 moveto 1.5 27 195 arrowhead
+170 180 moveto
+(Save into SHM with timestamp) cshow
+230 175 moveto 1.5 185 175 arrowhead
+%
+30 165 moveto
+(exposure \& readout) show
+27 150 moveto 1.5 27 185 arrowhead
+%
+97 140 moveto
+(Push measured spot statistics) cshow
+185 135 moveto 1.5 27 135 arrowhead
+170 120 moveto
+(Save into SHM with timestamp) cshow
+230 115 moveto 1.5 185 115 arrowhead
+
+75 60 moveto 1.5 75 125 arrowhead
+75 90 moveto
+(continuous) cshow
+
+97 45 moveto
+(Start AG operation \(from IIC\)) cshow
+27 40 moveto 1.5 92 40 arrowhead
+185 40 moveto 1.5 102 40 arrowhead
+170 25 moveto
+(Update SHM status with timestamp) cshow
+230 20 moveto 1.5 185 20 arrowhead
+
+
+360 220 moveto
+(Push telescope status) cshow
+295 215 moveto 1.5 415 215 arrowhead
+340 200 moveto
+(Read from SHM, convert with telescope status) cshow
+295 195 moveto 1.5 250 195 arrowhead
+360 185 moveto
+(Return to MLP1) cshow
+415 180 moveto 1.5 295 180 arrowhead
+%
+355 20 moveto 1.5 355 175 arrowhead
+355 100 moveto
+(continuous in 1Hz) cshow
+
+
+gsave
+[3 6] 0 setdash
+0.1 LW
+27 230 moveto 0 -220 rlineto
+97 230 moveto 0 -220 rlineto
+185 230 moveto 0 -220 rlineto
+295 230 moveto 0 -220 rlineto
+stroke
+grestore
+
 
 
 stroke
