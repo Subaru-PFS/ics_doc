@@ -443,6 +443,113 @@ Implementation ideas and trades
 \end{itemize}
 
 
+\section{Error propagation}
+
+Six AG cameras of PFS are placed at outermost area of PFI positioner bench 
+and some of conversions from measured spot statistics to output error values 
+are not simple by means of both distributions of spots over cameras and 
+3D correlation of error propagation. 
+In this section, analysis of conversion methods and their error propagation 
+is described. 
+
+With stepped window right before each AG camera, we will have two modes of 
+operation: one spot on one camera for position measurement only in PFI 
+positioner bench plane for measurement on a plane of PFI positioner bench, 
+two spots on one camera with single spot on each step for 3D measurement 
+including shift and tilt. 
+
+Distribution of AG camera sensors are at each corner of hexagon centered at 
+the center of PFI focal plane, where is close to the center of WFC distortion 
+center, with $\sim$ 240mm side length. The outermost fiber is located at 
+$\sim$ 216mm from the center. 
+
+\begin{figure}[htb]
+  \begin{center}
+    \includegraphics[scale=0.75]{ag_cameras.eps}
+  \end{center}
+  \caption{AG cameras on PFI positioner plane; ID and axis are only for this 
+    document and is not the case for real numbering. }
+  \label{fig:agcamera}
+\end{figure}
+
+
+\subsection{Running accuracy of mechanics}
+
+From specification (TM-N51463C), running accuracy of mechanical parts are: 
+\begin{itemize}
+  \item Hexapod: x, y 1.5$\mu$m; z 0.7$\mu$m; $\theta_x, \theta_y$ 0.5 arcsec (ref p70; positioning accuracy by design)
+  \item Instrument rotator (InR): $< 3.111$ arcsec rms (ref p73; running accuracy in design)
+\end{itemize}
+
+\subsection{Effect to measurement in one AG camera}
+
+This is not an error propagation, but effect to measurement from mechanical 
+accuracy. 
+
+For a field acquisition, 1st shot will be taken with open tracking accuracy. 
+PFS is assuming to set small subregion in camera sensor to detect a spot, 
+its possible error circle is important to define a size of subregion. 
+Translational error of $\sim$ 1 arcsec is $\sim$ 100$\mu$m ($\sim$ 6 pixels), 
+and from InR 
+angle error even AG camera is located at the outermost area (240mm away from 
+the center), 1 arcmin of InR error makes $\sim$ 70$\mu$m rotation ($\sim$ 5 
+pixels). In both cases, several tens pixels box is enough for spot detection. 
+
+To measure tilt of PFI positioner bench from its ideal plane, PFS will use 
+stepped window to make two regions with different focal length, and measure 
+one spot per each step for their FWHM difference. AG camera sensor has 
+maximum 18mm distance (diagonal), and 1\arcsec tilt makes $\sim$ 0.1$\mu$m 
+difference in Z direction, which is well smaller than focus measurement 
+error of $\sim$ 13$\mu$m at S/N = 30. 
+
+
+\subsection{Error propagation on tilt measurement}
+
+When we measure more than three pairs of spots, or more than three points 
+of focus error, we can separate tilt error ($\Delta\theta_x, \Delta\theta_y$) 
+from focus error measurement ($\Delta z$). 
+These error values ($\Delta z, \Delta\theta_x, \Delta\theta_y$) are orthogonal 
+and independent estimated values. 
+For this focus error measurement, PFS uses two spots in one AG camera on 
+different step positions, we only use its size (FWHM) to calculate focus 
+position error on an AG camera (output $\epsilon_i$ in $\Delta z$), 
+but not spot position which is largely affected by optical system.
+Spot size can be affected by distortion but two spots are within one AG 
+camera whose length in radial direction is only $\sim$6\% of its position, 
+difference by distortion is well small as $\sim$0.1\% which is (well) wihtin 
+spot measurement error. 
+
+Calculation of focus and tilt errors from real $\epsilon_i$ focus error 
+measurement values is not simple on the point of where these focus error 
+were measured. 
+Each measurement has two spots with no weight applied
+(shown as right bottom box in Figure.~\ref{ag:camera}), so its representative 
+point on PFI positioner bench (or focal plane) is the middle of two spots
+(marked as cross in the box), 
+which will be in a half of camera sensor 
+(plotted as a rectangular box by dotted line in Figure.~\ref{ag:camera}). 
+Independance of estimated values is perfect when three (or more) measurements 
+are point symmetry against the center of the PFI positioner bench, 
+in reallity these points can have $< \sim 3\%$ radial and $< \sim 0.9\degree$ 
+rotational, but covariances might not be increased to significant value with 
+such level. 
+
+Measurement of each $\epsilon_i$ will have error of $\sim 13\mu$m and 
+resultant estimate errors with three points of measurement are 
+$\sim$ 7.5$\mu$m ($13/\sqrt{3}$) for $\Delta z$ and 
+$\sim 6.5$ arcsec ($\tan \theta_x=13/\sqrt{3}/240000$) for 
+$\Delta\theta_x, \Delta\theta_y$. 
+Estimate errors for tilt is well larger than running accuracy of hexapod, 
+and we might not be possible to use this measurement. 
+\footnote{During commissioning, for tilt measurement between WFC and PFI, 
+PFS is planning to use spot deformation parameters of defocused spot on 
+AG cameras, but not this focus position measurement.}
+
+\subsection{Error propagation on pointing to translational and InR}
+
+(TO BE WRITTEN)
+
+
 \section{Interface design}
 
 \subsection{Functional requirements on interface design}
