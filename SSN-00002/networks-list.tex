@@ -28,65 +28,6 @@ Also overview of configuration at Subaru is included as an appendix
 for a reference and to have mutual understanding in the PFS. 
 
 
-\section{Overview of Subaru networks}
-
-We need to care of two items to distinguish "network" at Subaru, one is 
-cable IDs for wire (or outlet IDs at patch panel) 
-and another is network IDs for L2 layer. 
-For our network connection among subsystem places (e.g. control building, 
-PFI, Cs, SpS), we will use fiber cables for wire
-\footnote{We can get metal/TP by attaching media converter, but every 
-connection will be fiber at patch panel.}. 
-
-This section overviews these available networks at Subaru. 
-
-\subsection{Fiber cables}
-
-From control building (or computer room at 2nd floor) to each focus in the 
-Subaru dome, we will use fiber cables to connect our subsystems onto network. 
-
-Fiber cables are labeled as FBxxxxxY, where x is digit and Y is A/B/C
-\footnote{This is used at each terminal, but another schemes are used for 
-connector boxes.}. 
-5-digit number is an unique ID for each "connector" at patch panel, and the 
-same ID is used for both terminal. 
-A/B/C is for "fiber cable" but not for connector at patch panel, 
-and defined as following
-\footnote{Just defining fiber mode and core size.}: 
-
-\begin{description}
-  \item[A] SM 9.5 um
-  \item[B] MM/GI 50 um 
-  \item[C] MM/GI 62.5 um
-\end{description}
-
-Connectors at patch panel for fiber cables differs by port, 
-some have the same name as cable (FBxxxxxY),
-but some have port ID like AxxJxx. 
-
-\subsection{Networks}
-
-Existing Subaru networks are marked as X-LAN or X-LAN(Y), like V-LAN or 
-E-LAN(C), and each network is defined as one "subnet" with class C private 
-network. 
-For E-LAN(x) networks, originally these are defined by target application 
-and its required network speed (at 1990s...), but these are just subnet 
-definitions as for now. 
-Following is a (subset) list of available networks: 
-
-\begin{description}
-  \item[E-LAN(C)] was defined as "control" network, connected to dome by 10B 
-    (metal-optical converter)
-  \item[E-LAN(D)] was defined as "data" network, connected to dome by 100B 
-    (metal-optical converter)
-  \item[E-LAN(G1)] was defined as "gigabit" network, directly connected to 
-    each instrument or network in dome
-  \item[E-LAN(G2)] was defined as "gigabit" network, directly connected to 
-    dome (seems to be added for increasing IP address??)
-  \item[V-LAN] Video network for real time display (e.g. AG image),
-    using pre-formatted RPC (connected to VGW system)
-\end{description}
-
 \section{Required network connection per subsystem}
 
 Schematic diagram of PFS network is drawn as Figure.~\ref{fig:network}.
@@ -398,6 +339,68 @@ NsIR & FB15410A & SM & 0.6 & 1.1 & 1.1 & 0.9 &  \\
 \end{tabular}
 \end{center}
 \end{table}
+
+\appendix
+
+\section{Overview of Subaru networks}
+
+We need to care of two items to distinguish "network" at Subaru, one is 
+cable IDs for wire (or outlet IDs at patch panel) 
+and another is network IDs for L2 layer. 
+For our network connection among subsystem places (e.g. control building, 
+PFI, Cs, SpS), we will use fiber cables for wire
+\footnote{We can get metal/TP by attaching media converter, but every 
+connection will be fiber at patch panel.}. 
+
+This section overviews these available networks at Subaru. 
+
+\subsection{Fiber cables}
+
+From control building (or computer room at 2nd floor) to each focus in the 
+Subaru dome, we will use fiber cables to connect our subsystems onto network. 
+
+Fiber cables are labeled as FBxxxxxY, where x is digit and Y is A/B/C
+\footnote{This is used at each terminal, but another schemes are used for 
+connector boxes.}. 
+5-digit number is an unique ID for each "connector" at patch panel, and the 
+same ID is used for both terminal. 
+A/B/C is for "fiber cable" but not for connector at patch panel, 
+and defined as following
+\footnote{Just defining fiber mode and core size.}: 
+
+\begin{description}
+  \item[A] SM 9.5 um
+  \item[B] MM/GI 50 um 
+  \item[C] MM/GI 62.5 um
+\end{description}
+
+Connectors at patch panel for fiber cables differs by port, 
+some have the same name as cable (FBxxxxxY),
+but some have port ID like AxxJxx. 
+
+\subsection{Networks}
+
+Existing Subaru networks are marked as X-LAN or X-LAN(Y), like V-LAN or 
+E-LAN(C), and each network is defined as one "subnet" with class C private 
+network. 
+For E-LAN(x) networks, originally these are defined by target application 
+and its required network speed (at 1990s...), but these are just subnet 
+definitions as for now. 
+Following is a (subset) list of available networks: 
+
+\begin{description}
+  \item[E-LAN(C)] was defined as "control" network, connected to dome by 10B 
+    (metal-optical converter)
+  \item[E-LAN(D)] was defined as "data" network, connected to dome by 100B 
+    (metal-optical converter)
+  \item[E-LAN(G1)] was defined as "gigabit" network, directly connected to 
+    each instrument or network in dome
+  \item[E-LAN(G2)] was defined as "gigabit" network, directly connected to 
+    dome (seems to be added for increasing IP address??)
+  \item[V-LAN] Video network for real time display (e.g. AG image),
+    using pre-formatted RPC (connected to VGW system)
+\end{description}
+
 
 \end{document}
 
