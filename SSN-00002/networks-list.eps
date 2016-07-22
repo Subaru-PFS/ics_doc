@@ -2,7 +2,7 @@
 %%Creator: Atsushi Shimono
 %%Title: TEMPLATE
 %%CreationDate: Sun Jan 16 00:00:00 2005
-%%BoundingBox: 15 0 471 260
+%%BoundingBox: 0 0 450 250 
 %%DocumentData: Clean7Bit
 %%LanguageLevel: 2
 %%EndComments
@@ -38,6 +38,26 @@ errordict /nocurrentpoint {pop 0 0 M currentpoint} put
   {(setrgbcolor)} {(pop pop pop)} ifelse cvx end def
 /cshow {CS M dup stringwidth pop -2 div 0 m show} def
 /lshow {CS M dup stringwidth pop -1 div 0 m show} def
+/rbox {/r exch def /y exch def /x exch def moveto
+  /rx x r 2 mul sub def /ry y r 2 mul sub def
+  r 0 rmoveto rx 0 rlineto r r rmoveto 0 ry rlineto r -1 mul r rmoveto 
+  rx -1 mul 0 rlineto r -1 mul r -1 mul rmoveto 0 ry -1 mul rlineto
+  r 0 rmoveto currentpoint r -1 mul 0 rmoveto r 180 270 arc
+  rx r rmoveto currentpoint 0 r -1 mul rmoveto r 270 0 arc
+  r -1 mul ry rmoveto currentpoint r 0 rmoveto r 0 90 arc
+  rx -1 mul r -1 mul rmoveto currentpoint 0 r rmoveto r 90 180 arc stroke
+} bind def
+/arrowhead {
+  /y exch def /x exch def x y
+  gsave
+    currentpoint
+    4 2 roll exch 4 -1 roll exch
+    sub 3 1 roll sub exch
+    atan rotate dup scale 
+    -7 2 rlineto 1 -2 rlineto -1 -2 rlineto closepath fill
+  grestore
+  x y lineto
+} def
 
 /Helvetica findfont
 10 scalefont setfont
@@ -45,225 +65,153 @@ gsave
 0.2 LW
 
 
-% Cs
- 15 13 M (Cs) show
- 40 10 M 110 0 l 0 15 l -110 0 l 0 -15 l
- 95 13 M (MCS, Telemetry) cshow
-
-150 17 M 30 0 l
-
-% SpS
- 40 35 M 60 0 l 0 15 l -60 0 l 0 -15 l
- 70 38 M (Dewar Mech) cshow
- 40 50 M 60 0 l 0 15 l -60 0 l 0 -15 l
- 70 53 M (CCD x2) cshow
-120 40 M 50 0 l 0 15 l -50 0 l 0 -15 l
-145 43 M (BEE) cshow
-170 47 M 40 0 l
-
- 40  70 M 50 0 l 0 15 l -50 0 l 0 -15 l
- 65  73 M (H4RG) cshow
-100  70 M 50 0 l 0 15 l -50 0 l 0 -15 l
-125  73 M (SAM) cshow
-150  77 M 60 0 l
-
- 40  97 M 50 0 l 0 15 l -50 0 l 0 -15 l
- 65 100 M (OptMech) cshow
-110  90 M 50 0 l 0 15 l -50 0 l 0 -15 l
-135  93 M (Eth-Serial) cshow
-160  97 M 10 0 l 0 15 l
-110 105 M 50 0 l 0 15 l -50 0 l 0 -15 l
-135 108 M (ENU) cshow
-160 112 M 50 0 l
-
- 40 125 M 50 0 l 0 15 l -50 0 l 0 -15 l
- 65 128 M (Surv cam) cshow
- 90 125 M 50 0 l 0 15 l -50 0 l 0 -15 l
-115 128 M (Telemetry) cshow
-140 132 M 70 0 l
-
-155 137 M 45 0 l 0 15 l -45 0 l 0 -15 l
-177 140 M (FMC) cshow
-200 144 M 10 0 l
-
- 40 155 M 60 0 l 0 15 l -60 0 l 0 -15 l
- 70 158 M (Telemetry) cshow
-100 162 M 55 0 l
-155 155 M 45 0 l 0 15 l -45 0 l 0 -15 l
-177 158 M (SCR Ctrl) cshow
-200 162 M 10 0 l
-
-210 162 M 0 -115 l
-210  72 M 10 0 l
-
-15 138 M (SpS) show
-
-% PFI
- 40 180 M 60 0 l 0 15 l -60 0 l 0 -15 l
- 70 183 M (Surveillance) cshow
-100 180 M 60 0 l 0 15 l -60 0 l 0 -15 l
-130 183 M (AGCam x6) cshow
-170 180 M 50 0 l 0 15 l -50 0 l 0 -15 l
-195 183 M (USB-Opt) cshow
-250 180 M 50 0 l 0 15 l -50 0 l 0 -15 l
-275 183 M (Opt-USB) cshow
-
- 40 200 M 130 0 l 0 15 l -130 0 l 0 -15 l
-105 203 M (Telemetry, Sensor) cshow
- 40 220 M 130 0 l 0 15 l -130 0 l 0 -15 l
-105 223 M (Fiber illuminator) cshow
- 40 240 M 40 0 l 0 15 l -40 0 l 0 -15 l
- 60 243 M (COBRA) cshow
- 90 240 M 40 0 l 0 15 l -40 0 l 0 -15 l
-110 243 M (FPGA1) cshow
-140 240 M 40 0 l 0 15 l -40 0 l 0 -15 l
-160 243 M (FPGA2) cshow
-
-170 207 M 20 0 l 0 40 l -10 0 l
-170 227 M 20 0 l
-190 207 M 10 0 l
-
-15 205 M (PFI) show
-
-% Fiber
-stroke
-180  17 3 CC
-360  17 3 CC
-220  72 3 CC
-360  72 3 CC
-200 207 3 CC
-360 207 3 CC
-
-% Ctrl
-240 240 M (Ctrl Bldg) show
-
-360 17 M 0 210 l
-
-290  95 M 60 0 l 0 15 l -60 0 l 0 -15 l
-320  98 M (IR Ctrl PC) cshow
-350 102 M 10 0 l
-
-290 220 M 60 0 l 0 15 l -60 0 l 0 -15 l
-320 223 M (MPS, PFICS) cshow
-350 227 M 10 0 l
-
-310 180 M 40 0 l 0 15 l -40 0 l 0 -15 l
-330 183 M (AGC) cshow
-350 187 M 10 0 l
-330 170 M 0 10 l
-330 160 M (V-LAN?) cshow
-
-% fiber links
-233 75 M (x4) show
-233 190 M (x2) show
-
-% IIC etc
-360 92 M 10 0 l
-370 85 M 40 0 l 0 15 l -40 0 l 0 -15 l
-390 88 M (DB) cshow
-360 112 M 10 0 l
-370 105 M 40 0 l 0 15 l -40 0 l 0 -15 l
-390 108 M (Storage) cshow
-360 132 M 10 0 l
-370 125 M 40 0 l 0 15 l -40 0 l 0 -15 l
-390 128 M (g2t) cshow
-360 152 M 10 0 l
-370 145 M 40 0 l 0 15 l -40 0 l 0 -15 l
-390 148 M (IIC) cshow
-360 172 M 10 0 l
-370 165 M 40 0 l 0 15 l -40 0 l 0 -15 l
-390 168 M (MHS) cshow
-360 192 M 10 0 l
-370 185 M 40 0 l 0 15 l -40 0 l 0 -15 l
-390 188 M (etc..) cshow
-
-% Subaru
-
-435 240 M (Subaru) show
-
-410 132 M 20 0 l
-430 125 M 40 0 l 0 15 l -40 0 l 0 -15 l
-450 128 M (Gen2) cshow
-
-360 217 M 10 0 l
-370 210 M 50 0 l 0 15 l -50 0 l 0 -15 l
-395 213 M (Eth-Serial) cshow
-430 210 M 40 0 l 0 15 l -40 0 l 0 -15 l
-450 213 M (MLP1) cshow
-
-% special cables
-
-415   7 M (Fiber) show
-380  22 M 30 0 l
-415  19 M (Metal) show
-415  31 M (Elec, LVDS) show
-415  43 M (USB) show
-415  55 M (Serial) show
-
-stroke
-% fiber
-[2 2] 0 setdash
-
-180  17 M 180 0 l
-220  72 M 140 0 l
-200 207 M 160 0 l
-220 187 M  30 0 l
-
-380  10 M  30 0 l
-
-stroke
-% Elec, LVDS
-[] 0 setdash
-0.5 LW
- 80 247 M 10 0 l
-130 247 M 10 0 l
-100  42 M 10 0 l
-100  57 M 10 0 l
-110  48 M 10 0 l
-110  42 M 0 15 l
- 90  77 M 10 0 l
-
- 90 104 M 20 7 l
-
-380  34 M 30 0 l
-
-stroke
-% Serial
-0.1 LW
- 90 104 M 20 -7 l
-420 217 M 10 0 l
-
-380  58 M 30 0 l
-
-stroke
-% USB
-0.2 LW
-[4 4] 0 setdash
-160 187 M 10 0 l
-300 187 M 10 0 l
-
-380  46 M 30 0 l
-
-% separation
-
-stroke
-
+% boundary
 [3 6] 0 setdash
+150   0 M 0 70 l
+  0  70 M 450 0 l
+  0 160 M 450 0 l
 
-230  10 M 0 240 l
-230  30 M -210 0 l
-230 175 M -210 0 l
-425  70 M 0 180 l
+stroke
 
+[] 0 setdash
+
+% Cs
+ 10   5 M (Cs) show
+ 40   5 M 80 0 l 0 15 l -80 0 l 0 -15 l
+ 80  10 M (2960CG-8TL-L) cshow
 
 gsave
-0 0 translate
-1 1 scale
-%
-stroke
+/Helvetica findfont
+7 scalefont setfont
+ 80  23 M (Exchanged at Cs) cshow
+ 70  40 M (Cs focus) cshow
+110  40 M (Cs Standby) cshow
 grestore
 
+% SpS
+160   5 M (SpS \(TUE-IR\)) show
+180  25 M 100 0 l 0 15 l -100 0 l 0 -15 l
+230  30 M (Cisco 2960X-24TS-L) cshow
+gsave
+/Helvetica findfont
+7 scalefont setfont
+250  17 M (SpS distribution switch) cshow
+grestore
 
+330   5 M 100 0 l 0 12 l -100 0 l 0 -12 l
+380   7 M (SpS SM4 switch) cshow
+330  20 M 100 0 l 0 12 l -100 0 l 0 -12 l
+380  22 M (SpS SM3 switch) cshow
+330  35 M 100 0 l 0 12 l -100 0 l 0 -12 l
+380  37 M (SpS SM2 switch) cshow
+330  50 M 100 0 l 0 12 l -100 0 l 0 -12 l
+380  52 M (SpS SM1 switch) cshow
+
+stroke
+255 0 0 SET_COLOUR
+280  32 M 330 11 L
+280  32 M 330 26 L
+280  32 M 330 41 L
+280  32 M 330 56 L
+stroke
+0 0 0 SET_COLOUR
+
+% CB2F core
+ 10  75 M (CB2F) show
+ 80 110 M 150 0 l 0 15 l -150 0 l 0 -15 l
+155 113 M (Cisco 2960X-24TS-L) cshow
+110  80 M 120 0 l 0 15 l -120 0 l 0 -15 l
+170  83 M (Cisco 2960X-24TS-L) cshow
+ 10 110 M 60 0 l 0 15 l -60 0 l 0 -15 l
+ 40 113 M (Subaru core) cshow
+
+stroke
+0 255 0 SET_COLOUR
+ 85  20 M 0 90 l
+ 90  20 M 0 90 l
+185  40 M 0 40 l
+195  40 M 0 40 l
+205  40 M 0 40 l
+215  40 M 0 40 l
+stroke
+255 0 0 SET_COLOUR
+ 70 117 M 10 0 l
+stroke
+0 0 0 SET_COLOUR
+140  95 M 0 15 l
+
+gsave
+/Helvetica findfont
+7 scalefont setfont
+200  50 M (4SM in LACP) cshow
+145 100 M (FlexStack x2 \(dual link\)) show
+ 85 100 M (connected all time @ CB2F) cshow
+295  95 M (8x 1Gbps metal in device multipath iSCSI) cshow
+grestore
+
+360 80 80 20 5 rbox
+400 85 M (ICS Storage) cshow
+stroke
+255 0 0 SET_COLOUR
+230 85 M 130 0 l
+230 88 M 130 0 l
+230 91 M 130 0 l
+230 118 M 90 0 l
+stroke
+0 0 0 SET_COLOUR
+
+320 110 80 15 5 rbox
+360 113 M (AG control) cshow
+
+
+% PFI
+ 10 165 M (PFI) show
+
+ 50 170 M 100 0 l 0 15 l -100 0 l 0 -15 l
+100 173 M (Media converter) cshow
+ 50 200 100 15 5 rbox
+100 203 M (Cal controllers) cshow
+
+180 195 M 80 0 l 0 15 l -80 0 l 0 -15 l
+220 198 M (Media converter) cshow
+140 225 80 15 5 rbox
+180 228 M (PFI Ctrl) cshow
+230 225 80 15 5 rbox
+270 228 M (COBRA FPGA) cshow
+
+320 195 M 80 0 l 0 15 l -80 0 l 0 -15 l
+360 198 M (USB-Opt conv.) cshow
+330 225 60 15 5 rbox
+360 228 M (AG Cam x6) cshow
+
+stroke
+255 0 0 SET_COLOUR
+100 185 M 0 15 l
+195 210 M 0 15 l
+245 210 M 0 15 l
+stroke
+0 255 0 SET_COLOUR
+105 125 M 0 45 l
+205 125 M 0 70 l
+360 125 M 0 70 l
+stroke
+0 0 0 SET_COLOUR
+360 210 M 0 15 l
+
+stroke
+[2 2] 0 setdash
+180 165 200 15 5 rbox
+stroke
+[] 0 setdash
+280 168 M (POpt2 Cable Wrapper) cshow
+
+% sample
+stroke
+255 0 0 SET_COLOUR
+ 30 235 M (Metal \(RJ45\)) cshow
+stroke
+0 255 0 SET_COLOUR
+ 30 220 M (Fiber cable) cshow
 
 stroke
 showpage
