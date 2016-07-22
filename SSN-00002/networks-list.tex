@@ -247,27 +247,26 @@ but not yet defined clearly.
 %and network switches (core and four switches at each SM) will be provided 
 %by IPMU (+Subaru). 
 
-\section{Items requested to Subaru}
+\section{Subaru fiber assignment}
+
+\subsection{Request and Assignment}
 
 Following items had requested to Subaru. 
 All fibers are from control buidling patch panel. 
 
 \begin{itemize}
-  \item (Permitted) To have PFS dedicated ethernet network subnet (PFS-LAN)
-  \item (Assigned) 2 pairs of MM fibers to PFI
-    (will be used for USB-Optical converter)
-  \item (Assigned) 1 pairs of MM fibers to PFI
-    (will be used for GbE)
-  \item (Assigned\footnote{pfspo:12618}) 
-    4 SM fibers (4 pairs or 4 fibers w/WDM) to SpS floor (via NsIR)
-  \item 1 SM fibers (1 pairs or 1 fiber w/WDM) to Cs
-    \footnote{if SM is not avail, MM is ok}
-  \item (Assigned\footnote{pfspo:12618}) 
-    1 set of MM fibers to TUE (via NsOpt), same as a set to PFI
+  \item To have PFS dedicated ethernet network subnet (PFS-LAN)
+  \item 1 pairs of SM fibers to PFI (PCIe optical extender for USB3)
+  \item 1 pairs of MM fibers to PFI (GbE)
+  \item 4 pairs of SM fibers to SpS floor (via NsIR)
+  \item 1 pairs of SM or MM fibers to Cs
+  \item 1 pairs of SM or MM fibers to Cs Standby for PFS
+  \item 1 set of fibers to TUE (via NsOpt), same as a set to PFI
 \end{itemize}
 
-And following fibers (Table.~\ref{tab:subaru-fiber}) have assigned by Subaru. 
-For fiber cables to POpt2, we shall use ones in the same set as HSC. 
+Assigned fibers by Subaru to the PFS are listed 
+in Table.~\ref{tab:subaru-fiber}.
+All cables are in MPO(4) connector, and have four fibers each. 
 
 \begin{table}[htb]
 \begin{center}
@@ -280,11 +279,11 @@ POpt2 & FB17401A & SM & at OCB21: A41J41-A41J42, A41J43-A41J44 (Spare) \\
 POpt2 & FB17402A & SM & at OCB21: A41J45-A41J46 (Spare), A41J47-A41J48 (Spare) \\
 POpt2 & FB17412C & MM 62.5 & at OCB21: A41J84-A41J83, A41J82-A41J81 (Spare) \\
 \hline
-TUE (NsOpt) & FB15305A & SM & (MPO; 2 for spare) \\
-TUE (NsOpt) & FB15318C & MM 62.5 & (MPO; 2 for spare) \\
+TUE (NsOpt) & FB15305A & SM & 1 pair for spare \\
+TUE (NsOpt) & FB15318C & MM 62.5 & 1 pair for spare \\
 \hline
-SpS (NsIR) & FB15404A & SM & (MPO; No spare) \\
-SpS (NsIR) & FB15405A & SM & (MPO; No spare) \\
+SpS (NsIR) & FB15404A & SM & no spare \\
+SpS (NsIR) & FB15405A & SM & No spare \\
 \hline
 Cs & FB14707A & SM & A1J81-84 (1 pair for Spare); Mostly to be assigned \\
 Cs Standby & (FB13102A) & SM & Need to be tested and adjust auto connector position
@@ -292,7 +291,7 @@ Cs Standby & (FB13102A) & SM & Need to be tested and adjust auto connector posit
 \end{center}
 \end{table}
 
-\subsection{Test and fiber attenuation measurement results} 
+\subsection{Test and fiber attenuation measurement results (2014/02)} 
 
 \subsubsection{Fiber attenuation measurement method}
 
@@ -316,7 +315,7 @@ but we have not cleaned panel connectors.
 
 \subsubsection{Results}
 
-Results of measurements are in Table~{tab:subaru-measurement}. 
+Results of measurements are in Table.~\ref{tab:subaru-measurement}. 
 Results for patch cables are subtracted. 
 
 \begin{table}[htb]
