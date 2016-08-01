@@ -1,0 +1,164 @@
+\documentclass[a4paper,notitlepage]{article}
+\usepackage{ssn-format}
+\title{No 'collision avoidance' system operation}
+\author{Atsushi Shimono}
+%\date{2016--05--18}
+\begin{document}
+
+\drafttrue
+\SSNID{00025}
+\SSNREV{001}
+\SSNCATEGORY{ICS}
+\SSNChangeRecord{
+}
+\SSNReference{(none)}
+\SSNAttachment{(none)}
+\SSNWritten{Atsushi Shimono}
+
+\ssnhead
+
+\section{Abstract}
+
+Regarding recent hardware development and constraints found during these 
+development, we now have many new foundings and uncertainties, which may 
+have an impact on control of Cobra operation for entire PFS software 
+packages but not only MPS and FPS.
+From uncertainties of Cobra movement, it is quite difficult to simulate 
+behaviors of Cobra motors which makes a collision avoidance in advance from 
+the operation inaccurate and makes blocked region within acceptable level. 
+Although implementation could be possible, but this makes overall strategy 
+of software operation quite complex, which will make survey operation 
+inefficient. 
+This proposal is not taking such way to check as much as possible in advance, 
+but to perform only a simple check on target assignment with detecting 
+collision on the fly. 
+
+In this note, these new foundings are summarized and described, and 
+discussions which may affect to the operation of hardware from software 
+point of view to make us possible dealing with new constraints and conditions. 
+
+\section{Constraints and conditions on Cobra collisions}
+
+\subsection{Uncertainties of Cobra motor map}
+
+Cobra motor map is used for conversion between an angle of operation and 
+real number of steps to be commanded to Cobra movement, and is registered 
+as steps/degree per 3.6deg range for both forward and reverse movement per 
+each Cobra. Cobra is operated by vibration movement of its piezo plates in 
+high frequency, its movement (steps/degree) has large uncertainties up to 
+10\% (regarding to detailed research on 'hide to dot', 10\% is maximum but 
+not an average nor a sigma) both during movement and final destination. 
+This makes simulation of collision avoidance quite difficult since we just 
+are possible to simulate in stochastic way. 
+This Cobra motor map will be updated frequently (in how much frequency need 
+to be investigated both during system integration and in operation, but 
+assuming one per night operation at least to check validity with logged 
+history of movements during science operation), even we assume motor map 
+will not change much by such semi-realtime update, this will introduce 
+additional uncertainties into simulation of movement. 
+
+\subsection{On-the-fly update of Cobra motor map}
+
+Not only dedicated measurement data for Cobra motor map but statistics from 
+normal operation will be used for on-the-fly update of Cobra motor map. This 
+will require data cleansing before inputing to regeneration of Cobra motor 
+map, e.g. data points on hitting hard stop, non-accurate measurement points 
+such as 1st stage movement on small angle of 2nd stage (angular resolution 
+could be quite bad when 2nd stage is small), nearby Cobras collided. 
+
+\subsection{How harmful collision is}
+
+In recent development and performance verification of Cobra, it found that 
+collision does not make (unrecoverable) damage on its perzo motors, though 
+it does not move on collision to another. Regarding a comment from NewScale, 
+at least a few seconds of collision is fine. (Of course, it must doubltless 
+not be harmful since we will use hardstop as mechanical stopper for end limit 
+but not a switch for movement.) How much (or not) collision will damage the 
+Cobra piezo motors or fiber arm, and how long we can keep commanding to move 
+Cobra while hitting to hardstop or another Cobra, are questions which we 
+need to investigate on small distributed test bench.
+
+\subsection{Selectable 1st stage CW/CCW hardstop per each Cobra per each operation}
+
+Recent discussions and development in CIT/JPL, direction of "origin" (or 
+direction of 1st movement on Cobra configuration) of 1st stage has changed 
+as selectable from CW or CCW per each operation per each Cobra. A main reason 
+of this change is to make time shorter on 1st movement from each origin on 
+Cobra configuration, but could have some impact on collision modes that 
+nearby Cobra could have different movement direction of 1st stage. 
+
+\subsection{Metrology camera operation and no strob mode}
+
+Metrology camera system (MCS) is under development on its camera operation, 
+but currently only continuous rolling shutter mode is supported for its 
+exposure mode. Of course we will investigate further for longer exposure 
+time, this continuous rolling shutter mode could be used during Cobra 
+movement for configuration to detect unmoved spots. Such detection of 
+unmoved spots will make us enable for on-the-fly detection of completion 
+of movement per each Cobra or collision of Cobras whose spots stopped not 
+at their target spots but stopped in close positions. 
+
+Strob mode was considered to be used during Cobra position measurement, by 
+taking a long exposure with moving one stage of Cobra to get all points in 
+one exposure, but is not in the current base plan. Strob mode is designed 
+with ~0.1s light on by high intensity, Cobra moves well more than spot size 
+during one light on time, so it was designed to take arcs of Cobra movement 
+in bright enough arcs with high intensity illumination of LEDs. We could use 
+this strob mode in continuous exposures during Cobra movement of configuring 
+but we will have arcs but not unelongated spots. So such continuous shots 
+might not be used as higher resolution data for Cobra motor map nor as 
+tracking of positions at each shot, but just a judgement of moving or stopped.
+
+
+\section{No "collision avoidance" system operation}
+
+This proposal is to change design of system operation as
+
+\begin{enumerate}
+  \item No check of collision during movement on target assignment.
+    Check only no collision at the final positions where target objects are 
+    placed.
+  \item FPS decides which hardstop to be used right before commanding to origin.
+    Deciding which hardstop to be used might not need to use motor map, but 
+    just 180deg division is fine (TBC).
+  \item FPS and MCS detemines collision for each MCS exposure.
+\end{enumerate}
+
+Actions on detection of collision among Cobra fiber tips during Cobra motrs 
+active are need to be well defined, such that whether to stop Cobra movement 
+for collided pairs (or even possible), or that can we issue new command (back 
+to home position or move in another way for one or all in collided pair) 
+while others are kept moveing. 
+
+\section{Discussions}
+
+\subsection{Probability map of trajectory of Cobra fiber tip}
+
+Assuming uncertainties of Cobra motor map follow normal distribution with 
+$3\sigma\sim 10\%$, and each step of movement is independent each other 
+although reverberations of vibration could continue between steps, we can 
+model its probability map with a generalized Wiener process
+\footnote{Normally used in financial modeling especially for calculations of 
+premiums for options, using geometric Brownian motion.}.
+Summed probability map in a generalized Wiener process is shown as a standard 
+deviation of each step times square of step numbers, so considering operation 
+of Cobra motors are divided into unit steps, it will be written as a function 
+of square of distance to operate. 
+
+
+\subsection{Typical target pairs with high probability of collision}
+
+
+\subsection{Data cleansing on Cobra motor map calculation}
+
+
+
+\section{Action Items}
+
+\subsection{Test using Cobra test bed with dense population}
+
+\subsection{Collision simulation by changeable hardstop direction}
+
+
+\end{document}
+
