@@ -1,0 +1,40 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Second-Pass Distortion Map [Night-time]}\label{secflow:raster}
+
+At this step, the science fibers should be pointed to the targets with the accuracy of $\sim 50$ um (at least less than 100 um).
+
+The goal of the accuracy of pointing of the fibers is $\sim 10$ um, which is achieved by raster scan observation in this step.
+
+We slew the telescope to the field where enough stars is catalogued with good astrometry (see section \ref{sec:RasterField}).
+We put these bright stars on the science fibers and do telescope raster scan observation by 3$''$ $\times$ 3$''$ grid, approximately three time as large as the fiber core diameters.
+\redtext{It is suggested that raster with hexagonal pattern provide denser scan than grid.}
+
+Calibrations in the previous sequences shall include the following errors:
+\begin{itemize}
+\item Telescope elevation, and azimuth
+\item Temperature
+\item Focus
+\item ROA
+\item Error in the relative position of A\&G cameras to fiber positioner.
+\item Error in Cobras' position measured prior to integration at Subaru
+\item Error in Catalogue
+\item ADC
+\item etc…… (TBD)
+\end{itemize}
+
+We also check the dependency of the map on wavelength, and check if ADC works correctly, by comparing the observed positions with predicted ones by ADC.
+
+When the second distortion map is made, update ETS using this map.
+
+
+\begin{itembox}[l]{\suctitle{Success Criteria}}
+Second distortion map is obtained with error less than 10um.
+
+\bluetext{Required long time to analyze the data?: Yes. \\
+--- It takes time ($\sim$ one month) to improve distortion map, by analyzing raster scan data in various condition.
+Also it needed more than one run to check dependency of temperature and so on.
+}
+\end{itembox}
+
+When this step is completed, the fibers shall point to the target within the accuracy of 10 um.
+Then, we verify the instrument performance in the following steps. 

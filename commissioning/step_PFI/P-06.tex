@@ -1,0 +1,76 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Validation of Auto Guide Cameras [Nighttime]}\label{secflow:AGCfunc}
+\milestone{AGCs acquire star image for the first time, and the telescope is guided using AGCs for the first time.}
+
+
+Six Auto Guide cameras on the edge of FoV are used for many purposes:
+\begin{enumerate}
+\item Acquisition and Guidance of the field 
+\item Auto Guiding
+\item Focusing
+\item Telescope Pointing analysis
+\item Alignment of WFC$+$PFI with the prime mirror
+\end{enumerate}
+
+To enable these functions, in this phase we validate basic functions of AG cameras --- (1) focusing, (2) pixel scale and orientation of each sensor on the sky, and (3) auto guiding, that is, measuring the centroid and sending position error to the telescope.
+
+\paragraph{Focusing}
+Firstly, we seek on-focus position.
+We slew telescope to a bright stars and let them into the AG camera FoV.
+The we take AG camera image and seek on-focus position.
+AG cameras has step of 300um, with which they can take in-focus/ out-focus image simultaneously. 
+By measuring the size of these spots, seek focus position.
+The focusing procedure is proposed by Jim Gunn (PFI:336), to derive $\alpha$ parameter.
+The parameter shall be calculated using simulated data (TBC), and in the commissioning sequence, we shall optimize the parameter $\alpha$.
+If 4 out of 6 AGC can take pair of stars (in/out), the error of estimation of focus seems $\sim$10um (Jim's document: PFI:336)
+
+\paragraph{Pixel scale and orientation on the sky}
+Secondary, we measure pixel scale and orientation of the AGCs.
+We slew the telescope to the star clusters, and measure the pixel scale by the astrometry of stars on sensors.
+We then check the orientation of the x/y direction, putting slight offset on the telescope in R.A and Dec. direction individually.
+(And we can also check pixel scale by comparing two shifted images.)
+The derived pixel scale and orientations are implemented to the software module for acquisition and guidance.
+
+Assuming that it takes 5 min for one exposure from slewing telescope to acquiring images, 
+it takes 5 x 3 (position) x 6 (sets) = 90 min in total.
+Here, 3 positions are needed  to measure the x/y  direction: one is the origin and the others are with offset of either R.A or Dec..
+To measure the direction easily, we will move InR so a given AGC as to have PA of 0 degree.
+therefore 6 sets are needed.
+If there are any fields for the two opposite AG cameras to have enough number of stars, we can reduce to 3 sets.
+Including the time to execute astrometry and calibration, 120min=2hours are needed to this test.
+
+%%%%%%%%%%%%%%%%
+
+\paragraph{Auto guiding}
+Finally, we validate the AGC functions as the guiding and confirm that the tracking error meets the requirement \redtext{(How much?)}.
+For auto guiding, one or two AG camera are used to measure the position error of the telescope, and another camera is used to measure focusing.
+
+We slew telescope to a given field, and execute Acquisition and Guidance sequence --- measure the position of the star on Ag cameras, calculate position error (dRA, dDec) and d(InR), send telescope these errors, and correct the position.
+Then we start auto guiding --- measure the position of the star on Ag cameras, calculate position error (dRA, dDec) [and d(InR)], send telescope these errors.
+At the same time, some AG camera measures focus position.
+Focus should be corrected if it gets out-focus, but threshold and frequency is optimized during the commissioning.
+We measure the guiding error.
+
+%We check that the images is sent to VLAN and Gen2.
+
+%Because commissioning sequences in PFI don't need long-time exposures, the tracking errors on longer timescale ($>$ 10 minutes) shall be checked in  \ref{secflow:PV1}
+%Note also that this sequences can be carried out during the next sequences (\ref{secflow:1stDM}), where we take star images with telescope guided.
+
+We check these functions at several telescope positions.
+Assuming that it takes 15 min including optimizing the parameters for calculation of the pointing errors, 2 hours are required for this test.
+Note that we can also validate auto guiding in later phases and as mentioned above, parameters for correcting focus will be optimized during the commissioning.
+
+\smallskip
+
+Because in this sequence we have star image on AGCs  and control the telescope accordingly, we can validate communication between Gen2/MLP1 and MHS/AGCC.
+
+\begin{itembox}[l]{\suctitle{Success Criteria}}
+Acquisition and Guidance, focusing, and Auto Guiding can be executed using AGCs.
+
+Pixel scale and orientation of the x/y pixel direction on the sly are measured.
+%Error of tracking of telescope is 0.1 arcsec rms(1 minute), 0.2 arcsec rms (10 minutes), and 0.6 arcsec rms (30 minutes).
+
+\bluetext{Required long time to analyze the data?: No. \\
+--- We shall analyze the data in real-time.
+}
+\end{itembox}

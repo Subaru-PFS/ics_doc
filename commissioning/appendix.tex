@@ -1,0 +1,28 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Hexapod operation}\label{sec:Hexapod}
+
+The goal of Hexapod operation is to keep the x/y alignment, focus (z), and tilt of the WFC+HSC assembly with respect to the primary mirror.
+The Hexapod operation can depend on EL following a look-up table (see page 19). The z adjustment can also account for the effect depending on telescope truss temperature (Ttruss) via a simple model (details of the model TBC).
+The look-up table comes from a result of Mirror Analysis (MA) with HSC in POpt2 (see page 47), but the Hexapod operation can be optimized for PFS (see page 46).
+The instructions in the look-up table and those from the model with Ttruss can be imperfect, so probably an offset will need to be given based on a focusing operation from time to time during a night.
+
+\section{Optimizing Hexapod operation}
+
+A significant part of the Hexapod operation is determined by the investigations such as MA with HSC, so the result may not be optimal for PFS.
+However PFS can collect information to optimize it using the AG camera images:
+Image quality, focal plane tilt z \& tilt
+Asymmetry in a defocused star image or coma features in a focused star image  x/y (feasibility is under investigation, see a separate report)
+Initially PFS will have a look-up table copied from HSC, but this will be a different entity, so according to the information from the investigation using PFS, the PFS's look-up table can be edited to modify the Hexapod operation. It is also possible to apply offsets from a different command path.
+
+
+\section{Mirror Analysis}\label{sec:MA}
+PFS doesn't have capability of executing Mirror Analysis (MA).
+According to the document describing the mirror analysis and pointing analysis for PFS ({\tt TM-N57208}), PFS uses the MA data of HSC.
+PFS uses the same coefficients of primary mirror as those for HSC, while adds differential parameter for coefficients of secondary mirror. 
+When HSC updates the MA, operators can decide whether they also update the coefficients for PFS.
+
+The best x/y/z position of WFC+HSC assembly with respect to the primary mirror is investigated by observing a bright star using a Shack-Hartmann system onboard HSC. 
+The MA is performed at several EL to have the x/y/z positions as a function of EL. The operation of actuators for primary mirror support is also optimized as a function of EL via MA.
+The MA is performed only at the field center, so cannot investigate focal plane tilt. Instead HSC itself is used to check the focal plane by looking at stellar images across the field of view. This determines the optimal tilt operation of Hexapod.
+The optimization of x/y/z and tilt can be an iterative process: Once the tilt operation is determined, the MA is performed again to see if the best x/y/z position needs to be tweaked, and one may need to come back to tilt optimization.
+

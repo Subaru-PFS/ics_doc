@@ -1,0 +1,52 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Characterization of SpS [Daytime]}\label{secflow:SpSchar}
+
+Using arc lamps and continuum lamps, we characterize the SMs.
+Here we will use Dummy Cable B module [see DummyCableB-MainDocument.pptx (PFS-SpS:01680) for details] which is used for the integration by LAM\footnote{To achieve characterization well, we need lamps with large wavelength coverage. We also need black body lamp, but should input the light from slit or GANG connector.}.
+
+\paragraph{PSF and spectral distribution measurement}
+With arc-lamp image and continuum lamp image, we measure PSF and spectral distribution of various fibers on the detectors, respectively.
+These information of the fiber image is feedbacked to DRP development.
+Configuration of measured fibers is TBD\footnote{LAM will use 4 fibers with the option of extra 7 fibers sparsely arranged in the detectors, but is it acceptable for DRP development?
+It seems some room for fiber configurations.
+1--2 fibers per block, for instance,  are too much?
+At least, the PSFs and spectral distribution both centre and edge seems required.
+Besides, how many spots is needed in wavelength direction?
+}.
+
+\paragraph{wavelength coverage, spectral resolution, and throughput}
+Using the arc-lamp image, we estimate wavelength coverage and spectral resolution (including wavelength dependence), and compare with specifications, by measuring the FWHMs of the spots.
+Note that the wavelength coverage and the spectral resolution will be partly measured by LAM\footnote{Validation Roadmap; $\lambda$ coverage --- 2.5.3: checked by centring the image. $R$ --- 2.5.4: extrapolated by FWHM of the spot for testing image quality (maybe only center?).}.
+
+The requirement for the wavelength coverage ({\tt REQ-SpS-41 (Analysis)}) is 380--650 nm (blue), 630--970 nm (red), and  940--1260 nm (nir).
+
+The requirement for the spectral resolution, on the other hand, ({\tt REQ-SpS-42 (Analysis)}) is $>$2300 @ 520 nm (blue), $>$ 2800 @ 810 nm (red, LR),  $>$ 5000 @ 810 nm (red, MR), and $>$ 4100 @ 1110 um (nir).
+
+\smallskip
+
+Using a black body lamp, we will measure throughput of the SpS itself and compare with specifications, which is estimated by combining the performance of each element (LAM).
+If measured throughput is inconsistent with analysed one, consider possible causes (vignetting, background etc.) 
+The stability of the black body lamp (TBD) is needed.
+
+The requirement for the throughput of SpS ({\tt REQ-SpS-48 (Analysis)}) is in Table \ref{tab:SpSthroughput}:
+\begin{table}[!ht]
+\label{tab:SpSthroughput}
+\begin{center}
+\caption{}
+\begin{tabular}{c|cc}  \hline
+ & \multicolumn{2}{c}{Throughput [ \% ]} \\
+wavelength &  requirement & goal \\ \hline \hline
+380 & 14 & 19 \\
+440 & 38 & 49 \\
+550 & 39 & 50 \\
+650 & 33 & 50 \\
+790 & 42 & 56 \\
+980 & 36 & 47 \\
+1260 & 35 & 45 \\  \hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{itembox}[l]{\suctitle{Success Criteria}}
+SpS is characterized. These characters is consistent with expected by specification.
+\end{itembox}

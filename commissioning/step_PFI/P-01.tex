@@ -1,0 +1,52 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Check of basic functions of PFI / OPot2 on off-Telescope (stand-by) condition [Daytime]}\label{secflow:PFIoff}
+In this sequence, we check basic functions of PFI and Popt2 before installation to the telescope.
+Firstly we check basic functions of PFI prior to installation to Popt2.
+Namely,
+\begin{itemize}
+\item fiducial fiber illuminator: turn on/off
+\item calibration lamp: turn on/off (it can be turned on /off by local computer)
+\item AG cameras: read image (bias/dark) with expected noise level.
+We also check that the images is sent to VLAN and Gen2.
+\item fiducial cameras can read image (bias/dark) with expected noise level
+\item Center camera can read image (bias/dark) with expected noise level
+%\item fiber positioner: move and home, read status
+\item sensors can be read
+\item network connection
+\item cooling system
+\item telemetry
+\end{itemize}
+The above functions of PFI, except for the turning on/off calibration lamp, are controlled from Gen2 through MHS
+
+After the basic functions are checked, we install PFI to POpt2.
+When PFI is installed to POpt2, {\tt REQ-SYS-648} claims PFI should be set within the accuracy of $\pm$20 um.
+This requirement is flowed down to {\tt L3-PFI-042}, claiming the requirement for installation alignment accuracy with respect to the rotator coordinate:
+\begin{itemize}
+\item within 200um in radial translation
+\item  within 100um accuracy in focus
+\item  within 15 arcsec tilt (~80 um @ outer ring of positioner frame w/ diameter of 1108 mm)
+\end{itemize}
+These requirements are for absolute positions.
+In addition to them, the repeatability within $\pm$ 20 um is required, and we lay weight on the repeatability.
+
+The repeatability of the installation is determined by the tolerance of POpt2 gear support and PFI positioner frame.
+According to the HSC experience, the repeatability of installation of the camera dewar is quite well (less than 30 um with 0.21 mm gap between the dewar and the gear support).
+If we take the same procedure\footnote{some explanation is described here: NDTN-20150925-NTakato-Inner\_diameter\_of\_PFI\_interface\_of\_POpt2.pdf}, we will be able to achieve the same repeatability.
+
+After the installation of PFI to Popt2, then the following functions are checked.
+\begin{itemize}
+\item rotator: can mechanically rotate from -270 [deg] to + 270 [deg]
+\end{itemize}
+
+At this point, most of functions controlled by PFICS, MPS, so that these modules and their communication with Gen2 via MHS are validated.
+\redtext{Name them. how about Cal. lamp?}
+
+Refer the requirement for pre-installation check-out to {\tt L3-PFI-037}.
+
+\begin{itembox}[l]{\suctitle{Success Criteria}}
+All PFI basic functions are available and characterized.\\
+PFI is installed to POpt2 within the required accuracy. 
+
+\bluetext{Required long time to analyze the data?: No. \\
+---We can check the functions in real time.}
+\end{itembox}

@@ -1,0 +1,43 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Check of basic function of PFI on the Telescope [Daytime]}\label{secflow:PFIon}
+
+\milestone{PFI is operated on the telescope for the first time.}
+
+In this sequence, we check the functions of PFI again but on-telescope condition.
+Basically we repeat the same items as those in \ref{secflow:PFIoff}.
+Namely.
+\begin{itemize}
+\item Calibration lamp can be turned on/off.
+\item AG cameras: read image (bias/dark) with expected noise level.
+We also check that the images is sent to VLAN and Gen2.
+\item Fiducial fiber cameras can read image (bias/dark) with expected noise level.
+\item Center camera can read image (bias/dark) with expected noise level.
+\item Rotator can rotate from -270 [deg] to + 270 [deg].
+\item All telemetry sensors can sent proper status.
+\item Cooling system works.
+\item Network connection.
+\end{itemize}
+
+The following functions of PFI are validated using MCS by taking the fiber image.
+\begin{itemize}
+\item Fiducial fiber illuminator can be  turned on/off \footnote{If SpS and Cable B are ready, we can also check back-illumination of science fibers.}
+%\item science fibre back illuminator (after SpS and Cable B are installed): turn on/off, brightness (normal mode and strobe mode), pulsed light (10ms period and 10\% amplitude)
+\item MPS can move fiber positioners (Cobras) move and read their status.
+At this point, because Cobras parameters are not calibrated (\ref{secflow:CobraCal}), we should move them slightly to avoid collision.
+%If the SpS and Cable B are installed, the science fibers are moved to the home position several times to test good repeatability ($\sim$1um)
+%\item Dots can be obscure the Fibers.
+%We move the fibers to the dot positions and turn on the calibration lamp.
+%Take fibers image by MCS and compare with that of home position, where the fibers are not obscured.
+%If dots work, the spots in MCS is fainter than those with the fibers at home position.
+\end{itemize}
+
+When the basic function of AG cameras, fixed fiducial cameras, center camera and Calibration lamp are verified, the calibration data (flat and bias) shall be obtained.
+(Acquiring the calibration data probably doesn't needed so frequently --- at the beginning of each run is enough?)
+
+\begin{itembox}[l]{\suctitle{Success Criteria}}
+PFI basic functions above are checked on Telescope. 
+
+\bluetext{Required long time to analyze the data?: No. \\
+--- We can check the functions in real-time.
+}
+\end{itembox}

@@ -1,0 +1,171 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Performance Verification I [Night-time]}\label{secflow:PV1}
+
+\milestone{We operate full observation sequence for 900-sec exposure for the first time.}
+
+\milestone{PFS acquire faint galaxies/stars spectra for the first time.}
+
+The goal of this commissioning stage is to verify the performance of the integrated PFS system. 
+Specifically, after we confirm that the observational sequence in order to carry out scientific observations can be made, we measure the total throughput from end to end, i.e., from the primary mirror of the telescope to the detectors, with actual celestial objects. 
+
+\begin{itemize}
+
+\item{Verification of the observation sequence}
+
+The following points, which correspond to the sequence itself that is supposed to be carried out in normal science observations, will be verified:
+
+\begin{enumerate}
+\item{Acquisition of the target field}
+\item{Confirmation of the guiding}
+\item{The cobra configuration for target objects}
+\item{Start exposure}
+\item{Acquisition of the next target, if any}
+\end{enumerate}
+
+At this sequence, we test that all commands can be sent correctly.
+We have requirements for overheads, assuming typical exposure time of 900 seconds.
+According to {\tt REQ-SYS-520 (Test)}, the taken time from field acquisition to starting auto guiding is within 105 seconds, which this shall be confirmed in \ref{secflow:AGCfunc}.
+By selecting a field where all science fibers should be allocated objects, we test whether 95 \% of 2394 fibers (2275 fibers) moves to the their targets within 105 seconds {\tt REQ-SYS-517 (Test)}, with accuracy of $<$ 10um. 
+We shall take 900-sec exposure, during which the tracking error should be $\sim$ 0.2 arcsec rms by auto guiding (0.2 arcsec rms for 10 minites and 0.6 arcsec rms for 30 minites: {\tt REQ-SYS-888 (Test)}).
+(It seems the first time to track a field for longer period, $>$ 10 minutes, because we execute short exposures in the previous sequences.)
+After exposure, it should take less than 35 seconds to readout detectors, archive the fits (including MCS data for finally configured fiber image) data and telemetry data to STARS, Subaru archiving system ({\tt REQ-SYS-519}). 
+
+
+\begin{itembox}[l]{\suctitle{Success Criteria}}
+Confirm that the normal observation sequence can be carried out.
+\begin{itemize}
+\item 95 \% of science fibers can be allocated to their objects within 105 seconds, and allocation error should be less than 10 um. 
+\item Tracking error for 10 minutes and 30 minutes is 0.2 arcsec rms and 0.6 arcsec rms. 
+\item Reading out the detectors and archiving data are completed for less than 35 seconds. 
+\end{itemize}
+\end{itembox}
+
+\item{Measurement of the total throughput}
+
+The throughput is estimated using measured transmissions / reflection curve for each optical components (e.g. the primary mirror, fibers, optics for Spectrographs).
+The expected PFS performance is shown on the web.\\
+\hspace*{10mm} http://pfs.ipmu.jp/research/performance.html \\
+In this test, we measure the throughput of the entire system and compare with the prediction.
+
+The process of the total throughput measure will be carried out as the following way:
+
+\begin{enumerate}
+\item{Observe stars with known spectral types}
+
+This process requires a substantial number of stars whose spectral types and absolute flux are known. The spectra should have as less spectral feature in the observed wavelength range as possible, therefore F-type dwarf stars will be a suitable candidate for this measurement. The number of stars in the observations should be ideally equal to the number of fibers per one FoV. Star clusters will be a good candidates.
+
+\item{Comparison of the observed counts to the given flux density as a function of wavelength}
+
+We will compare the obtained spectra to the given spectra of the observed stars. From the given spectra, the expected counts as a function of wavelength can be calculated by assuming atmospheric transmission. By comparing the obtained counts and expected counts, the total throughput can be estimated.
+
+\item{Repeat this measurement and comparison in various conditions}
+
+The total throughput measurement should be carried out in different conditions (e.g., weather including different seeing, cobra configuration, telescope EL, and ROA, etc.). The average value will be the representative measured value of the total throughput. 
+
+\item{Comparison of the obtained throughput to the expected one}
+
+If the measured value is significantly different from the expected total throughput, we might need to verify the input source. In FMOS engineering observations, they checked the total throughput measurement with celestial objects by using a black body furnace. In this case, the optimization of the set up of the blackbody furnace, such as position, incident angle, and the calibration of absolute flux, would need to be considered.
+
+\end{enumerate}
+
+The time duration of this commissioning stage will be about 1 engineering run, i.e., about 2--3 engineering nights, taking into consideration of a weather factor.
+
+\begin{itembox}[l]{\suctitle{Success Criteria}}
+Confirm that the total throughput of PFS is as expected:\\
+BLUE arm --- $\sim$12\% (380--450 nm), $\sim$21\% (450--550 nm) and $\sim$24\% (550--650 nm) \\
+RED arm (LR) --- $\sim$30\% (630--750 nm), $\sim$29\% (750--850 nm) and $\sim$27\% (850--970 nm) \\
+RED arm (MR) --- $\sim$26\% (710--875 nm), $\sim$28\% (775--825 nm) and $\sim$27\% (725--885 nm) \\
+NIR arm --- $\sim$17\% (940--1050 nm), $\sim$19\% (1050--1150 nm), and $\sim$17\% (1150--1260 nm)
+\end{itembox}
+
+\end{itemize}
+\begin{itemize}
+\item{Verification of the absolute flux calibration}
+
+One of the important tasks is the establishment of the absolute flux calibration process. In the normal observations of faint objects such as distant galaxies, we suppose that a certain fraction of fibers is used for flux calibration stars, for which F-type stars are desirable. By using the flux calibration stars, the spectra of all other fibers will be calibrated. In this measurement, we verify whether the absolute flux calibration process can be made at the expected level, with the accuracy of 5 \% ({\tt REQ-SYS-656 (Test)}). The measurement process will be done as follows:
+
+\begin{enumerate}
+\item{The process is closely related to the measurement of the total throughput described in the previous subsection. In this measurement, we observe a substantial number of stars whose spectral types and absolute flux are known, including flux calibration stars. The data reduction is done following the normal procedure.}
+
+\item{The calibrated spectra can be compared to the given spectra. The deviation from the expected spectra can be calculated as a function of wavelength. If necessary, this measurement will be done in various different condition such as ones listed in the previous subsection, and the deviation of the flux calibration as a function of these quantities.}
+
+\item{The cross-correlation to the external catalogue will be useful especially for faint galaxies. In this measurements, targets selected from the external catalogue (e.g., SDSS) will be observed and the data processing will be done in the normal procedure. We check the obtained spectra and the deviation from the external SDSS spectra.}
+
+\item{Verify the following items:}
+\begin{itemize}
+\item{that absolute flux calibration can be done at the desired level of accuracy (5 \%)}
+\item{the number of objects that should be used for the calibration}
+\item{the spectral type of stars that is optimal and acceptable for the desired flux calibration}
+\item{the optimal spatial distribution of the calibration stars on the FoV}
+\end{itemize}
+\end{enumerate}
+
+\begin{itembox}[l]{\suctitle{Success Criteria}}
+Confirm that the absolute flux calibration can be done with the accuracy of 5 \%. \\
+The number of fibers for flux calibration is determined (100--200 ? TBC).
+\end{itembox}
+
+\item{Verification of sky background subtraction}
+
+The subtraction of the sky background in the data analysis is one of the most critical tasks in the PFS projects. 
+In this verification process, we allocate all fibers on the sky, among which we choose some of them as the sky fibers.
+Then we test sky subtraction by checking the reduced data of the rest fibers, selected as ``scientific object".
+If the sky background is subtracted perfectly, the reduced spectra should be ``flat". 
+We also observe a substantial number of faint objects that is supposed to be observed in the actual scientific operations. In the normal and expected observations, a certain fraction of total fibers will be used for the sky background subtraction. We will estimate the residual of the sky subtraction as a function of:
+\begin{enumerate}
+\item{exposure or observing time}
+\item{airmass}
+\item{other weather condition such as seeing}
+\item{cobra configuration and ROA?}
+\end{enumerate}
+
+We verify whether the sub subtraction residual is in the range of the expected level (0.5 \% accuracy{\tt REQ-SYS-679 (Analysis)}) or not. 
+Another important items to be verified is the number of the sky fibers that is required for the desired sky subtraction.
+
+\begin{itembox}[l]{\suctitle{Success Criteria}}
+Confirm that the sky background can be subtracted within the accuracy of 0.5 \%.
+\end{itembox}
+
+\item{Verification of the limit of exposure time in each frame}
+
+According to {\tt REQ-SYS-732 (Demonstration)}, the exposure time for one frame shall range 10 sec -- 1800 sec. 
+The maximum exposure time is determined not to have too many cosmic rays, nor saturated sky emission lines.
+In this verification process, we will determine the maximum exposure time for one frame by taking a substantial number of frames with longer exposure ($>$ 150 sec. TBC). 
+The purpose of this verification is as follows:
+
+\begin{itemize}
+\item{Check the fiber loss as a function of time}
+\item{Effects on the sky subtraction}
+\item{Check the saturation of OH emission lines}
+\item{Effects by cosmic ray on obtained spectra and data reduction process}
+\item{Check the instrument stability (c.f. FMOS instability problem during engineering observation)}
+\end{itemize}
+
+\begin{itembox}[l]{\suctitle{Success Criteria}}
+Confirm that the maximum limit of long exposure time ($<$ 1800 sec) in each frame can be verified.
+\end{itembox}
+
+\item{Verification of observations with a long total exposure time}
+
+In the observations targeting very faint objects such as high-redshift galaxies, very long exposure time in total will be supposed. The signal-to-noise ratio of the obtained spectra should, ideally, increase with exposure time just as expected. In this verification process, we will carried out observations with very long exposure time in total ($\sim$10-20 hours). The target is supposed to be both bright and faint galaxies. In the measurement, we will check the following points:
+
+\begin{itemize}
+\item{The obtained signal-to-noise ratio grows as a function of exposure time following $\propto \sqrt{t_{exp}}$.} 
+\item{The effect of very long exposure on the sky subtraction.}
+\end{itemize}
+
+The time duration of this commissioning stage will be about 2 engineering runs, i.e., about 5--7 engineering nights, taking into consideration of a weather factor.
+
+\begin{itembox}[l]{\suctitle{Success Criteria}}
+Confirm that the expected growth of Signal-to-Noise ratio of faint targets for long exposure time
+\end{itembox}
+
+\item{Verification of re-configuration of cobra during scientific observations}
+
+\begin{itembox}[l]{\suctitle{Success Criteria}}
+Confirm weather the re-configuration of cobra during observations with long total exposure time and how often the re-configuration is needed
+\end{itembox}
+
+\item{Verification of beam-switching mode (TBD)}
+
+\end{itemize}

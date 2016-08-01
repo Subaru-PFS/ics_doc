@@ -1,0 +1,110 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Table of Compliance Matrix
+
+
+%--------------------------------------------------------------
+%  Table: expected runs and nights
+%--------------------------------------------------------------
+%\setlength{\tabcolsep}{1mm}{
+\begin{landscape}
+\begin{longtable}{r|c|p{50mm}|p{100mm}|p{11mm}|c|p{35mm}}
+%\begin{center}
+\caption{
+The list of achieved functions during the commissioning.}
+\label{tbl:funcs} 
+%\scriptsize
+\footnotesize
+\\ \hline
+No	& Pri.	& Functions & Success Criteria & \#Sq.  & Succ.?  & Notes \\ \hline \hline
+\endhead
+%\hline
+\endfoot
+%%% Fiber allocation
+\multicolumn{7}{l}{\hspace{5mm} {\bf Fiber Allocation}} \\ \hline
+%%% Initial check
+1	& A 	& Initial check of subsystems	& MCS can communicate with MHS	& \ref{secflow:MCSoff}, \ref{secflow:MCSon}	&	& 	\\ \cline{1-2}\cline{4-7}
+2	& A 	&	& MCS can take image with required performance (dark, noise,etc.)	& \ref{secflow:MCSoff}, \ref{secflow:MCSon}	&	& 	\\ \cline{1-2}\cline{4-7}
+3	& A 	& 	& All mechanical and environmental sensors of MCS can be read	& \ref{secflow:MCSoff}, \ref{secflow:MCSon}	&	&	\\ \cline{1-2}\cline{4-7}
+4	& A	&	& PFI can communicate with MHS	& \ref{secflow:PFIoff}, \ref{secflow:PFIon}	&	& \\ \cline{1-2}\cline{4-7}
+5	& A	&	& AG cameras can take image with required performance (noise, dark, etc.)	& \ref{secflow:PFIoff}, \ref{secflow:PFIon}	&	& \\ \cline{1-2}\cline{4-7}
+6	& A	&	& Fixed fiducial cameras can take image with required performance (noise, dark, etc.)	& \ref{secflow:PFIoff}, \ref{secflow:PFIon}	&	& \\ \cline{1-2}\cline{4-7}
+7	& A	&	& Center camera can take image with required performance (noise, dark, etc.)	& \ref{secflow:PFIoff}, \ref{secflow:PFIon}	&	& \\ \cline{1-2}\cline{4-7}
+8	& A	&	& Instrument rotator moves from $-270 \degree$ to $+270 \degree$	& \ref{secflow:PFIoff}, \ref{secflow:PFIon}	&	& \\ \cline{1-2}\cline{4-7}
+9	& A	&	& Cooling system works	& \ref{secflow:PFIoff}, \ref{secflow:PFIon}	&	& \\ \cline{1-2}\cline{4-7}
+10	& A 	& 	& All mechanical and environmental sensors of PFI can be read	& \ref{secflow:PFIoff}, \ref{secflow:PFIon}	&	&	\\ \hline
+%%% Installation of subsystems
+11	& A 	& Installation of subsystems	& MCS is installed on the Cs focus meeting required accuracy (tilt $<$ 0.14 degree, decenter of optical axis $<$ 45mm in x,y each)	& \ref{secflow:MCSinstall}	&	&	\\ \cline{1-2}\cline{4-7}
+12	& A	&	& PFI is installed in POpt2 meeting required repeatability ($<$ 200um in lateral, $<$ 100um in focus, $<$ 15 arcsec in tilt)	& \ref{secflow:PFIoff}, \ref{secflow:PFIoffset}	&	& repeatability of focus and tilt is not measured in \ref{secflow:PFIoffset}  \\ \cline{1-2}\cline{4-7}
+13	& A	&	& POpt2 is installed on the prime focus with accuracy of 10 um	& \ref{secflow:PFIinstall}	&	& Specification of Mitsubishi \\ \cline{1-2}\cline{4-7}
+14	& A	&	& Cable B is connected with PFI and SpS correctly (fiber ID, throughput?)	& \ref{secflow:FibConcec}, \ref{secflow:FibID}	&	& \\ \hline 
+%%% pre study of coordinate transformation
+15	& A 	& Pre-study of coordinate transformation	& Algorithm of coordinate transformation works (accuracy: 50 um)	& \ref{secflow:prestudy}	&	&	\\ \hline
+%%% measurement of fiber centroids
+16	& A	& Measurement of fibers centroids	& Spot size is $\sim$2.6 pix on entire FoV at various Elevations and rotator angles	& \ref{secflow:MCSperf}	&	&	\\ \cline{1-2}\cline{4-7}
+17	& A	& 	& Centroids can be measured within the accuracy of 5 um	 (1.5 pixel)	& \ref{secflow:MCSperf}	&	&	\\ \cline{1-2}\cline{4-7}
+18	& A	& 	& Measurement process is done within 5 seconds	& \ref{secflow:MCSperf}	&	&	\\ \hline
+%%% Telescope pointing and tracking
+19	& A	& Telescope pointing and tracing	& Telescope can be focused with error of 10 um	& \ref{secflow:WFCTiltShift}	&	&	\\ \cline{1-2}\cline{4-7}
+21	& A	& 	& WFC is aligned to Primary Mirror within the shift of 0.5mm and tilt of 1 arcmin	& \ref{secflow:WFCTiltShift}	&	&	\\ \cline{1-2}\cline{4-7}
+23	& A	& 	& Telescope Pointing Analysis can be done with error of XXX	& \ref{secflow:TPA1}	&	&	\\ \cline{1-2}\cline{4-7}
+24	& A	& 	& PFS can acquire field and start auto guiding within 15 seconds	& \ref{secflow:AGCfunc}	&	& \\ \cline{1-2}\cline{4-7}
+25	& A	& 	& Telescope can track a field with error of $\lesssim$ 0.1 arcsec in both RA and DEC directions using A\&G camera	& \ref{secflow:AGCfunc}	&	& 	\\ \hline
+%%% Registration of FFF
+26	& A	& Registration of fixed fiducial fibers	& Positions of the fixed fiducial fibers measured on F3C within the accuracy of 5 um (TBD)	& \ref{secflow:mcs2f3c}	& 	& \ref{secflow:WFCTiltShift} is needed prior to \ref{secflow:mcs2f3c}	\\ \hline
+%%% First-pass distortion map
+27	& A	&	First-pass sky-PFI distortion map	& Fiber allocation error is $<$50 um	& \ref{secflow:1stDM}	&	&	\\ \hline
+%%% back illumination of fibers
+28	& A	& Back illumination of fibers	& Fixed fiducial fibers are back-illuminated	& \ref{secflow:PFIoff}	&	&	\\ \cline{1-2}\cline{4-7}
+29	& A	& 	& Science fibers are back-illuminated	& \ref{secflow:CobraCal}	&	&	\\ \cline{1-2}\cline{4-7}
+30	& A	& 	& Brightness of science and fixed fiducial fibers is the same on MCS	& \ref{secflow:CobraCal}	&	&	\\ \hline
+%%% Cobra movement/calibration
+31	& A	&	Cobra initial movement	& Cobra can move anyhow & \ref{secflow:PFIon}	&	&	\\ \hline
+32	& A	&	Calibration of Cobra	& Cobra parameters are calibrated	& \ref{secflow:CobraCal}	&	& \\ \hline
+33	& A	&	Cobra movement	& Cobra can move everywhere in their patrol area & \ref{secflow:CobraCal}	&	&	\\ \hline
+%%% Second-pass distortion map
+34	& A	&	Second-pass sky-PFI distortion map	& Fiber allocation error is $<\sim$10 um (TBD)	& \ref{secflow:raster}	&	&	\\ \hline
+%%% Fiber reconfiguration
+35	& A	& Fiber configuration	& 95\% of 2394 fibers can be allocated to their targeted position within 105 seconds	& \ref{secflow:PV1}	&	& \\ \hline 
+36	& A	& Fiber re-configuration	& Fibers are reconfigured within 105 seconds with the accuracy of 10um (TBD)		& \ref{secflow:PV2}	&	& \\ \hline \hline
+%---------------------------
+\multicolumn{7}{l}{\hspace{5mm}{\bf Spectrograph}} \\ \hline
+%%% Initial check
+37	& A	& Initial check of subsystems & SCR and SpS can communicate with MHS	& \ref{secflow:SCR}	&	& \\ \cline{1-2}\cline{4-7}
+38	& A	&	& The temperature of SCR is controlled stably (3--5 degC)	& \ref{secflow:SCR}	&	& \\ \cline{1-2}\cline{4-7}
+39	& A	&	& SCR ans SpS Can recover from power failure mode	& \ref{secflow:SCR}	&	& \\ \cline{1-2}\cline{4-7}
+40	& A	&	& All 12 detectors can take images within expected noise.	& \ref{secflow:SCR}	&	& \\ \cline{1-2}\cline{4-7}
+41	& A	&	& SpS can change LR/MR mode in RED arms	& \ref{secflow:SCR}	&	& \\  \cline{1-2}\cline{4-7}
+42	& A	&	& SpS can open/close shutters	& \ref{secflow:SCR}	&	& \\  \cline{1-2}\cline{4-7}
+43	& A 	& 	& All mechanical and environmental sensors of SMs can be read	& \ref{secflow:SCR}	&	&	\\ \cline{1-2}\cline{4-7}
+44	& A	&	& The input light can be focused on the detectors (EE is 50\% in 3 x 3 pixels and 90 \% in 5 x 5 pixels in 90\% of detector area)	& \ref{secflow:SCR}	&	& \\  \hline
+%%% Installing subsystems
+%A	& Installation of subsystems & \\
+%%% Characterization
+45	& A	& Characterization	& Wavelength coverage is 380--650 nm in BLUE arms	& \ref{secflow:SpSchar}	&	& \\ \cline{1-2}\cline{4-7}
+46	& A	& 	& Wavelength coverage is 630--970 nm in RED(LR) arms	& \ref{secflow:SpSchar}	&	& \\ \cline{1-2}\cline{4-7}
+47	& A	& 	& Wavelength coverage is 710--885 nm in RED(MR) arms	& \ref{secflow:SpSchar}	&	& \\ \cline{1-2}\cline{4-7}
+48	& A	& 	& Wavelength coverage is 940--1260 nm in NIR arms	& \ref{secflow:SpSchar}	&	& \\ \cline{1-2}\cline{4-7}
+49	& A	&	& Spectral resolution is $>$2300 at 520 nm (BLUE)	& \ref{secflow:SpSchar}	&	& \\ \cline{1-2}\cline{4-7}
+50	& A	&	& Spectral resolution is $>$2800 at 810 nm (RED, LR)	& \ref{secflow:SpSchar}	&	& \\ \cline{1-2}\cline{4-7}
+51	& A	&	& Spectral resolution is $>$5000 at 810 nm (RED, MR)	& \ref{secflow:SpSchar}	&	& \\ \cline{1-2}\cline{4-7}
+52	& A	&	& Spectral resolution is $>$4100 at 1100 nm (NIR)	& \ref{secflow:SpSchar}	&	& \\ \cline{1-2}\cline{4-7}
+53	& A	&	& Throughput of SpS (TBD)	& \ref{secflow:SpSchar}	&	& \\ \cline{1-2}\cline{4-7}
+54	& A	&	& PSF and spectral distribution of SpS are characterized	& \ref{secflow:SpSchar}	&	& \\ \cline{1-2}\cline{4-7}
+55	& A	&	& PSF and spectral distribution through the entire system are characterized at various El. (30$\degree$--90$\degree$) and RoA ($-270 \degree$ -- $+270\degree$) & \ref{secflow:PSFchar}	&	& \\ \cline{1-2}\cline{4-7}
+56	& A	&	& Total throughput of BLUE arm is $\gtrsim$12\% (380--450 nm), $\gtrsim$21\% (450--550 nm) and $\gtrsim$24\% (550--650 nm)	& \ref{secflow:PV1}	& 	&  \\ \cline{1-2}\cline{4-7}
+57	& A	& 	& Total throughput of RED (LR) arm is $\gtrsim$30\% (630--750 nm), $\gtrsim$29\% (750--850 nm) and $\gtrsim$27\% (850--970 nm)	& \ref{secflow:PV1}	& 	&  \\ \cline{1-2}\cline{4-7}
+58	& A	& 	& Total throughput of RED (MR) arm is $\gtrsim$26\% (710--875 nm), $\gtrsim$28\% (775--825 nm) and $\gtrsim$27\% (725--885 nm)	& \ref{secflow:PV1}	& 	&  \\ \cline{1-2}\cline{4-7}
+59	& A	& 	& Total throughput of NIR arm is $\gtrsim$17\% (940--1050 nm), $\gtrsim$19\% (1050--1150 nm), and $\gtrsim$17\% (1150--1260 nm)	& \ref{secflow:PV1}	& 	&  \\ \hline
+60	& A	& Calibration	& Calibration lamp turns on/off	& \ref{secflow:PFIoff}	&	&	\\ \cline{1-2}\cline{3-6}
+61	& A	& 	& Calibration sources are bright enough on the detectors (XXX count)	& \ref{secflow:SpSchar}	&	&	\\ \cline{1-2}\cline{4-7}
+62	& A	&	& Dots shall obscure fibers during taking calibration data	& \ref{secflow:CobraCal}	&	&	\\ \cline{1-2}\cline{4-7}
+63	& A	& 	& Sky background can be corrected within the accuracy of $\lesssim$ 0.5 \%		& \ref{secflow:PV2}	&	&	\\ \cline{1-2}\cline{4-7}
+64	& A	& 	& Flux can be calibrated within the accuracy of 5 \%	& \ref{secflow:PV2}	&	&	\\ \hline \hline
+%---------------------------
+\multicolumn{7}{l}{\hspace{5mm}{\bf Total Performance}} \\ \hline
+65	& A	& Long-term exposure	& S/N is proportional to $\sqrt{t}$ during long-term exposures ($\sim$10 hours)	& \ref{secflow:PV2}	&	& \\ \hline
+?	& ?	& Beam-switching mode	& TBD	&	&	& Current plan doesn't include validation for BS mode \\  \hline \hline
+%...	& ...	& ...	& ...	& ...	& ... \\ \hline \hline
+%\end{center}
+\end{longtable}
+\end{landscape}

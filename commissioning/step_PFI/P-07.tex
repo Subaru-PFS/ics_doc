@@ -1,0 +1,37 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Check focal plane shift/tilt [Night-time]}\label{secflow:WFCTiltShift}
+
+To have good image quality on the focal plane, WFC (and hence the instrument) need to be aligned in x/y/z and tilt with respect to the telescope primary mirror.
+The misalignment of WFC with the primary mirror in x/y causes coma aberration across the field.
+That in z defocuses images.
+A tilt error induces coma aberration and focal plane tilt.
+So it is important to minimize these errors to keep good image quality during observation. 
+This alignment is carried out by Hexapod on POpt2 that can adjust the x/y/z and tilt of the assembly of WFC and PFI (see section \ref{sec:Hexapod}).
+
+
+We slew the telescope to bright stars again, but defocused.
+Using defocused ($\Delta$D5=0.5mm) image of AGCs, measure shift/tilt of WFC with respect to M1 and correct them.
+The goal of correction is that shift is less than 0.5mm, and that tilt is less than 1 arcmin, with which the spot size (RMS) is less than 15 um.
+[See Yoko Tanaka's report detailed procedure (WFC\_position.pdf: Japanese)]
+
+To measure tilt and shift of WFC, 6 defocused image are needed on every AG camera.
+As we use bright stars, we acquire such image by rotating the instrument.
+Assuming it takes about 3min including positioning, one iteration needs about 20 min.
+According to Yoko Tanaka's study, four iterations on average are needed to alignment.
+Therefore, it takes ~80min for one position.
+
+The parameters of Hexapod for alignment is registered as a function or table with respect to the elevation.
+Therefore, we measure the Hexapd parameters at several elevations.
+Given we measure them 5 positions (e.g., EL=30, 40, 50, 60, 75) and repeat three times at each elevation, 800 minutes, or 20 hours are needed for the correction.
+
+
+\begin{itembox}[l]{\suctitle{Success Criteria}}
+The focus is measured with the accuracy of $\sim$10 um \\
+Misalignment of  WFC and M1 is corrected (shift: 0.5mm and tilt 1 arcmin)
+
+Hexapod position at several elevation are measured and registered as correction parameters.
+
+\bluetext{Required long time to analyze the data?: No. \\
+--- We shall analyze the data in real-time to align WFC.
+}
+\end{itembox}

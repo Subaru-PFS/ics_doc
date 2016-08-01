@@ -1,0 +1,86 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Characterization of PSF and Spectral Distribution on the detectors [Daytime/Nighttime]}\label{secflow:PSFchar}
+
+\milestone{The light is delivered from the primary mirror to the detectors for the first time.}
+
+In this step, we measure PSFs and the spectral distribution on the detectors.
+As twist of fiber changes, PSF depends on telescope positions as well as Cobra position in its patrol area.
+This step is similar to step \ref{secflow:SpSchar}, but the data includes all optics and systems; namely, Primary Mirror --- WFC, --- Field Element --- Cable C --- Cable B --- Cable A --- SpS, and all connectors between them.
+
+PSF/spectral distribution image will be sent to 2D DRP team of Princeton University, who will characterize them in detail.
+We will check basic properties of PSFs such as FWHM etc., though.
+
+This sequence consist of three step: (1) principal characterization, (2) measurement of sky spectra, and (3) characterization according to Cobra movement.
+The arc/flat lamp on PFI is used to measure PSFs/spectral distribution of all fibers.
+We therefore also check the uniformity of the calibration lamps, and validate the calibration sequence.
+
+\paragraph{Principal Characterization}
+As soon as PFS can deliver light from the primary mirror to the Spectrograph detector, we will take arc and flat.
+As of the writing (June 2016), it can be done during PFI check on Telescope (\ref{secflow:PFIon}), because PFI, Cable B and two SMs will be delivered.
+In order to look into the PSF, we shall dithered flat as well.
+Dark and bias data is needed for calibration.
+
+Once Cobra calibration is carried out, sparse arc and flat shall be taken in order to look into the PSF wing.
+How sparse is TBD, but we can estimate AIT data at LAM.
+Current plan\footnote{In his draft, he requested to observe semi-crowded fields before we can target objects for demonstration and PR. May be it can be done during later phase of \ref{secflow:1stDM}, if it is acceptable accurate fiber positioning is crucial.} by Robert Lupton from Princeton University (2D-DRP team) is every other fibers and every 10th fibers with shorter and longer integrations.
+
+\paragraph{Measurement of Sky Spectra}
+We will take arc and continuum image with changing telescope elevation and/or RoA.
+For example,
+\begin{itemize}
+\item RoA = $-270, -180, -90, -60, 0, +60, +90, +180, +270$ (9 positions)
+\item Elevation = $30, 45, 60, 75$ (4 positions)
+\end{itemize}
+%If we hide every 3 fibers on the detector with the dots, we need 3 types of fiber configuration.
+If we take 3 types fiber configuration (e.g. full, a little sparse, very sparse), there are $3 \times 4 \times 9 = 108$ configurations in total.
+%Therefore, there are $4 \times 9 = 108$ configurations in total.
+Assuming that it takes 5 minutes to configure, and acquire a couple of images, it will take 9 hours for a series of either arc or continuum images.
+As time will be limited, we will firstly characterize PSFs in operation RoAs at every elevation angles, and then study other RoAs.
+If we take images at 9 RoA positions at El=60 degree, and 3 RoA operational positions at other elevations (18 telescope positions in total), it will take 4.5 hours.
+In the current plan, required time is estimated assuming measurement at 18 positions.
+Ideally, as sky condition changes during a night, we shall revisit to a given elevation and RoA every hour or so.
+
+By comparing the properties of PSF such as FWHM, we examine dependency and repeatability of the spots on telescope pointing.
+%It is difficult to take arc/continuum image using calibration lamps with telescope pointing to other direction than zenith.
+%We will use sky as light source for PSF measurement.
+%At this moment, it is not necessary to moving fiber positioner, because we can take spectra of somewhere of the sky.
+In the PFS operation RoA is limited from $-60 \deg$ to $+60 \deg$, considering that impact of twisted fibers on FRD.
+During the commissioning, however, we shall check the PSFs in wider range of RoA.
+If the impact is enough low at wider RoA, we can have more flexibility of operation (e.g. constraint due to dots.).
+
+\paragraph{Characterization according to Cobra Movement}
+In this sequence, we also examine PSF variance with respect to the Cobra rotation angles ($\theta$, $\phi$).
+Here, we use calibration lamps with the telescope pointing at zenith.
+If we change Cobra positions by 60 degrees, namely
+\begin{itemize}
+\item $\theta$ = $0, +60, +120, +180, +240, +300, +360$ ($0, +360$ mean limit angles)
+\item $\phi$ = $0, +60, +120, +180$ ($0, +180$ mean limit angles)
+\end{itemize}
+We will take $3 \times 7 \times 4 = 84$ sets of data, for 3 fiber configurations.
+We will take $3 \times 7 \times 4 = 84$ sets of data, for 3 fiber configurations.
+It will take 7 hours to acquire a series of arc data.
+We shall take images while Cobras are moving.
+
+\bigskip
+
+During the commissioning phase, SMs 1 and 2 will be delivered ahead of the rest SMs.
+Then we can repeat the same test for the first two SMs.
+Alternatively, if we can characterize PSF well for the first SMs, we can limit the PSF test for the last SMs, in order to minimize the telescope time.
+
+In either case, the test using sky shall be limited, for example
+\begin{itemize}
+\item RoA = $-60, 0, +60$ (3 positions)
+\item Elevation = $30, 60$ (2 positions)
+\end{itemize}
+In this case, it will take 0.5 hours for either arc or continuum data.
+
+\redtext{Measure wavelength resolution, wavelength coverage. 
+Sequence \ref{secflow:PSFchar} can be skipped at least wavelength resolution and coverage for SM3,4, which will be ready in August 2018.}
+
+\begin{itembox}[l]{\suctitle{Success Criteria}}
+The dependency of PSF and spectral distribution on Telescope elevation and RoA is measured.
+
+\bluetext{Required long time to analyze the data?: No. \\
+--- Detailed PSF characterization is mainly carried out by 2D-DRP team, and we will proceed to the next sequence in parallel with analysis.
+}
+\end{itembox}

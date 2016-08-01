@@ -1,0 +1,25 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Validation of MCS performance [Daytime]}\label{secflow:MCSperf}
+
+\milestone{MCS reads fiducial/science fiber image for the first time.}
+
+After the PFI and MCS are installed to the Prime Focus and the Cassegrain  Focus, respectively, the image quality of the MCS is validated, because at this point MCS can take the image of fibers in the entire field of view for the first time.
+We check the intensity of the spots of fiducial fibers, and confirm the S/N meets the requirement ($>$ several hundreds, according to CDR).
+We validate the MCS exposure and centroid measurement sequence; taking image and calculating the positions of fibers with expected time ($<5$ seconds, according to CDR).
+Here, we need to somehow illuminate the science fibers if SpS and Cable B is not ready\footnote{According to the latest schedule, Cable B and SM1,2 will be delivered before the PFI arrival. We then shall back-illuminate science fibers at the other end of Cable B (on IR4 floor).}.
+
+When we confirm MCS can take fibers image, we validate the MCS performance.
+MCS is designed to have uniform PSF with FWHM of 8.5um, or 2.6 pixel, in the entire field of view of PFI.
+In this step, we take the image of back-illuminated fiducial and science fibers, and check the FWHM of the PSFs.
+We also check that the accuracy of the position of the spots is less than 5um (0.08 pixel) rms, by taking several image of the fibers and calculating the positions at a given Elevation.
+Taking fibers image at various Elevations and rotator angles, we also test the stability of the image quality and derived centroids.
+
+\begin{itembox}[l]{\suctitle{Success Criteria}}
+MCS can take fiber image and measure fiber positions. \\
+The spot size is $\sim$ 8.5um (2.6 pixel) in the entire field of view. \\
+Position of all fibers is estimated within the accuracy of 5um.
+
+\bluetext{Required long time to analyze the data?: No. \\
+--- We can analyze FWHM and and centroid accuracy on relatively short-timescale.
+}
+\end{itembox}

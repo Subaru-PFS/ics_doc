@@ -1,0 +1,133 @@
+\documentclass[11pt]{article}
+\usepackage[margin=2.0cm,bottom=1.5cm,footskip=1.0cm]{geometry}
+\usepackage[sectionbib,numbers]{natbib}
+%\usepackage[sectionbib]{chapterbib}
+%\usepackage{chapterbib}
+%\renewcommand\bibsection{\section{\bibname}}
+\usepackage[dvipdfm]{graphicx} 
+\usepackage{amsmath,amssymb}
+\usepackage[usenames]{color} 
+\usepackage{ascmac,fancybox}
+% bounding box
+\usepackage{mediabb}
+
+\pagestyle{myheadings}
+%\markboth{Reference List}{Reference List}
+%\renewcommand{\bibname}{List}
+%\bibliographystyle{unsrtnat}
+%\renewcommand{\chaptername}{File}
+\usepackage{publiname}
+% package for vector
+\usepackage{bm}
+% package for longtable
+\usepackage{longtable}
+\usepackage{lscape}
+%caption package
+\usepackage{caption}
+\captionsetup[longtable]{width=0.80\textwidth}
+
+%spreadsheet table
+%\usepackage{spreadtab}
+
+%coloured text
+\newcommand{\redtext}[1]{\textcolor{BrickRed}{#1}}
+\newcommand{\grntext}[1]{\textcolor{OliveGreen}{#1}}
+\newcommand{\orntext}[1]{\textcolor{Orange}{#1}}
+\newcommand{\bluetext}[1]{\textcolor{BlueViolet}{#1}}
+\newcommand{\suctitle}[1]{\textcolor{RoyalBlue}{{\large \bf #1}}}
+\newcommand{\milestone}[1]{\textcolor{BlueGreen}{{\bf --- #1 ---}}}
+
+% math units
+\newcommand{\degree}{^\circ}
+
+% path for figures
+\graphicspath{{./figs/}}
+
+\title{PFS Commissioning \& Operation Work Flow}
+\author{Yuki Moritani, Kiyoto Yabe, Naoyuki Tamura, and Atsushi Shimono \\
+(PFS Project Office, Kavli IPMU)}
+\date{
+ver. 1: October 7, 2015 \\
+ver. 2:  March 15, 2016 \\
+ver. 3: May 10, 2016 \\
+ver. 4: \today}
+%\date{\today \\ ver. 1 September 2, 2015}
+
+\begin{document}
+%title and index
+\maketitle
+\tableofcontents
+
+% Section: Overview
+\section{Overview}
+\input{overview}
+
+% Section: Details of Procedure
+\section{Details of Work Flow}
+
+% MCS part
+\renewcommand{\thesubsubsection}{M-\;\arabic{subsubsection}}
+\subsection{Validation of MCS}\label{sec:MCS}
+\input{step_MCS/M-01}
+\input{step_MCS/M-02}
+\input{step_MCS/M-03}
+\input{step_MCS/M-04}
+
+% PFI part
+\renewcommand{\thesubsubsection}{P-\;\arabic{subsubsection}}
+\subsection{Validation of PFI}\label{sec:PFI}
+Because MCS will be delivered to the Subaru telescope one year before PFI delivery, we can install MCS to the Cassecrain focus during the PFI validation.
+\input{step_PFI/P-01}
+\input{step_PFI/P-02}
+\input{step_PFI/P-03}
+\input{step_PFI/P-04}
+\input{step_PFI/P-05}
+\input{step_PFI/P-06}
+\input{step_PFI/P-07}
+\input{step_PFI/P-08}
+\input{step_PFI/P-09}
+\input{step_PFI/P-10}
+%\input{step_PFI/P-11}
+%\input{step_PFI/P-12}
+%\input{step_PFI/P-13}
+
+% SpS part
+\renewcommand{\thesubsubsection}{S-\;\arabic{subsubsection}}
+\subsection{Validation of SpS}\label{sec:SpS}
+\input{step_SpS/S-01}
+\input{step_SpS/S-02}
+%\input{step_SpS/S-03}
+
+% FoCCos part
+\renewcommand{\thesubsubsection}{F-\;\arabic{subsubsection}}
+\subsection{Validation of FoCCos}\label{sec:FoCCoS}
+\input{step_CAB/F-01}
+\input{step_CAB/F-02}
+
+% All part
+\renewcommand{\thesubsubsection}{A-\;\arabic{subsubsection}}
+\subsection{Commissioning of All Systems}\label{sec:All}
+%-- replaced to each other: 25 Apr. 2016 : start
+\input{step_All/A-02}
+\input{step_All/A-01}
+%-- replaced to each other: 25 Apr. 2016 : end
+%\input{step_All/A-03}
+\input{step_All/A-04}
+\input{step_All/A-05}
+\input{step_All/A-06}
+
+% Raster Fields
+\input{starcatalog.tex}
+
+% Coordinates systems
+\input{coordinates.tex}
+
+\clearpage
+
+%Appendix
+\appendix
+%\renewcommand{\thesection}{Appendix \Alph{section}.}
+\input{appendix.tex}
+\input{abbreviation.tex}
+
+\end{document}

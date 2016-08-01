@@ -1,0 +1,16 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Calibration of the Distance b/w A\&G Cameras and the Fixed Fiducial Fibers [Night-time]}\label{secflow:agc2fff}
+
+In this step, we calibrate the position of the A\&G cameras relative to their fixed fiducial fibers, in order to make the sky-PFI relation  consistent between A\&G cameras and the field of view.
+
+Firstly, we slew the telescope to have a star in the center of an A\&G camera.
+Then we move the telescope to have the AG fixed fiducial fiber pointed to the star.
+We execute the raster scan around the fixed fiducial fiber and calibrate the distance between A\&G camera and the fiber.
+Because one A\&G camera has two fiducial fibers on both sides in the azimuth direction, the raster scan should be carried out using both fibers.
+Therefore, we shall do $12 \times n$ raster scan in total.
+
+Using the calibrated data, the transformation from Sky Catalogue ti F3C is updated.
+
+\begin{itembox}[l]{\suctitle{Success Criteria}}
+Calibration of the distance between the AGC and the AG fiducial fibres is succeeded.
+\end{itembox}

@@ -1,0 +1,44 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Check of Basic Functions of MCS on the Telescope [Daytime]}\label{secflow:MCSon}
+
+\milestone{MCS is operated on the telescope for the first time.}
+
+After installation to the telescope, basic functions of MCS are checked again, but on-telescope condition in this sequence.
+During installing operation, the power of MCS will be off, so we should turn on the MCS electric devices again.
+
+Then we check the following functions (the same as \ref{secflow:MCSoff}):
+
+\begin{itemize}
+\item MCS can read CMOS sensor with expected performance.
+	\begin{itemize}
+	\item dark level: No detectable dark current at 20--25 [decC] with 1.1 sec. exposure time
+	\item noise level: $6.4 e^-$
+	\item background level: \redtext{how much??}
+	\item shutter: We take several images changing the exposure time to confirm the mechanical shutter works properly.
+	\end{itemize}
+These values are cited from the CDR slides ({\tt MCS camera system.pdf}).
+\item MCS can read environmental and mechanical (?) sensors.
+	\begin{itemize}
+	\item 7 temperature sensors \redtext{(where)?}
+	\item \redtext{flow meter?}
+	\end{itemize}
+\end{itemize}
+
+After the basic functions are confirmed to work, the calibration data (flat, bias and, dark?:TBC) of CMOS sensor shall be obtained.
+The stability of calibration data can be examined using the data in multiple runs.
+
+By sending command from gen2, we will also confirm communication between MCS and Gen2.
+
+\redtext{
+According to the MCS delta-CDR, the flat screen is attached MCS flange for obtaining flat-fielding, and 3--4 LEDs are attached near MCS-M1 module.
+On the other hand, because the Cassegrain stand-by flange has a space for light source on the top, the calibration data can be obtained during stand-by (TBD).
+}
+
+\begin{itembox}[l]{\suctitle{Success Criteria}}
+All MCS basic functions are verified --- power, CMOS sensor, telemetry.  \\
+The calibration data (bias, flat, and dark?) of CMOS are acquired.
+
+\bluetext{Required long time to analyze the data?: No. \\
+--- We can check the functions in real-time}
+\end{itembox}
+

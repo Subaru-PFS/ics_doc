@@ -1,0 +1,26 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Confirmation of Fibre-Slit Relationship [Daytime]}\label{secflow:FibID}
+
+In this step, we check fibre-slit relationship.
+It is defined in e.g. \\
+ http://sumire.pbworks.com/w/file/76743299/FiberMapping.pdf .
+
+Firstly, we move all fibers to be obscured by the dots.
+Then move each fiber out of the dot, take back-illuminated fiber image using MCS and identify it.
+We identify position on the spectrograph, on the other hand, by taking a spectra of continuum lamp (or dome light).
+%We take fiber spectra by SpS and image by MCS under two configurations: with and without hidden by dot.
+
+Note that we will move cobra to dots before calibration, but it should be safe considering that the position will have been calibrated during I\&T at ASIAA\footnote{If the accuracy of calibration will be poor and is risky to move positioners before calibration, we disconnect the Cable B and A, and check identification by illuminating each holes.}.
+
+%We illuminate individual fibers at both female and male gang connectors (connector of cables A and B) and see the position of the fiber on camera and Cobra.
+%The position on the camera is measured by taking images by SpS, while the positions on cobra is measured by MCS.
+
+If the relationship is different than the expected one, update the relationship.
+It seems simpler to modify the position on the camera, fixing the positioner ID.
+%Given that the coordinate system (VMCS) should use cobra IDs and that it would be more complicated to update them, it is rather simple to update IDs on SMs.
+%(That is, Cobra IDs should be fixed. )
+
+
+\begin{itembox}[l]{\suctitle{Success Criteria}}
+Fibre position on Cobra and PFI is confirmed
+\end{itembox}
