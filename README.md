@@ -10,6 +10,10 @@ Required style files are in pfs_misc repository.
 Add to the list below, push to the master.
 Do never recycle old IDs.
 
+### Commissioning documents
+
+* commissioning_details: Detailed procedure of PFS commissioning
+
 ### SSN (Software Study Note)
 
 1. Data rate from reading out detectors
@@ -36,3 +40,6 @@ Do never recycle old IDs.
 22. ICS on-site (summit/CB2F) rack design, restriction and unit registration
 23. AG/A&G control flow and interface
 24. FITS file generation flow
+25. Collision detection during Cobra configuration
+26. Cobra collision cases
+
