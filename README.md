@@ -14,6 +14,28 @@ Do never recycle old IDs.
 
 * commissioning_details: Detailed procedure of PFS commissioning
 
+### SE-IPMU
+
+System Engineering related document by IPMU team.
+
+1. IR4 SpS chiller planning
+2. 
+3. SpS power distribution box design
+4. PFI failure mode analysis
+5. System wide failure mode analysis
+6. Connection test and performance evaluation of Subaru communication fiber
+7. Applicable limitations to ETS on target assignment
+8. SpS 5th rack unit registration
+9. Fiber monitoring system design
+10. SCR cable tray design and cable numbers
+11. SpS UPS capacity requirement
+12. Study on dot placement on radius from center of Cobra
+13. xCU vacuum line note
+14. Effects on Cobra operation from design and manufacture error
+15. AG conversion accuracy study
+16. SCR cabling design
+17. Exposure time control per camera (arm)
+
 ### SSN (Software Study Note)
 
 1. Data rate from reading out detectors
