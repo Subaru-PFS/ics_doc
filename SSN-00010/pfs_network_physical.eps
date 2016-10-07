@@ -2,7 +2,7 @@
 %%Creator: Atsushi Shimono
 %%Title: TEMPLATE
 %%CreationDate: Sun Jan 16 00:00:00 2005
-%%BoundingBox: 0 0 500 250
+%%BoundingBox: 0 0 500 400
 %%DocumentData: Clean7Bit
 %%LanguageLevel: 2
 %%EndComments
@@ -38,6 +38,9 @@ errordict /nocurrentpoint {pop 0 0 M currentpoint} put
   {(setrgbcolor)} {(pop pop pop)} ifelse cvx end def
 /cshow {CS M dup stringwidth pop -2 div 0 m show} def
 /lshow {CS M dup stringwidth pop -1 div 0 m show} def
+/rect {4 2 roll moveto
+  2 copy 0 exch rlineto 0 rlineto neg 0 exch rlineto neg 0 rlineto stroke
+} def
 /rbox {/r exch def /y exch def /x exch def moveto
   /rx x r 2 mul sub def /ry y r 2 mul sub def
   r 0 rmoveto rx 0 rlineto r r rmoveto 0 ry rlineto r -1 mul r rmoveto 
@@ -60,7 +63,6 @@ errordict /nocurrentpoint {pop 0 0 M currentpoint} put
 } def
 
 
-
 /Helvetica findfont
 10 scalefont setfont
 
@@ -68,21 +70,165 @@ gsave
 
 0.2 LW
 
+% Legends
+467 383 moveto (Legends) cshow
+440 380 moveto 55 0 rlineto
 stroke
+/cASIAA {0 0 1 SET_COLOUR} def
+/cSubaru {0 1 0 SET_COLOUR} def
+/cIPMU {1 0 0 SET_COLOUR} def
+/cJHU {1 0 1 SET_COLOUR} def
+/cDef {0 0 0 SET_COLOUR} def
+/cMetal {0 0 0.7 SET_COLOUR} def
+/cFiber {0.7 0 0 SET_COLOUR} def
+/cExchange {0.35 0 0 SET_COLOUR} def
+cASIAA 440 230 50 15 rect 465 233 moveto (ASIAA) cshow stroke
+cSubaru 440 250 50 15 rect 465 253 moveto (Subaru) cshow stroke
+cIPMU 440 270 50 15 rect 465 273 moveto (IPMU) cshow stroke
+cJHU 440 290 50 15 rect 465 293 moveto (JHU) cshow stroke
+cDef 440 310 50 15 5 rbox 465 313 moveto (Hardware) cshow stroke
+cMetal 440 333 moveto 15 0 rlineto 460 330 moveto (metal) show stroke
+cFiber 440 348 moveto 15 0 rlineto 460 345 moveto (fiber) show stroke
+cExchange stroke 445 363 5 CC 455 360 moveto (Exchange) show
 
+% boundary
+stroke
+cDef
 [4 4] 0 setdash
+10 275 moveto 420 0 rlineto
+10 100 moveto 480 0 rlineto
+200 100 moveto 0 -90 rlineto
 
+15 380 moveto (PFI) show
+15 110 moveto (CB2F) show
+15 20 moveto (Cs) show
+215 20 moveto (SpS \(TUE-IR\)) show
 stroke
-
 [] 0 setdash
 
+% Cs
+cIPMU 50 30 120 15 rect stroke cDef 110 33 moveto (Cisco 2960CG-8TL-L) cshow
+cFiber 100 45 moveto 0 125 rlineto
+105 45 moveto 0 125 rlineto stroke
+cDef
 gsave
-0 0 translate
-1 1 scale
-%
+/Helvetica findfont 8 scalefont setfont
+100 150 moveto (Connected all time) cshow 100 140 moveto (at CB2F side) cshow
+100 50 moveto (Exchanged at Cs side only) cshow
+grestore
+/Helvetica findfont 10 scalefont setfont
+100 110 moveto (SM \(TBC\)) cshow
+95 80 moveto (Cs focus) lshow
+110 80 moveto (Cs StandBy) show
+stroke
+cExchange 102.5 65 5 CC stroke
+
+% SpS
+cIPMU 220 50 100 15 rect stroke cDef 270 53 moveto (Cisco 2960X-24TS-L) cshow
+cJHU 370 70 100 15 rect stroke cDef 420 73 moveto (SpS SM1 switch) cshow
+cJHU 370 50 100 15 rect stroke cDef 420 53 moveto (SpS SM2 switch) cshow
+cJHU 370 30 100 15 rect stroke cDef 420 33 moveto (SpS SM3 switch) cshow
+cJHU 370 10 100 15 rect stroke cDef 420 13 moveto (SpS SM4 switch) cshow
+cMetal
+320 63 moveto 50 14 rlineto
+320 60 moveto 50 -3 rlineto
+320 57 moveto 50 -20 rlineto
+320 54 moveto 50 -37 rlineto
+stroke
+cFiber
+240 65 moveto 0 75 rlineto
+250 65 moveto 0 75 rlineto
+260 65 moveto 0 75 rlineto
+270 65 moveto 0 75 rlineto
+stroke
+cDef 255 110 moveto (4 SM in LACP) cshow
+
+% CB2F
+cSubaru 10 170 70 15 rect stroke cDef 45 173 moveto (Subaru core) cshow
+cSubaru 10 230 70 15 rect stroke cDef 45 233 moveto (E-LAN) cshow
+cMetal  45 185 moveto 0 45 rlineto stroke
+cMetal  80 177 moveto 15 0 rlineto stroke
+
+cIPMU 95 170 200 15 rect stroke cDef 195 173 moveto (Cisco 2960X-24TS-L) cshow
+cIPMU 160 140 135 15 rect stroke cDef 220 143 moveto (Cisco 2960X-24TS-L) cshow
+cDef 170 155 moveto 0 15 rlineto stroke
+cDef 175 158 moveto (FlexStack x2 \(dual link\)) show
+
+cDef
+370 150 120 20 5 rbox stroke
+430 156 moveto (ICS Storage \(iSCSI\)) cshow
+stroke
+gsave
+/Helvetica findfont 8 scalefont setfont
+340 140 moveto (8x 1Gbps metal in device multipath iSCSI) show
+340 132 moveto (Connection distribution to core switch is TBD) show
 stroke
 grestore
+/Helvetica findfont 10 scalefont setfont
+cMetal
+295 154 moveto 75 10 rlineto
+295 150 moveto 75 10 rlineto
+295 146 moveto 75 10 rlineto
+295 142 moveto 75 10 rlineto
+stroke
 
+cDef 310 210 100 20 5 rbox stroke 360 215 moveto (AG control) cshow
+cASIAA 310 230 100 15 rect stroke cDef 360 233 moveto (PCIe-Opt conv x2) cshow
+stroke
+cMetal 295 180 moveto 60 30 rlineto stroke
+
+% PFI
+cIPMU 30 290 80 15 rect stroke cDef 70 293 moveto (Media conv.) cshow
+cDef 30 330 80 15 5 rbox stroke 70 333 moveto (Cal controllers) cshow
+
+cASIAA 150 325 70 15 rect stroke cDef 185 328 moveto (Media conv.) cshow
+cDef 150 360 70 20 5 rbox stroke 185 365 moveto (PFI controllers) cshow
+230 360 70 20 5 rbox stroke 265 365 moveto (COBRA FPGA) cshow
+cASIAA 310 325 100 15 rect stroke cDef 360 328 moveto (Opt-USB conv x2) cshow
+cDef 310 340 100 20 5 rbox stroke 360 345 moveto (AG Cameras \(x6\)) cshow
+
+cFiber
+105 185 moveto 0 105 rlineto
+185 185 moveto 0 140 rlineto
+350 245 moveto 0 80 rlineto
+360 245 moveto 0 80 rlineto
+stroke
+cMetal
+70 305 moveto 0 25 rlineto
+185 340 moveto 0 20 rlineto
+185 340 moveto 80 20 rlineto
+stroke
+
+stroke
+[2 2] 0 setdash
+cDef 130 290 280 20 5 rbox stroke 270 295 moveto (POpt2 Cable Wrapper) cshow
+stroke
+[] 0 setdash
+
+
+cDef
+105 200 moveto (MM 62.5) cshow
+185 200 moveto (MM 62.5) cshow
+355 250 moveto (SM) cshow
+stroke
+
+cExchange
+105 270 3 CC
+185 270 3 CC
+350 270 3 CC
+360 270 3 CC
+stroke
+[2 2] 0 setdash
+108 270 moveto 249 0 rlineto
+stroke
+[] 0 setdash
+gsave
+/Helvetica findfont 8 scalefont setfont
+260 260 moveto (Different fibers at PF exchange) cshow
+260 250 moveto (at both ends) cshow
+stroke
+grestore
+/Helvetica findfont 10 scalefont setfont
 
 
 stroke
