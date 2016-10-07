@@ -245,6 +245,8 @@ CDM) are closed, simple telnet should be fine on security point of view.
 This section is to record configurations and also to tell how to configure 
 network switches used in PFS-LAN to who do not know anything about cisco 
 switch, so that anyone can configure when serious issue occurs. 
+Also directory for this note contains final configuration file of each 
+switch.
 
 \subsection{General configurations}
 
@@ -262,6 +264,53 @@ Purpose independent (general) configurations are:
 
 \subsection{Component specific configurations}
 
+\subsubsection{LACP}
+
+Configure for interface (or its range) as:
+
+\begin{verbatim}
+spscore#configure terminal 
+spscore(config)#interface range gigabitEthernet1/0/25-28
+spscore(config-if-range)#channel-group 1 mode active 
+spscore(config-if-range)#channel-protocol lacp
+spscore(config-if-range)#end
+\end{verbatim}
+
+Check configuration as:
+
+\begin{verbatim}
+spscore#show etherchannel 1 summary 
+Flags:  D - down        P - bundled in port-channel
+        I - stand-alone s - suspended
+        H - Hot-standby (LACP only)
+        R - Layer3      S - Layer2
+        U - in use      f - failed to allocate aggregator
+
+        M - not in use, minimum links not met
+        u - unsuitable for bundling
+        w - waiting to be aggregated
+        d - default port
+
+Number of channel-groups in use: 1
+Number of aggregators:           1
+
+Group  Port-channel  Protocol    Ports
+------+-------------+-----------+-----------------------------------------------
+1      Po1(SD)         LACP      Gi1/0/25(D) Gi1/0/26(D) Gi1/0/27(D) 
+                                 Gi1/0/28(D) 
+spscore#show lacp 1 internal 
+Flags:  S - Device is requesting Slow LACPDUs 
+        F - Device is requesting Fast LACPDUs
+        A - Device is in Active mode       P - Device is in Passive mode     
+
+Channel group 1
+                            LACP port     Admin     Oper    Port        Port
+Port      Flags   State     Priority      Key       Key     Number      State
+Gi1/0/25  SA      down      32768         0x1       0x0     0x11A       0x45  
+Gi1/0/26  SA      down      32768         0x1       0x0     0x11B       0x45  
+Gi1/0/27  SA      down      32768         0x1       0x0     0x11C       0x45  
+Gi1/0/28  SA      down      32768         0x1       0x0     0x11D       0x45  
+\end{verbatim}
 
 
 \subsection{Sample logs}
