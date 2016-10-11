@@ -51,11 +51,13 @@ Requirements on management aspect are:
   \item Network switch shall be managed and monitored from Subaru CDM, and 
     follow standard configuration (e.g. VLAN, remote access) of CDM.
   \item All PFS network components shall be on the single subnet (PFS-LAN) and 
-    VLAN ID, which will be assigned from Subaru with fitting Subaru's 
+    single VLAN ID, which will be assigned from Subaru with fitting Subaru's 
     configuration. Also seemless access from Subaru network (incl Hilo, VPN) 
     to PFS LAN for remote maintenance and operation are required, although 
     security of instrument operation need to be secured in a required level.
-  \item All connections to subaru dome are in fiber connection. 
+    Discussions and negotiations with Subaru are planned on this point. 
+  \item All connections to subaru dome from computer roon at the control 
+    building 2F (CB2F) are in fiber connection. 
   \item Static IP address assignment is desired.
 \end{itemize}
 
@@ -83,7 +85,7 @@ hardware. For now, following requirements are pointed:
 
 \section{Network design}
 
-\subsection{L0-1, Physical layer and wiring design}
+\subsection{L0-2: Physical layer, wiring design, and datalink}
 
 For physical layer, we take simple configuration without selectable definitions 
 on components as followings:
@@ -95,7 +97,8 @@ on components as followings:
     to put MCP fiber.
   \item PFS LAN will not share one switch by more than two VLANs, except for 
     management VLAN operated by Subaru CDM. Connection(s) between core switch 
-    on PFS-LAN and Subaru are by tag-VLAN of PFS network.
+    on PFS-LAN and Subaru, as well as PFS core and some distribution switches 
+    (Cs and SpS) are by tag-VLAN (trunk port). 
   \item No switch management or monitoring network (VLAN) by PFS ICS operation. 
     Monitoring by SNMP or management by telnet used for PFS ICS operation are 
     done within PFS-LAN. Also no STP will be used for PFS ICS operation.
