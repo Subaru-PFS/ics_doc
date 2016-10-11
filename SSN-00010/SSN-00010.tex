@@ -248,6 +248,18 @@ switch, so that anyone can configure when serious issue occurs.
 Also directory for this note contains final configuration file of each 
 switch.
 
+\subsection{Items to be changed at Subaru}
+
+Following items shall be updated and changed when we deliver hardware to 
+Subaru, to match with management at Subaru. 
+
+\begin{itemize}
+  \item VLAN ID is set as 1 (default) for now, real VLAN ID will be assigned 
+    by Subaru but not 1.
+  \item User authentication will be integrated into Subaru's standard.
+  \item Some inter switch connections will be set as trunk port but not access.
+\end{itemize}
+
 \subsection{General configurations}
 
 Purpose independent (general) configurations are:
@@ -255,10 +267,11 @@ Purpose independent (general) configurations are:
 \begin{description}
   \item[enable] use "pfs"
   \item[SNMP] v2c/public to readonly, execute "snmp-server community public ro"
-  \item[IP address] set static IP address
+  \item[IP address] set static IP address, but not DHCP
   \item[hostname] set hostname, "hostname XXXX"
   \item[NTP] set ntp server, "ntp server x.x.x.x"
   \item[telnet login] set vty 0-15 with password "pfscisco"
+  \item[DNS] set DNS server
 \end{description}
 
 
@@ -460,6 +473,8 @@ Switch#exit
 \subsubsection{Host IP address and switchport access}
 
 \begin{verbatim}
+Switch(config)# hostname spscore
+spscore(config)#ip name-server 10.100.200.1
 spscore(config)#interface vlan 1
 spscore(config-if)#ip address 10.100.200.193 255.255.255.0
 spscore(config-if)#exit
