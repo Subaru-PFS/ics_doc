@@ -256,7 +256,8 @@ Subaru, to match with management at Subaru.
 \begin{itemize}
   \item VLAN ID is set as 1 (default) for now, real VLAN ID will be assigned 
     by Subaru but not 1.
-  \item User authentication will be integrated into Subaru's standard.
+  \item User authentication will be integrated into Subaru's standard, 
+    including enable or vty login.
   \item Some inter switch connections will be set as trunk port but not access.
 \end{itemize}
 
@@ -265,15 +266,16 @@ Subaru, to match with management at Subaru.
 Purpose independent (general) configurations are:
 
 \begin{description}
-  \item[enable] use "pfs"
+  \item[enable] use "XXX" (e.g. pfs, pfscisco)
   \item[SNMP] v2c/public to readonly, execute "snmp-server community public ro"
   \item[IP address] set static IP address, but not DHCP
   \item[hostname] set hostname, "hostname XXXX"
   \item[NTP] set ntp server, "ntp server x.x.x.x"
-  \item[telnet login] set vty 0-15 with password "pfscisco"
+  \item[telnet login] set vty 0-15 with password "XXX" (e.g. pfs, pfscisco)
   \item[DNS] set DNS server
 \end{description}
 
+Note, check internal wiki site on real password for "XXX" items.
 
 \subsection{Component specific configurations}
 
@@ -489,10 +491,10 @@ spscore(config-if-range)#end
 
 \begin{verbatim}
 spscore#configure terminal
-spscore(config)#enable password pfscisco
+spscore(config)#enable password XXX
 spscore(config)#service password-encryption 
 spscore(config)#line vty 0 15
-spscore(config-line)#password pfscisco
+spscore(config-line)#password XXX
 spscore(config-line)#end
 \end{verbatim}
 
