@@ -240,7 +240,263 @@ network switches, that SSH or https connection requires complex configurations
 and key management. Since PFS-LAN and management network of Subaru network (by 
 CDM) are closed, simple telnet should be fine on security point of view.
 
+\section{Switch configuration (cisco)}
 
+This section is to record configurations and also to tell how to configure 
+network switches used in PFS-LAN to who do not know anything about cisco 
+switch, so that anyone can configure when serious issue occurs. 
+Also directory for this note contains final configuration file of each 
+switch.
+
+\subsection{Items to be changed at Subaru}
+
+Following items shall be updated and changed when we deliver hardware to 
+Subaru, to match with management at Subaru. 
+
+\begin{itemize}
+  \item VLAN ID is set as 1 (default) for now, real VLAN ID will be assigned 
+    by Subaru but not 1.
+  \item User authentication will be integrated into Subaru's standard, 
+    including enable or vty login.
+  \item Some inter switch connections will be set as trunk port but not access.
+\end{itemize}
+
+\subsection{General configurations}
+
+Purpose independent (general) configurations are:
+
+\begin{description}
+  \item[enable] use "XXX" (e.g. pfs, pfscisco)
+  \item[SNMP] v2c/public to readonly, execute "snmp-server community public ro"
+  \item[IP address] set static IP address, but not DHCP
+  \item[hostname] set hostname, "hostname XXXX"
+  \item[NTP] set ntp server, "ntp server x.x.x.x"
+  \item[telnet login] set vty 0-15 with password "XXX" (e.g. pfs, pfscisco)
+  \item[DNS] set DNS server
+\end{description}
+
+Note, check internal wiki site on real password for "XXX" items.
+
+\subsection{Component specific configurations}
+
+\subsubsection{LACP}
+
+Configure for interface (or its range) as:
+
+\begin{verbatim}
+spscore#configure terminal 
+spscore(config)#interface range gigabitEthernet1/0/25-28
+spscore(config-if-range)#channel-group 1 mode active 
+spscore(config-if-range)#channel-protocol lacp
+spscore(config-if-range)#end
+\end{verbatim}
+
+Check configuration as:
+
+\begin{verbatim}
+spscore#show etherchannel 1 summary 
+Flags:  D - down        P - bundled in port-channel
+        I - stand-alone s - suspended
+        H - Hot-standby (LACP only)
+        R - Layer3      S - Layer2
+        U - in use      f - failed to allocate aggregator
+
+        M - not in use, minimum links not met
+        u - unsuitable for bundling
+        w - waiting to be aggregated
+        d - default port
+
+Number of channel-groups in use: 1
+Number of aggregators:           1
+
+Group  Port-channel  Protocol    Ports
+------+-------------+-----------+-----------------------------------------------
+1      Po1(SD)         LACP      Gi1/0/25(D) Gi1/0/26(D) Gi1/0/27(D) 
+                                 Gi1/0/28(D) 
+spscore#show lacp 1 internal 
+Flags:  S - Device is requesting Slow LACPDUs 
+        F - Device is requesting Fast LACPDUs
+        A - Device is in Active mode       P - Device is in Passive mode     
+
+Channel group 1
+                            LACP port     Admin     Oper    Port        Port
+Port      Flags   State     Priority      Key       Key     Number      State
+Gi1/0/25  SA      down      32768         0x1       0x0     0x11A       0x45  
+Gi1/0/26  SA      down      32768         0x1       0x0     0x11B       0x45  
+Gi1/0/27  SA      down      32768         0x1       0x0     0x11C       0x45  
+Gi1/0/28  SA      down      32768         0x1       0x0     0x11D       0x45  
+\end{verbatim}
+
+
+\subsection{Sample logs}
+
+\subsubsection{Initial configuration}
+
+\begin{verbatim}
+         --- System Configuration Dialog ---
+
+Enable secret warning
+----------------------------------
+In order to access the device manager, an enable secret is required
+If you enter the initial configuration dialog, you will be prompted 
+for the enable secret
+If you choose not to enter the intial configuration dialog, or if you 
+exit setup without setting the enable secret,
+please set an enable secret using the following CLI in configuration mode-
+enable secret 0 <cleartext password>
+----------------------------------
+Would you like to enter the initial configuration dialog? [yes/no]: no
+Switch>enable
+Switch#configure 
+Configuring from terminal, memory, or network [terminal]? 
+Switch(config)#enable secret 0 pfs
+Switch(config)#exit
+Switch#show running-config 
+Building configuration...
+
+Current configuration : 1581 bytes
+!
+! Last configuration change at 06:22:44 UTC Fri Oct 7 2016
+!
+version 15.0
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname Switch
+!
+boot-start-marker
+boot-end-marker
+!
+enable secret 5 $1$eEpa$eU5apmm0vTtr.WQxjuZF7.
+!
+no aaa new-model
+switch 1 provision ws-c2960x-24ts-l
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+!
+!
+!
+!
+!
+vlan internal allocation policy ascending
+!
+!
+!
+!
+!
+interface FastEthernet0
+no ip address
+!
+interface GigabitEthernet1/0/1
+!
+interface GigabitEthernet1/0/2
+!
+interface GigabitEthernet1/0/3
+!
+interface GigabitEthernet1/0/4
+!
+interface GigabitEthernet1/0/5
+!
+interface GigabitEthernet1/0/6
+!
+interface GigabitEthernet1/0/7
+!
+interface GigabitEthernet1/0/8
+!
+interface GigabitEthernet1/0/9
+!
+interface GigabitEthernet1/0/10
+!
+interface GigabitEthernet1/0/11
+!
+interface GigabitEthernet1/0/12
+!
+interface GigabitEthernet1/0/13
+!
+interface GigabitEthernet1/0/14
+!
+interface GigabitEthernet1/0/15
+!
+interface GigabitEthernet1/0/16
+!
+interface GigabitEthernet1/0/17
+!
+interface GigabitEthernet1/0/18
+!
+interface GigabitEthernet1/0/19
+!
+interface GigabitEthernet1/0/20
+!
+interface GigabitEthernet1/0/21
+!
+interface GigabitEthernet1/0/22
+!
+interface GigabitEthernet1/0/23
+!
+interface GigabitEthernet1/0/24
+!
+interface GigabitEthernet1/0/25
+!
+interface GigabitEthernet1/0/26
+!
+interface GigabitEthernet1/0/27
+!
+interface GigabitEthernet1/0/28
+!
+interface Vlan1
+no ip address
+!
+ip http server
+ip http secure-server
+!
+!
+!
+!
+line con 0
+line vty 5 15
+!
+end
+
+Switch#copy running-config startup-config
+Destination filename [startup-config]? 
+Building configuration...
+[OK]
+Switch#exit
+\end{verbatim}
+
+\subsubsection{Host IP address and switchport access}
+
+\begin{verbatim}
+Switch(config)# hostname spscore
+spscore(config)#ip name-server 10.100.200.1
+spscore(config)#interface vlan 1
+spscore(config-if)#ip address 10.100.200.193 255.255.255.0
+spscore(config-if)#exit
+spscore(config)#ip default-gateway 10.100.200.4
+spscore(config)#interface range gigabitEthernet1/0/1-28
+spscore(config-if-range)#switchport mode access 
+spscore(config-if-range)#switchport access vlan 1
+spscore(config-if-range)#end
+\end{verbatim}
+
+\subsubsection{Remote login}
+
+\begin{verbatim}
+spscore#configure terminal
+spscore(config)#enable password XXX
+spscore(config)#service password-encryption 
+spscore(config)#line vty 0 15
+spscore(config-line)#password XXX
+spscore(config-line)#end
+\end{verbatim}
 
 \end{document}
 
