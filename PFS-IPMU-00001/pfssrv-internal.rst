@@ -19,10 +19,10 @@ Internal services
 
 - Static lease based DHCP server (mgmt-dhcp) - testing on-site ICS
 - RAID1 storages (pfsdisk; 3TB x3): Server storage, Virt disk store, 
-    simulator storage / weekly disk health veryfy, 2 hotswap disk
+  simulator storage / weekly disk health veryfy, 2 hotswap disk
 - LDAP server (pfs.ipmu.jp)
 - Most of physical server is just VM host server, except for pfsdisk (NFS 
-    storage), pfscalc (IPMU internal services)
+  storage), pfscalc (IPMU internal services)
 
 Connection
 ======
@@ -84,9 +84,9 @@ Hosts
 
 - See list at https://pfs.ipmu.jp/wiki/System/hardware
 - external server (br0 to PFS-LAN, br1 to internal) run only VMs requires 
-    global address: extvm2(.5)
+  global address: extvm2(.5)
 - internal server (br0 to PFS-LAN, br2 to IPMU) run only VMs requires IPMU 
-    network: r410-1 (external services), dl360-2 (Windows VM)
+  network: r410-1 (external services), dl360-2 (Windows VM)
 - service hosts: pfsdisk(.3), pfscalc(.4)
 
 VM management
@@ -99,9 +99,9 @@ Virt disk storage on NFS
 
 - Local storage only for host operation
 - VM operation via virsh interface, remote monitoring via libvirt feature 
-    under testing
+  under testing
 - VM hosts could be easily replaced, no configuration difference among hosts, 
-    except for network bridge (existence of bridges to IPMU or global)
+  except for network bridge (existence of bridges to IPMU or global)
 
 Service
 ******
@@ -154,13 +154,13 @@ System startup procedure
 - Power on pfsdisk, system health check (on KVM)
 - Power on extvm2, system health check (on KVM)
 - Power on mgmt-dhcp, pfssrv, pfspipe on extvm2, and check services (apache, 
-    mailman) on pfssrv
+  mailman) on pfssrv
 - Restart ntp service on pfsdisk, extvm2
 - Check LDAP loading on pfsdisk (LDAP server at pfssrv)
 - Power on pfscalc, check eth ar up
 - Power on VM host servers (no order)
 - Bootup service VMs. Mostly no order, that services rely on DB will resume 
-    their connection on db startup
+  their connection on db startup
 
 PFS instrument simulator
 ======
