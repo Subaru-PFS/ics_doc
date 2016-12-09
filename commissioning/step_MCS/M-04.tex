@@ -2,12 +2,27 @@
 \subsubsection{Verify MCS performance [Daytime]}\label{secflow:prestudy}
 In this sequence, we verify MCS performance to measure the fiber positions on focal plane.
 We also check validity the PFS coordinate-transfer system.
-Here, because MCS will arrive prior to PFI arrival\footnote{ASIAA also propose that MCS be aligned with the prime focus using pinhole array on POpt2 or FMOS/PIR, which is required after PFI arrival.}, there are two options for this test.
-One is FMOS/PIR instead of fiber positioner system, and the other is pinhole array equipped to POpt2.
+This sequence is to use time efficiently after the PFI arrival, because, according to the current schedule (as of October 2016), MCS will be delivered to the Subaru telescope a half year earlier the PFI.
+
+In this sequence \footnote{Some test are also proposed in MCS CDR document by ASIAA: MCS\_I\&T.pdf, and PFS MCS Delta CDR.pdf}, we will:
+\begin{enumerate}
+\item Align MCS on MCBox with respect to the WFC
+\item Verify image quality
+\item Demonstrate MCS-PFI coordinate transformation, and
+\item Study distortion map in detail
+\end{enumerate}
+
+Regarding the image quality, the same test will be done in seq. \ref{secflow:MCSperf}.
+Hence, if the image quality will be validated well enough in this sequence, we can skip \ref{secflow:MCSperf}.
+
+Since PFI will not available, we have two options as an alternative.
+One is Echidna positioner system of FMOS/PIR, and the other is pinhole array equipped to POpt2.
+Table \ref{tbl:fmos_pinhole} summarize the specifications of Echidna on FMOS/PIR and pinhole on POpt2 as well as their usefulness for tests in this sequence. 
 
 \paragraph{In the case of FMOS/PIR}
-The field of view of FMOS ($\sim 30$ arcmin in diameter) is much smaller than that of PFS.
-Besides, only 32 fibers can be back-illuminated simultaneously.
+The field of view of FMOS/PIR ($\sim$ 150mm $\times$ $\sim$ 150mm, corresponding to $\sim 30$ arcmin in diameter) is much smaller than that of PFS, and their optics and mechanics are different from each other.
+Besides, only 32 fibers out of 400 can be back-illuminated simultaneously.
+These facts imply that Echidna on FMOS/PIR is not suitable for the MCS alignment and image quality test.
 Nonetheless, the procedure of coordinate transformation shall be studied well.
 
 MCS measures fiber positions somewhat converted to MCS frame, and then positions are transferred to them on focal plane.
@@ -16,7 +31,7 @@ By comparing measured fiber positions by MCS and the coordinate transformation s
 %The error in measurement contributed by dome seeing temperature, or telescope elevation will be also estimated by measuring position several elevation and temperatures.
 %% estimation of error is needed for PFI-MCS relation? maybe not. but error estimation is needed for measurement on MCS?
 %% Echidna: 20 fibers are illuminated at a time
-At present, Echidana can position fibers with the accuracy of $\sim 35$ um\footnote{Originally the fiber allocation was achieved with the accuracy of $\sim 10$um. Recently the encoder of X position of sky camera was broken, which have added $\sim 25$ um for fiber positions.}.
+At present, Echidna can position fibers with the accuracy of $\sim 35$ um\footnote{Originally the fiber allocation was achieved with the accuracy of $\sim 10$um. Recently the encoder of X position of sky camera was broken, which have added $\sim 25$ um for fiber positions.}.
 We set the goal in accuracy of fiber positioning 50 um for pre-study, the same as 1-st pass distortion map (\ref{secflow:1stDM}).
 
 The procedure of the measurement is as follows:
@@ -49,7 +64,7 @@ We also examine these effect.
 %--------------------------------------------------------------
 \begin{figure}[!ht]
 \begin{center}
-\includegraphics[width=100mm]{fiber_echidna.eps}
+\includegraphics[width=90mm]{fiber_echidna.eps}
 \end{center}
 \caption{
 Example of the arrangement of FMOS/Echidna back-lit fibers.
@@ -57,10 +72,15 @@ Example of the arrangement of FMOS/Echidna back-lit fibers.
 \label{fig:fibEchidna}
 \end{figure}
 
+Because the corrector lens are different between PIR and WFC, we cannot study a effect of WFC surface figure error itself if we use FMOS.
+However, similar study will be performed by changing the fiber configurations (TBC).
+
 \paragraph{In the case of pinhole array on POpt2}
-If pinhole array can be attached on the POpt2, we can study transfer coordinate system in the similar procedure above.
-WFC has a ring-patterned local surface error with a pitch of 6mm, pinholes with the smaller pitch enable us to study the effect of the local surface error.
-Using pinholes are arranged at fiducial fiber position and hexagonal position of 4 mm (half size of that of cobras), we will study the the coordinate transform in the following procedure.
+If pinhole array can be attached on the POpt2, we can of course align MCS and test image quality.
+Also we can study transfer coordinate system in the similar procedure above.
+WFC has a ring-patterned local surface error with a pitch of 6mm, we can study the effect of the local surface error on WFC distortion by using pinholes with the smaller pitch, or rotating pinholes slightly.
+
+Supposing that we will have designated pinhole mask with holes arranged at fiducial fiber position and hexagonal position of 4 mm (half of the pitch of  Cobras), we will study the the coordinate transform in the following procedure.
 \begin{enumerate}
 \item Distortion map is determined with WFC as-built model.
 \item \label{item:M4pin2} Take pin holes array images by MCS.
@@ -70,8 +90,31 @@ Choose one of the holes in the patrol areas and calculate their position on F3C.
 \item Executing the above procedures at a various Elevation (EL) and Rotator angle (ROA), study the stability of the measurements.
 \end{enumerate}
 
-Because the corrector lens are different between PIR and WFC, we cannot study a effect of WFC itself if we use FMOS.
-However, similar study will be performed by changing the fiber configurations (TBC).
+Although the pinhole, which ASIAA has prepared for testing image quality of MCS, has the 8mm pitch (partly 2mm), we can use the ASIAA pinhole by rotating the instrument slightly.
+The movement accuracy of the instrument rotator of POpt2 is 8 arcsec, enough smaller than angle corresponds to 8 mm at the field edge (at 250 mm radius, $\sim$ 1.8 $\degree$ ).
+This pinhole size is $\sim$ 356mm $\times$ $\sim$ 356mm, which covers $\sim 75\%$ of FoV of WFC, so that distortion shall studied well.
+
+%---------------------------------------------------
+% Table: Comparison b/w FMOS/PIR and pinhole/POpt2
+%---------------------------------------------------
+\begin{table}[!ht]
+\begin{center}
+\caption{Specifications of Echidna on FMOS/PIR and pinhole on POpt2, and their usefulness.
+Note that we assume that pinhole mask is the same type as ASIAA.}
+\label{tbl:fmos_pinhole}
+%\scriptsize
+%\footnotesize
+\begin{tabular}{p{42mm}|*{3}{p{42mm}}} \hline
+Specifications	& Echidna on FMOS/PIR & Pinhole on POpt2 & Requiring Test Items\\ \hline \hline
+Size at focal plane	& $\sim$150 mm $\times$ $\sim$150 mm (at field center)		& $\sim$356 mm $\times$ $\sim$356 mm ($\sim 75 \%$ PFI FoV)	& distortion \\
+Optical and mechanics	& FMOS specific	& WFC + POpt2 itself	& alignment, image quality, distortion, MCS-PFI coordinate transformation \\ 
+Expected focal-plane spatial sampling rate	& $\sim$ 35 um	& $\sim$ 10um (at field edge)	& distortion \\
+RMS spot radius on MCS detector(*)	& $\sim$10 um at field center, $\sim$20um at field edge	& $\sim$ 9um	& image quality \\ \hline
+\end{tabular} 
+\end{center}
+* : MCS CDR document (``PFS MCS Delta CDR.pdf" by S.-Y. Wang.)
+\end{table}
+
 
 
 \paragraph{Back-up plan}

@@ -56,7 +56,7 @@ The subsystem Meteorology Camera System calculates centroids of back-illuminated
 Here, the centroids are determined as the position on CMOS sensor in the unit of pixels, equivalent to MCSC.
 The centroids of the fibers, therefore, is determined in MCSC as $\bm{F_k}=(i_k [ \mathrm{pixel} ], j_k [ \mathrm{pixel} ])$.
 
-\subsection{Observational Sequence and Definitions of Coordinate Transformations}
+\subsection{Observational Sequence and Definitions of Coordinate Transformations}\label{sec:ctsec}
 
 \begin{figure}[!ht]
 \begin{center}
@@ -74,13 +74,23 @@ The procedure of fiber positioning is as follows:
 \item ETS (Exposure Time Sequencer) calculate the target positions $\bm{S_k}=(\Delta \alpha _k [ \degree ], \Delta \delta _k [ \degree ])$ in the observed field centered at $\bm{S}=(\alpha [ \degree ], \delta [ \degree ])$.
 %%% 2. sky -> F3C
 \item ETS transforms the target positions in Sky Catalogue to those in F3C using the telescope parameters at that moment ($Az, El, InR, T$).
-We define this transform as $D_1$.
+We define this transformation as $D_1$.
 That is,
 \begin{equation}
 \begin{array}{crcl}
 & \bm{S_k}=(\alpha _k [ \degree ], \delta _k [ \degree ]) & \rightarrow & \bm{X_k}=(x_k [ \mathrm{mm} ], y_k [ \mathrm{mm} ]), \\
 & & D_1 & \\
 \mathrm{or} & \bm{X_k} &= & D_1(\bm{S_k}).
+\end{array}
+\end{equation}
+In practical, firstly ETS calculates ($Az, El, InR$) at a given time for the filed centered at $\bm{S}$, or receives them from the telescope.
+Then ETS calculates ($\Delta Az [ \degree ], \Delta El [ \degree ]$) of each target $\bm{S_k}$, as the offset of the field center.
+This offset is transformed to the position on F3C using $D_1$.
+That is,
+\begin{equation}
+\begin{array}{rcccl}
+\bm{S_k}=(\alpha _k [ \degree ], \delta _k [ \degree ]) & \rightarrow & (\Delta Az [ \degree ], \Delta El [ \degree ]) & \rightarrow & \bm{X_k}=(x_k [ \mathrm{mm} ], y_k [ \mathrm{mm} ]), \\
+& & & D_1 & \\
 \end{array}
 \end{equation}
 %%% 3, MCSC -> F3C
@@ -96,28 +106,29 @@ That is,
 \end{array}
 \end{equation}
 %%% 4. F3C -> MPS
-\item\label{item:f3c2cobra} MPS calculates Cobra Coordinates of fibers $\bm{X'_k}$ and targets $\bm{X_k}$.
+\item\label{item:f3c2cobra} MPS calculates Cobra Coordinates to be commanded, by comparing the position of fibers $\bm{X'_k}$ and targets $\bm{X_k}$.
 We call this transformation $D_3$.
 \begin{equation}
 \begin{array}{crcl}
-& \bm{X_k}=(x_k [ \mathrm{mm} ], y_k [ \mathrm{mm} ]) & \rightarrow & \bm{C_k}=(\theta _k [ \degree ], \phi _k [ \degree ]) ,\\
+& \bm{X_k}=(x_k [ \mathrm{mm} ], y_k [ \mathrm{mm} ]), \bm{X'_k}=(x'_k [ \mathrm{mm} ], y'_k [ \mathrm{mm} ]) & \rightarrow & \bm{C_k}=(\theta _k [ \degree ], \phi _k [ \degree ]) ,\\
 & & D_3 & \\
-\mathrm{or} & \bm{C_k} & = & D_3(\bm{X_k}).
+\mathrm{or} & \bm{C_k} & = & D_3(\bm{X_k},\bm{X'_k}).
 \end{array}
 \end{equation}
-Comparing these positions, MPS derives the angles to move cobras $\bm{C_k}$:
-\begin{equation}
-\begin{array}{crcl}
- & \bm{C_k} & = & D_3(\bm{X'_k}) - D_3(\bm{X_k}).
-\end{array}
-\end{equation}
+%Comparing these positions, MPS derives the angles to move cobras $\bm{C_k}$:
+%\begin{equation}
+%\begin{array}{crcl}
+% & \bm{C_k} & = & D_3(\bm{X'_k}) - D_3(\bm{X_k}).
+%\end{array}
+%\end{equation}
 Then move Cobras following the derived angles $\bm{C_k}$.
 %%% 5. repeat
 \item Repeat \ref{item:mcs2f3c} and \ref{item:f3c2cobra} until the differential between the target and the fiber positions meets the required accuracy; $\Delta r_k= \sqrt{ \Delta x_k^2 + \Delta y_k^2} \leq 10 \;\mathrm{[um]}$ (TBC; {\tt REQ-SYS-553}).
 FPS judges which fibers should be moved, and sends $\bm{X_k}$ and $\bm{X'_k}$ to MPS.
 \end{enumerate} 
 
-During the commissioning, the transformation functions $D_1$, $D_2$, and $D_3$ are defined and/or calibrated.
+Formation of $D_1$ and $D_2$ is determined by the Project Office and stored to a designated repository (TBC), while $D_3$ is determined by JPL.
+During the commissioning, the transformation functions $D_1$, $D_2$, and defined and/or calibrated, and calibration for $D_3$ are executed.
 In the following section, these process are described.
 
 %------------------------------
@@ -129,26 +140,30 @@ Before shipping to the Subaru, the physical positions of all fixed fiducial fibe
 We shall use the positions of fixed fiducial fibers at that time as their coordinates in F3C.
 
 \paragraph{Sky Catalogue to F3C transformation $D_1$:}
-In order to transform target coordinates in Sky Catalogue to those in F3C, we use the HSC distortion map $D'_{1,0}$ as the first step.
-We call the HSC distortion map ``$0^{th}$-pass distortion map".
-As of the time of writing, ``$0^{th}$-pass distortion map" is described in the form of 9-order Polynomial of x and y \footnote{According to the HSC DRP team (Pfof. Robert Lupton), the 9-order polynomial is not suitable in particular to the edge of FoV. The PFS FoV including A\&G Cameras ($\sim 0.71 \degree$), however, seems smaller enough to use the same function as ``$0^{th}$-pass distortion map". They will improve the form in the future.}.
+%In order to transform target coordinates in Sky Catalogue to those in F3C, we use the HSC distortion map $D'_{1,0}$ as the first step.
+In order to transform target coordinates in Sky Catalogue to those in F3C, we use the WFC as-built model $D'_{1,0}$ as the first step.
+Using this model, the position on PFI is calculated by Yoko Tanaka from Subaru telescope.
+We call this distortion map ``$0^{th}$-pass distortion map".
+The detail of the ``$0^{th}$-pass distortion map" is under development.
+%As of the time of writing, ``$0^{th}$-pass distortion map" is described in the form of 9-order Polynomial of x and y \footnote{According to the HSC DRP team (Pfof. Robert Lupton), the 9-order polynomial is not suitable in particular to the edge of FoV. The PFS FoV including A\&G Cameras ($\sim 0.71 \degree$), however, seems smaller enough to use the same function as ``$0^{th}$-pass distortion map". They will improve the form in the future.}.
 %As of the time of writing, ``$0^{th}$-pass distortion map" is described in the form of $9^{th}$-order Chebyshev polynomial  $T_9(x)$\footnote{$T_9(x)=256x^9-576x^7+432x^5-120x^3+9x$}\footnote{According to the HSC DRP team (Pfof. Robert Lupton), $9^{th}$-order Chebyshev polynomial is not suitable in particular to the edge of FoV. The PFS FoV including A\&G Cameras ($\sim 0.71 \degree$), however, seems smaller enough to use the same function as ``$0^{th}$-pass distortion map". They will improve the form in the future.}.
-Note that the original HSC distortion map has the unit of pixel, so we should convert the map to mm (see below).
-Using ``$0^{th}$-pass distortion map", the Sky Catalogue -- F3C transformation is described as follows:
+%Note that the original HSC distortion map has the unit of pixel, so we should convert the map to mm (see below).
+Given ``$0^{th}$-pass distortion map" as a polynomial function, the Sky Catalogue -- F3C transformation is described as follows:
 \begin{equation}
 \begin{array}{cclc}
 \bm{X_k} & = & D_{1,0} (\bm{S_k}) \\
-& = & \sum P_{ll',HSC} x^l (\bm{S_k})y^{l'} (\bm{S_k}) & [l, l'=0,1,...,9],
+& = & \sum P_{ll',model} x^l (\bm{S_k})y^{l'} (\bm{S_k}) & [l, l'=0,1,..],
+%& = & \sum P_{ll',HSC} x^l (\bm{S_k})y^{l'} (\bm{S_k}) & [l, l'=0,1,...,9],
 %& = & \sum P_{l,HSC} x^l (\bm{S_k}) & [l=1,3,5,7,9],
 \end{array}
 \end{equation}
-where $D_{1,0}$ is ``$0^{th}$-pass distortion map" expediently scaled to mm unit with HSC CCD pixel scale ($D'_{1,0} \times \mathrm{15 um/pixel} = D_{1,0}$), and $P_{ll'}$ is coefficient of $x^l$ term of Chebychev polynomials.
-$x(\bm{S_k})$, $y(\bm{S_k})$ is the distance from the center of FoV in the x, y direction, respectively.
+%where $D_{1,0}$ is ``$0^{th}$-pass distortion map" expediently scaled to mm unit with HSC CCD pixel scale ($D'_{1,0} \times \mathrm{15 um/pixel} = D_{1,0}$), and $P_{ll'}$ is coefficient of $x^l$ term of Chebychev polynomials.
+where $x(\bm{S_k})$, $y(\bm{S_k})$ is the distance from the center of FoV in the x, y direction, respectively, which corresponds to $(\Delta Az [ \degree ], \Delta El [ \degree ])$ in the section \ref{sec:ctsec}.
 
 Through the commissioning, we shall optimize these coefficients for PFS by measuring the sky distortion and the sky scale in F3C.
-This means we shall derive $P_{l,PFS}$, which expresses PFS distortion on the scale of F3C.
+This means we shall derive $P_{ll',PFS}$, which expresses PFS distortion on the scale of F3C.
 Note that the distortion map likely varies with respect to the telescope parameters (azimuth $Az$, elevation $El$, instrument rotator $InR$), temperature $T$ and so on.
-In other words, $P_{l,PFS}$ has the dependency on them; $P_{l,PFS}=P_{l,PFS}(Az., El., InR., T, ...)$\footnote{The HSC distortion map ($P_{l,HSC}$ ) should also have such a dependency, but they use mean map. The dependency of these parameters will be checked.}.
+In other words, $P_{ll',PFS}$ has the dependency on them; $P_{ll',PFS}=P_{ll',PFS}(Az., El., InR., T, ...)$\footnote{cf. The HSC distortion map ($P_{l,HSC}$ ) should also have such a dependency, but they use mean map. The dependency of these parameters will be checked.}.
 
 \bigskip
 
@@ -162,7 +177,7 @@ When \ref{secflow:1stDM} is succeeded, the distortion map shall be updated as fo
 \begin{equation}
 \begin{array}{cclc}
 \bm{X_k} & = & D_{1,1} (\bm{S_k}) \\
-& = & \sum P_l x^l (\bm{S_k}) & [l=0,1,2, ... 9].
+& = & \sum P_{ll'} x^l (\bm{S_k})y^{l'} (\bm{S_k}) & [l, l'=0,1,2, ...].
 \end{array}
 \end{equation}
 The updated distortion map $D_{1,1}$ is called ``$1^{st}$-pass distortion map".
@@ -175,7 +190,7 @@ That is,
 \begin{equation}
 \begin{array}{cclc}
 \bm{X_k} & = & D_{1,2} (\bm{S_k}) \\
-& = & \sum P_{l,PFS}(Az., El., InR., T, ...) x^l (\bm{S_k}) & [l=0,1,2, ... 9].
+& = & \sum P_{ll',PFS}(Az., El., InR., T, ...) x^l (\bm{S_k})y^{l'} (\bm{S_k}) & [l, l'=0,1,2, ..].
 \end{array}
 \end{equation}
 

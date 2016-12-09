@@ -19,9 +19,14 @@ For 1- TPA, the telescope control system drives the sequence as below:
 %The FoV of the center camera is large enough to acquire a bright star in the FoV even before TPA.
 \item Take its image by AG camera.
 \item Measure the Az/El offset, by measuring offset of the star from where it should be.
-\item repeat [1-3] for different stars. (How many?)
-\item Update Az/El offset value of mount correction efficients, as the additional parameter.
+\item repeat [1-3] for different stars.
+We will visit every 30 degree in the azimuth direction and every 15 degree in elevation from 30 -- 75 degree.
+In total , Az/El offsets are  measured at 12 $\times$ 4 $=$ 48 field of view.
+\item Average offset measured at sequence [3].
+Update Az/El offset value of mount correction efficients, as the additional parameter.
 \end{enumerate}
+
+Assuming it will tale 900sec to obtain the data in a given field, 12 hours (900 $\times$ 48 seconds) are required.
 
 \redtext{How much does the difference of the scale b/w FoV center and edge effect??}
 %The offset derived from this process can be considered from the next telescope pointing. 
@@ -35,7 +40,7 @@ For 1- TPA, the telescope control system drives the sequence as below:
 %After TPA, we check tracking error of the telescope.
 
 \begin{itembox}[l]{\suctitle{Success Criteria}}
-Telescope pointing error is less than XXX (TBD)
+Obtain Az/El offset value of mount correction efficients.
 
 \bluetext{Required long time to analyze the data?: No. \\
 --- We shall analyze the data in real-time.
