@@ -1,0 +1,159 @@
+\documentclass[a4paper,notitlepage]{article}
+\usepackage{ssn-format}
+\title{Preparation at Subaru/Summit before delivery of subsystems}
+\author{PFS ICS Team}
+\date{2015--11--27}
+\begin{document}
+
+\SSNID{00020}
+\SSNREV{001}
+\SSNCATEGORY{ICS}
+\SSNChangeRecord{Rev.001 / First Release / 2015--11--2727}
+\SSNReference{(none)}
+\SSNAttachment{(none)}
+\SSNWritten{PFS ICS Team}
+
+\ssnhead
+
+\section{Abstract}
+
+This note is a summary of items to be done at Subaru/Summit before receiving 
+subsystems from institutions, in electronics and software point of view. 
+Aim of this summary is to show hardware need to be purchased or delivered 
+at certain epochs for the project and Subaru, but will not include any 
+software module (which will not have highly solid delivery date…). 
+Also connections or power supplies required will be shown per each setup. 
+
+
+\section{Items and assigned delivery}
+
+Followings are hardware items which the project (or Subaru) need to prepare 
+or deliver to the summit, and subsystems use these items.
+
+PFI (PF part) and MCS will be delivered as complete hardware which does not 
+need any support system delivered separated. This section lists items which 
+will be placed to CB2F or SpS (TUE-IR / IR4). 
+
+\begin{table}[htb]
+\caption{List of items and required point of delivery (CB2F)}
+\label{tbl:listitem-cb2f}
+\begin{center}
+\begin{tabular}{c||c|c|l}
+Item & Prepared by & Required by & Remarks \\
+\hline
+Rack to host items & Subaru & before all of delivery & Assumed deepest unit 
+  \~{}760mm (MPS) \\
+Network switch (PFS core) & IPMU & 1st at MCS, 2nd at SCR & Already in hand \\
+ICS RAID6 storge & IPMU & SM1 & MCS backup could be done with small storage? \\
+VM host computers & IPMU & 1 at MCS to run MHS & Some already in hand \\
+Serial communication host & IPMU & PFI & \\
+KVM, PDU etc & IPMU & MCS & some already in hand \\
+DB host & IPMU & SM1? & Spec. TBD 
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}[htb]
+\caption{List of items and required point of delivery (SpS)}
+\label{tbl:listitem-sps}
+\begin{center}
+\begin{tabular}{c||c|c|l}
+Item & Prepared by & Required by & Remarks \\
+\hline
+5th rack & JHU & SCR &  \\
+Network switch to CB2F & IPMU & SCR & Already in hand \\
+UPS and power supply & Subaru & SCR &  \\
+1U host computer at 5th rack & IPMU & SCR & Spec. TBD \\
+Telemetry devices and system & TBD & SCR or SM1 & 
+\end{tabular}
+\end{center}
+\end{table}
+
+
+\section{Setups required for subsystem commissioning}
+
+Setups at Subaru required for subsystem commissioning are listed in this 
+section. Assumed points of delivery are: 
+\begin{itemize}
+  \item MCS at 2016/08
+  \item SCR at 2017/06
+  \item SM1,2 at 2017/08
+  \item PFI at 2018/02
+\end{itemize}
+
+\subsection{MCS}
+
+MCS will be installed as Cs instrument. 
+We need to have minimum operation hardware at CB2F, including PFS network.
+
+\begin{itemize}
+  \item 19inch Rack (Subaru)
+  \item PFS network switch (at least 1; IPMU; already in hand)
+    : Also connection to subaru’s core switch
+  \item VM host (IPMU; 1 already in hand)
+    : Hosting administrative VM, e.g. dnsmasq
+  \item KVM, PDU (IPMU; already in hand)
+\end{itemize}
+
+At this stage, no special care for power distribution is required, 
+only like connecting things to PDU at CB2F. Also network is simple, 
+we need two fiber connection to Cs and its standby (one active, one backup), 
+one connection to subaru core switch with routing.
+
+\subsection{SCR}
+
+In parallel to build SCR (Spectrograph Clean Room) at TUE-IR (IR4), 
+we need to have control hardware for SCR.
+
+\begin{itemize}
+  \item 2nd network switch at CB2F (IPMU; already in hand)
+    : might only need 1 SFP to SpS, 
+    but better to have and check working at this moment
+  \item Network switch at SpS (IPMU; already in hand)
+  \item 5th rack (from JHU)
+  \item UPS at IR3, with power distribution/panel (Subaru)
+  \item 1U host computer (also for SCR control) (IPMU)
+  \item Telemetry devices (TBD)
+    : e.g. Lakeshore temperature monitor and sensors
+\end{itemize}
+
+At this point, we need full power distribution system to supply 
+spectrograph, both UPS and power panel w/ cables. Environment 
+active control subsystem for SCR shall be considered as a part of 
+SCR, so not listed here.
+
+For network and storage, we only need “connected” at this point, 
+so performance evaluation on network in parallel to SCR preparation 
+(or validation) is fine.
+
+\subsection{SM1, 2}
+
+Before we have SM1,2 at summit, we need almost all of hardware. 
+
+\begin{itemize}
+  \item ICS RAID6 storage (IPMU)
+  \item DB host (IPMU)
+    : Not as full operation (e.g. interaction with ETS or survey coordination), 
+    but to store MHS status archive or telemetry etc.
+\end{itemize}
+
+Before this point, PFS network and storage need to be fully prepared and 
+validated on performance point of view (for NCU1,2 operation).
+
+
+\subsection{PFI}
+
+Most of computing and power resources need to be active well before delivery 
+of PFI to the summit.
+
+\begin{itemize}
+  \item Serial communication (IPMU)
+    : This communication will be validated at factory of melco 
+      (Mitsubishi; at Amagasaki) in test setup.
+\end{itemize}
+
+
+
+
+\end{document}
+
