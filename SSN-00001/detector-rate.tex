@@ -187,6 +187,121 @@ but not yet defined for other exposures.
 
 \section{Estmated data rate for operation modes}
 
+This section is to summarize estimated data rate among PFS subsystems, PFS 
+CB2F NFS server, and Gen2 by operation modes, such as on exposure, on CCD 
+readout. 
+PFS iSCSI storage server and NFS server will be installed into the same rack 
+at CB2F, and will be connected through the same network switch (if we use 
+ethernet iSCSI but not FC connection option
+\footnote{Selection is just to replace SFP inserted into the PFS storage 
+server.}
+), their configurations are relatively easy to be changed than other 
+connections like CB2F to PFS subsystems. 
+In this section, data flow to the PFS NFS server is taken but not to 
+PFS iSCSI storage server (through PFS NFS server). 
+
+\subsection{Possible data flow by each operation mode}
+
+Between two exposure, PFS has two modes for its operation -- execute next 
+exposure with or without Cobra configuration
+\footnote{There could be one another mode to slew telescope to new field 
+before Cobra configuration, but not much change on data flow except for MCS 
+data.}. Former is normal operation, and latter is used especially for some 
+survey program with 2x 450sec exposure for total 900sec integration per one 
+target assignment. 
+When next exposure is commanded without Cobra configuration, MCS will not be 
+used and no data flow from MCS happens, and AG camera operation continues 
+over between two exposures. 
+Also data stream to Gen2 from PFS storage continues after next exposure 
+starts, CCD data transfer will be in parallel for (most of) all, and 
+IR up-the-ramp data (11.5GB for 450sec exposure) will not finished in 28sec 
+(11.5GB in 28sec is \~{}3.3Gbps). 
+
+Once exposure ends with shutter closed, following operations are executed 
+in parallel:
+\begin{itemize}
+  \item FITS files for IR detectors are created and starts sending to Gen2
+    (continuous)
+  \item CCD readout (for first 28sec), and sending to Gen2 follows
+  \item Cobra configuration (configuration takes \~{}100sec, MCS image for 
+    final assignment taken after configuration)
+\end{itemize}
+
+If there is no image data flow from Cs (MCS) for first 28sec after shutter 
+closed
+\footnote{As for now, this assumption is true that PFS assumes to send only 
+the final image to PFS storage during operation.}, 
+data flow configuration is the same for all operation types except for AG. 
+
+\subsection{Summary}
+
+Estimated data rate for operation modes are summarized as 
+Table.~\ref{datarate-modes}, taking typical exposure time of 900sec. 
+Data rate is shown in two types, one is in total size for transfer between 
+two storages which can vary by network conditions and configurations, 
+one is in Mbps for fixed data outputs. 
+At the top of table, data flow origin and destination is listed, 
+'CB2F' means PFS NFS server for storage operation, 
+and 'PFI to CB2F' means PFI control computer at CB2F to 'CB2F'.
+Data rate for each flow is shown in a column of connection (at the top of 
+table). 
+
+
+\begin{table}[htb]
+\caption{Estimated data rate for operation modes}
+\label{datarate-modes}
+\begin{center}
+\begin{tabular}{c||r|r|r||r|r||l}
+     & \multicolumn{3}{c||}{To CB2F} & \multicolumn{2}{c||}{From CB2F} &  \\
+Name & SpS & Cs & PFI & Gen2 & V-LAN & Remarks \\
+\hline
+\hline
+\multicolumn{7}{c}{During exposure} \\
+\hline
+IR up-the-ramp & 200Mbps & -- & -- & $<$ 200Mbps & -- & To Gen2 for monitoring \\
+AG & -- & -- & 34Mbps & $<$ 30Mbps & -- & To Gen2 for monitoring \\
+V-LAN & -- & -- & -- & -- & 0.5Mbps & \\
+(Science data) & -- & -- & -- & ($<$ 13GB) & -- & (for without Cobra configuration) \\
+\hline
+Total & 200Mbps & -- & 34Mbps & $<$ 230Mbps & 0.5Mbps &  \\
+\hline
+\hline
+\multicolumn{7}{c}{First 28sec after exposure (shutter closed) with Cobra 
+  configuration} \\
+\hline
+IR data & -- & -- & -- & (23GB) & -- & Size depends on exposure time \\
+AG data & -- & -- & -- & (3.8GB) & -- & Size depends on exposure time \\
+CCD readout & 73Mbps & -- & -- & -- & -- & \\
+\hline
+Total & 73Mbps & -- & -- & (26.8GB) & -- &  \\
+\hline
+\hline
+\multicolumn{7}{c}{First 28sec after exposure (shutter closed) without Cobra 
+  configuration} \\
+\hline
+IR data & -- & -- & -- & (23GB) & -- & Size depends on exposure time \\
+AG data & -- & -- & -- & (3.8GB) & -- & Size depends on exposure time \\
+CCD readout & 73Mbps & -- & -- & -- & -- & \\
+AG & -- & -- & 34Mbps & $<$ 30Mbps & -- & To Gen2 for monitoring \\
+V-LAN & -- & -- & -- & -- & 0.5Mbps & \\
+\hline
+Total & 73Mbps & -- & 34Mbps & (see above) & 0.5Mbps &  \\
+\hline
+\hline
+\multicolumn{7}{c}{After CCD readout finished before shutter open} \\
+\hline
+IR data & -- & -- & -- & (23GB) & -- & Size depends on exposure time \\
+AG data & -- & -- & -- & (3.8GB) & -- & Size depends on exposure time \\
+MCS data & -- & (100MB) & -- & (100MB) & -- & \\
+\hline
+Total & -- & (100MB) & -- & (26.9GB) & -- &  \\
+\hline
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+
 
 
 \end{document}
