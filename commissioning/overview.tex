@@ -94,28 +94,33 @@ See the documents by collaborators (TBA) for detailed procedure of I\&T.
 
 Table \ref{tbl:SubSysIandT} summarizes schedule and place of I\&T of subsystems.
 The validated functions before shipping (or before commissioning) is listed in table \ref{tbl:subfuncs}.
+The file named {\tt PFS\_AIT\_Subaru.pptx}\footnote{http://sumire.pbworks.com/w/file/111633073/PFS\_AIT\_Subaru.pptx} summarizes The required source, layout of working space and other configurations of I\&T process in Hawaii
 
 %---------------------------------------------------
 % Table: Subsystem functions at delivery.
 %---------------------------------------------------
 \begin{table}[!ht]
 \begin{center}
-\caption{Subsystem I\&T time and place.}
 %\scriptsize
 %\footnotesize
-\begin{tabular}{*{3}{c}}\label{tbl:SubSysIandT} \\ \hline
-Subsystem	& Year/Month & I\&T Place \\ \hline \hline
-PFI	& 2019/04--2019/05		& TBD \\
-MCS	& 2017/03--2017/06	& Observation floor \\
-SpS-SM1,2	& 2017/07--08		& IR4 (SCR) \\
-SpS-SM3,4	& 2018/05--06		& IR4 (SCR) \\
-Cable B	&	2018/12--2019/02	& TBD \\ \hline
+\caption{Subsystem I\&T time and place.}
+\label{tbl:SubSysIandT} 
+\begin{tabular}{*{4}{c}} \hline
+Subsystem	& Year/Month & I\&T Place (Hilo) & I\&T Place (Summit) \\ \hline \hline
+PFI	& 2018/10--2019/01		& Simulator lab.	& Instrument Lab. \& Observation floor \\
+MCS	& 2017/07--2017/09	& Simulator lab.	& Observation floor \\
+SpS-SM1	& 2018/02--2018/03		& & IR4 (SCR) \\
+SpS-SM2	& 2018/11--2018/12		& & IR4 (SCR) \\
+SpS-SM3	& 2018/11--2018/12		& & IR4 (SCR) \\
+SpS-SM4	& 2019/07--2019/08		& & IR4 (SCR) \\
+Cable B	&	2018/06--2018/08	& TBD	&TBD \\ \hline
 \end{tabular} 
 \end{center}
 \end{table}
 
 \paragraph{PFI}
 PFI is shipped after assembled at ASIAA, so it doesn't need to be re-assembled at Subaru.
+However, field element will be disassembled for protection, so that it will be integrated again at the Summit.
 %, according to the latest I\&T story board.
 %After shipped, PFI is re-adjusted if needed.
 The I\&T story board at the summit is in preparation but the currently assumed test items are as follows:
@@ -128,6 +133,7 @@ The I\&T story board at the summit is in preparation but the currently assumed t
 \item Dot position check
 \item Cobra convergence test with dummy MCS
 \item AG camera test for dark and noise
+\item Integration of Field Element
 \end{enumerate}
 These test are carried out using test stand on which PFI will be shipped, and dummy MCS.
 Because the tilt mechanism is not assumed to be delivered so far, the test should be limited compared to AIT phase at ASIAA.
@@ -137,13 +143,13 @@ After the above tests are passed, PFI will be installed to POpt2, and the the sa
 \redtext{Test items for software --- control individual modules, telemetry, communicate with MLP1/STS etc.}
 
 \paragraph{MCS}
-After AIT at ASIAA, MCS camera modules are disassemble for shipping to Subaru. 
-The camera modules, therefore, will be re-assembled in Hawaii.
-After it, the image quality will be checked with the pinhole array.
-If the test will be done firstly at Hilo base, re-assemble and test should be also carried out at the summit.
+After AIT at ASIAA, MCS will be shipped to Subaru  without disassembling.
+Therefore, the optical alignment of the subsystem will be checked using laser at Hilo base, then the subsystem will be transported to the Summit.
+At the Summit, the image quality will be checked with the pinhole array.
 ASIAA is planning optional configuration to adjust the alignment of MCS with respect to the prime focus, because MCS will be mounted to CsBox only ``mechanically".
-If the pinhole array can be equipped on Popt2, MCS can be aligned with the prime focus by checking the camera image.
+This test will be performed using the pinhole array can be equipped on POpt2.
 Such a test enables us to use time efficiently before PFI arrival, and to save time after PFI arrival, which is expected one year later than MCS arrival, because we should align MCS with the prime focus firstly.
+Note that the I\&T process using Popt2 with pinhole array will be done combining to MCS commissioning process (\ref{secflow:MCSon}).
 
 
 \redtext{Test items for software --- control individual modules, telemetry, communicate with STS etc.}
@@ -273,14 +279,14 @@ Note that telescope can be used for other Ns/PF instruments on the night when MC
 	(1) confirm fixed fiducial fiber positions on F3C (refine the PFI-MCS relation)
 	\item 1.5 days (nighttime) for P-9 :
 	(1) Telescope Pointing Analysis
-	\item 0.5 day (daytime) for F-1 : 
-	(1) connect Cable B to PFI and SpS (SM1/2)
-	\item 1 day (daytime) for F-2 :  
-	(1) confirm  the fiber identifications (SM1/2)
+	\item 0.7 day (daytime) for F-1 : 
+	(1) connect Cable B to PFI and SpS (SM1/2/3)
+	\item 1.8 day (daytime) for F-2 :  
+	(1) confirm  the fiber identifications (SM1/2/3)
 	\item 1.5 days (daytime) for A-1 : 
 	(1) calibration of Cobras (SM1/2)
 	\item 1.5 days (1.5-day nighttime) for A-2 : 
-	(1) PSF measurement through the entire system (SM1/2)	
+	(1) PSF measurement through the entire system (SM1/2/3)	
 \end{itemize}
 \end{minipage} \\
 \begin{minipage}{0.8\hsize}
@@ -310,7 +316,7 @@ Note that telescope can be used for other Ns/PF instruments on the night when MC
 	\item 1.5 days (daytime) for A-1 : 
 	(1) calibration of Cobras (SM3/4)
 	\item 1.5 days (1.5-day daytime) for A-2 : 
-	(1) PSF measurement through the entire system (SM1/2)
+	(1) PSF measurement through the entire system (SM1/2/3)
 	\end{itemize}
 \end{minipage} \\
 \begin{minipage}{0.8\hsize}
@@ -337,11 +343,11 @@ Note that telescope can be used for other Ns/PF instruments on the night when MC
 	\begin{itemize}
 	\item 2 days (nighttime) for P-10 : 
 	(1) 1st-pass distortion map
-	\item 0.5 day (daytime) for F-1 :  
-	(1) connecting Cable B to PFI and SpS (SM3/4)
-	\item 1.0 day (daytime) for F-2 :  
-	(1) confirmation of  the fiber identifications (SM3/4)
-	\item 2.0 days (1.5-day daytime and 0.5-day nighttime) for A-2: 
+	\item 0.4 day (daytime) for F-1 :  
+	(1) connecting Cable B to PFI and SpS (SM4)
+	\item 0.6 day (daytime) for F-2 :  
+	(1) confirmation of  the fiber identifications (SM4)
+	\item 1.5 days (1.0-day daytime and 0.5-day nighttime) for A-2: 
 	(1) PSF measurement through the entire system (all SMs)
 	\item 3.5 days (nighttime) for A-3: 
 	(1) 2nd-pass distortion map
@@ -452,38 +458,38 @@ Note that telescope can be used for other Ns/PF instruments on the night when MC
 \begin{center}
 \caption{
 Expected days for commissioning.
-Note that Year/Month in column 2 are just roughly set assuming the latest schedule of each subsystems and that scientific operation will start in the S19B semester.}
+Note that Year/Month in column 2 are just roughly set assuming the latest schedule of each subsystems and that scientific operation will start in the S20B semester.}
 %\scriptsize
 \footnotesize
 \begin{tabular}{*{3}{c}|*{4}{c}}\label{tbl:CountDates} \\ \hline
 Run	 & Year/  &\#days & seq.	& daytime & night-sky  &  dark-sky\\
 	& Month	&	&	 & is OK & is needed  &  is needed  \\ \hline \hline
 1	& 2017/08		& 3*	& M1--3		& (1*)	& 0		& 0	\\
-	& --2018/03	& 		& M4			& 3		& 0		& 0	\\ \hline
-2	& 2018/06	& 7 (13**)	& P1--P3,P5	& 1 	& 0 	& 0	\\
+	& --2019/02	& 		& M4			& 3		& 0		& 0	\\ \hline
+2	& 2019/02	& 7 (14**)	& P1--P3,P5	& 1 	& 0 	& 0	\\
 	&	&					& P4			& 0.5 	& 0 	& 0	\\
 	&	&					& P6  			& 0 	& 1.5 	& 0	\\
 	&	&					& P7  			& 0 	& 2.5 	& 0	\\
 	&	&					& P8  			& 1.5 	& 0 	& 0	\\
 	&	&					& P9  			& 0 	& 1.5 	& 0	\\
-	&	&					& F1 (SM1,2)	& 0.5 	& 0 	& 0	\\
-	&	&					& F2 (SM1,2)	& 1.0 	& 0 	& 0	\\
+	&	&					& F1 (SM1,2)	& 0.7 	& 0 	& 0	\\
+	&	&					& F2 (SM1,2)	& 1.8 	& 0 	& 0	\\
 	&	&					& A1 (SM1,2)	& 1.5 	& 0 	& 0	\\
 	&	&					& A2 (SM1,2)	& 0 	& 1.5 	& 0	\\ \hline
-3	& 2018/08	& 4 (7**)	& P11 			& 0 	& 4 	& 0	\\
+3	& 2019/06	& 4 (7**)	& P11 			& 0 	& 4 	& 0	\\
 	&	&					& A1 (SM3,4)	& 1.5 	& 0 	& 0	\\
 	&	&					& A2 (SM1,2)	& 1.5 	& 0 	& 0	\\ \hline
-4	& 2018/10	& 6 (9**)	& P10			& 0		& 2 	& 0	\\
-	&	& 					& F1 (SM3,4)	& 0.5 	& 0 	& 0	\\
-	&	&					& F2 (SM3,4)	& 1.0 	& 0 	& 0	\\
-	&	&					& A2 (all SMs)	& 1.5 	& 0.5 	& 0	\\
+4	& 2019/09	& 6 (8**)	& P10			& 0		& 2 	& 0	\\
+	&	& 					& F1 (SM3,4)	& 0.4 	& 0 	& 0	\\
+	&	&					& F2 (SM3,4)	& 0.6 	& 0 	& 0	\\
+	&	&					& A2 (all SMs)	& 1.0 	& 0.5 	& 0	\\
 	&	&					& A3			& 0		& 3.5	& 0	\\ \hline
-5	& 2018/11	& 6			& A3			& 0		& 3		& 0	\\
+5	& 2019/10	& 6			& A3			& 0		& 3		& 0	\\
 	&	&					& A4			& 0		& 0 	& 3	\\ \hline
-6	& 2019/01	& 4			& A4			& 0		& 0 	& 2\\
+6	& 2019/12	& 4			& A4			& 0		& 0 	& 2\\
 	&	&					& A5			& 0		& 0 	& 2	\\ \hline
-7	& 2019/05	& 4			& A5			& 0		& 0 	& 4	\\ \hline
-8	& 2019/08	& 4			& A5			& 0		& 0 	& 4	\\ \hline \hline
+7	& 2020/04	& 4			& A5			& 0		& 0 	& 4	\\ \hline
+8	& 2020/07	& 4			& A5			& 0		& 0 	& 4	\\ \hline \hline
 \multicolumn{2}{r}{in total}& 38 (50**) \\ \hline
 \end{tabular}
 \\
