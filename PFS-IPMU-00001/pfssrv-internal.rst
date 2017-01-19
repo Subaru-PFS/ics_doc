@@ -1,6 +1,8 @@
 ******
-PFS services internal design (pfs.ipmu.jp, pfspipe.ipmu.jp, internal to IPMU)
+PFS services internal design rev.009 (pfs.ipmu.jp, pfspipe.ipmu.jp, internal to IPMU)
 ******
+
+As of 2016/12/02
 
 Network
 ******
@@ -28,28 +30,31 @@ Connection
 ======
 
 Ethernet connection for internal LAN is moving to managed L2 switches. 
-For networks to IPMU and global, using (and will use) non-managed L2 switch.
+For networks to global, keep using non-managed switch.
 
 Servers
 
-- internal: Cisco 2960C (8+2SFP)
-- IPMU-LAN: Dell PC5424
+- PFS-LAN: Fujitsu SR-S324TC1 (24-4SFP; f24b .198)
+- IPMU-LAN: Dell PC5424 (24-4SFP; d5424a 192.168.156.29)
 
 Simulator rack
 
-- Fujitsu 24port 1G for master
-- Cisco 2950 48port 100M for low speed hosts
+- Fujitsu SR-S324TC1 (24-4SFP; f24a .196) for master
+- Cisco 2950 (48port 100M; c48a .195) for low speed hosts
 
 Place of physical host
 ======
 
-At wall side (server system) - from corner
+Server system at wall side, on floor
 
-- CAD PC
 - pfsdisk: storage for services
 - pfscalc: storage for internal use
 - extVM2: host for external service VMs (port to global has no IP address)
-- R410-1 (on desk): host for external service VMs
+
+Server system at wall side, on work desk
+
+- r410-2: VM host for external services
+- dl360-1, dl360-4: Windows host (physical)
 
 At work desk (simulator services)
 
@@ -86,7 +91,7 @@ Hosts
 - external server (br0 to PFS-LAN, br1 to internal) run only VMs requires 
   global address: extvm2(.5)
 - internal server (br0 to PFS-LAN, br2 to IPMU) run only VMs requires IPMU 
-  network: r410-1 (external services), dl360-2 (Windows VM)
+  network: r410-2 (external services)
 - service hosts: pfsdisk(.3), pfscalc(.4)
 
 VM management
@@ -95,8 +100,6 @@ VM management
 Virt disk storage on NFS
 
 - /virt at pfsdisk (RAID1 3TB)
-- /virt-win: at dl360-2 (RAID1 1TB) for Windows VMs used at host local
-
 - Local storage only for host operation
 - VM operation via virsh interface, remote monitoring via libvirt feature 
   under testing
@@ -140,8 +143,6 @@ mgmt (.7)
 pfsdisk (.3)
   RAID1 storage server (3TBx3, 2S): /server for external server data and home, 
   /virt for VM images, /simdata for data storage for simulators
-pfscalc3 (.6)
-  RAID1 storage for /virt-win and Windows VM host
 landfill (.32)
   landfill services
 db2 (.37)
@@ -171,9 +172,8 @@ iSCSI storage server (.170-.179)
 Axis PTX surveillance camera (.180)
   Testbed for SpS/SCR
 Cisco switches
-  Cs (8+2SFP; .190), CB2F (24+4SFPx2, FlexStack; .191, .192), SpS (24+4SFP; 
-  .193), CB2F E-LAN (8+2SFP; .194), c48a (48; 100BASE; .195), 
-  f24a (24; .196), p5424a (24; 192.168.156.29)
+  CB2F (24+4SFPx2, FlexStack; .191, .192),
+  SpS (24+4SFP; .193)
 KVM
   simulator (10.100.200.203, 192.168.156.33), 
   server (10.100.200.212, 192.168.156.32)
@@ -190,7 +190,8 @@ Shared storage service is provided as 192.168.156.70 (10.100.200.4) in RAID1
 4TB and 6TB.
 
 NFS, samba (4TB)
-  Access 192.168.156.70:/data1, samba user/pass set at host by smbpasswd
+  Access 192.168.156.70:/data1, samba user/pass set at pfscalc by smbpasswd. 
+  All data are backed up to /data2 per weekly.
 Backup (6TB)
   "rsync" to 192.168.156.70:/data2, e.g. 
   ``rsync -a -delete --link-dest=<priv> <orig> <backup>``
