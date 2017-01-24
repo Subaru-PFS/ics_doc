@@ -209,19 +209,23 @@ Column 1 lists the priority of the functions (TBD).
 %Assuming that 1 run amounts 5--7 nights (and/or daytime) including 1 day each for installing/uninstalling the instruments, we estimate the number of required runs for the PFS validation \& commissioning procedure.
 The PFS commissioning requires several ``engineering observation runs", during which a few sequences are executed step by step.
 We estimate the number of required runs and working-days for the PFS validation \& commissioning procedure.
-There are 15-day works for which night time is not required, and 35-day works for which the night time is essential.
-Among the latter, 22-day works require dark night,  in later phase of the commissioning.
+There are 15-day works for which night time is not required, and 37-day works for which the night time is essential.
+Among the latter, 15-day works require dark night, in later phase of the commissioning, where we shall validate the instrument performance.
 We arranges the working process to use the telescope time as effectively as possible.
-In total, {\bf 8 runs of 38 working-days} will be  required for the commissioning. 
+In total, {\bf 9 runs of 41 working days} will be  required for the commissioning. 
 Here, we take account into the weather factor of 70 \% uniformly  for nighttime sequences.
 We also include the uniform 20 \% technical margin into each sequence for unseen situations.
 
+In addition, 2 nights will be required for Mitsubishi to test the updated software to control the telescope.
+Also, to check the performance the algorithm for PFI alignment (\ref{secflow:WFCTiltShift}), 0.5 (TBC) night will be used as HSC engineering run in the S17B semester.
+Combined with these numbers, {\bf 43.5 working days} will be required for the PFS commissioning.
+
 The expected numbers of working-days for each run and its breakdown is as below.
-Figures \ref{fig:run1} -- \ref{fig:run7}  display the rough schedule of each run, from installation of subsystems before the engineering observation to uninstallation of them after the run.
+Figures \ref{fig:run1} -- \ref{fig:run7}  display the rough schedule of run 1--9, from installation of subsystems before the engineering observation to uninstallation of them after the run.
 Here, sequences which requires dark night-sky are colored by navy, while ones requiring night-sky even bright/grey by blue.
 Sequences we can carry out even in the daytime are colored by pink.
 %Here numbers of parentheses are required days for only sequences.
-Table \ref{tbl:CountDates} summarizes these numbers with schedule on the assumption of the current timeline of the project.
+Table \ref{tbl:CountDates} summarizes these numbers with schedule on the assumption of the current timeline of the project (as of January 2017).
 
 %It should be noted that this calculation is for ideal case --- no trouble on each subsystem, nor telescope, in addition to the perfect weather.
 Note that we don't count the required days for validation of SpS (seq. S-\#) for the above estimation, because the telescope time is not occupied with PFS during its validation.
@@ -231,13 +235,29 @@ Note that we don't count the required days for validation of SpS (seq. S-\#) for
 Breakdown of individual runs are as follows.
 
 %---------------------------------------------------
+% Run 0
+%---------------------------------------------------
+\begin{figure}[!ht]
+\begin{center}
+\begin{tabular}{c}
+\begin{minipage}{0.95\hsize}
+\paragraph{Run 0: 0.5 day}
+	\begin{itemize}
+	\item 0.5 day for check performance of the algorithm for PFI alignment, which is used in the process \ref{secflow:WFCTiltShift}.
+	\end{itemize}
+\end{minipage}
+\end{tabular}
+\end{center}
+\end{figure}
+
+%---------------------------------------------------
 % Run 1
 %---------------------------------------------------
 \begin{figure}[!ht]
 \begin{center}
 \begin{tabular}{c}
 \begin{minipage}{0.95\hsize}
-\paragraph{Run 1: 3 (4) days (Figure \ref{fig:run1})}
+\paragraph{Run 1: 4 days (Figure \ref{fig:run1})}
 	\begin{itemize}
  	\item 1 day (daytime) for M-1 --  M-3: 
 	(1) check MCS functions standing by,
@@ -246,13 +266,18 @@ Breakdown of individual runs are as follows.
  	\item 3 days (daytime) for M-4 : 
 	(1) pre-study the coordinate transformation system
 	\end{itemize}
+Run 1 has AIT work by ASIAA:
+	\begin{itemize}
+ 	\item 1 day (daytime) for alignment the MCS to the prime focus
+ 	\item 3 days (nightime) for image quality test, study of dome seeing under observational configuration.
+	(1) pre-study the coordinate transformation system
+	\end{itemize}
 Note that telescope can be used for other Ns/PF instruments on the night when MCS is installed (seq. M-1 -- M-3).
-Note also that this run has AIT work by ASIAA --- alignment the MCS to the prime focus and image quality test, although the exact number of working day is TBD.
 \end{minipage} \\
 \begin{minipage}{0.8\hsize}
 	\begin{center}
 	\vspace*{5mm}
-	\includegraphics[width=81mm]{timetable_run1.eps}
+	\includegraphics[width=98mm]{timetable_run1.eps}
 	\end{center}
 	\vspace*{-5mm}
 	\caption{Time table of Run 1.}
@@ -280,11 +305,11 @@ Note also that this run has AIT work by ASIAA --- alignment the MCS to the prime
 	(1) verify  MCS performance
 	\item 1.5 days (nighttime) for P-6 :
 	(1) verification of A\&G camera functions 
-	\item 2.5 days (nighttime) for P-7 :
+	\item 1.7 days (nighttime) for P-7 :
 	(1) correct WFC shift/tilt with respect to the primary mirror
 	\item 1.5 days (daytime) for P-8 :  
 	(1) confirm fixed fiducial fiber positions on F3C (refine the PFI-MCS relation)
-	\item 1.5 days (nighttime) for P-9 :
+	\item 0.8 days (nighttime) for P-9 :
 	(1) Telescope Pointing Analysis
 	\item 0.7 day (daytime) for F-1 : 
 	(1) connect Cable B to PFI and SpS (SM1/2/3)
@@ -292,14 +317,16 @@ Note also that this run has AIT work by ASIAA --- alignment the MCS to the prime
 	(1) confirm  the fiber identifications (SM1/2/3)
 	\item 1.5 days (daytime) for A-1 : 
 	(1) calibration of Cobras (SM1/2)
-	\item 1.5 days (1.5-day nighttime) for A-2 : 
+	\item 1.0 days (1.0-day nighttime) for A-2 : 
 	(1) PSF measurement through the entire system (SM1/2/3)	
 \end{itemize}
+In addition, run 2 has 2-night work by Mitsubishi for test of software for telescope control.
+Note that we assume that we can coordinate with Mitsubishi to proceed individual day-time works in parallel.
 \end{minipage} \\
 \begin{minipage}{0.8\hsize}
 	\begin{center}
 	\vspace*{5mm}
-	\includegraphics[width=135mm]{timetable_run2.eps}
+	\includegraphics[width=140mm]{timetable_run2.eps}
 	\end{center}
 	\vspace*{-5mm}
 	\caption{Time table of Run 2.}
@@ -316,20 +343,24 @@ Note also that this run has AIT work by ASIAA --- alignment the MCS to the prime
 \begin{center}
 \begin{tabular}{c}
 \begin{minipage}{0.95\hsize}
-\paragraph{Run 3 : 4 days  (Figure \ref{fig:run3})}
+\paragraph{Run 3 : 6 days  (Figure \ref{fig:run3})}
 	\begin{itemize}
+	\item 0.8 days (nighttime) for P-7 :
+	(1) correct WFC shift/tilt with respect to the primary mirror (confirmation)
+	\item 0.7 days (nighttime) for P-9 :
+	(1) Telescope Pointing Analysis (confirmation)
 	\item 4 days (nighttime) for P-10 : 
 	(1) 1st-pass distortion map
 	\item 1.5 days (daytime) for A-1 : 
 	(1) calibration of Cobras (SM3/4)
-	\item 1.5 days (1.5-day daytime) for A-2 : 
+	\item 2.0 days (1.5-day daytime and 0.5-day nighttime) for A-2 : 
 	(1) PSF measurement through the entire system (SM1/2/3)
 	\end{itemize}
 \end{minipage} \\
 \begin{minipage}{0.8\hsize}
 	\begin{center}
 	\vspace*{5mm}
-	\includegraphics[width=94.5mm]{timetable_run3.eps}
+	\includegraphics[width=126mm]{timetable_run3.eps}
 	\end{center}
 	\vspace*{-5mm}
 	\caption{Time table of Run 3.}
@@ -346,24 +377,18 @@ Note also that this run has AIT work by ASIAA --- alignment the MCS to the prime
 \begin{center}
 \begin{tabular}{c}
 \begin{minipage}{0.95\hsize}
-\paragraph{Run 4 : 6 days  (Figure \ref{fig:run4})}
+\paragraph{Run 4 : 5 days  (Figure \ref{fig:run4})}
 	\begin{itemize}
 	\item 2 days (nighttime) for P-10 : 
 	(1) 1st-pass distortion map
-	\item 0.4 day (daytime) for F-1 :  
-	(1) connecting Cable B to PFI and SpS (SM4)
-	\item 0.6 day (daytime) for F-2 :  
-	(1) confirmation of  the fiber identifications (SM4)
-	\item 1.5 days (1.0-day daytime and 0.5-day nighttime) for A-2: 
-	(1) PSF measurement through the entire system (all SMs)
-	\item 3.5 days (nighttime) for A-3: 
+	\item 3 days (nighttime) for A-3: 
 	(1) 2nd-pass distortion map
 	\end{itemize}
 \end{minipage} \\
 \begin{minipage}{0.8\hsize}
 	\begin{center}
 	\vspace*{5mm}
-	\includegraphics[width=121.5mm]{timetable_run4.eps}
+	\includegraphics[width=112mm]{timetable_run4.eps}
 	\end{center}
 	\vspace*{-5mm}
 	\caption{Time table of Run 4.}
@@ -381,18 +406,22 @@ Note also that this run has AIT work by ASIAA --- alignment the MCS to the prime
 \begin{center}
 \begin{tabular}{c}
 \begin{minipage}{0.95\hsize}
-\paragraph{Run 5 : 6 days  (Figure \ref{fig:run5})}
+\paragraph{Run 5 : 4 days  (Figure \ref{fig:run5})}
 	\begin{itemize}
-	\item 3 days (nighttime) for A-3:
+	\item 0.4 day (daytime) for F-1 :  
+	(1) connecting Cable B to PFI and SpS (SM4)
+	\item 0.6 day (daytime) for F-2 :  
+	(1) confirmation of  the fiber identifications (SM4)
+	\item 1.5 days (1.0-day daytime and 0.5-day nighttime) for A-2: 
+	(1) PSF measurement through the entire system (all SMs)
+	\item 3.5 days (nighttime) for A-3: 
 	(1) 2nd-pass distortion map
-	\item 3 day (dark-night) for A-4 :
-	(1) performance verification I
 	\end{itemize}
 \end{minipage} \\
 \begin{minipage}{0.8\hsize}
 	\begin{center}
 	\vspace*{5mm}
-	\includegraphics[width=121.5mm]{timetable_run5.eps}
+	\includegraphics[width=98mm]{timetable_run5.eps}
 	\end{center}
 	\vspace*{-5mm}
 	\caption{Time table of Run 5.}
@@ -409,18 +438,18 @@ Note also that this run has AIT work by ASIAA --- alignment the MCS to the prime
 \begin{center}
 \begin{tabular}{c}
 \begin{minipage}{0.95\hsize}
-\paragraph{Run 6 : 4 days  (Figure \ref{fig:run6})}
+\paragraph{Run 6 : 5 days  (Figure \ref{fig:run6})}
 	\begin{itemize}
-	\item 2 days (dark-night) for A-4 : 
+	\item 2 days (nighttime) for A-3:
+	(1) 2nd-pass distortion map
+	\item 3 day (dark-night) for A-4 :
 	(1) performance verification I
-	\item 2 days (dark-night) for A-5 :
-	(1) performance verification II (stabilization)
 	\end{itemize}
 \end{minipage} \\
 \begin{minipage}{0.8\hsize}
 	\begin{center}
 	\vspace*{5mm}
-	\includegraphics[width=94.5mm]{timetable_run6.eps}
+	\includegraphics[width=112mm]{timetable_run6.eps}
 	\end{center}
 	\vspace*{-5mm}
 	\caption{Time table of Run 6.}
@@ -431,13 +460,41 @@ Note also that this run has AIT work by ASIAA --- alignment the MCS to the prime
 \end{figure}
 
 %---------------------------------------------------
-% Run 7 and 8
+% Run 7
 %---------------------------------------------------
 \begin{figure}[!ht]
 \begin{center}
 \begin{tabular}{c}
 \begin{minipage}{0.95\hsize}
-\paragraph{Runs 7 and 8 : 4 days  (Figure \ref{fig:run7})}
+\paragraph{Run 7 : 4 days  (Figure \ref{fig:run7})}
+	\begin{itemize}
+	\item 2 days (dark-night) for A-4 : 
+	(1) performance verification I
+	\item 2 days (dark-night) for A-5 :
+	(1) performance verification II (stabilization)
+	\end{itemize}
+\end{minipage} \\
+\begin{minipage}{0.8\hsize}
+	\begin{center}
+	\vspace*{5mm}
+	\includegraphics[width=98mm]{timetable_run7.eps}
+	\end{center}
+	\vspace*{-5mm}
+	\caption{Time table of Run 7.}
+	\label{fig:run7}
+\end{minipage}
+\end{tabular}
+\end{center}
+\end{figure}
+
+%---------------------------------------------------
+% Run 8 and 9
+%---------------------------------------------------
+\begin{figure}[!ht]
+\begin{center}
+\begin{tabular}{c}
+\begin{minipage}{0.95\hsize}
+\paragraph{Runs 8 and 9 : 4 days  (Figure \ref{fig:run8})}
 	\begin{itemize}
 	\item 4 days (dark-night) for A-5 :
 	(1) performance verification II (stabilization)
@@ -446,11 +503,11 @@ Note also that this run has AIT work by ASIAA --- alignment the MCS to the prime
 \begin{minipage}{0.8\hsize}
 	\begin{center}
 	\vspace*{5mm}
-	\includegraphics[width=94.5mm]{timetable_run7.eps}
+	\includegraphics[width=98mm]{timetable_run8.eps}
 	\end{center}
 	\vspace*{-5mm}
-	\caption{Time table of Runs 7 and 8.}
-	\label{fig:run7}
+	\caption{Time table of Runs 8 and 9.}
+	\label{fig:run8}
 \end{minipage}
 \end{tabular}
 \end{center}
@@ -468,40 +525,46 @@ Expected days for commissioning.
 Note that Year/Month in column 2 are just roughly set assuming the latest schedule of each subsystems and that scientific operation will start in the S20B semester.}
 %\scriptsize
 \footnotesize
-\begin{tabular}{*{3}{c}|*{4}{c}}\label{tbl:CountDates} \\ \hline
-Run	 & Year/  &\#days & seq.	& daytime & night-sky  &  dark-sky\\
-	& Month	&	&	 & is OK & is needed  &  is needed  \\ \hline \hline
-1	& 2017/08		& 3*	& M1--3		& (1*)	& 0		& 0	\\
-	& --2019/02	& 		& M4			& 3		& 0		& 0	\\ \hline
-2	& 2019/02	& 7 (14**)	& P1--P3,P5	& 1 	& 0 	& 0	\\
-	&	&					& P4			& 0.5 	& 0 	& 0	\\
-	&	&					& P6  			& 0 	& 1.5 	& 0	\\
-	&	&					& P7  			& 0 	& 2.5 	& 0	\\
-	&	&					& P8  			& 1.5 	& 0 	& 0	\\
-	&	&					& P9  			& 0 	& 1.5 	& 0	\\
-	&	&					& F1 (SM1,2)	& 0.7 	& 0 	& 0	\\
-	&	&					& F2 (SM1,2)	& 1.8 	& 0 	& 0	\\
-	&	&					& A1 (SM1,2)	& 1.5 	& 0 	& 0	\\
-	&	&					& A2 (SM1,2)	& 0 	& 1.5 	& 0	\\ \hline
-3	& 2019/06	& 4 (7**)	& P11 			& 0 	& 4 	& 0	\\
-	&	&					& A1 (SM3,4)	& 1.5 	& 0 	& 0	\\
-	&	&					& A2 (SM1,2)	& 1.5 	& 0 	& 0	\\ \hline
-4	& 2019/09	& 6 (8**)	& P10			& 0		& 2 	& 0	\\
-	&	& 					& F1 (SM3,4)	& 0.4 	& 0 	& 0	\\
-	&	&					& F2 (SM3,4)	& 0.6 	& 0 	& 0	\\
-	&	&					& A2 (all SMs)	& 1.0 	& 0.5 	& 0	\\
-	&	&					& A3			& 0		& 3.5	& 0	\\ \hline
-5	& 2019/10	& 6			& A3			& 0		& 3		& 0	\\
-	&	&					& A4			& 0		& 0 	& 3	\\ \hline
-6	& 2019/12	& 4			& A4			& 0		& 0 	& 2\\
-	&	&					& A5			& 0		& 0 	& 2	\\ \hline
-7	& 2020/04	& 4			& A5			& 0		& 0 	& 4	\\ \hline
-8	& 2020/07	& 4			& A5			& 0		& 0 	& 4	\\ \hline \hline
-\multicolumn{2}{r}{in total}& 38 (50**) \\ \hline
+\begin{tabular}{*{3}{c}|*{3}{c}}\label{tbl:CountDates} \\ \hline
+Run	 & Year/Month  &\#days & seq.	& daytime & night (dark) \\ \hline \hline
+0	& S17B			& 0.5***	& P7(*)	& 0		& 0.5 (0.5)	\\ \hline
+1	& S18A			& 4		& M1--3		& (1**)	& 0	(0)	\\
+	& or	& 				& M4		& 3		& 0	(0)	\\ 
+	& S19B	& 				& ASIAA	& 0		& 4	(0)	\\ \hline
+2	& 2019/02	& 7***			& P1--P3,P5	& 1 	& 0 (0)	\\
+	&	&					& P4			& 0.5 	& 0 (0)	\\
+	&	&					& P6  			& 0 	& 1.5 (0)	\\
+	&	&					& P7  			& 0 	& 1.7 (0)	\\
+	&	&					& P8  			& 1.5 	& 0 (0)	\\
+	&	&					& P9  			& 0 	& 0.8 (0)	\\
+	&	&					& F1 (SM1,2,3)	& 0.7 	& 0 (0)	\\
+	&	&					& F2 (SM1,2,3)	& 1.8 	& 0 (0)	\\
+	&	&					& A1 (SM1,2)	& 1.5 	& 0 (0)	\\
+	&	&					& A2 (SM1,2,3)	& 0 	& 1.0 (0)	\\
+	&	& 		& Mitsubishi	& 0		& 2	(0)	\\ \hline
+3	& 2019/04	& 6 		& P7 			& 0 	& 0.8 (0)	\\
+	&	&					& P9  			& 0 	& 0.7 (0)	\\
+	&	&					& P10  			& 0 	& 4 (0)	\\
+	&	&					& A1 (SM3,4)	& 1.5 	& 0 (0)	\\
+	&	&					& A2 (SM1,2,3)	& 1.5 	& 0.5 (0)	\\ \hline
+4	& 2019/06	& 5 		& P10 			& 0 	& 2 (0)	\\
+	&	&					& A3 			& 0 	& 3 (0)	\\
+5	& 2019/08	& 4			& F1 (SM4)		& 0.4 	& 0 (0)	\\
+	&	&					& F2 (SM4)		& 0.6 	& 0 (0)	\\
+	&	&					& A2 (all SMs)	& 1.0 	& 0.5 (0)	\\
+	&	&					& A3			& 0		& 3.5 (0)	\\ \hline
+6	& 2019/10	& 5			& A3			& 0		& 2	(0)	\\
+	&	&					& A4			& 0		& 0 (3)	\\ \hline
+7	& 2019/12	& 4			& A4			& 0		& 0 (2)	\\
+	&	&					& A5			& 0		& 0 (2)	\\ \hline
+8	& 2020/03	& 4			& A5			& 0		& 0 (4)	\\ \hline
+9	& 2020/06	& 4			& A5			& 0		& 0 (4)	\\ \hline \hline
+\multicolumn{2}{r}{in total}& 41 (43.5***) \\ \hline
 \end{tabular}
 \\
-* telescope can be used for other instruments \\
-** day-time and night-time works are counted independently
+* Check algorithm at HSC engineering run. \\
+** Telescope can be used for other instruments \\
+*** The number combined with run 0 and Mitsubishi's work
 \end{center}
 \end{table}
 
