@@ -2,12 +2,13 @@
 \usepackage{ssn-format}
 \title{Data rate from reading out detectors}
 \author{PFS ICS Team}
-\date{2012--08--28}
+%\date{2012--08--28}
+\drafttrue
 \begin{document}
 
 \SSNID{00001}
 \SSNREV{001}
-\SSNCATEGORY{DCR, IIC}
+\SSNCATEGORY{ICS}
 \SSNChangeRecord{Rev.001 / First Release / 2012--08--28}
 \SSNReference{(none)}
 \SSNAttachment{(none)}
@@ -20,20 +21,26 @@
 To design computer hardware system including network connections for detector 
 system of PFS, we need to study how much data rate is assumed for the entire 
 system. 
-In this study report, we will summarize estimated data rates for detector 
-systems and perform some trade-off study of existing (consumer) 
-hardware system. 
+Estimated data rate for detectors over the entire PFS instrument is 
+summarized in this study report. 
 
+Note: In version 1, 'ideas for computer hardware system' was included in this 
+study note, to be used by further studies such as design of PFS network. 
+Designs of instrument control modules and their hardware have been developed 
+and (partly) implemented in other documents, these parts are removed from 
+version 2.
 
-\section{Operational condition and estimated data rate}
+\section{Detector operational condition and estimated data rate}
 
-\subsection{Operational condition}
+\subsection{Detector operational condition}
 
-Based on the CoDR Technical Document of the PFS project, 
-operational conditions are summarized as Table.~\ref{datarate-cond}.
+Operational conditions are summarized as Table.~\ref{datarate-cond} (science 
+detectors in SpS/xCU), and Table.~\ref{datarate-cond-other} (others
+\footnote{This lists only operational cameras, but excluding support cameras 
+for monitoring and/or surveillance whose data will not be archived as FITS.}).
 
 \begin{table}[htb]
-\caption{Operational conditions of detectors}
+\caption{Operational conditions of science detectors}
 \label{datarate-cond}
 \begin{center}
 \begin{tabular}{c||r|r|l}
@@ -43,7 +50,8 @@ operational conditions are summarized as Table.~\ref{datarate-cond}.
   Chip per dewar & 2 & 1 & chips / dewar \\
   Total dewars in system & 8 & 4 & dewars \\
   Readout channel & 4 & 32 & channels / chip \\
-  Readout speed & 75kHz & 300kHz & (1000 pixels / sec) \\
+  Readout speed & 75kHz & 100kHz & (1000 pixels / sec) \\
+  Readout per frame & 28 & 5.3 & sec \\
   \hline
   Datasize per chip & 16MB & 32MB & per chip \\
   Total datasize per frame & 256MB & 128MB & (all spectrograph) \\
@@ -51,17 +59,37 @@ operational conditions are summarized as Table.~\ref{datarate-cond}.
 \end{center}
 \end{table}
 
+\begin{table}[htb]
+\caption{Operational conditions of non-science detectors}
+\label{datarate-cond-other}
+\begin{center}
+\begin{tabular}{c||r|r|r|r|l}
+Name & Chip format & \# & MB/frame & Readout & Remarks \\
+\hline
+AGCC (AG Camera) & 1k sq. & 6 & 2MB & FT & typ. operation in 1 to 0.1 Hz \\
+FCC (Field Center Camera) & 250 sq. & 1 & 0.13MB & 44Hz & \\
+FVC (Fiber Viewing Camera) & 1k sq. & 1 & 2MB & (TBC) & \\
+\hline
+MCS (Metrology camera) & 50M pixel & 1 & 100MB & 1.1Hz & CMOS rolling shutter \\
+\end{tabular}
+\end{center}
+\end{table}
 
-\subsection{Estimated data rate for CCD}
+\subsection{Estimated data rate and operation conditions}
+
+\subsubsection{CCD (SpS/[BR]CU)}
 
 For CCD, since all readout will be destructive, we will readout only once 
 per exposure. This readout will occur just after its exposure.
 
 Total data size is 256MB per exposure which will be readout in 28.0 sec, 
-and estimated data rate is 73 Mbps in total (all spectrographs).
+and estimated data rate is 73 Mbps in total (all spectrographs) from SpS 
+switch to PFS storage. 
+Data transfer from PFS storage to Gen2 will occur right after FITS files are 
+finalized by SpS/[BR]CU, its total data volume is 256MB (2Gbits). 
 
 
-\subsection{Estimated data rate for IR detector}
+\subsubsection{IR detector (SpS/NCU)}
 
 For IR detector, we will use two methods: Fowler sampling, up-the ramp. 
 Still by data rate point of view, these two are the same -- we can concentrate 
@@ -70,54 +98,210 @@ finalizing as one data frame, though.
 
 The maximum data rate is one for up-the ramp sampling, which is continuous 
 data flow with the specified readout speed. 
-With the readout speed of 300 kHz, 9.6M pixels per sec per detctor will be 
-read, and this corresponds to data flow of 153.6 Mbps per detector. 
-In total (4 detectors in 4 spectrograph), required data bandwidth is 
-614 Mbps.
+With the readout speed of 100 kHz and using 32 channels, one NCU generates 
+51.2Mbps (6.4MB/s), and 5.76GB for 900sec exposure. 
 
-\subsection{Network connection for component control}
+Data transfer from SpS to PFS storage (at CB2F) will be \~{}200Mbps for one 
+stream from all spectrographs \footnote{PFS may have up to two stream for 
+each up-the-ramp data, one is for one FITS file per one full frame readout, 
+and another is for stacked FITS file over one exposure. This can make total 
+data transfer to be double over entire data readout during exposure.}. 
 
-From data rate point of view, required bandwidth of network connection for 
-detector system (and spectrograph system) is quite low amount comparing to 
-the other connections described in previous sections. 
-
-
-\section{Candidates of computer hardware system}
-
-\subsection{Network connection}
-
-Currently, since we have not yet fixed our control hardware topology design, 
-we cannot fix network connection requirement. 
-Since the most strict requirement on network connections will be lines 
-between the IR 3rd floor of the telescope dome and the conputer room at the 
-control building, this section will concentrate on this point. 
-
-Assuming direct 1Gbps fiber connection between readout electroncis system 
-and data storage computer, effective data rate will be 500Mbps or so per 
-connection. 
-For final images without up-ramp sampling of IR detectors, 
-data rate in total will be less than this. 
-To include up-ramp sampling of 614Mbps, 
-we might be better to have multiple (at least two) 1Gbps fiber connection 
-considering safety buffer and worst case, such as having one 1Gbps fiber 
-connection per two spectrographs and two in total. 
-Since up-ramp data flow is only during exposure, we can share these connections 
-for CCD readout. 
-
-
-\subsection{Temporary storage}
-
-For storage side, (continuous writting of) 0.6Gbps is not a problem. 
-We can have many options, including
-
+Data transfer from PFS storage to Gen2 has two parts: 
 \begin{itemize}
-  \item Local temporary storage (SSD etc.) per each data storage computer
-  \item Large and high performance data storage server shared by entire system
+  \item On the fly FITS file transfer with single up-the-ramp frame during 
+    exposure, for health check of instrument during exposure
+  \item FITS file for entire exposure with multiple (or all of) up-the-ramp 
+    frame transferred after exposure finished, for archive of science data
 \end{itemize}
 
-To make the final hardware design (or its proposal), 
-we need to perform trade-off studies more in detail, including further back-end 
-systems such as a FITS handling system. 
+For 1st part, a set of FITS files (4 files) of single up-the-ramp readout 
+from all 4 NCUs will be transferred, and their total data size is 128MB 
+(or 256MB if PFS handles real pixels and references in one pack). Minimum 
+separation between two transfer is 5.3sec which is a time for full frame 
+readout, but interval of sending to Gen2 is not defined for real operation. 
+128MB can be transferred about 1sec with 1Gbps connection. 
+
+For 2nd part, data size to be transferred depends on exposure time (total 
+number of frames from up-the-ramp) and sampling rate (all up-the-ramp frame 
+or picked up). For typical exposure time of 900 sec and all up-the-ramp frame, 
+total data size (of 4 FITS files) is 23GB (184Gbits) for all spectrograph 
+modules. 
+
+\subsubsection{AGCC --- AG camera}
+
+AG camera control computer is at CB2F with dedicated connection of PCIe bus 
+extender to six AG cameras at PFI Cobra bench. No load to ethernet connection 
+between CB2F and PFI for AG camera data transfer. 
+Maximum data rate from six AGCC to PFS storage through AG camera control 
+computer at CB2F, which flows only on PFS network switch at CB2F, 
+is \~{}100Mbps (2MB x6 in 1Hz), 
+for assumed normal operation of 2 cameras in 1Hz (for AG) and 1 camera in 
+0.1Hz (for focusing) data rate is \~{}34Mbps. 
+
+During AG running, two image transfer will run: 
+\begin{itemize}
+  \item Image to V-LAN, 512 pixels sq. with 16bit (0.5MB each) with maximum 1Hz.
+    For caching (data transfer frequency to V-LAN could be different from one 
+    of AG camera readout) and debug (to be checked later) purpose, data sent 
+    to V-LAN could be saved into PFS storage. 
+  \item FITS file to Gen2 for operational display purpose but not to be 
+    archived. This will be just transfer FITS files saved by AGCC. 
+\end{itemize}
+
+PFS is planning to archive guide star images of auto guiding, but details are 
+not fixed yet. Maximum data size for assumed normal operation (2 cameras in 
+1Hz for AG and 1 camera in 0.1Hz for focusing) and typical exposure time of 
+900sec is \~{}3.8GB. 
+
+
+\subsubsection{FCC --- Field center camera}
+
+This camera is assumed to be used only on commissioning or special case of 
+instrument health check.
+This camera will not generate traffic during normal operation. 
+
+
+\subsubsection{FVC --- Fiber viewing camera}
+
+This camera is mounted at backside of fixed fiducial fibers in parallel to 
+fixed fiducial back illuminator lamp system, and looks sky through fixed 
+fiducial fibers, which is assumed to be used only on commissioning or special 
+case of instrument health check. 
+This camera will not generate traffic during normal operation. 
+
+\subsubsection{MCS --- Metrology camera}
+
+Metrology camera detector is operated in a rolling shutter mode of CMOS image 
+sensor. As a system, MCS (Metrology camera system) has a mechanical shutter 
+to control exposure time, and will stack into one output (single image is 
+100MB, not yet defined for stacked image) for one exposure. 
+Control computer of this camera is at Cs container, and images will be saved 
+into local storage of the control computer. MCS is used during Cobra 
+configuration between exposures (for normal operation), with around 5 to 10 sec 
+interval and upto 10 times per configuration. 
+
+The last exposure is assumed to be transferred to Gen2 through PFS storage, 
+but not yet defined for other exposures. 
+
+
+\section{Estmated data rate for operation modes}
+
+This section is to summarize estimated data rate among PFS subsystems, PFS 
+CB2F NFS server, and Gen2 by operation modes, such as on exposure, on CCD 
+readout. 
+PFS iSCSI storage server and NFS server will be installed into the same rack 
+at CB2F, and will be connected through the same network switch (if we use 
+ethernet iSCSI but not FC connection option
+\footnote{Selection is just to replace SFP inserted into the PFS storage 
+server.}
+), their configurations are relatively easy to be changed than other 
+connections like CB2F to PFS subsystems. 
+In this section, data flow to the PFS NFS server is taken but not to 
+PFS iSCSI storage server (through PFS NFS server). 
+
+\subsection{Possible data flow by each operation mode}
+
+Between two exposure, PFS has two modes for its operation -- execute next 
+exposure with or without Cobra configuration
+\footnote{There could be one another mode to slew telescope to new field 
+before Cobra configuration, but not much change on data flow except for MCS 
+data.}. Former is normal operation, and latter is used especially for some 
+survey program with 2x 450sec exposure for total 900sec integration per one 
+target assignment. 
+When next exposure is commanded without Cobra configuration, MCS will not be 
+used and no data flow from MCS happens, and AG camera operation continues 
+over between two exposures. 
+Also data stream to Gen2 from PFS storage continues after next exposure 
+starts, CCD data transfer will be in parallel for (most of) all, and 
+IR up-the-ramp data (11.5GB for 450sec exposure) will not finished in 28sec 
+(11.5GB in 28sec is \~{}3.3Gbps). 
+
+Once exposure ends with shutter closed, following operations are executed 
+in parallel:
+\begin{itemize}
+  \item FITS files for IR detectors are created and starts sending to Gen2
+    (continuous)
+  \item CCD readout (for first 28sec), and sending to Gen2 follows
+  \item Cobra configuration (configuration takes \~{}100sec, MCS image for 
+    final assignment taken after configuration)
+\end{itemize}
+
+If there is no image data flow from Cs (MCS) for first 28sec after shutter 
+closed
+\footnote{As for now, this assumption is true that PFS assumes to send only 
+the final image to PFS storage during operation.}, 
+data flow configuration is the same for all operation types except for AG. 
+
+\subsection{Summary}
+
+Estimated data rate for operation modes are summarized as 
+Table.~\ref{datarate-modes}, taking typical exposure time of 900sec. 
+Data rate is shown in two types, one is in total size for transfer between 
+two storages which can vary by network conditions and configurations, 
+one is in Mbps for fixed data outputs. 
+At the top of table, data flow origin and destination is listed, 
+'CB2F' means PFS NFS server for storage operation, 
+and 'PFI to CB2F' means PFI control computer at CB2F to 'CB2F'.
+Data rate for each flow is shown in a column of connection (at the top of 
+table). 
+
+
+\begin{table}[htb]
+\caption{Estimated data rate for operation modes}
+\label{datarate-modes}
+\begin{center}
+\begin{tabular}{c||r|r|r||r|r||l}
+     & \multicolumn{3}{c||}{To CB2F} & \multicolumn{2}{c||}{From CB2F} &  \\
+Name & SpS & Cs & PFI & Gen2 & V-LAN & Remarks \\
+\hline
+\hline
+\multicolumn{7}{c}{During exposure} \\
+\hline
+IR up-the-ramp & 200Mbps & -- & -- & $<$ 200Mbps & -- & To Gen2 for monitoring \\
+AG & -- & -- & 34Mbps & $<$ 30Mbps & -- & To Gen2 for monitoring \\
+V-LAN & -- & -- & -- & -- & 0.5Mbps & \\
+(Science data) & -- & -- & -- & ($<$ 13GB) & -- & (for without Cobra configuration) \\
+\hline
+Total & 200Mbps & -- & 34Mbps & $<$ 230Mbps & 0.5Mbps &  \\
+\hline
+\hline
+\multicolumn{7}{c}{First 28sec after exposure (shutter closed) with Cobra 
+  configuration} \\
+\hline
+IR data & -- & -- & -- & (23GB) & -- & Size depends on exposure time \\
+AG data & -- & -- & -- & (3.8GB) & -- & Size depends on exposure time \\
+CCD readout & 73Mbps & -- & -- & -- & -- & \\
+\hline
+Total & 73Mbps & -- & -- & (26.8GB) & -- &  \\
+\hline
+\hline
+\multicolumn{7}{c}{First 28sec after exposure (shutter closed) without Cobra 
+  configuration} \\
+\hline
+IR data & -- & -- & -- & (23GB) & -- & Size depends on exposure time \\
+AG data & -- & -- & -- & (3.8GB) & -- & Size depends on exposure time \\
+CCD readout & 73Mbps & -- & -- & -- & -- & \\
+AG & -- & -- & 34Mbps & $<$ 30Mbps & -- & To Gen2 for monitoring \\
+V-LAN & -- & -- & -- & -- & 0.5Mbps & \\
+\hline
+Total & 73Mbps & -- & 34Mbps & (see above) & 0.5Mbps &  \\
+\hline
+\hline
+\multicolumn{7}{c}{After CCD readout finished before shutter open} \\
+\hline
+IR data & -- & -- & -- & (23GB) & -- & Size depends on exposure time \\
+AG data & -- & -- & -- & (3.8GB) & -- & Size depends on exposure time \\
+MCS data & -- & (100MB) & -- & (100MB) & -- & \\
+\hline
+Total & -- & (100MB) & -- & (26.9GB) & -- &  \\
+\hline
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+
 
 
 \end{document}
