@@ -64,4 +64,7 @@ System Engineering related document by IPMU team.
 24. FITS file generation flow
 25. Collision detection during Cobra configuration
 26. Cobra collision cases
+27. (TradeStudy) Cobra operational data (spot measurement, target) handling on MHS or DB
+28. ics_dnsmasq (ICS DHCP/DNS server) organization and item registration procedure
+29. (Material for review) PFS ICS infrastructure design and performance verification
 
