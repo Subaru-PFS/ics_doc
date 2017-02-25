@@ -24,15 +24,18 @@ These values are cited from the CDR slides ({\tt MCS camera system.pdf}).
 	\end{itemize}
 \end{itemize}
 
-After the basic functions are confirmed to work, the calibration data (flat, bias and, dark?:TBC) of CMOS sensor shall be obtained.
+After the basic functions are confirmed to work, the calibration data (flat, bias and, dark?:TBC) of CMOS sensor shall be obtained, if they are not taken in the step of \ref{secflow:MCSoff}.
 The stability of calibration data can be examined using the data in multiple runs.
 
-By sending command from gen2, we will also confirm communication between MCS and Gen2.
+\paragraph{Designated Tool for this step}
+We will prepare commands to check MCS functions, the same as \ref{secflow:MCSoff}.
 
-\redtext{
-According to the MCS delta-CDR, the flat screen is attached MCS flange for obtaining flat-fielding, and 3--4 LEDs are attached near MCS-M1 module.
-On the other hand, because the Cassegrain stand-by flange has a space for light source on the top, the calibration data can be obtained during stand-by (TBD).
-}
+%By sending command from gen2, we will also confirm communication between MCS and Gen2.
+
+%\redtext{
+%According to the MCS delta-CDR, the flat screen is attached MCS flange for obtaining flat-fielding, and 3--4 LEDs are attached near MCS-M1 module.
+%On the other hand, because the Cassegrain stand-by flange has a space for light source on the top, the calibration data can be obtained during stand-by (TBD).
+%}
 
 \begin{itembox}[l]{\suctitle{Success Criteria}}
 All MCS basic functions are verified --- power, CMOS sensor, telemetry.  \\
