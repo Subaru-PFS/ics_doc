@@ -20,7 +20,8 @@ We also check that the images is sent to VLAN and Gen2.
 
 The following functions of PFI are validated using MCS by taking the fiber image.
 \begin{itemize}
-\item Fiducial fiber illuminator can be  turned on/off \footnote{If SpS and Cable B are ready, we can also check back-illumination of science fibers.}
+\item Fiducial fiber illuminator can be  turned on/off 
+\item Check back-illumination of science fibers (If SpS and Cable B are ready\footnote{As of January 2017, three Spectrograph Modules and Cable B will be ready before PFI delivery. Therefore, back-illumination function of these three SMs are checked at run 2. The function of the last SM will be tested at run 5 after its delivery. Besides, if we have time, we can regulate the brightness of fiducial fibers and science fibers, which will be done in the step \ref{secflow:CobraCal}.})
 %\item science fibre back illuminator (after SpS and Cable B are installed): turn on/off, brightness (normal mode and strobe mode), pulsed light (10ms period and 10\% amplitude)
 \item MPS can move fiber positioners (Cobras) move and read their status.
 At this point, because Cobras parameters are not calibrated (\ref{secflow:CobraCal}), we should move them slightly to avoid collision.
