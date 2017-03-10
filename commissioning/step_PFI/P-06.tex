@@ -2,7 +2,6 @@
 \subsubsection{Validation of Auto Guide Cameras [Nighttime]}\label{secflow:AGCfunc}
 \milestone{AGCs acquire star image for the first time, and the telescope is guided using AGCs for the first time.}
 
-
 Six Auto Guide cameras on the edge of FoV are used for many purposes:
 \begin{enumerate}
 \item Acquisition and Guidance of the field 
@@ -12,32 +11,56 @@ Six Auto Guide cameras on the edge of FoV are used for many purposes:
 \item Alignment of WFC$+$PFI with the prime mirror
 \end{enumerate}
 
-To enable these functions, in this phase we validate basic functions of AG cameras --- (1) focusing, (2) pixel scale and orientation of each sensor on the sky, and (3) auto guiding, that is, measuring the centroid and sending position error to the telescope.
+To enable these functions, in this process we validate basic functions of AG cameras --- (1) focusing, (2) pixel scale and orientation of each sensor on the sky, and (3) auto guiding, that is, measuring the centroid and sending position error to the telescope.
 
 \paragraph{Focusing}
 Firstly, we seek on-focus position.
-We slew telescope to a bright stars and let them into the AG camera FoV.
-The we take AG camera image and seek on-focus position.
-AG cameras has step of 300um, with which they can take in-focus/ out-focus image simultaneously. 
-By measuring the size of these spots, seek focus position.
-The focusing procedure is proposed by Jim Gunn (PFI:336), to derive $\alpha$ parameter.
-The parameter shall be calculated using simulated data (TBC), and in the commissioning sequence, we shall optimize the parameter $\alpha$.
-If 4 out of 6 AGC can take pair of stars (in/out), the error of estimation of focus seems $\sim$10um (Jim's document: PFI:336)
+The focusing procedure is proposed by Jim Gunn (PFI:336).
+With a glass plate covering half area of the detector, AG camera has two focus positions.
+Hence, the cameras can take out-focus/ in-focus image simultaneously, when the PFI is at focus.
+Measuring the spot size of stars at the area with and without glass plate, $s_+$ and $s_-$, we calculate focus positions.
+Namely, $\delta f = (s_+^2 - s_-^2)/(4 \alpha \Delta)$, where $\Delta$ is 150 um from the current design.
+The parameter $\alpha$ shall be calculated using simulated data (TBC), and in the commissioning sequence, we shall optimize the parameter $\alpha$.
+If 4 out of 6 cameras can take pair of stars (in/out), the error of estimation of focus seems $\sim$10um (Jim's document: PFI:336).
+
+To determine $\alpha$, we 
+\begin{enumerate}
+\item Slew the telescope to a given field.
+\item Seek on-focus position changing $z$ direction. 
+Here either area with or without position is used.
+\item Move focus position by 1.40 mm, then measure spot sizes ($s_+$ and $s_-$).
+In the current design, AG camera detectors locate 1.40mm back-ward from the best position of scientific fibers (see reference for {\tt REQ-SYS-1390}).
+\item Repeating step 1.--3. at a various telescope position, derive $\alpha$.
+\item After deriving $\alpha$, slew telescope to a given field, and seek focus position using AG camera.
+Changing the focus position around on-focus position, estimate position accuracy.
+\end{enumerate}
+
+Assuming 10-sec exposure, it will take$\sim$ 10 minutes to execute step 1.--3. for a given field.
+Here we set 7 different focus positions.
+The same number is used to measuring the focusing accuracy (step 4.).
+If we visit three fields every 15$\degree$ from El.=30$\degree$ to E.l=75$\degree$ to derive $\alpha$, it will take 120 minutes.
+Another 40 minutes are needed to measure focusing accuracy.
+Therefore, $\sim$ 3 hours are required for this step, including time for analysis.
+%We slew telescope to a bright stars and let them into the AG camera FoV.
 
 \paragraph{Pixel scale and orientation on the sky}
-Secondary, we measure pixel scale and orientation of the AGCs.
-We slew the telescope to the star clusters, and measure the pixel scale by the astrometry of stars on sensors.
-We then check the orientation of the x/y direction, putting slight offset on the telescope in R.A and Dec. direction individually.
+Secondary, we measure pixel scale and orientation of the AGCs in the following sequence.
+Because AG cameras locates every 60$\degree$ , we have to measure the orientation individually (see below).
+
+\begin{enumerate}
+\item Slew the telescope to the star clusters, and measure the pixel scale by the astrometry of stars on sensors.
+\item Put slight offset on the telescope in R.A and Dec. direction individually, and check the orientation of the x/y direction.
 (And we can also check pixel scale by comparing two shifted images.)
+\end{enumerate}
 The derived pixel scale and orientations are implemented to the software module for acquisition and guidance.
 
 Assuming that it takes 5 min for one exposure from slewing telescope to acquiring images, 
-it takes 5 x 3 (position) x 6 (sets) = 90 min in total.
-Here, 3 positions are needed  to measure the x/y  direction: one is the origin and the others are with offset of either R.A or Dec..
+it takes 5 x 4 (position) x 6 (sets) = 120 min in total.
+Here, 4 positions are needed  to measure the x/y  direction: the origin and with offset of either R.A or Dec..
 To measure the direction easily, we will move InR so a given AGC as to have PA of 0 degree.
-therefore 6 sets are needed.
-If there are any fields for the two opposite AG cameras to have enough number of stars, we can reduce to 3 sets.
-Including the time to execute astrometry and calibration, 120min=2hours are needed to this test.
+Therefore 6 sets are needed.
+Note that if there are any fields for the two opposite AG cameras to have enough number of stars, we can reduce to 3 sets.
+Including the time to execute astrometry and calibration, 150 minutes = 2.5 hours are needed to this test.
 
 %%%%%%%%%%%%%%%%
 
@@ -45,12 +68,15 @@ Including the time to execute astrometry and calibration, 120min=2hours are need
 Finally, we validate the AGC functions as the guiding and confirm that the tracking error meets the requirement \redtext{(How much?)}.
 For auto guiding, one or two AG camera are used to measure the position error of the telescope, and another camera is used to measure focusing.
 
-We slew telescope to a given field, and execute Acquisition and Guidance sequence --- measure the position of the star on Ag cameras, calculate position error (dRA, dDec) and d(InR), send telescope these errors, and correct the position.
-Then we start auto guiding --- measure the position of the star on Ag cameras, calculate position error (dRA, dDec) [and d(InR)], send telescope these errors.
+Validation is done following standard procedure for Acquisition and Guidance and Auto Guide:
+\begin{enumerate}
+\item Slew telescope to a given field
+\item Execute Acquisition and Guidance sequence --- measure the position of the star on AG cameras, calculate position error (dRA, dDec) and d(InR), send telescope these errors, and correct the position.
+\item Start Auto Guiding --- measure the position of the star on Ag cameras, calculate position error (dRA, dDec) [and d(InR)], send telescope these errors.
 At the same time, some AG camera measures focus position.
 Focus should be corrected if it gets out-focus, but threshold and frequency is optimized during the commissioning.
-We measure the guiding error.
-
+\item Keeping guiding for a couple of minutes, measure the guiding error.
+\end{enumerate}
 %We check that the images is sent to VLAN and Gen2.
 
 %Because commissioning sequences in PFI don't need long-time exposures, the tracking errors on longer timescale ($>$ 10 minutes) shall be checked in  \ref{secflow:PV1}
@@ -63,6 +89,12 @@ Note that we can also validate auto guiding in later phases and as mentioned abo
 \smallskip
 
 Because in this sequence we have star image on AGCs  and control the telescope accordingly, we can validate communication between Gen2/MLP1 and MHS/AGCC.
+
+\paragraph{Designated Tool for This Step}
+Spot size and spot position are measured by ICS module (Auto Guide Camera Controler).
+Using these values, a script is needed for seeking on-focus position using either in-focus or out-focus area.
+Also, a script to measure the orientation of the camera is needed.
+Astrometry should be done using specified script.
 
 \begin{itembox}[l]{\suctitle{Success Criteria}}
 Acquisition and Guidance, focusing, and Auto Guiding can be executed using AGCs.
