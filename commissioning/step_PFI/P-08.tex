@@ -1,31 +1,44 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Refine of the PFI -- MCS relation [Daytime]}\label{secflow:mcs2f3c}
-After the alignment of WFC with the primary mirror is confirmed at a given telescope position, we confirm and refine PFI--MCS relation using fiducial fibers in this sequence (see also section \ref{sec:coord_calib}).
+Once the alignment of WFC with the primary mirror is confirmed at a given telescope position (\ref{secflow:WFCTiltShift}), we can confirm and refine PFI--MCS relation using fiducial fibers in this sequence (see also section \ref{sec:coord_calib}).
 
-Prior to the integration, the Focal Plane from the viewpoint of MCS (PFI--MCS relation) has been calculated with ZEMAX, using the WFC as-built model.
-Using the ZEMAX calculation, we derive the form of relation in advance.
+Prior to the integration, the focal plane from the viewpoint of MCS (F3C--MCSC relation) has been calculated with ZEMAX, using the WFC as-built model.
+%Using the ZEMAX calculation, we derive the form of relation in advance
 %This relation can be predicted by fitting the relation with a given function.
 \redtext{(the function form: TBD)}
+Using this formula, we calculate the positions of fixed fiducial fibers on F3C.
 
-In this sequence, we refine the position of the fixed fiducial fibers on F3C.
+The physical positions of fixed fiducial fibers on focal plane, on the other hand, will be measured during the PFI I\&T process at ASIAA before shipment.
+By comparing derived positions with the physical positions, we refine the position of the fixed fiducial fibers on F3C.
+
+We will carry out this process as follows:
 %At the beginning of this sequence, we use this function.
-We take the images of back-lit fixed fiducial fibers with MCS, and transform the centroid on MCSC to F3C.
-The physical positions of fixed fiducial fibers on focal plane, on the other hand, are measured during I\&T at ASIAA before shipment.
-We compare those two positions and check the consistency.
+\begin{enumerate}
+\item Take the images of back-lit fixed fiducial fibers with MCS, and transform the centroid on MCSC to F3C.
+\item Compare measured fixed fiducial fiber positions with physical positions.
+Here, we aim at getting these positions consistent with each other by 10 um RMS (TBC).
+If the positions of fixed fiducial fibers are consistent between F3C and physical position, the position on F3C are registered.
+The positions with terrible discrepancy shall be excluded from F3C.
+\end{enumerate}
 %the relation between fiber position on PFI ($x_{PFI}, y_{PFI}$) and on MCS ($x_{MCS}, y_{MCS}$).
 %If the transformed positions is different from the original ones on F3C, the function shall be improved.
 %We shall derive the PFI--MCS relation at various El. and ROA in order to check the dependency on them, and minimize the error of the function.
 
-If the positions of fixed fiducial fibers are consistent between F3C and physical position, the position on F3C are registered.
-The positions with terrible discrepancy shall be excluded from F3C.
 %The improved PFI--MCS relations are sent to coordinate transformation system as MCS--F3C transformation function.
 At this point, the transforming function from the MCS coordinate to the F3C coordinate is defined.
+If we take $\sim$ 10--20 images to measure fixed fiducial fiber position on F3C, $\sim$15minutes  is quite enough. 
+Including comparing positions, updating the coordinate transformation (and hence softwares), 1 day is enough for this process.
 
 Once MCS-F3C transformation is confirmed, MPS can send command for moving the Cobras to dot position.
 We verify this command, by taking the images with the fibers on-/off- dots after the Cobra calibration \ref{secflow:CobraCal}.
 
+\paragraph{Designated Tool for This Process}
+A tool for plotting physical positions and F3C positions, to compare them easily.
+Centroids on F3C will be derived in the standard way for coordinates transformation (by Fiber Positioner Sequencer).
+
 \begin{itembox}[l]{\suctitle{Success Criteria}}
 PFI--MCS relation is calibrated and MCSC--F3C transformation is confirmed. \\
+Fixed fiducial fibers position on F3C is consistent with physical position by 10 um RMS (TBC), 
 %MPS command for dot position is validated.
 
 \bluetext{Required long time to analyze the data?: No. \\
