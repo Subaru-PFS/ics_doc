@@ -1,26 +1,49 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Confirmation of Fibre-Slit Relationship [Daytime]}\label{secflow:FibID}
 
-In this step, we check fibre-slit relationship.
+In this process, we check fibre-slit relationship.
 It is defined in e.g. \\
- http://sumire.pbworks.com/w/file/76743299/FiberMapping.pdf .
+ {\tt http://sumire.pbworks.com/w/file/76743299/FiberMapping.pdf}.
+There are four cables connecting PFI and SpS (Cable B), each of which deliver lights to four spectrograph module.
 
-Firstly, we move all fibers to be obscured by the dots.
-Then move each fiber out of the dot, take back-illuminated fiber image using MCS and identify it.
-We identify position on the spectrograph, on the other hand, by taking a spectra of continuum lamp (or dome light).
-%We take fiber spectra by SpS and image by MCS under two configurations: with and without hidden by dot.
+The ID of Cobra positioner and position on the Spectrgraph detectors is checked by hiding a given fiber by the field element dot. 
+The detailed procedure is as follows:
+\begin{enumerate}
+\item Move all fibers out of the dots.
+\item Back-illuminate fibers by each Spectrograph Module, and take the MCS image.
+At this point, we check the fiber mapping in unit of Spectrograph Module. 
+On the other hand, take flat image.
+In this step, we have four MCS image and four SpS images with all fibers illuminated (Images set A).
+\item Move given two fibers ($i, j$) to be obscured by dots, and take MCS image and SpS image (Images set B).
+\item Move one of these two fibers ($j$) out of the dot and another fiber ($k$) onto the dot. 
+Take MCS image and SpS image (Images set C).
+\item Comparing image sets A, B, and C, identify three fibers.
+Fiber $i$ is hidden for both B and C, $j$ is hidden for B, and $k$ is hidden for C.
+\item Repeat 3.--5. for other three fibers ($i', j', k'$).
+\end{enumerate} 
+If the relationship is different than the expected one, update the relationship.
+It seems simpler to modify the position on the camera, fixing the positioner ID.
+
+There are 2394 fibers in total, among which 600 fibers are assigned to SM 1 and 2 each, and 597 fibers to SM 3 and 4.
+Hence, 200 or 199 series of the image sets B,C are required. 
+(Image set A is shared for all fibers.)
+We can check fibers for different modules , once we confirmed their IDs in unit of SMs (in step 2.).
+
+Assuming that it will take $\sim$ 3 minues to get a series of image sets, 1 day is required for this process.
+Because SMs other than SM4 will be available at run 2, another 1 day will be needed at run 5.
 
 Note that we will move cobra to dots before calibration, but it should be safe considering that the position will have been calibrated during I\&T at ASIAA\footnote{If the accuracy of calibration will be poor and is risky to move positioners before calibration, we disconnect the Cable B and A, and check identification by illuminating each holes.}.
 
 %We illuminate individual fibers at both female and male gang connectors (connector of cables A and B) and see the position of the fiber on camera and Cobra.
 %The position on the camera is measured by taking images by SpS, while the positions on cobra is measured by MCS.
 
-If the relationship is different than the expected one, update the relationship.
-It seems simpler to modify the position on the camera, fixing the positioner ID.
 %Given that the coordinate system (VMCS) should use cobra IDs and that it would be more complicated to update them, it is rather simple to update IDs on SMs.
 %(That is, Cobra IDs should be fixed. )
 
+\paragraph{Designated Tool for This Process}
+Nothing.
+At present, it is planned to simply subtract the images to find which fiber is hidden.
 
 \begin{itembox}[l]{\suctitle{Success Criteria}}
-Fibre position on Cobra and PFI is confirmed
+Fiber positions on PFI and SpS are confirmed.
 \end{itembox}
