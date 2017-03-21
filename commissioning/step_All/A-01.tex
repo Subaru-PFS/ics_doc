@@ -1,5 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Characterization of PSF and Spectral Distribution on the detectors [Daytime/Nighttime]}\label{secflow:PSFchar}
+\subsubsection{Characterization of PSF and Spectral Distribution [Daytime/Nighttime]}\label{secflow:PSFchar}
 
 \milestone{The light is delivered from the primary mirror to the detectors for the first time.}
 
@@ -19,6 +19,7 @@ As soon as PFS can deliver light from the primary mirror to the Spectrograph det
 As of the writing (June 2016), it can be done during PFI check on Telescope (\ref{secflow:PFIon}), because PFI, Cable B and two SMs will be delivered.
 In order to look into the PSF, we shall dithered flat as well.
 Dark and bias data is needed for calibration.
+Check wavelength resolution, wavelength coverage for all fibers.
 
 Once Cobra calibration is carried out, sparse arc and flat shall be taken in order to look into the PSF wing.
 How sparse is TBD, but we can estimate AIT data at LAM.
@@ -63,9 +64,9 @@ We shall take images while Cobras are moving.
 
 \bigskip
 
-During the commissioning phase, SMs 1 and 2 will be delivered ahead of the rest SMs.
-Then we can repeat the same test for the first two SMs.
-Alternatively, if we can characterize PSF well for the first SMs, we can limit the PSF test for the last SMs, in order to minimize the telescope time.
+During the commissioning phase, SMs 1, 2, and 3 will be delivered ahead of the delivery of PFI.
+Therefore, we can repeat the same test for the first three SMs when SM4 will be tested.
+Alternatively, if we can characterize PSF well for the first SMs, we can limit the PSF test for the last SM, in order to minimize the telescope time.
 
 In either case, the test using sky shall be limited, for example
 \begin{itemize}
@@ -74,8 +75,12 @@ In either case, the test using sky shall be limited, for example
 \end{itemize}
 In this case, it will take 0.5 hours for either arc or continuum data.
 
-\redtext{Measure wavelength resolution, wavelength coverage. 
-Sequence \ref{secflow:PSFchar} can be skipped at least wavelength resolution and coverage for SM3,4, which will be ready in August 2018.}
+%\redtext{Measure wavelength resolution, wavelength coverage. 
+%Sequence \ref{secflow:PSFchar} can be skipped at least wavelength resolution and coverage for SM3,4, which will be ready in August 2018.}
+
+\paragraph{Designated Tool fot This Process}
+Detailed analysis will be done by 2D-DRP team (Princeton).
+For PFS commissioning, a tool for measure FWHM is needed.
 
 \begin{itembox}[l]{\suctitle{Success Criteria}}
 The dependency of PSF and spectral distribution on Telescope elevation and RoA is measured.
