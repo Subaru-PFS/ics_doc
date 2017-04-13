@@ -41,12 +41,21 @@ In the 'ics_dnsmasq' repository, we SHALL place configuration files as:
 
 Any other directory or file with configurations SHALL NOT be added or 
 placed into the master branch of 'ics_dnsmasq' repository. 
+As in `Global configurations`_ section, it is possible to add new separated 
+file for groups of configurations, such as PXE as DHCP option for flagged 
+hosts, but such file SHALL be added in the list above before added into 
+the `ics_dnsmasq` repository. 
 
 'target' name used for configuration files SHALL be based on acronyms listed 
 in the product tree of the PFS, such as PFI (Prime Focus Instrument), MCS 
 (Metrology Camera System), or RCU (Red Camera Unit), with number(s) attached 
 for identifying multiple instances. Commonly used shorter names like r1 for 
 RCU1 are NOT RECOMMENDED, not to confuse team members. 
+Considering replacements by maintenance, especially for hardware replacement 
+consisted with several hardwares and control boxes, it is RECOMMENDED to 
+break configurations into files by domains to be used, such as a set of 
+control computers and hardwares for cameras (like FCC) in PFI, or a piepan of 
+each cryostat in SpS. 
 
 Files in two directories, `host-mac` and `hosts`, SHALL be the same file name 
 for the same target. Like, for host `mac` with `ab:cc:ef:01:23:45` and 
@@ -143,7 +152,8 @@ Following configurations MAY be included in branches (also for `master`).
     without this configuration). 
 
 Following configurations SHOULD be included when PXE/TFTP is required for 
-operation, such as SpS/BEE. 
+operation, such as SpS/BEE. These configurations MAY be added as a separated 
+configuration file at the top level directory in the `ics_dnsmasq` repository. 
 
 - `dhcp-option-force=xxx`
 - `dhcp-boot=tag:pxe,pxelinux.0`
