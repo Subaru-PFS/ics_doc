@@ -90,9 +90,12 @@ be included in other branches. `xxx` in configurations SHALL be replaced with
 real values. 
 
 - `dnsmasq` configuration files' definitions
+
   - `addn-hosts=/etc/dnsmasq.d/hosts`
   - `dhcp-hostsfile=/etc/dnsmasq.d/host-mac`
+
 - DNS
+
   - `local-ttl=900`: `local-ttl` is a configuration of TTL (in seconds) in 
     reply from dnsmasq service and used for cache at requester. Default is `0` 
     which means requester (DNS client) SHOULD NOT cache replies. This is to 
@@ -102,7 +105,9 @@ real values.
   - `domain-needed`: This is required not to break upstream DNS server.
   - `txt-record=xxx,xxx`: This txt record is REQUIRED for operation of FITS 
     name building (as for now). 
+
 - DHCP
+
   - `log-dhcp`: This makes dnsmasq to log all DHCP requests and replies, which 
     is useful for issue handling and trouble shooting. 
   - `domain=xxx`: for default domain used in the site
@@ -117,6 +122,7 @@ real values.
 Following configurations MAY be included in branches (also for `master`). 
 
 - DNS
+
   - `log-queries`: This makes dnsmasq to log all DNS queries into a log file, 
     but most of logs are useless. 
   - `bogus-priv`: In production, IP address range is not in private IP ranges, 
@@ -125,7 +131,9 @@ Following configurations MAY be included in branches (also for `master`).
   - `no-resolv`, `server=xxx`: In production, by default, upstream DNS server 
     configuration is to be specified in `/etc/resolv.conf`, but these two 
     configurations could be added just in case. 
+
 - DHCP
+
   - `dhcp-sequential-ip`: This is to lease DHCP IP address in sequential but 
     not determing by a hash of the client's MAC address. 
   - `dhcp-lease-max`: is default to 1000 and could be enough, but we MAY limit 
@@ -165,6 +173,7 @@ For both cases, hosts SHALL be configured in the dnsmasq service as follows.
   and SHALL be taken from its function. This means a hostname assigned to a 
   function, like BEE of RCU1, SHALL not be replaced on replacement of hardware 
   by maintenance. 
+
   - VM hosts MAY be named by their hardware, such as `r410-1`, but service 
     oriented names (or name fixed to function) SHALL be used for entries in 
     DNS/DHCP configuration files.
