@@ -206,4 +206,6 @@ configure as follows.
 IP address range assignments in master branch (real)
 ******
 
+PFS has assigned IP address range of 133.40.164.0/23 from Subaru. This section 
+is to define smaller IP address ranges to be assigned to PFS ICS subsystems. 
 
