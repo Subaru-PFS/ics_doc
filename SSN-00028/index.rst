@@ -146,6 +146,62 @@ operation, such as SpS/BEE.
 Host configurations
 ======
 
+Host configurations are defined by two files in both `hosts` and `host-mac` 
+directories, which define IP address and MAC address against hostname 
+respectively. Hosts are categorized into two, one SHALL NOT depend on DHCP 
+and SHALL be configured as static at OS such as network switches or VM hosts 
+which need to run before the dnsmasq service on a VM client starts, 
+and another is all others most of which MAY work both with DHCP or static. 
+For both cases, hosts SHALL be configured in the dnsmasq service as follows. 
+
+- Every pairs of IP address or MAC address to hostname SHALL be included in 
+  configuration files. Even for ones configured as static, a pair SHALL be 
+  included. This is for DNS resolv, recording of hosts, and in case of 
+  trouble (to assign IP address by DHCP for these hosts). 
+- All NICs on computing hardware SHALL be included in configuration files 
+  in `host-mac` directory. A hostname for additional NIC SHALL follow the 
+  main one, such like `vmhost1b` for a host named as `vmhost1`. 
+- A hostname SHALL be fixed to function of target component but not hardware, 
+  and SHALL be taken from its function. This means a hostname assigned to a 
+  function, like BEE of RCU1, SHALL not be replaced on replacement of hardware 
+  by maintenance. 
+  - VM hosts MAY be named by their hardware, such as `r410-1`, but service 
+    oriented names (or name fixed to function) SHALL be used for entries in 
+    DNS/DHCP configuration files.
+
+Also these hostnames are RECOMMENDED to consider following points.
+
+- 'hostname' MAY contain '-' for separations between subparts, but SHALL NOT 
+  use '_' for separations (RFC violation).
+- Subparts of 'hostname' is RECOMMENDED to be well defined name in the PFS 
+  product tree, such as `bcu1` but not just `b1`, to make hostname to be self 
+  described. 
+
+For configuration files in `hosts` directory, which contains pairs of hostname 
+and IP address in hosts format, every lines are RECOMMENDED to consider 
+following points.
+
+- Only one hostname, from which defined in `host-mac` as pairs of hostname and 
+  MAC address, is defined for one IP address. 'dnsmasq' takes first 
+  definition (first line or first item in a line), but ignores any of 
+  followings as double defined for fixed IP address assignments of DHCP. 
+- Multiple hostname MAY be defined for DNS to be used for having alternate 
+  name of a target to be connected from control software. 
+- These configuration files SHALL NOT be changed on replacing hardware for 
+  maintenance, and SHALL be static over the entire period of operation except 
+  for an event of reorganization over the entire network and subnet. 
+
+Within PFS LAN, several physical servers may have multiple NICs and could be 
+connected to a network switch in bonding. For hardware control computers, 
+there is almost no need to have such high bandwidth connection, and requirement 
+or necessity of these configuration may be limited to physical servers at 
+CB2F, such as VM hosts. For these physical servers, it is RECOMMENDED to 
+configure as follows.
+
+- Every hosts are RECOMMENDED to be configured as static but not DHCP, 
+  especially for bondX network interface. 
+- All MAC addresses of physical NICs SHALL be recorded into a corresponding 
+  `host-mac` configuration file. 
 
 IP address range assignments in master branch (real)
 ******
