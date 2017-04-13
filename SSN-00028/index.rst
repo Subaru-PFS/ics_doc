@@ -4,6 +4,20 @@ PFS ICS dnsmasq Configuration Conventions
 - This document is applicable to 'ics_dnsmasq' repositogy in Subaru-PFS organization
 - Follow RFC #2119 for requirement levels
 
+**TOC**
+
+- `Genetal`_
+
+  - `Directory and file management`_
+  - `Branch management`_
+
+- `Contents (definitions in configuration files)`_
+
+  - `Global configurations`_
+  - `Host configurations`_
+
+- `IP address range assignments in master branch (real)`_
+
 General
 ******
 
