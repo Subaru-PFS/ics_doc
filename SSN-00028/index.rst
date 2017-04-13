@@ -51,6 +51,24 @@ RCU1 are NOT RECOMMENDED, not to confuse team members.
 Branch management
 ======
 
+Not like normal git branch management way, the 'ics_dnsmasq' repository makes 
+the `master` branch to be defined as the one used at the production - Subaru 
+summit environment as real. Other branches are to be used at each development 
+site with a name of each site, such as `LAM` and so on. 
+
+Merging from one branch to another SHOULD happen at points of hardware 
+deliveries, but can be perfomed well in advanced. It is RECOMMENDED to have 
+separated files in `host-mac` and `hosts` directory per each hardware 
+delivery. For most cases, actual procedure of merging will not be by normal 
+ways using git, but just copied and newly added to the new branch is 
+RECOMMENDED with including a commit hash and a branch name of the origin. 
+
+- Many sites have different regulation of IP address assignments, and 
+  configuration files in `hosts` directory could be different. 
+- Getting the exact files for one delivery with simple diff between two 
+  points of commit history is difficult for some instrument development sites, 
+  it is simple just to copy with modification into a branch for target of 
+  delivery rather than having complexed flow of git commands. 
 
 Contents (definitions in configuration files)
 ******
