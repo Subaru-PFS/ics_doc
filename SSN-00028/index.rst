@@ -73,15 +73,18 @@ RECOMMENDED with including a commit hash and a branch name of the origin.
 Contents (definitions in configuration files)
 ******
 
+Some of this section is RECOMMENDED for instrument development sites (or 
+branch in git repository) but not is REQUIRED. 
+
 Global configurations
-======
-
-
-IP address range assignments
 ======
 
 
 Host configurations
 ======
+
+
+IP address range assignments in master branch (real)
+******
 
 
