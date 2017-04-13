@@ -49,9 +49,9 @@ for identifying multiple instances. Commonly used shorter names like r1 for
 RCU1 are NOT RECOMMENDED, not to confuse team members. 
 
 Files in two directories, `host-mac` and `hosts`, SHALL be the same file name 
-for the same target. Like, for host `mac` with `ab:cd:ef:01:23:45` and 
+for the same target. Like, for host `mac` with `ab:cc:ef:01:23:45` and 
 `10.123.45.67` in `mac` target category, configurations will be done as 
-`ab:cd:ef:01:23:45,mac` in `host-mac/mac.conf` and `10.123.45.67 mac` in 
+`ab:cc:ef:01:23:45,mac` in `host-mac/mac.conf` and `10.123.45.67 mac` in 
 `hosts/mac.conf`. 
 
 Branch management
