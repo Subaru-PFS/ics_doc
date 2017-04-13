@@ -110,7 +110,7 @@ real values.
     one for all range of assignable IP addresses (for IP addresses, which are 
     not included in any of lines, are not assigned even if specified in 
     dnsmasq configurations), and one with `tag:!known` option to specify 
-    temporary hosts. 
+    temporary IP addresses. 
   - `dhcp-option=option:ntp-server,xxx`: for configuration of NTP server. The 
     NTP server MAY be by Subaru but PFS could have its own. 
 
