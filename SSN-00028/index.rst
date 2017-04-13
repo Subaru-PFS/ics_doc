@@ -79,6 +79,63 @@ branch in git repository) but not is REQUIRED.
 Global configurations
 ======
 
+Following configurations SHALL be included in the `master` branch, and SHOULD 
+be included in other branches. `xxx` in configurations SHALL be replaced with 
+real values. 
+
+- `dnsmasq` configuration files' definitions
+  - `addn-hosts=/etc/dnsmasq.d/hosts`
+  - `dhcp-hostsfile=/etc/dnsmasq.d/host-mac`
+- DNS
+  - `local-ttl=900`: `local-ttl` is a configuration of TTL (in seconds) in 
+    reply from dnsmasq service and used for cache at requester. Default is `0` 
+    which means requester (DNS client) SHOULD NOT cache replies. This is to 
+    reduce load of dnsmasq service and network traffic. 
+  - `expand-hosts`: This is required to build FQDN from `addn-hosts` 
+    configuration.
+  - `domain-needed`: This is required not to break upstream DNS server.
+  - `txt-record=xxx,xxx`: This txt record is REQUIRED for operation of FITS 
+    name building (as for now). 
+- DHCP
+  - `log-dhcp`: This makes dnsmasq to log all DHCP requests and replies, which 
+    is useful for issue handling and trouble shooting. 
+  - `domain=xxx`: for default domain used in the site
+  - `dhcp-range=xxx`: for DHCP configurations. At least two lines are REQUIRED, 
+    one for all range of assignable IP addresses (for IP addresses, which are 
+    not included in any of lines, are not assigned even if specified in 
+    dnsmasq configurations), and one with `tag:!known` option to specify 
+    temporary hosts. 
+  - `dhcp-option=option:ntp-server,xxx`: for configuration of NTP server. The 
+    NTP server MAY be by Subaru but PFS could have its own. 
+
+Following configurations MAY be included in branches (also for `master`). 
+
+- DNS
+  - `log-queries`: This makes dnsmasq to log all DNS queries into a log file, 
+    but most of logs are useless. 
+  - `bogus-priv`: In production, IP address range is not in private IP ranges, 
+    this configuration will not affect to anything nor is not harmful. 
+    But could be useful in some development sites. 
+  - `no-resolv`, `server=xxx`: In production, by default, upstream DNS server 
+    configuration is to be specified in `/etc/resolv.conf`, but these two 
+    configurations could be added just in case. 
+- DHCP
+  - `dhcp-sequential-ip`: This is to lease DHCP IP address in sequential but 
+    not determing by a hash of the client's MAC address. 
+  - `dhcp-lease-max`: is default to 1000 and could be enough, but we MAY limit 
+    below than the default. 
+  - `dhcp-authoritative`: In the PFS network, the dnsmasq service is the only 
+    one DHCP server on a network, and this should be set (but could work 
+    without this configuration). 
+
+Following configurations SHOULD be included when PXE/TFTP is required for 
+operation, such as SpS/BEE. 
+
+- `dhcp-option-force=xxx`
+- `dhcp-boot=tag:pxe,pxelinux.0`
+- `enable-tftp`
+- `tftp-root=/xxx`
+- `tftp-secure`
 
 Host configurations
 ======
