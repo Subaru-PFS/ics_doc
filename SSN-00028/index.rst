@@ -6,7 +6,7 @@ PFS ICS dnsmasq Configuration Conventions
 
 **TOC**
 
-- `Genetal`_
+- `General`_
 
   - `Directory and file management`_
   - `Branch management`_
