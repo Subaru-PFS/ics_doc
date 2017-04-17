@@ -1,7 +1,7 @@
 PFS ICS dnsmasq Configuration Conventions
 ******
 
-- This document is applicable to 'ics_dnsmasq' repositogy in Subaru-PFS organization
+- This document is applicable to 'ics_dnsmasq' repository in Subaru-PFS organization
 - Follow RFC #2119 for requirement levels
 
 **TOC**
@@ -44,7 +44,7 @@ In the 'ics_dnsmasq' repository, we SHALL place configuration files as:
   Place files in a name of 'target'.conf, which contain lines of a pair of 
   MAC address and its hostname as `xx:xx:xx:xx:xx:xx,hostname` format.
 `hosts` directory
-  Plase files in a name of 'target'.conf, which contain lines in a format 
+  Place files in a name of 'target'.conf, which contain lines in a format 
   used for `hosts` file as `IP_address hostname(s)`.
 `dnsmasq.conf` file
   This file SHALL have all configurations specified in the 
@@ -66,9 +66,9 @@ in the product tree of the PFS, such as PFI (Prime Focus Instrument), MCS
 for identifying multiple instances. Commonly used shorter names like r1 for 
 RCU1 are NOT RECOMMENDED, not to confuse team members. 
 Considering replacements by maintenance, especially for hardware replacement 
-consisted with several hardwares and control boxes, it is RECOMMENDED to 
+consisted with several hardware and control boxes, it is RECOMMENDED to 
 break configurations into files by domains to be used, such as a set of 
-control computers and hardwares for cameras (like FCC) in PFI, or a piepan of 
+control computers and hardware for cameras (like FCC) in PFI, or a piepan of 
 each cryostat in SpS. 
 
 Files in two directories, `host-mac` and `hosts`, SHALL be the same file name 
@@ -86,7 +86,7 @@ summit environment as real. Other branches are to be used at each development
 site with a name of each site, such as `LAM` and so on. 
 
 Merging from one branch to another SHOULD happen at points of hardware 
-deliveries, but can be perfomed well in advanced. It is RECOMMENDED to have 
+deliveries, but can be performed well in advanced. It is RECOMMENDED to have 
 separated files in `host-mac` and `hosts` directory per each hardware 
 delivery. For most cases, actual procedure of merging will not be by normal 
 ways using git, but just copied and newly added to the new branch is 
@@ -158,7 +158,7 @@ Following configurations MAY be included in branches (also for `master`).
 - DHCP
 
   - `dhcp-sequential-ip`: This is to lease DHCP IP address in sequential but 
-    not determing by a hash of the client's MAC address. 
+    not determining by a hash of the client's MAC address. 
   - `dhcp-lease-max`: is default to 1000 and could be enough, but we MAY limit 
     below than the default. 
   - `dhcp-authoritative`: In the PFS network, the dnsmasq service is the only 
@@ -218,7 +218,7 @@ following points.
   MAC address, is defined for one IP address. 'dnsmasq' takes first 
   definition (first line or first item in a line), but ignores any of 
   followings as double defined for fixed IP address assignments of DHCP. 
-- Multiple hostname MAY be defined for DNS to be used for having alternate 
+- Multiple hostname MAY be defined for DNS to be used for having alternative 
   name of a target to be connected from control software. 
 - These configuration files SHALL NOT be changed on replacing hardware for 
   maintenance, and SHALL be static over the entire period of operation except 
