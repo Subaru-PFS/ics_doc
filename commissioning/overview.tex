@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Work-flow overview}
 
-The ultimate goal of the PFS validation \& commissioning work-flow is to optimize the PFS performance and validate the goodness for scientific use.
+The ultimate goal of the PFS commissioning work-flow is to optimize the PFS performance and validate the goodness for scientific use.
 To achieve this goal, we proceed the PFS commissioning following this outline:
 \begin{enumerate}
 \item Integrate PFS subsystems of which the performances have been validated by the PFS collaborators.
@@ -25,7 +25,7 @@ The work-flow of the PFS commissioning (Fig. \ref{fig:flowchart}) consists of fi
 \item Validation of MCS (labeled with M-\#, see section \ref{sec:MCS})
  \begin{itemize}
  \item Validation of MCS basic functions.
- \item Pre-study of the coordinate transformation using pinhole array or FMOS/PIR or pinhole array on POpt2.
+ \item Pre-study of the coordinate transformation using pinhole array on POpt2.
  \end{itemize}
 This part requires only MCS.
 \item Validation of PFI (labeled with P-\#, see section \ref{sec:PFI}), basically prior to SpS delivery at Subaru.
@@ -36,7 +36,7 @@ This part requires only MCS.
  \item Confirmation of PFI--MCS relation (registration of Fixed Fiducial Fibers in F3C).
  \item Make the first-pass distortion map using AGCs (sky).
  \end{itemize}
-This part requires only PFI basically, but some sequences need MCS, too.
+This part requires only PFI basically, but some processes need MCS, too.
 \item Validation of SpS (labeled with S-\#, see section \ref{sec:SpS})
  \begin{itemize}
  \item Validation of image quality and stability in the SCR.
@@ -50,7 +50,7 @@ We don't need the telescope to carry out this part.
  \item Confirmation of fibers ID on MCS and SpS.
  \end{itemize}
 This part requires all subsystems: MCS, PFI, Cable B and SpS.
-\item Commissioning all systems (labeled with A-\#, see section \ref{sec:All}
+\item Commissioning of all systems (labeled with A-\#, see section \ref{sec:All}
  \begin{itemize}
  \item Cobra calibration.
  \item PSF characterization.
@@ -63,7 +63,7 @@ This part requires all subsystems: MCS, PFI, Cable B and SpS.
 \end{enumerate}
 
 During the commissioning procedure, we also verify the software sequence for observation (acquisition, fiber configuration, guiding, and exposure) at suitable commissioning sequences.
-We also verify the data reduction pipeline (DRP).
+We also verify the data reduction pipeline (DRP), and quality-assurance (QA) process and so on.
 
 %---------------------------------------------------
 % Figure: Big picture of the PFS commissioning
@@ -94,7 +94,7 @@ See the documents by collaborators (TBA) for detailed procedure of I\&T.
 
 Table \ref{tbl:SubSysIandT} summarizes schedule and place of I\&T of subsystems.
 The validated functions before shipping (or before commissioning) is listed in table \ref{tbl:subfuncs}.
-The file named {\tt PFS\_AIT\_Subaru.pptx}\footnote{http://sumire.pbworks.com/w/file/111633073/PFS\_AIT\_Subaru.pptx} summarizes The required source, layout of working space and other configurations of I\&T process in Hawaii
+The file named {\tt PFS\_AIT\_Subaru.pptx}\footnote{http://sumire.pbworks.com/w/file/111633073/PFS\_AIT\_Subaru.pptx} summarizes The required sources, layout of working space and other configurations of I\&T process in Hawaii
 
 %---------------------------------------------------
 % Table: Subsystem functions at delivery.
@@ -109,21 +109,21 @@ The file named {\tt PFS\_AIT\_Subaru.pptx}\footnote{http://sumire.pbworks.com/w/
 Subsystem	& Year/Month & I\&T Place (Hilo) & I\&T Place (Summit) \\ \hline \hline
 PFI	& 2018/10--2019/01		& Simulator lab.	& Instrument Lab. \& Observation floor \\
 MCS	& 2017/07--2017/09	& Simulator lab.	& Observation floor \\
-SpS-SM1	& 2018/02--2018/03		& & IR4 (SCR) \\
-SpS-SM2	& 2018/11--2018/12		& & IR4 (SCR) \\
-SpS-SM3	& 2018/11--2018/12		& & IR4 (SCR) \\
-SpS-SM4	& 2019/07--2019/08		& & IR4 (SCR) \\
+SpS-SM1	& 2018/02--2018/03		& -- 	& IR4 (SCR) \\
+SpS-SM2	& 2018/11--2018/12		& --	 	& IR4 (SCR) \\
+SpS-SM3	& 2018/11--2018/12		& -- 	& IR4 (SCR) \\
+SpS-SM4	& 2019/07--2019/08		& -- 	& IR4 (SCR) \\
 Cable B	&	2018/06--2018/08	& TBD	&TBD \\ \hline
 \end{tabular} 
 \end{center}
 \end{table}
 
 \paragraph{PFI}
-PFI is shipped after assembled at ASIAA, so it doesn't need to be re-assembled at Subaru.
-However, field element will be disassembled for protection, so that it will be integrated again at the Summit.
+PFI wll be shipped after assembled at ASIAA, so it doesn't need to be re-assembled at Subaru, except for the field element.
+The field element will be disassembled for protection, so that it will be integrated again at the Summit.
 %, according to the latest I\&T story board.
 %After shipped, PFI is re-adjusted if needed.
-The I\&T story board at the summit is in preparation but the currently assumed test items are as follows:
+Although the I\&T story board at the summit is in preparation, the currently assumed test items are as follows:
 \begin{enumerate}
 \item Fiber transparency tests
 \item Rotational test for Cable Wrapper
@@ -140,7 +140,9 @@ Because the tilt mechanism is not assumed to be delivered so far, the test shoul
 
 After the above tests are passed, PFI will be installed to POpt2, and the the same tests are repeated, except for the cobra circular motion test.
 
-\redtext{Test items for software --- control individual modules, telemetry, communicate with MLP1/STS etc.}
+Software modules controlling PFI will be also integrated on-site ICS.
+Not only communication among ICS individual modules, but also communication among AGCC, MAC and MLP1 will be tested.
+Also, telemetry system, communication among PFI software actors, SAS, and STS will be validated.
 
 \paragraph{MCS}
 After AIT at ASIAA, MCS will be shipped to Subaru without disassembling.
@@ -151,21 +153,20 @@ ASIAA will also adjust the alignment of MCS with respect to the prime focus, bec
 Such a test enables us to use time efficiently before PFI arrival, and to save time after PFI arrival, which is expected one year later than MCS arrival, because we should align MCS with the prime focus firstly.
 After the alignment, the image quality will be also checked under the more realistic observational condition (e.g. dome seeing).
 This test will be performed using the pinhole array can be equipped on POpt2.
-Note that the I\&T process using Popt2 with pinhole array will be done combining to MCS commissioning process (\ref{secflow:MCSon}).
+Note that the I\&T process using Popt2 with pinhole array will be done combining to MCS commissioning process (\ref{secflow:prestudy}).
 
-
-\redtext{Test items for software --- control individual modules, telemetry, communicate with STS etc.}
+As the same as PFI, MCS software module is also integrated and tested.
 
 \paragraph{SpS}
-After AIT at LAM, four modules are shipped to Subaru two by two.
-The modules are re-assembled in SCR on the IR4 floor, and the following test will be carried out (TBC):
+After AIT at LAM, four modules are shipped to Subaru separately.
+Individual modules are re-assembled in SCR on the IR4 floor, and the following test will be carried out (TBC):
 \begin{itemize}
 \item Thermal function (cooling down /warming up)
-\item Image quality
+\item Image quality and stability
 \item Characterization of spectrograph  (optional: TBD)
 \end{itemize}
 
-\redtext{Test items for software --- control individual modules, telemetry, communicate with STS etc.}
+SpS software modules are also integrated and tested.
 
 \paragraph{Cable B}
 After shipped to Subaru, the light-path will be tested firstly. 
