@@ -10,7 +10,7 @@
 \begin{longtable}{r|p{80mm}|p{25mm}|c|p{30mm}|p{45mm}}
 %\begin{center}
 \caption{
-The list of validated functions before the commissioning.}
+The list of fundamental functions validated before the commissioning.}
 \label{tbl:subfuncs} 
 %\scriptsize
 \footnotesize
@@ -30,18 +30,18 @@ P05 & Science fibers home position is measured in the accuracy of 50 um PTV.	& 3
 P06 & Science fibers rotation center is measured in the accuracy of 50 um PTV.	& 34, 35	& 	&	& Relative position to a fiducial fiber near the center. \\ \hline
 P07 & Perimeter fiducial fibers position is measured in the accuracy of 50 um PTV.	& 34, 26	& 	&	& Relative position to a fiducial fiber near the center. \\ \hline
 P08 & Field element dots position is measured in the accuracy of 50 um PTV.	& 34, 35	& 	&	& Relative position to a fiducial fiber near the center. \\ \hline
-P09 & The position of AG camera fiducial fibers is measured in the accuracy of 10 um PTV.	& 26	& 	&	& Relative to nearest perimeter fiducial fiber. \\ \hline
-P10 & The position of AG camera sensors is measured in the accuracy of 10 um PTV.	& 	& 	&	& Relative to nearest perimeter fiducial fiber. \\ \hline
-P11 & The focus position of science fibers is measured in the accuracy of 12 um PTV.	& 	& 	&	& Relative to designed focus position. \\ \hline
-P12 & The focus position of perimeter fiducial fibers is measured in the accuracy of 12 um PTV.	& 	& 	&	& Relative to designed focus position. \\ \hline
-P13 & The focus position of AG camera sensors is measured in the accuracy of 12 um PTV.	& 	& 	&	& Relative to designed focus position. \\ \hline
-P14 & The tilt of science fibers is measured in the accuracy of $0.17 \degree$ PTV.	& 	& 	&	& Relative to a fiducial fiber near the center. \\ \hline
-P15 & The tilt of perimeter fiducial fibers is measured in the accuracy of $0.17 \degree$ PTV.	& 	& 	&	& Relative to a fiducial fiber near the center. \\ \hline
-P16 & The tilt of AG camera sensors is measured in the accuracy of $0.17 \degree$ PTV.	& 	& 	&	& Relative to a COB rear surface. \\ \hline
+P09 & The position of AG camera fiducial fibers is measured in the accuracy of 10 um PTV.	& 26, 34	& 	&	& Relative to nearest perimeter fiducial fiber. \\ \hline
+P10 & The position of AG camera sensors is measured in the accuracy of 10 um PTV.	& 19, 21	& 	&	& Relative to nearest perimeter fiducial fiber. \\ \hline
+P11 & The focus position of science fibers is measured in the accuracy of 12 um PTV.	& 34	& 	&	& Relative to designed focus position. \\ \hline
+P12 & The focus position of perimeter fiducial fibers is measured in the accuracy of 12 um PTV.	& 26, 34 	& 	&	& Relative to designed focus position. \\ \hline
+P13 & The focus position of AG camera sensors is measured in the accuracy of 12 um PTV.	& 19	& 	&	& Relative to designed focus position. \\ \hline
+P14 & The tilt of science fibers is measured in the accuracy of $0.17 \degree$ PTV.	& 34	& 	&	& Relative to a fiducial fiber near the center. \\ \hline
+P15 & The tilt of perimeter fiducial fibers is measured in the accuracy of $0.17 \degree$ PTV.	& 26, 34	& 	&	& Relative to a fiducial fiber near the center. \\ \hline
+P16 & The tilt of AG camera sensors is measured in the accuracy of $0.17 \degree$ PTV.	& 19, 21	& 	&	& Relative to a COB rear surface. \\ \hline
 P17 & P05--P16 are achieved with rotation angle of $0, \pm 60 \degree$ and El. $90,60,30 \degree $	& 	& 	&	& CDR \\ \hline
 P18 & The cobra positioner converge to requested x/y position in the accuracy of 10 um PTV.	& 34, 35	& 	&	&  \\ \hline
-P19 & P19 is achieved with rotation angle of $0, \pm 60 \degree$ and El. $90,60,30 \degree $	& 	& 	&	& CDR \\ \hline
-P21	& AG camera shall acquire image.	& 	& 	& 	& 	\\ \hline
+P19 & P18 is achieved with rotation angle of $0, \pm 60 \degree$ and El. $90,60,30 \degree $	& 	& 	&	& CDR \\ \hline
+P21	& AG camera shall acquire image.	& 19, 21, 23, 25 	& 	& 	& 	\\ \hline
 P21	& Fiducial fiber viewing cameras shall acquire image.	& 6	& 	& 	& 	\\ \hline
 P22	& Center camera shall acquire image.	& 7	& 	& 	& 	\\ \hline
 P21	& PFI shall be operated remotely via MHS.	& 4, 10	& 	& 	& 	\\ \hline
@@ -50,7 +50,7 @@ P21	& PFI shall be operated remotely via MHS.	& 4, 10	& 	& 	& 	\\ \hline
 \hline
 \multicolumn{6}{l}{\hspace{5mm} {\bf MCS}} \\ \hline
 M01	& The FoV is large enough to see all science and fiducial fibers at a time.	& 16, 17	&	& {\tt REQ-MET-2} 	& MCS covers 462mm in diameter at the focal plane (CDR).	\\ \hline
-M02	& The fiber centroid cam be measured within the error of 5 um (RMS) for all fibers.	& 15, 16, 17, 26	& 	& {\tt REQ-MET-6}	& $<$ 4.46um RMS (CDR)	\\ \hline
+M02	& The fiber centroid can be measured within the error of 5 um (RMS) for all fibers.	& 15, 16, 17, 26	& 	& {\tt REQ-MET-6}	& $<$ 4.46um RMS (CDR)	\\ \hline
 M03	& MCS completes one cycle of image acquisition, data read, and measurement within 5 seconds in average. 	& 18 	& 	& {\tt REQ-MET-7}	& $<$ 3 seconds (CDR) 	\\ \hline
 M04	& MCS shall be operated remotely via MHS.	& 1,3	& 	& 	& 	\\ \hline
 ...	& ...	& ...	& ...	& ...	& ...	\\ \hline
@@ -60,8 +60,20 @@ M04	& MCS shall be operated remotely via MHS.	& 1,3	& 	& 	& 	\\ \hline
 S01	& The blue detector shall be cooled down to operating temperature ($173 \pm 0.5$ K)	& 	& 	& {\tt SPS-REQ-307}, {\tt SPS-REQ-202}, {\tt SPS-REQ-95}	& 	\\ \hline
 S02	& The red detector shall be cooled down to operating temperature ($173 \pm 0.5$ K)	& 	& 	& {\tt SPS-REQ-307}, {\tt SPS-REQ-203}, {\tt SPS-REQ-95}	& 	\\ \hline
 S03	& The nir detector shall be cooled down to operating temperature ($110 \pm 0.5$ K)	& 	& 	& {\tt SPS-REQ-307}, {\tt SPS-REQ-204}, {\tt SPS-REQ-95}	& 	\\ \hline
-S04	 & All camera units cover 2394 science fibers in their readable area.	& 	& 	& 	& 	\\ \hline
-S05	 & SpS shall back-illuminate science fibers.	& 29, 30 	& 	& 	& 	\\ \hline
+S04	 & Each camera unit keeps operating pressure ($1e-6$ Torr) for 400 days.	& 	& 	& {\tt SPS-REQ-192}	& 	\\ \hline
+S045 & All camera units cover 2394 science fibers in total in their readable area. Dead fiber shall be less than 1\%.	& 	& 	& {\tt SPS-REQ-39}, {\tt SPS-REQ-40}, {\tt SPS-REQ-274}	& 	\\ \hline
+S06	 & Visible-Blue camera units cover 380 -- 650 nm.	&  	& 	& {\tt SPS-REQ-41}	& 45	\\ \hline
+S07	 & Visible-Red camera units cover 630 -- 970 nm.	&  	& 	& {\tt SPS-REQ-41}	& 46, 47 	\\ \hline
+S08	 & NIR camera units cover 940 -- 1260 nm.	& 48 	& 	& {\tt SPS-REQ-41}	& 	\\ \hline
+S09 & Visible-Blue camera have spectral resolution of $>$2300 at 520nm.	& 49 	& 	& {\tt SPS-REQ-42}	& 	\\ \hline
+S10	 & Visible-Red camera  have spectral resolution of  $>$ 2800 (LR) and $>$ 5000 (MR) at 810 nm.	& 50, 51  	& 	& {\tt SPS-REQ-42}	& 	\\ \hline
+S11	 & NIR camera units have spectral resolution of $>$4100 at 1110nm.	& 52 	& 	& {\tt SPS-REQ-42}	& 	\\ \hline
+S12	 & Spots in $\geq$95\% of detector area has Ensquared Energy $\geq$50\% within 3$\times$3pixels, and $\geq$90\% within 5$\times5$pixels, and its centroid is stable within 0.2pixel over 1 hour 1pixel over 16 hours.	& 41 	& 	& {\tt SPS-REQ-47}, {\tt SPS-REQ-45}	& 	\\ \hline
+S13	 & The throughput of Spectrograph Modules is higher than 14\% at 380nm, 38\% at 440nm, 39\% at 550nm, 33\% at 650nm, 42\% at 790nm, 36\% at 980nm, and 25\% at 1260nm.	& 53, 56--59  	& 	& {\tt SPS-REQ-48}	& 	\\ \hline
+S14	 & Image with exposure time from 2 sec. to 30 min. are acquired.	& 40 	& 	& {\tt SPS-REQ-53}	& 	\\ \hline
+S15 & Red channel can exchange dispersers between LR-mode and MR-mode.	& 41 	& 	& {\tt SPS-REQ-74}	& 	\\ \hline
+S16	 & SpS shall back-illuminate science fibers.	& 29, 30 	& 	& 	& 	\\ \hline
+S17	& SpS shall be operated remotely via MHS.	& 37	& 	& 	& 	\\ \hline
 ...	& ...	& ...	& ...	& ...	& ...	\\ \hline
 %%% SpS
 \hline
