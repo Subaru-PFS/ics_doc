@@ -27,7 +27,7 @@ Then execute the raster scan around the fixed fiducial fiber and calibrate the d
 Because one A\&G camera has two fiducial fibers on both sides in the azimuth direction, the raster scan should be carried out using both fibers.
 Therefore, we shall do $12 \times n$ raster scan in total.
 
-Assuming that we take 9 images for each AG fixed fiducial fiber ($3" \time 3"$ grid), it will take 10 minutes to take a set of raster scan images, including the moving telescope, readout, etc.
+Assuming that we take 9 images for each AG fixed fiducial fiber ($3'' \times 3''$ grid), it will take 10 minutes to take a set of raster scan images, including the moving telescope, readout, etc.
 Therefore, 10 $\times$ 2 (areas) $\times$ 2 (fibers) $\times$ 6 (cameras) =240 minutes (6 hours) is requires for this sequence.
 
 \redtext{Typical exposure time of fiducial fiber viewing camera.}
@@ -55,7 +55,8 @@ The new distortion map is called ``$1^\mathrm{st}$-pass" distortion map.
 Assuming it will take $\sim$ 15 minutes for a given field, 80 fields will be visited in 20 hours.
 We will execute this process at two tun.
 At the first run, we will calibrate sky scale and do astrometry using $\sim$50 fields to make the first distortion map.
-Using the first distortion map, we visit the several fields to check this map and update if needed.
+Using the first distortion map, we visit the several fields to check this map and update it if needed.
+
 At this point, we can configure the science fibers and take spectra to demonstrate the instrument performance.
 So we take fiber spectra for a couple of fields.
 
@@ -63,7 +64,7 @@ So we take fiber spectra for a couple of fields.
 %* AG position at MCS is defined using fiducial fibers for AG cameras \\
 %* We need Astrometry catalogue or a single catalogue during the commission (use UCAC4 ?).
 
-\paragraph{Designated Tool for this Process}
+\paragraph{Designated Tool for This Process}
 A method is needed to analyze AG camera images for astrometry, and analyze raster scan data of the fiver viewing cameras.
 \redtext{To do: Check output from fvcactor. If it outputs intensity of the fiber spot, the method will be simple..}
 

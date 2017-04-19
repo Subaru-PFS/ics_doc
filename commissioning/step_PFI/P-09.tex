@@ -1,12 +1,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Telescope Pointing Analysis [Night-time]}\label{secflow:TPA1}
 
-\milestone{PFS send Az/El offset measured using AGC to the telescope for the first time.}
+%\milestone{PFS send Az/El offset measured using AGC to the telescope for the first time.}
 
 Although there are originally 1-, 5-, 32-points Telescope Pointing Analysis (TPA) functions on the Subaru telescope, PFS can execute only 1- TPA\footnote{It is noted that 1-TPA for PFS doesn't seem Subaru standard manner.}.
 Here, the number shows the numbers of stars to be observed at a given field.
-PFS uses the same mount correction coefficients as HSC, and they are updated when HSC executed TPA.
-(Operator can decide whether to update for PFS.)
+PFS uses the same mount correction coefficients as HSC, and they are updated when HSC executes TPA.
+(Note that operator can decide whether to update for PFS.)
 
 By executing 1- TPA, offset angles for Az/EL are estimated.
 These offset are used the additional parameters for mount correction coefficients for PFS.
@@ -18,9 +18,9 @@ For 1- TPA, the telescope control system drives the sequence as below:
 %PFI has a small CMOS sensor ($\sim 9" \times 9"$) in the center of the FoV.
 %The FoV of the center camera is large enough to acquire a bright star in the FoV even before TPA.
 \item Take its image by AG camera.
-\item calculate the Az/El offset, by measuring offset of the star from where it should be.
+\item Calculate the Az/El offset, by measuring offset of the star from where it should be.
 \item Repeat step 1.--3. for different stars.
-We will visit every 30 degree in the azimuth direction and every 15 degree in elevation from 30 -- 75 degree.
+We will visit every 30$\degree$ in the azimuth direction and every 15$\degree$ from 30 -- 75$\degree$ in elevation.
 In total , Az/El offsets are  measured at 12 $\times$ 4 $=$ 48 field of view.
 \item Average offset measured at sequence [3].
 Update Az/El offset value of mount correction efficients, as the additional parameter.

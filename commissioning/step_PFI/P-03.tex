@@ -3,19 +3,19 @@
 
 \milestone{PFI is operated on the telescope for the first time.}
 
-In this sequence, we check the functions of PFI again but on-telescope condition.
+In this process, we check the functions of PFI again but on-telescope condition.
 Basically we repeat the same items as those in \ref{secflow:PFIoff}.
 Namely.
 \begin{itemize}
 \item Calibration lamp can be turned on/off.
 \item AG cameras: read image (bias/dark) with expected noise level.
-We also check that the images is sent to VLAN and Gen2.
+We also check that the images is sent to VLAN and Gen2 again.
 \item Fiducial fiber cameras can read image (bias/dark) with expected noise level.
-\item Center camera can read image (bias/dark) with expected noise level.
-\item Rotator can rotate from -270 [deg] to + 270 [deg].
-\item All telemetry sensors can sent proper status.
+\item Field center camera can read image (bias/dark) with expected noise level.
+\item Rotator can rotate PFI from $-270\degree$ to $+270\degree$.
+\item All telemetry sensors can send proper status.
 \item Cooling system works.
-\item Network connection.
+%\item Network connection.
 \end{itemize}
 
 The following functions of PFI are validated using MCS by taking the fiber image.
@@ -35,7 +35,7 @@ At this point, because Cobras parameters are not calibrated (\ref{secflow:CobraC
 When the basic function of AG cameras, (fixed fiducial) fiber viewing cameras, center camera and calibration lamp are verified, the calibration data (flat and bias) for these cameras shall be obtained.
 (We probably don't have to acquire the calibration data so frequently --- at the beginning of each run is enough?)
 
-\paragraph{Designated Tool for This Step}
+\paragraph{Designated Tool for This Process}
 We will prepare a command sequence for checking basic functions, as \ref{secflow:PFIoff}.
 Also, we will prepare a command sequence for acquiring calibration data.
 
