@@ -3,31 +3,32 @@
 
 \milestone{MCS is operated on the telescope for the first time.}
 
-After installation to the telescope, basic functions of MCS are checked again, but on-telescope condition in this sequence.
-During installing operation, the power of MCS will be off, so we should turn on the MCS electric devices again.
+After installation to the telescope, basic functions of MCS are checked again, but on-telescope condition in this process.
+During installing operation, the power of MCS will be kept on (TBC\footnote{Having UPS, MCS computer can be kept on. Still, the network will be disconnected}), so we should turn on the MCS electric devices (or reconnect to the network) again.
 
 Then we check the following functions (the same as \ref{secflow:MCSoff}):
 
 \begin{itemize}
 \item MCS can read CMOS sensor with expected performance.
 	\begin{itemize}
-	\item dark level: No detectable dark current at 20--25 [decC] with 1.1 sec. exposure time
+	\item dark level: No detectable dark current at 20--25 [decC] in one 0.8s frame
 	\item noise level: $6.4 e^-$
 	\item background level: \redtext{how much??}
-	\item shutter: We take several images changing the exposure time to confirm the mechanical shutter works properly.
+	\item shutter: We take several images opening and closing the mechanical shutter to confirm it works properly.
 	\end{itemize}
 These values are cited from the CDR slides ({\tt MCS camera system.pdf}).
-\item MCS can read environmental and mechanical (?) sensors.
+\item MCS can read environmental sensors.
 	\begin{itemize}
-	\item 7 temperature sensors \redtext{(where)?}
-	\item \redtext{flow meter?}
+	\item 7 temperature sensors on optics, mechanical structure, coolant lines, MCBox and electrical rack \redtext{(where exactly?)}
+	\item flow meter
+	\item microphone
 	\end{itemize}
 \end{itemize}
 
 After the basic functions are confirmed to work, the calibration data (flat, bias and, dark?:TBC) of CMOS sensor shall be obtained, if they are not taken in the step of \ref{secflow:MCSoff}.
 The stability of calibration data can be examined using the data in multiple runs.
 
-\paragraph{Designated Tool for this step}
+\paragraph{Designated Tool for This Process}
 We will prepare commands to check MCS functions, the same as \ref{secflow:MCSoff}.
 
 %By sending command from gen2, we will also confirm communication between MCS and Gen2.
