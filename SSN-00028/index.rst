@@ -27,7 +27,7 @@ Directory and file management
 ======
 
 The 'ics_dnsmasq' repository is organized to be deployed as `/etc/dnsmasq.d/` 
-and SHALL not contain any file or directory which causes syntax error by 
+and SHALL NOT contain any file or directory which causes syntax error by 
 dnsmasq daemon. Assumed deploy method and operation is to replace entire system 
 default installed configuration at `/etc/dnsmasq.d/` into cloned one from 
 git repository, `.git/` directory (`/etc/dnsmasq.d/.git/`) will be ignored 
@@ -103,7 +103,7 @@ Contents (definitions in configuration files)
 ******
 
 Some of this section is RECOMMENDED for instrument development sites (or 
-branch in git repository) but not is REQUIRED. 
+branch in git repository) but is NOT REQUIRED. 
 
 Global configurations
 ======
@@ -195,7 +195,7 @@ For both cases, hosts SHALL be configured in the dnsmasq service as follows.
   main one, such like `vmhost1b` for a host named as `vmhost1`. 
 - A hostname SHALL be fixed to function of target component but not hardware, 
   and SHALL be taken from its function. This means a hostname assigned to a 
-  function, like BEE of RCU1, SHALL not be replaced on replacement of hardware 
+  function, like BEE of RCU1, SHALL NOT be replaced on replacement of hardware 
   by maintenance. 
 
   - VM hosts MAY be named by their hardware, such as `r410-1`, but service 
