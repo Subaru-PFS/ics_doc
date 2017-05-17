@@ -1,19 +1,19 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Validation of the Basic function of SCR and SpS [Daytime]}\label{secflow:SCR}
 
-SpS modules (SM1, 2, 3,and 4) are operated on the IR4 floor in the designated room called SCR, where the temperature is controlled from 3 degC to 5 degC.
+SpS modules (SM1, 2, 3,and 4) are operated in the designated room called SCR (Spectrgraph Clean Room) on the IR4 floor, where the temperature is controlled from 3 degC to 5 degC.
 The Camera Assemblies are cooled down in the cryostat.
-On the below floor, the compressors will be used during the operations.
-Under such a condition, the following functions of SpS assemblies should be verified:
-We  also check the functions of SCR in this sequence.
+On the below floor (IR3), the compressors will be used during the operations.
+Under such a condition, the following functions of SpS assemblies as well as SCR functions should be verified:
+%We  also check the functions of SCR in this sequence.
 \begin{itemize}
 \item The temperature in SCR can be controlled stably in the range from 3 degC to 5 degC.
-\item SpS can read cameras within expected noise -- dark, bias.
-\item SpS can switch MR/LR mode (red arm).
-\item SpS can open/close shutters.
-\item SpS can move all other mechanical part. \redtext{Name}
-\item SpS can back-illuminate the fibers (by looking from GANG connectors of cable A?)
-\item SpS can read sensors
+\item All SMs can switch Medium-Resolution mode and Low-Resolution mode (red arm).
+\item All SMs can open and close blue and red shutters.
+\item All SMs can move all other mechanical part. \redtext{Name}
+\item All SMs can back-illuminate the fibers (by looking from GANG connectors of cable A?)
+\item All SMs can read telemetry sensors
+\item All SMs can read their all detectors within expected noise -- dark, bias.
 \item The spots are on-focus in the detector.
 \item We check the image quality and stability at a certain temperature and vibration [cf. Validation Roadmap by LAM: tests stability (2.5.8)].
 Repeat temperature cycle and check repeatability.
@@ -26,6 +26,9 @@ The image quality is defined in the requirements {\tt REQ-SpS-47 (Test)}, which 
 % If the spots doesn't satisfy image quality, adjust assembly following partners' documents (and/or consulting them).
 % We check the stability of the focus position in the operational range of the temperature.
 
+\paragraph{Designated Tool for This Process}
+We will prepare commands to check SpS functions.
+This might be used as health check of the subsystems (TBD).
 
 %Cool SCR and cryostats into operation temperature and check basic functions of SpS assemblies under the low temperature:
 

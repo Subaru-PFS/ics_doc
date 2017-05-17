@@ -1,12 +1,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Telescope Pointing Analysis [Night-time]}\label{secflow:TPA1}
 
-\milestone{PFS send Az/El offset measured using AGC to the telescope for the first time.}
+%\milestone{PFS send Az/El offset measured using AGC to the telescope for the first time.}
 
-Although there are originally 1-, 5-, 32-points Telescope Pointing Analysis (TPA) functions on the Subaru telescope, PFS can execute only 1- TPA.
+Although there are originally 1-, 5-, 32-points Telescope Pointing Analysis (TPA) functions on the Subaru telescope, PFS can execute only 1- TPA\footnote{It is noted that 1-TPA for PFS doesn't seem Subaru standard manner.}.
 Here, the number shows the numbers of stars to be observed at a given field.
-PFS uses the same mount correction coefficients as HSC, and they are updated when HSC executed TPA.
-(Operator can decide whether to update for PFS.)
+PFS uses the same mount correction coefficients as HSC, and they are updated when HSC executes TPA.
+(Note that operator can decide whether to update for PFS.)
 
 By executing 1- TPA, offset angles for Az/EL are estimated.
 These offset are used the additional parameters for mount correction coefficients for PFS.
@@ -18,17 +18,19 @@ For 1- TPA, the telescope control system drives the sequence as below:
 %PFI has a small CMOS sensor ($\sim 9" \times 9"$) in the center of the FoV.
 %The FoV of the center camera is large enough to acquire a bright star in the FoV even before TPA.
 \item Take its image by AG camera.
-\item Measure the Az/El offset, by measuring offset of the star from where it should be.
-\item repeat [1-3] for different stars.
-We will visit every 30 degree in the azimuth direction and every 15 degree in elevation from 30 -- 75 degree.
+\item Calculate the Az/El offset, by measuring offset of the star from where it should be.
+\item Repeat step 1.--3. for different stars.
+We will visit every 30$\degree$ in the azimuth direction and every 15$\degree$ from 30 -- 75$\degree$ in elevation.
 In total , Az/El offsets are  measured at 12 $\times$ 4 $=$ 48 field of view.
 \item Average offset measured at sequence [3].
 Update Az/El offset value of mount correction efficients, as the additional parameter.
 \end{enumerate}
 
-Assuming it will tale 900sec to obtain the data in a given field, 12 hours (900 $\times$ 48 seconds) are required.
+Assuming it will take 300 sec to obtain the data in a given field, 4 hours (300 $\times$ 48 seconds) are required.
+We derive mount correction efficients in a run, and check them in another run.
+In total, it will take 8 hours to complete this process.
 
-\redtext{How much does the difference of the scale b/w FoV center and edge effect??}
+\redtext{Check how much does the difference of the scale b/w FoV center and edge effect??}
 %The offset derived from this process can be considered from the next telescope pointing. 
 
 %In this step, we start with 1-, 5- TPA.
@@ -38,6 +40,9 @@ Assuming it will tale 900sec to obtain the data in a given field, 12 hours (900 
 %These offset is derived from $0^\mathrm{th}$-pass distortion map in the first operation (see below), but derived from updated distortion map after commissioning.
 
 %After TPA, we check tracking error of the telescope.
+
+\paragraph{Designated Tool for This Process}
+It depends on ICS software (MAC: MLP1 AGCC Converter) has this function (TBC).
 
 \begin{itembox}[l]{\suctitle{Success Criteria}}
 Obtain Az/El offset value of mount correction efficients.

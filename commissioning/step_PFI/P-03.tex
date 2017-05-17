@@ -3,24 +3,25 @@
 
 \milestone{PFI is operated on the telescope for the first time.}
 
-In this sequence, we check the functions of PFI again but on-telescope condition.
+In this process, we check the functions of PFI again but on-telescope condition.
 Basically we repeat the same items as those in \ref{secflow:PFIoff}.
 Namely.
 \begin{itemize}
 \item Calibration lamp can be turned on/off.
 \item AG cameras: read image (bias/dark) with expected noise level.
-We also check that the images is sent to VLAN and Gen2.
+We also check that the images is sent to VLAN and Gen2 again.
 \item Fiducial fiber cameras can read image (bias/dark) with expected noise level.
-\item Center camera can read image (bias/dark) with expected noise level.
-\item Rotator can rotate from -270 [deg] to + 270 [deg].
-\item All telemetry sensors can sent proper status.
+\item Field center camera can read image (bias/dark) with expected noise level.
+\item Rotator can rotate PFI from $-270\degree$ to $+270\degree$.
+\item All telemetry sensors can send proper status.
 \item Cooling system works.
-\item Network connection.
+%\item Network connection.
 \end{itemize}
 
 The following functions of PFI are validated using MCS by taking the fiber image.
 \begin{itemize}
-\item Fiducial fiber illuminator can be  turned on/off \footnote{If SpS and Cable B are ready, we can also check back-illumination of science fibers.}
+\item Fiducial fiber illuminator can be  turned on/off 
+\item Check back-illumination of science fibers (If SpS and Cable B are ready\footnote{As of January 2017, three Spectrograph Modules and Cable B will be ready before PFI delivery. Therefore, back-illumination function of these three SMs are checked at run 2. The function of the last SM will be tested at run 5 after its delivery. Besides, if we have time, we can regulate the brightness of fiducial fibers and science fibers, which will be done in the step \ref{secflow:CobraCal}.})
 %\item science fibre back illuminator (after SpS and Cable B are installed): turn on/off, brightness (normal mode and strobe mode), pulsed light (10ms period and 10\% amplitude)
 \item MPS can move fiber positioners (Cobras) move and read their status.
 At this point, because Cobras parameters are not calibrated (\ref{secflow:CobraCal}), we should move them slightly to avoid collision.
@@ -31,8 +32,12 @@ At this point, because Cobras parameters are not calibrated (\ref{secflow:CobraC
 %If dots work, the spots in MCS is fainter than those with the fibers at home position.
 \end{itemize}
 
-When the basic function of AG cameras, fixed fiducial cameras, center camera and Calibration lamp are verified, the calibration data (flat and bias) shall be obtained.
-(Acquiring the calibration data probably doesn't needed so frequently --- at the beginning of each run is enough?)
+When the basic function of AG cameras, (fixed fiducial) fiber viewing cameras, center camera and calibration lamp are verified, the calibration data (flat and bias) for these cameras shall be obtained.
+(We probably don't have to acquire the calibration data so frequently --- at the beginning of each run is enough?)
+
+\paragraph{Designated Tool for This Process}
+We will prepare a command sequence for checking basic functions, as \ref{secflow:PFIoff}.
+Also, we will prepare a command sequence for acquiring calibration data.
 
 \begin{itembox}[l]{\suctitle{Success Criteria}}
 PFI basic functions above are checked on Telescope. 

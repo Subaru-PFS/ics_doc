@@ -2,7 +2,7 @@
 \usepackage[sectionbib,numbers]{natbib}
 \usepackage{fancyhdr}
 \usepackage{url}
-\usepackage[colorlinks=true,linkcolor=blue,filecolor=blue,urlcolor=blue]{hyperref}
+\usepackage[colorlinks=true,linkcolor=blue,filecolor=blue,urlcolor=blue,dvipdfmx]{hyperref}
 \usepackage[top=30truemm,bottom=30truemm,left=25truemm,right=25truemm]{geometry}
 
 \pagestyle{fancy}
@@ -11,22 +11,13 @@
 \lhead{PFS Commissioning Workflow}
 \rfoot{}
 
-%\usepackage[sectionbib]{chapterbib}
-%\usepackage{chapterbib}
-%\renewcommand\bibsection{\section{\bibname}}
-\usepackage[dvipdfm]{graphicx} 
+\usepackage[dvipdfmx]{graphicx} 
 \usepackage{amsmath,amssymb}
 \usepackage[usenames]{color} 
 \usepackage{ascmac,fancybox}
 % bounding box
 \usepackage{mediabb}
 
-%\pagestyle{myheadings}
-%\markboth{Reference List}{Reference List}
-%\renewcommand{\bibname}{List}
-%\bibliographystyle{unsrtnat}
-%\renewcommand{\chaptername}{File}
-\usepackage{publiname}
 % package for vector
 \usepackage{bm}
 % package for longtable
@@ -53,7 +44,13 @@
 % path for figures
 \graphicspath{{./figs/}}
 
-\title{PFS Commissioning \& Operation Work Flow}
+% *** a dictionary           *** %
+%  * process: work-flow process e.g. P-1, A-3
+%  * sequence: sub-process in a given process. e.g. P-6 (AG function) consists of 3 sequences (focusing, pixel scale, guiding)
+%  * step: working step of each process and/or sequence
+% *** a dictionary (End) *** %
+
+\title{PFS Commissioning Work Flow}
 \author{Yuki Moritani, Kiyoto Yabe, Naoyuki Tamura, and Atsushi Shimono \\
 (PFS Project Office, Kavli IPMU)}
 \date{
@@ -83,7 +80,8 @@ ver. 6: \today}
 % PFI part
 \renewcommand{\thesubsubsection}{P-\;\arabic{subsubsection}}
 \subsection{Validation of PFI}\label{sec:PFI}
-Because MCS will be delivered to the Subaru telescope one year before PFI delivery, we can install MCS to the Cassecrain focus during the PFI validation.
+MCS will be delivered to the Subaru telescope one year before PFI delivery.
+Hence, working process for PFI validation are considered assuming that we can install MCS to the Cassecrain focus.
 \input{step_PFI/P-01}
 \input{step_PFI/P-02}
 \input{step_PFI/P-03}
@@ -125,6 +123,8 @@ Because MCS will be delivered to the Subaru telescope one year before PFI delive
 
 % Raster Fields
 \input{starcatalog.tex}
+
+\clearpage
 
 % Coordinates systems
 \input{coordinates.tex}

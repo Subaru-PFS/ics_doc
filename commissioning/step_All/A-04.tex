@@ -1,15 +1,19 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Second-Pass Distortion Map [Night-time]}\label{secflow:raster}
 
-At this step, the science fibers should be pointed to the targets with the accuracy of $\sim 50$ um (at least less than 100 um).
+After the process \ref{secflow:1stDM}, the science fibers should be pointed to the targets with the accuracy of $\sim 50$ um (at least less than 100 um).
+In this step, we will do raster scan to improve the distortion map and achieve the fiber pointing accuracy of $\sim 10$ um RMS.
 
-The goal of the accuracy of pointing of the fibers is $\sim 10$ um, which is achieved by raster scan observation in this step.
-
-We slew the telescope to the field where enough stars is catalogued with good astrometry (see section \ref{sec:RasterField}).
-We put these bright stars on the science fibers and do telescope raster scan observation by 3$''$ $\times$ 3$''$ grid, approximately three time as large as the fiber core diameters.
-\redtext{It is suggested that raster with hexagonal pattern provide denser scan than grid.}
-
-Calibrations in the previous sequences shall include the following errors:
+The process is as follows:
+\begin{enumerate}
+\item Slew the telescope to the field where enough bright stars is cataloged with good astrometry (see section \ref{sec:RasterField}).
+\item Put these bright stars on the science fibers and take fiber spectra with the telescope moving in 3$''$ $\times$ 3$''$ grid, approximately three time as large as the fiber core diameters.
+Note that the raster with 5 position of hexagonal pattern provide denser scan than the grid (TBD).
+\item Calculate the brightest position by comparing the intensity of these spectra.
+\item Repeat 1.--3. for several fields at various telescope positions, and calibrate the distortion map.
+\item Check the dependency of the map on wavelength, and check if ADC works correctly, by comparing the observed positions with predicted ones by ADC.
+\end{enumerate}
+Calibrations will include the following factors:
 \begin{itemize}
 \item Telescope elevation, and azimuth
 \item Temperature
@@ -22,10 +26,17 @@ Calibrations in the previous sequences shall include the following errors:
 \item etc…… (TBD)
 \end{itemize}
 
-We also check the dependency of the map on wavelength, and check if ADC works correctly, by comparing the observed positions with predicted ones by ADC.
+Assuming we take 120- --150-second exposure for a given position, it will take $\sim$ 30 minutes including slewing, fiber configuration, and acquiring sky frames.
+We will take 2 sets of 4 El $\times$ 4 RoA positions ($\sim$ 8 hours) to study the dependence of the above parameters.
+We repeat 2 times of these sets using SMs 1--3 (runs. 4 and 5).
+Note that fibers of each SM are arranged on the focal plane to cover entire field of view, we can study distortion without SM4.
+However, we will check and finalize the distortion map using all SMs at run 6.
+In total, 5 nights are required in this process.
 
-When the second distortion map is made, update ETS using this map.
+When the second distortion map is made, update ETS using this map, and/or update the repository for coordinate transformation (TBC).
 
+\paragraph{Designated Tool for This Process}
+A tool for measuring the brightest position from raster scan data.
 
 \begin{itembox}[l]{\suctitle{Success Criteria}}
 Second distortion map is obtained with error less than 10um.

@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Off-Telescope (stand-by) characterization of MCS [Daytime]}\label{secflow:MCSoff}
-In this step, the basic functions of MCS are checked before installation to the telescope.
+In this process, the basic functions of MCS are checked before installation to the telescope.
 
 Firstly, we turn on the power of MCS computer and electronic chassis.
 Then we check the following functions:
@@ -8,30 +8,46 @@ Then we check the following functions:
 \begin{itemize}
 \item MCS can read CMOS sensor with expected performance.
 	\begin{itemize}
-	\item dark level: No detectable dark current at 20--25 [decC] with 1.1 sec. exposure time
+	\item dark level: No detectable dark current at 20--25 [decC] in one 0.8s frame
 	\item noise level: $6.4 e^-$
 	\item background level: \redtext{how much??}
-	\item shutter: We take several images changing the exposure time to confirm the mechanical shutter works properly.
+	\item shutter: We take several images opening and closing the mechanical shutter to confirm it works properly.
 	\end{itemize}
-These values are cited from the CDR slides ({\tt MCS camera system.pdf}).
-\item MCS can read environmental and mechanical (?) sensors.
+These values are based on the CDR slides ({\tt MCS camera system.pdf}).
+\item MCS can read environmental and sensors.
 	\begin{itemize}
-	\item 7 temperature sensors \redtext{(where)?}
-	\item \redtext{flow meter?}
+	\item 7 temperature sensors on optics, mechanical structure, coolant lines, MCBox and electrical rack \redtext{(where exactly?)}
+	\item flow meter
+	\item microphone
 	\end{itemize}
 \end{itemize}
 
-Because every command is sent vis MHS, we can confirm communication via MHS in this sequence. 
-That is we also validate that MHS can send commands to read CMOS sensors and environmental sensors, and then receive proper results and status.
+In addition, we will send command on Subaru side (Gen2), so that we can validate ICS performance as follows:
+\begin{itemize}
+\item MHS communicates with between Gen2
+\item IIC interprets Gen2 commands and send MCS proper commands through MHS
+\item Subaru (STS and Gen2) refers MCS status 
+\item Subaru (Gen2) receives MCS image
+\end{itemize}
+%Because every command is sent vis MHS, we can confirm communication via MHS in this sequence. 
+%That is we also validate that MHS can send commands to read CMOS sensors and environmental sensors, and then receive proper results and status.
 
 %Besides, MCS should be characterized in off-telescope condition, such as temperature, noise-level and so on.
 
 Note that once MCS is powered on, it will be connected to the power supply and Subaru network.
-Then telemetry is monitored during stand-by.
-Considering this fact, we can skip this sequence from the second and more times for commissioning run.
+The telemetry is monitored during stand-by.
+Considering this fact, we can skip this step from the second and more times for commissioning run.
+
+After validating the above performance, we will take calibration data (bias, dark, and flat) of CMOS sensor.
+Note that this process will be skipped in this step, and be carried out in the step \ref{secflow:MCSon} instead.
+
+\paragraph{Designated Tool for This Process}
+We will prepare commands to check MCS functions.
+This will be used as health check of the subsystem.
 
 \begin{itembox}[l]{\suctitle{Success Criteria}}
-All MCS basic functions are verified --- power, CMOS sensor, telemetry. 
+All MCS basic functions are verified --- power, CMOS sensor, telemetry. \\
+ICS can control the instrument communicating with Gen2.
 
 \bluetext{Required long time to analyze the data?: No. \\
 ---We can check the functions in real time.}

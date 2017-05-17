@@ -1,32 +1,55 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Characterization of SpS [Daytime]}\label{secflow:SpSchar}
 
-Using arc lamps and continuum lamps, we characterize the SMs.
-Here we will use Dummy Cable B module [see DummyCableB-MainDocument.pptx (PFS-SpS:01680) for details] which is used for the integration by LAM\footnote{To achieve characterization well, we need lamps with large wavelength coverage. We also need black body lamp, but should input the light from slit or GANG connector.}.
+In this process, we characterize the SMs using arc lamps and continuum lamp.
+Here we will use Dummy Cable B module [see {\tt DummyCableB-MainDocument.pptx} (PFS-SpS:01680) for details] which is used for the integration by LAM\footnote{To achieve characterization well, lamps with large wavelength coverage would be ideal. We need black body lamp for throughput measurement, but should input the light from slit or GANG connector.}.
+\redtext{Note that LAM also has a plan for characterization as their AIT work\footnote{See their document for validation roadmap ({\tt LAM.PJT.SUM.DS.1024\_1-4\_Verification\_Requirements.pdf}); $\lambda$ coverage --- 2.5.3: checked by centring the image. $R$ --- 2.5.4: extrapolated by FWHM of the spot for testing image quality (maybe only center?).}, although these characterization are not mandatory test items. Coordination between AIT work and the PFS commissioning work is in progress.}
+According to the document by Sandrine Pascal (LAM; {\tt PFS-DummyCableB\_V1.0.pdf }), Dummy Cable B has 4 sets of 7 fibers and 8 sets of single fibers.
+We can use 5 out of 8 sets at a time.
 
 \paragraph{PSF and spectral distribution measurement}
-With arc-lamp image and continuum lamp image, we measure PSF and spectral distribution of various fibers on the detectors, respectively.
-These information of the fiber image is feedbacked to DRP development.
-Configuration of measured fibers is TBD\footnote{LAM will use 4 fibers with the option of extra 7 fibers sparsely arranged in the detectors, but is it acceptable for DRP development?
-It seems some room for fiber configurations.
-1--2 fibers per block, for instance,  are too much?
-At least, the PSFs and spectral distribution both centre and edge seems required.
-Besides, how many spots is needed in wavelength direction?
-}.
+We take arc-lamp image and continuum lamp image, and measure PSF and spectral distribution of various fibers on the detectors, respectively.
+These images are sent to DRP development team, who will analyze them in detail.
+\redtext{Fiber configurations for measurement is TBD.}
+%\footnote{LAM will use 4 fibers with the option of extra 7 fibers sparsely arranged in the detectors, but is it acceptable for DRP development?
+%It seems some room for fiber configurations.
+%1--2 fibers per block, for instance,  are too much?
+%At least, the PSFs and spectral distribution both centre and edge seems required.
+%Besides, how many spots is needed in wavelength direction?
+%}.
 
-\paragraph{wavelength coverage, spectral resolution, and throughput}
-Using the arc-lamp image, we estimate wavelength coverage and spectral resolution (including wavelength dependence), and compare with specifications, by measuring the FWHMs of the spots.
-Note that the wavelength coverage and the spectral resolution will be partly measured by LAM\footnote{Validation Roadmap; $\lambda$ coverage --- 2.5.3: checked by centring the image. $R$ --- 2.5.4: extrapolated by FWHM of the spot for testing image quality (maybe only center?).}.
+\paragraph{Spectral resolution}
+We take the arc-lamp images, and  measure FWHM of the spots.
+Then we estimate spectral resolution including wavelength dependence, and compare with specifications.
+The requirement for the spectral resolution ({\tt REQ-SpS-42 (Analysis)}) is:
+\begin{itemize}
+\item $>$2300 @ 520 nm (blue)
+\item $>$2800 @ 810 nm (red, LR),  $>$5000 @ 810 nm (red, MR)
+\item $>$4100 @ 1110 um (nir)
+\end{itemize}
+We will characterize at least 4 fibers at the outer-most and inner-most of up and down areas, and all 3 sets of 7 fibers.
 
-The requirement for the wavelength coverage ({\tt REQ-SpS-41 (Analysis)}) is 380--650 nm (blue), 630--970 nm (red), and  940--1260 nm (nir).
+\paragraph{Wavelength coverage}
+We take continuum and measure the effective area for signal, and take arc-lamp image and derive pixel-wavelength relation.
+Then we estimate wavelength coverage using the relation, and compare with specifications.
+The requirement for the wavelength coverage ({\tt REQ-SpS-41 (Analysis)}) is:
+\begin{itemize}
+\item 380--650 nm (blue)
+\item 630--970 nm (red, LR), 710 - 885 nm (red, MR)
+\item 940--1260 nm (nir).
+\end{itemize}
+As spectral resolution, we will characterize at least 4 fibers at the outer-most and inner-most of up and down areas, and all 3 sets of 7 fibers.
 
-The requirement for the spectral resolution, on the other hand, ({\tt REQ-SpS-42 (Analysis)}) is $>$2300 @ 520 nm (blue), $>$ 2800 @ 810 nm (red, LR),  $>$ 5000 @ 810 nm (red, MR), and $>$ 4100 @ 1110 um (nir).
+\paragraph{Throughput}
+Given that throughput will be measured at LAM before shipping to Subaru (discussion in the 8th collaboration meeting in December 2016), this measurement is probably optional.
+For the condition of experiment at laboratory is more stable than at the summit.
 
-\smallskip
-
-Using a black body lamp, we will measure throughput of the SpS itself and compare with specifications, which is estimated by combining the performance of each element (LAM).
-If measured throughput is inconsistent with analysed one, consider possible causes (vignetting, background etc.) 
-The stability of the black body lamp (TBD) is needed.
+Nevertheless, in this paragraph the procedure is described for throughput measurement.
+We illuminate GANG connector with a black body lamp, and take fiber images.
+We count the intensity of the detector, and measure throughput of the SpS itself.
+We compare the measured values with specifications, which is estimated by combining the performance of each element (LAM).
+If measured throughput is inconsistent with analyzed one, consider possible causes (vignetting, background etc.) 
+For this measurement, the stability of the black body lamp (TBD) is needed.
 
 The requirement for the throughput of SpS ({\tt REQ-SpS-48 (Analysis)}) is in Table \ref{tab:SpSthroughput}:
 \begin{table}[!ht]
@@ -47,6 +70,14 @@ wavelength &  requirement & goal \\ \hline \hline
 \end{center}
 \end{table}
 
+\paragraph{Designated Tool for This Process}
+A tool for FWHS measurement is needed.
+For throughput measurement, illuminating system including light source is needed.
+
 \begin{itembox}[l]{\suctitle{Success Criteria}}
 SpS is characterized. These characters is consistent with expected by specification.
+\bluetext{Required long time to analyze the data?: Yes. \\
+--- No, but we don't need to analyze on real time for this process. 
+This process doesn't require the telescope, either.
+}
 \end{itembox}

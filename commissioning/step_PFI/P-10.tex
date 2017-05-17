@@ -4,38 +4,69 @@
 In the PFS operation we need to convert sky coordinate (Sky Catalogue) to another convenient to position fibers (F3C).
 For this coordinate transformation we have a ``$0^\mathrm{th}$-pass" distortion map from the optical model with the as-built WFC \& model of atmospheric refraction (including the differential effect), prior to the commissioning.
 
-In this step, we calibrate the distortion map purely by the AGCs with no fibers involved (First pass distortion map).
-The sequence is as follows:
-\begin{enumerate}
-%\item Confirm the orientation of the individual images of AG cameras; \\
-%The AG camera pixel scale and orientation of x/y-pixel coordinate can be confirmed by taking two images with an offset of the telescope pointing or by centroiding astrometory stars on them.
-\item Make distortion map by images from the 6 AG cameras; \\
-Take deep images ($\sim 10-30$ sec exposure) of bright stars with good astrometry and derive distortion map.
-Derive distortion of AG camera by measuring the positions of stars on camera and comparing with catalogue.
-Here, we need special method to analyze the A\&G images.
-We update the distortion map of the entire FoV by interpolating with the new A\&G distortion map.
-The total field of view of the A\&G camera is (5.5 arcmin$^2$ $\times$ 6)/2 = 16.5 arcmin$^2$.
-The division by 2 is because of the step of the A\&G cameras, half region of which has the same focal plane. 
-Note that the registration of images $\sim$ 1.4 deg apart from the field center, should be possible thanks to the off-telescope calibration of A\&G camera positions on F3C.
-This should be useful to give constraints to the models.
-\item We make the map at various elevation and azimuth and refine it as a function of El, Az, and ROA
-\item Measure the sky scale on F3C; \\
-We calibrate the position of the A\&G cameras relative to their fixed fiducial fibers.
+In this process, we calibrate the distortion map purely by the AGCs with no fibers involved (First pass distortion map).
+This process comprises two major sequences: calibration of the sky scale, and astrometry on AGCs.
+
+\paragraph{Calibration of the Sky Scale}
+Firstly, we calibrate the sky scale on F3C (focal plane).
+For this calibration we measure the position of A\&G camera relative to their two fixed fiducial fibers.
 %, in order to make the sky-F3C relation consistent between A\&G cameras and the field of view.
-Firstly, we slew the telescope to have a star in the center of an A\&G camera.
-Then we move the telescope to have the AG fixed fiducial fiber pointed to the star.
-We execute the raster scan around the fixed fiducial fiber and calibrate the distance between A\&G camera and the fiber.
+
+We proceed this sequence as follows:
+\begin{enumerate}
+\item Slew the telescope to have a star in the center of either half area of a given A\&G camera.
+To proceed step 2. easily, rotate PFI for the target camera to  locate PA=0.
+Note that the center of the A\&G camera cannot be used because of the shade of the glass plate.
+%Either side (``inside'' or ``outside") is fine, but we use the same side for all cameras.
+%(Here we assume half ``inside" area.)
+\item  Move the telescope to have the AG fixed fiducial fiber pointed to the star.
+Then execute the raster scan around the fixed fiducial fiber and calibrate the distance between A\&G camera and the fiber.
+\item Repeat 1. and 2. for the other half area of the AG camera.
+\item Repeat 1.--3. for all fixed fiducial fiber of all 6 A\&G cameras.
+\end{enumerate}
 Because one A\&G camera has two fiducial fibers on both sides in the azimuth direction, the raster scan should be carried out using both fibers.
 Therefore, we shall do $12 \times n$ raster scan in total.
-\end{enumerate}
 
+Assuming that we take 9 images for each AG fixed fiducial fiber ($3'' \times 3''$ grid), it will take 10 minutes to take a set of raster scan images, including the moving telescope, readout, etc.
+Therefore, 10 $\times$ 2 (areas) $\times$ 2 (fibers) $\times$ 6 (cameras) =240 minutes (6 hours) is requires for this sequence.
+
+\redtext{Typical exposure time of fiducial fiber viewing camera.}
+
+\paragraph{Astrometry}
+Secondary, we make distortion map by images from the 6 AG cameras.
+The total field of view of the A\&G camera is 5.5 arcmin$^2$ $\times$ 6 = 33 arcmin$^2$.
+AG camera is lightly out of focus when we focus the telescope; a half region of camera is inside, while the other half outside.
+However, the accuracy in calculation centroids of a spot is $\sim$3um, referring estimation by Jim Gunn:{\tt Focus Offsets, Sensitivity, and Star Counts for AG Cameras (ver. 2015.05.18)}, is small enough to make the distortion map (accuracy: $\sim 50$um).
+%Note that the registration of images $\sim$ 1.4 deg apart from the field center, should be possible thanks to the off-telescope calibration of A\&G camera positions on F3C.
+%This should be useful to give constraints to the models.
+
+We proceed this sequence as follows:
+\begin{enumerate}
+\item Take deep images ($\sim 60$ sec exposure: TBD) of bright stars with good astrometry.
+We take 3--5 images for statistics.
+\item Derive distortion of AG cameras by measuring the positions of stars on camera and comparing with catalogue.
+Update the distortion map of the entire FoV by interpolating with the new A\&G distortion map.
+\item Repeat 1.--2. at various elevation and azimuth and refine the map as a function of El, Az, and ROA
+At present, we will visit from EL=30, 45, 60 and 80$\deg$, and 2--4 Az positions at every elevation (TBD).
+\end{enumerate}
 Using the calibrated data, the transformation from Sky Catalogue ti F3C is refined.
 The new distortion map is called ``$1^\mathrm{st}$-pass" distortion map.
 
+Assuming it will take $\sim$ 15 minutes for a given field, 80 fields will be visited in 20 hours.
+We will execute this process at two tun.
+At the first run, we will calibrate sky scale and do astrometry using $\sim$50 fields to make the first distortion map.
+Using the first distortion map, we visit the several fields to check this map and update it if needed.
+
+At this point, we can configure the science fibers and take spectra to demonstrate the instrument performance.
+So we take fiber spectra for a couple of fields.
 
 %Note: \\
 %* AG position at MCS is defined using fiducial fibers for AG cameras \\
 %* We need Astrometry catalogue or a single catalogue during the commission (use UCAC4 ?).
+
+\paragraph{Designated Tool for This Process}
+A method is needed to analyze AG camera images for astrometry, and analyze raster scan data of the fiver viewing cameras.
+\redtext{To do: Check output from fvcactor. If it outputs intensity of the fiber spot, the method will be simple..}
 
 \begin{itembox}[l]{\suctitle{Success Criteria}}
 The ``$1^\mathrm{st}$-pass" distortion map is obtained with the accuracy of 50um

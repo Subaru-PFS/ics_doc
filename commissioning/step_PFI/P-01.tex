@@ -1,20 +1,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Check of basic functions of PFI / OPot2 on off-Telescope (stand-by) condition [Daytime]}\label{secflow:PFIoff}
-In this sequence, we check basic functions of PFI and Popt2 before installation to the telescope.
+\subsubsection{Check of basic functions of PFI / OPot2 on stand-by condition [Daytime]}\label{secflow:PFIoff}
+In this process, we check basic functions of PFI and Popt2 before installation to the telescope.
 Firstly we check basic functions of PFI prior to installation to Popt2.
 Namely,
 \begin{itemize}
-\item fiducial fiber illuminator: turn on/off
-\item calibration lamp: turn on/off (it can be turned on /off by local computer)
+\item Fiducial fiber illuminator: turn on/off
+\item Calibration lamp: turn on/off (it can be turned on /off by local computer)
 \item AG cameras: read image (bias/dark) with expected noise level.
 We also check that the images is sent to VLAN and Gen2.
-\item fiducial cameras can read image (bias/dark) with expected noise level
-\item Center camera can read image (bias/dark) with expected noise level
+\item Fiducial viewing cameras can read image (bias/dark) with expected noise level
+\item Field center camera can read image (bias/dark) with expected noise level
 %\item fiber positioner: move and home, read status
-\item sensors can be read
-\item network connection
-\item cooling system
-\item telemetry
+\item Telemetry sensors can be read
+%\item Network connection
+\item Cooling system
+%\item Telemetry
 \end{itemize}
 The above functions of PFI, except for the turning on/off calibration lamp, are controlled from Gen2 through MHS
 
@@ -35,13 +35,17 @@ If we take the same procedure\footnote{some explanation is described here: NDTN-
 
 After the installation of PFI to Popt2, then the following functions are checked.
 \begin{itemize}
-\item rotator: can mechanically rotate from -270 [deg] to + 270 [deg]
+\item Rotator: PFI can rotate from -270$\degree$ to + 270$\degree$
 \end{itemize}
 
-At this point, most of functions controlled by PFICS, MPS, so that these modules and their communication with Gen2 via MHS are validated.
-\redtext{Name them. how about Cal. lamp?}
+At this point, the functions are controlled by agccActor, fccActor, fvcActor and pebActor, that these modules (actors) and their communication with Gen2 via MHS are also validated.
+\redtext{How about Cal. lamp?}
 
 Refer the requirement for pre-installation check-out to {\tt L3-PFI-037}.
+
+\paragraph{Designated Tool for This Process} 
+We will prepare a command sequence to check the basic functions.
+This sequence will be used as PFI health check.
 
 \begin{itembox}[l]{\suctitle{Success Criteria}}
 All PFI basic functions are available and characterized.\\

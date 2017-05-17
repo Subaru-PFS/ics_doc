@@ -1,22 +1,25 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Measurement of PFI x/y offset [Daytime]}\label{secflow:PFIoffset}
 
-In this step, we measure offset of PFI in x/y direction by deriving its rotator center on MCS.
-By measuring in several runs, the repeatability of installing PFI to Popt2 (and then PFI positions w.r.t. rotator axis) are verified, taking account into the expected repeatability of decenter of MCS ($<$ 50um, see \ref{secflow:MCSinstall}) and installing Popt2 to the top ring ($\leq$ 10um, see \ref{secflow:PFIinstall})
+In this process, we measure offset of PFI in x/y direction by deriving its rotator center on MCS.
+By measuring this at several runs, the repeatability of installing PFI to Popt2 (and then PFI positions w.r.t. rotator axis) are verified, taking account into the expected repeatability of decenter of MCS ($<$ 50um, see \ref{secflow:MCSinstall}) and installing Popt2 to the top ring ($\leq$ 10um, see \ref{secflow:PFIinstall})
 
 The measurement is carried out in the following procedure:
 \begin{enumerate}
-\item Firstly, we take several back-illuminated fiducial fibers images at a given rotator angle at aiming Elevation and Azimuth in order to measure the stability of the centroid.
+\item Firstly, we take several back-illuminated fiducial fibers images at a given rotator angle at aiming Elevation in order to measure the stability of the centroid \footnote{The accuracy and stability of centroid are measured in the process \ref{secflow:MCSperf}, but it should be measured here for sanity.}.
 \item Then we take fiducial fibers images at various instrument rotator angles.
 The series of spots of individual fibers is fit to concentric circles centered at the rotator axis.
 In other words, the position of rotator axis on the MCS ($x_{rot}, y_{rot}$) can be measured from the circles. 
 \item ($x_{rot}, y_{rot}$) with respect to the center of MCS is compared with the prediction or the value at the last PFI installation. 
-If the new ($x_{rot}, y_{rot}$) is quite different from the previous value, we might have to adjust PFI to POpt2.
+If the new ($x_{rot}, y_{rot}$) is quite different from the previous value, we might have to adjust PFI to POpt2, and/or MCS to Cs.
 \item We also check dependence of ($x_{rot}, y_{rot}$) on telescope Elevation.
 \end{enumerate}
 
 The first ($x_{rot}, y_{rot}$) is possibly different from that measured later, because we will align the WFC w.r.t the primary mirror in \ref{secflow:WFCTiltShift}.
-In the current commissioning plan, the repeatability in z direction is not be measured.
+In the current commissioning plan, the offset in z direction and its repeatability will not be measured.
+
+\paragraph{Designated Tool for This Process}
+We will prepare a tool to measure the center of concentric circles from quires images.
 
 \begin{itembox}[l]{\suctitle{Success Criteria}}
 PFI x/y offset is measured and confirmed offset from the previous operation is smaller than 20 um. 

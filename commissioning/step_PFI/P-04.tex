@@ -3,16 +3,29 @@
 
 \milestone{MCS reads fiducial/science fiber image for the first time.}
 
-After the PFI and MCS are installed to the Prime Focus and the Cassegrain  Focus, respectively, the image quality of the MCS is validated, because at this point MCS can take the image of fibers in the entire field of view for the first time.
+After PFI and MCS are installed to the Prime Focus and the Cassegrain  Focus, respectively, the image quality of the MCS is validated finally, because at this point MCS can take the image of ``fibers" in the entire field of view for the first time.
 We check the intensity of the spots of fiducial fibers, and confirm the S/N meets the requirement ($>$ several hundreds, according to CDR).
 We validate the MCS exposure and centroid measurement sequence; taking image and calculating the positions of fibers with expected time ($<5$ seconds, according to CDR).
-Here, we need to somehow illuminate the science fibers if SpS and Cable B is not ready\footnote{According to the latest schedule, Cable B and SM1,2 will be delivered before the PFI arrival. We then shall back-illuminate science fibers at the other end of Cable B (on IR4 floor).}.
+Here, we need to somehow illuminate the science fibers if SpS and Cable B is not ready\footnote{According to the latest schedule, Cable B and SM1,2, and 3 will be delivered before the PFI arrival. We will use these SMs, and shall back-illuminate the rest of science fibers at the other end of Cable B (on IR4 floor) in some way.}.
 
-When we confirm MCS can take fibers image, we validate the MCS performance.
+After we confirm MCS can take fibers image with required S/N, we validate the MCS performance.
 MCS is designed to have uniform PSF with FWHM of 8.5um, or 2.6 pixel, in the entire field of view of PFI.
-In this step, we take the image of back-illuminated fiducial and science fibers, and check the FWHM of the PSFs.
-We also check that the accuracy of the position of the spots is less than 5um (0.08 pixel) rms, by taking several image of the fibers and calculating the positions at a given Elevation.
-Taking fibers image at various Elevations and rotator angles, we also test the stability of the image quality and derived centroids.
+For the accuracy of the position of the spots, the requirement is less than 5um (0.08 pixel) rms, 
+The validation will be processed as follows:
+\begin{enumerate}
+\item Take the image of back-illuminated fiducial and science fibers, and measure the FWHM of the PSFs.
+\item Take several fiber images and calculate the positions errors at a given Elevation. 
+\item Repeating 1. and 2. at various elevations and rotator angles, test the stability of the image quality and derived centroids.
+\end{enumerate}
+
+If we take 50 frames for a given elevation and rotator angle, it will take $\sim$10 minutes (see also \ref{secflow:prestudy}).
+Assuming we test at 6 rotator angles (with 60$\degree$ step from EL$=-180\degree$ to 180$\degree$) for every 5 elevation (with 15$\degree$ step from EL$=30\degree$ to 90$\degree$), 5 hours are required for this test.
+Hence, 0.5 day is enough for this process, including the time for verifying the S/N of the spots.
+
+\paragraph{Designated Tool for This Process}
+Nothing except for statistics of the measured values.
+For measurement of centroid and FWHM, we will use MCS software.
+
 
 \begin{itembox}[l]{\suctitle{Success Criteria}}
 MCS can take fiber image and measure fiber positions. \\
