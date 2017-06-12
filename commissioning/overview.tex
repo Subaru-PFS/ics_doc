@@ -112,12 +112,16 @@ The file named {\tt PFS\_AIT\_Subaru.pptx}\footnote{http://sumire.pbworks.com/w/
 \begin{center}
 %\scriptsize
 %\footnotesize
-\caption{Subsystem I\&T time and place.}
+\caption{Subsystem I\&T time and place.
+In column 1 is listed subsystem.
+In column 2 is described the latest schedule of A\&I in Hawaii.
+In columns 3 and 4 are listed working place at Hilo base and at the summit, respectively.
+}
 \label{tbl:SubSysIandT} 
 \begin{tabular}{*{4}{c}} \hline
 Subsystem	& Year/Month & I\&T Place (Hilo) & I\&T Place (Summit) \\ \hline \hline
 PFI	& 2018/10--2019/01		& Simulator lab.	& Instrument Lab. \& Observation floor \\
-MCS	& 2017/07--2017/09	& Simulator lab.	& Observation floor \\
+MCS	& 2017/12--2018/01	& Simulator lab.	& Observation floor \\
 SpS-SM1	& 2018/02--2018/03		& -- 	& IR4 (SCR) \\
 SpS-SM2	& 2018/11--2018/12		& --	 	& IR4 (SCR) \\
 SpS-SM3	& 2018/11--2018/12		& -- 	& IR4 (SCR) \\
@@ -192,7 +196,12 @@ To be written.
 %%% achieved functions
 \subsection{Achieved PFS Functions during the Commissioning (TBD)}\label{sec:cmatrix}
 Table \ref{tbl:funcs} shows achieved PFS functions and related commissioning sequences (compliance matrix).
-Column 1 lists the priority of the functions (TBD).
+Column 1 lists the ID of the functions.
+Column 2 lists the priority of the functions (TBC).
+In column 3 and 4 are described the functions, and detailed success criteria respectively.
+Columns 5 lists the process  where the functions will be validated.
+In columns 6, a checked-mark will be put when the the functions will be validated.
+Columns 7 describes other notes.
 
 %---------------------------------------------------
 % Table: Achieved functions and related sequences.
@@ -522,11 +531,16 @@ Note that we assume that we can coordinate with Mitsubishi to proceed individual
 \begin{center}
 \caption{
 Expected number of working days for commissioning.
-Note that Year/Month in column 2 are just roughly set assuming the latest schedule of each subsystems and that scientific operation will start in the S20B semester.}
+Column 1 lists the run number.
+Note that Year/Month in column 2 are just roughly set assuming the latest schedule of each subsystems and that scientific operation will start in the S20B semester.
+The required days for each run are listed in column 3.
+Required days for individual  processes at each run are listed in column 5 (daytime) or 6 (night-time).
+The numbers in parentheses in column 6 is required dark nights.  
+}
 %\scriptsize
 \footnotesize
 \begin{tabular}{*{3}{c}|*{3}{c}}\label{tbl:CountDates} \\ \hline
-Run	 & Year/Month  &\#days & seq.	& daytime & night (dark) \\ \hline \hline
+Run	 & Year/Month  &\#days & process	& daytime & night (dark) \\ \hline \hline
 0	& S17B			& 0.5***	& P7(*)	& 0		& 0.5 (0.5)	\\ \hline
 1	& S18A			& 4		& M1--3		& (1**)	& 0	(0)	\\
 	& or	& 				& M4		& 3		& 0	(0)	\\ 
