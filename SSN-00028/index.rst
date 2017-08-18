@@ -13,7 +13,7 @@ PFS ICS dnsmasq Configuration Conventions
 
 - `Contents (definitions in configuration files)`_
 
-  - `Global configurations`_
+  - `Global dnsmasq configurations`_
   - `Site specific dnsmasq configurations`_
   - `Host configurations`_
 
@@ -131,7 +131,7 @@ Contents (definitions in configuration files)
 Some of this section is RECOMMENDED for instrument development sites (or 
 branch in git repository) but is NOT REQUIRED. 
 
-Global configurations
+Global dnsmasq configurations
 ======
 
 Following configurations SHALL be included in the `master` branch, and SHOULD 
