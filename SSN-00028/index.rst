@@ -224,7 +224,8 @@ Following configurations MAY be included.
 Host configurations
 ======
 
-Host configurations are defined by two files in both `hosts` and `host-mac` 
+Host configurations are defined by two files in both `hosts.\<site\>` and 
+`host-mac` 
 directories, which define IP address and MAC address against hostname 
 respectively. Hosts are categorized into two, one SHALL NOT depend on DHCP 
 and SHALL be configured as static at OS such as network switches or VM hosts 
@@ -256,7 +257,8 @@ Also these hostnames are RECOMMENDED to consider following points.
   product tree, such as `bcu1` but not just `b1`, to make hostname to be self 
   described. 
 
-For configuration files in `hosts` directory, which contains pairs of hostname 
+For configuration files in `hosts.\<site\>` directory, 
+which contains pairs of hostname 
 and IP address in hosts format, every lines are RECOMMENDED to consider 
 following points.
 
