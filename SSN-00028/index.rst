@@ -14,6 +14,7 @@ PFS ICS dnsmasq Configuration Conventions
 - `Contents (definitions in configuration files)`_
 
   - `Global configurations`_
+  - `Site specific dnsmasq configurations`_
   - `Host configurations`_
 
 - `IP address range assignments in master branch (real)`_
@@ -62,24 +63,43 @@ repository even if the entire file is just a text file without any line for
 configuration (like readme). Placing such files as dot filename, like 
 `.README.rst`, is NOT RECOMMENDED. 
 
+To have `site specific` configuration files and directories, system 
+administrator of each instance SHALL 
+
+- Configure dnsmasq to load `/etc/dnsmasq.d/*.conf` by editing 
+  `/etc/default/dnsmasq` file to have a line - 
+  `CONFIG_DIR=/etc/dnsmasq.d,*.conf`. 
+- Make symlink for `site specific` dnsmasq configuration, from 
+  `/etc/dnsmasq.d/dnsmasq-site.\<site\>` to `/etc/dnsmasq.d/dnsmasq-site.conf`.
+
 In the 'ics_dnsmasq' repository, we SHALL place configuration files as:
 
 `host-mac` directory
   Place files in a name of 'target'.conf, which contain lines of a pair of 
   MAC address and its hostname as `xx:xx:xx:xx:xx:xx,hostname` format.
-`hosts` directory
+  Only `global` configuration is allowed for this part, all paris used at 
+  every sites SHALL be placed here. 
+`hosts.\<site\>` directory
   Place files in a name of 'target'.conf, which contain lines in a format 
   used for `hosts` file as `IP_address hostname(s)`.
+  This directory SHALL be configured to be loaded by `dnsmasq-site.\<site\>` 
+  file, but NOT by symlink. 
 `dnsmasq.conf` file
   This file SHALL have all configurations specified in the 
   `Global configurations`_ section, and SHALL NOT have any configuration 
   not described in the section. 
   In other words, any global configurations SHALL be described in the 
   `Global configurations`_ section with its necessity. 
+`dnsmasq-site.\<site\>` file
+  This file SHALL have all configurations specified in the 
+  `Site specific dnsmasq configurations`_ section, and SHALL NOT have any 
+  configuration not described in the section. 
 
 Any other directory or file with configurations SHALL NOT be added or 
-placed into the master branch of 'ics_dnsmasq' repository. 
-As in `Global configurations`_ section, it is possible to add new separated 
+placed into the 'ics_dnsmasq' repository. 
+As in `Global configurations`_ or 
+`Site specific dnsmasq configurations`_ section, 
+it is possible to add new separated 
 file for groups of configurations, such as PXE as DHCP option for flagged 
 hosts, but such file SHALL be added in the list above before added into 
 the `ics_dnsmasq` repository. 
@@ -94,6 +114,10 @@ consisted with several hardware and control boxes, it is RECOMMENDED to
 break configurations into files by domains to be used, such as a set of 
 control computers and hardware for cameras (like FCC) in PFI, or a piepan of 
 each cryostat in SpS. 
+
+'site' name used for `site specific` configuration files SHALL be a commonly 
+used short name of a site in all lower cases, such as 'subaru', 'ipmu', or 
+'jhu'. 
 
 Files in two directories, `host-mac` and `hosts`, SHALL be the same file name 
 for the same target. Like, for host `mac` with `ab:cc:ef:01:23:45` and 
@@ -176,6 +200,9 @@ configuration file at the top level directory in the `ics_dnsmasq` repository.
 - `enable-tftp`
 - `tftp-root=/xxx`
 - `tftp-secure`
+
+Site specific dnsmasq configurations
+======
 
 Host configurations
 ======
