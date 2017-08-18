@@ -8,7 +8,7 @@ PFS ICS dnsmasq Configuration Conventions
 
 - `General`_
 
-  - `Branch management`_
+  - `Branch and deployment management`_
   - `Directory and file management`_
 
 - `Contents (definitions in configuration files)`_
@@ -23,27 +23,29 @@ General
 
 In this section, git repository configurations, such as directory, file, and branch, are defined. 
 
-Branch management
+Branch and deployment management
 ======
 
-Not like normal git branch management way, the 'ics_dnsmasq' repository makes 
-the `master` branch to be defined as the one used at the production - Subaru 
-summit environment as real. Other branches are to be used at each development 
-site with a name of each site, such as `LAM` and so on. 
+Not like normal git branch management way, the 'ics_dnsmasq' repository SHALL 
+have only `master` branch for all sites both the production, Subaru summit 
+environment as real, and and all AIT or development sites. 
+Files and directories of configurations SHALL be categorized into either 
+`global` or `site specific`, and `site specific` configuration files or 
+directories SHALL be loaded by the dnsmasq daemon using symlink configured 
+at each instance, following scheme defined in the 
+`Directory and file management`_ section. 
 
-Merging from one branch to another SHOULD happen at points of hardware 
-deliveries, but can be performed well in advanced. It is RECOMMENDED to have 
-separated files in `host-mac` and `hosts` directory per each hardware 
-delivery. For most cases, actual procedure of merging will not be by normal 
-ways using git, but just copied and newly added to the new branch is 
-RECOMMENDED with including a commit hash and a branch name of the origin. 
+With this scheme, merging contents in normal git branch management way will 
+not happen, but it is RECOMMENDED to store conflict free configurations, 
+such as pairs of MAC address and host name, in `global` ones not to duplicate 
+configurations in multiple `site specific` ones. 
 
 - Many sites have different regulation of IP address assignments, and 
   configuration files in `hosts` directory could be different. 
-- Getting the exact files for one delivery with simple diff between two 
-  points of commit history is difficult for some instrument development sites, 
-  it is simple just to copy with modification into a branch for target of 
-  delivery rather than having complexed flow of git commands. 
+- Configuring daemon to load `site specific` configuration files or directories 
+  using symlink is a task just once per instance, and could be less harmful 
+  rather than doing merge configuration files between branches at each time 
+  of delivery. 
 
 Directory and file management
 ======
