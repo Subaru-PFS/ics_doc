@@ -134,13 +134,11 @@ branch in git repository) but is NOT REQUIRED.
 Global dnsmasq configurations
 ======
 
-Following configurations SHALL be included in the `master` branch, and SHOULD 
-be included in other branches. `xxx` in configurations SHALL be replaced with 
-real values. 
+Following configurations SHALL be included. 
+`xxx` in configurations SHALL be replaced with real values. 
 
 - `dnsmasq` configuration files' definitions
 
-  - `addn-hosts=/etc/dnsmasq.d/hosts`
   - `dhcp-hostsfile=/etc/dnsmasq.d/host-mac`
 
 - DNS
@@ -152,23 +150,13 @@ real values.
   - `expand-hosts`: This is required to build FQDN from `addn-hosts` 
     configuration.
   - `domain-needed`: This is required not to break upstream DNS server.
-  - `txt-record=xxx,xxx`: This txt record is REQUIRED for operation of FITS 
-    name building (as for now). 
 
 - DHCP
 
   - `log-dhcp`: This makes dnsmasq to log all DHCP requests and replies, which 
     is useful for issue handling and trouble shooting. 
-  - `domain=xxx`: for default domain used in the site
-  - `dhcp-range=xxx`: for DHCP configurations. At least two lines are REQUIRED, 
-    one for all range of assignable IP addresses (for IP addresses, which are 
-    not included in any of lines, are not assigned even if specified in 
-    dnsmasq configurations), and one with `tag:!known` option to specify 
-    temporary IP addresses. 
-  - `dhcp-option=option:ntp-server,xxx`: for configuration of NTP server. The 
-    NTP server MAY be by Subaru but PFS could have its own. 
 
-Following configurations MAY be included in branches (also for `master`). 
+Following configurations MAY be included.
 
 - DNS
 
@@ -177,9 +165,6 @@ Following configurations MAY be included in branches (also for `master`).
   - `bogus-priv`: In production, IP address range is not in private IP ranges, 
     this configuration will not affect to anything nor is not harmful. 
     But could be useful in some development sites. 
-  - `no-resolv`, `server=xxx`: In production, by default, upstream DNS server 
-    configuration is to be specified in `/etc/resolv.conf`, but these two 
-    configurations could be added just in case. 
 
 - DHCP
 
@@ -203,6 +188,38 @@ configuration file at the top level directory in the `ics_dnsmasq` repository.
 
 Site specific dnsmasq configurations
 ======
+
+Following configurations SHALL be included. 
+`xxx` in configurations SHALL be replaced with real values. 
+
+- `dnsmasq` configuration files' definitions
+
+  - `addn-hosts=/etc/dnsmasq.d/hosts.\<site\>` to include hostname to IP 
+    address configuration.
+
+- DNS
+
+  - `txt-record=xxx,xxx`: This txt record is REQUIRED for operation of FITS 
+    name building (as for now) to identify at which site the system is working. 
+
+- DHCP
+
+  - `domain=xxx`: for default domain used in the site
+  - `dhcp-range=xxx`: for DHCP configurations. At least two lines are REQUIRED, 
+    one for all range of assignable IP addresses (for IP addresses, which are 
+    not included in any of lines, are not assigned even if specified in 
+    dnsmasq configurations), and one with `tag:!known` option to specify 
+    temporary IP addresses. 
+  - `dhcp-option=option:ntp-server,xxx`: for configuration of NTP server. The 
+    NTP server MAY be by Subaru but PFS could have its own. 
+
+Following configurations MAY be included.
+
+- DNS
+
+  - `no-resolv`, `server=xxx`: In production, by default, upstream DNS server 
+    configuration is to be specified in `/etc/resolv.conf`, but these two 
+    configurations could be added just in case. 
 
 Host configurations
 ======
