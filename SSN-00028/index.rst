@@ -8,8 +8,8 @@ PFS ICS dnsmasq Configuration Conventions
 
 - `General`_
 
-  - `Directory and file management`_
   - `Branch management`_
+  - `Directory and file management`_
 
 - `Contents (definitions in configuration files)`_
 
@@ -22,6 +22,28 @@ General
 ******
 
 In this section, git repository configurations, such as directory, file, and branch, are defined. 
+
+Branch management
+======
+
+Not like normal git branch management way, the 'ics_dnsmasq' repository makes 
+the `master` branch to be defined as the one used at the production - Subaru 
+summit environment as real. Other branches are to be used at each development 
+site with a name of each site, such as `LAM` and so on. 
+
+Merging from one branch to another SHOULD happen at points of hardware 
+deliveries, but can be performed well in advanced. It is RECOMMENDED to have 
+separated files in `host-mac` and `hosts` directory per each hardware 
+delivery. For most cases, actual procedure of merging will not be by normal 
+ways using git, but just copied and newly added to the new branch is 
+RECOMMENDED with including a commit hash and a branch name of the origin. 
+
+- Many sites have different regulation of IP address assignments, and 
+  configuration files in `hosts` directory could be different. 
+- Getting the exact files for one delivery with simple diff between two 
+  points of commit history is difficult for some instrument development sites, 
+  it is simple just to copy with modification into a branch for target of 
+  delivery rather than having complexed flow of git commands. 
 
 Directory and file management
 ======
@@ -76,28 +98,6 @@ for the same target. Like, for host `mac` with `ab:cc:ef:01:23:45` and
 `10.123.45.67` in `mac` target category, configurations will be done as 
 `ab:cc:ef:01:23:45,mac` in `host-mac/mac.conf` and `10.123.45.67 mac` in 
 `hosts/mac.conf`. 
-
-Branch management
-======
-
-Not like normal git branch management way, the 'ics_dnsmasq' repository makes 
-the `master` branch to be defined as the one used at the production - Subaru 
-summit environment as real. Other branches are to be used at each development 
-site with a name of each site, such as `LAM` and so on. 
-
-Merging from one branch to another SHOULD happen at points of hardware 
-deliveries, but can be performed well in advanced. It is RECOMMENDED to have 
-separated files in `host-mac` and `hosts` directory per each hardware 
-delivery. For most cases, actual procedure of merging will not be by normal 
-ways using git, but just copied and newly added to the new branch is 
-RECOMMENDED with including a commit hash and a branch name of the origin. 
-
-- Many sites have different regulation of IP address assignments, and 
-  configuration files in `hosts` directory could be different. 
-- Getting the exact files for one delivery with simple diff between two 
-  points of commit history is difficult for some instrument development sites, 
-  it is simple just to copy with modification into a branch for target of 
-  delivery rather than having complexed flow of git commands. 
 
 Contents (definitions in configuration files)
 ******
