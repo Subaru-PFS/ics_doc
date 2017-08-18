@@ -84,10 +84,10 @@ In the 'ics_dnsmasq' repository, we SHALL place configuration files as:
   file, but NOT by symlink. 
 `dnsmasq.conf` file
   This file SHALL have all configurations specified in the 
-  `Global configurations`_ section, and SHALL NOT have any configuration 
+  `Global dnsmasq configurations`_ section, and SHALL NOT have any configuration 
   not described in the section. 
   In other words, any global configurations SHALL be described in the 
-  `Global configurations`_ section with its necessity. 
+  `Global dnsmasq configurations`_ section with its necessity. 
 `dnsmasq-site.\<site\>` file
   This file SHALL have all configurations specified in the 
   `Site specific dnsmasq configurations`_ section, and SHALL NOT have any 
@@ -95,7 +95,7 @@ In the 'ics_dnsmasq' repository, we SHALL place configuration files as:
 
 Any other directory or file with configurations SHALL NOT be added or 
 placed into the 'ics_dnsmasq' repository. 
-As in `Global configurations`_ or 
+As in `Global dnsmasq configurations`_ or 
 `Site specific dnsmasq configurations`_ section, 
 it is possible to add new separated 
 file for groups of configurations, such as PXE as DHCP option for flagged 
