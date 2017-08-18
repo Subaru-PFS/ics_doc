@@ -17,8 +17,6 @@ PFS ICS dnsmasq Configuration Conventions
   - `Site specific dnsmasq configurations`_
   - `Host configurations`_
 
-- `IP address range assignments in master branch (real)`_
-
 General
 ******
 
@@ -283,10 +281,4 @@ configure as follows.
   especially for bondX network interface. 
 - All MAC addresses of physical NICs SHALL be recorded into a corresponding 
   `host-mac` configuration file. 
-
-IP address range assignments in master branch (real)
-******
-
-PFS has assigned IP address range of 133.40.164.0/23 from Subaru. This section 
-is to define smaller IP address ranges to be assigned to PFS ICS subsystems. 
 
