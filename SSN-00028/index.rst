@@ -156,7 +156,7 @@ Following configurations SHALL be included.
 
 - `dnsmasq` configuration files' definitions
 
-  - `dhcp-hostsfile=/etc/dnsmasq.d/host-mac`
+  - `dhcp-hostsfile=/etc/dnsmasq.d/macs`
 
 - DNS
 
@@ -193,16 +193,6 @@ Following configurations MAY be included.
     one DHCP server on a network, and this should be set (but could work 
     without this configuration). 
 
-Following configurations SHOULD be included when PXE/TFTP is required for 
-operation, such as SpS/BEE. These configurations MAY be added as a separated 
-configuration file at the top level directory in the `ics_dnsmasq` repository. 
-
-- `dhcp-option-force=xxx`
-- `dhcp-boot=tag:pxe,pxelinux.0`
-- `enable-tftp`
-- `tftp-root=/xxx`
-- `tftp-secure`
-
 Site specific dnsmasq configurations
 ======
 
@@ -211,8 +201,11 @@ Following configurations SHALL be included.
 
 - `dnsmasq` configuration files' definitions
 
-  - `addn-hosts=/etc/dnsmasq.d/hosts.\<site\>` to include hostname to IP 
-    address configuration.
+  - `addn-hosts=/etc/dnsmasq.d/hosts-\<site\>` to include hostname to IP 
+    address configuration. (multiple lines are possible, like `hosts-lam` for 
+    AIT site specific pairs and `hosts-subaru` for real pairs.) 
+  - `dhcp-hostsfile=/etc/dnsmasq.d/macs-\<site\>` to include MAC address to 
+    hostname configuration. 
 
 - DNS
 
@@ -232,17 +225,35 @@ Following configurations SHALL be included.
 
 Following configurations MAY be included.
 
+- `dnsmasq` configuration
+
+  - `interface` (with `bind-interfaces`): to limit interface to listen, 
+    if dnsmasq host is a gateway to external network.
+
 - DNS
 
   - `no-resolv`, `server=xxx`: In production, by default, upstream DNS server 
     configuration is to be specified in `/etc/resolv.conf`, but these two 
     configurations could be added just in case. 
 
+Following configurations SHOULD be included when PXE/TFTP is required for 
+operation, such as SpS/BEE. These configurations MAY be added as a separated 
+configuration file at the top level directory in the `ics_dnsmasq` repository. 
+Note, having `tftp-root` configuration without real path existing, dnsmasq 
+will not start for missing directory error. 
+
+- `dhcp-option-force=xxx`
+- `dhcp-boot=tag:pxe,pxelinux.0`
+- `enable-tftp`
+- `tftp-root=/xxx`
+- `tftp-secure`
+
+
 Host configurations
 ======
 
-Host configurations are defined by two files in both `hosts.\<site\>` and 
-`host-mac` 
+Host configurations are defined by two files in both `hosts-\<site\>` and 
+`macs-\<site\>` 
 directories, which define IP address and MAC address against hostname 
 respectively. Hosts are categorized into two, one SHALL NOT depend on DHCP 
 and SHALL be configured as static at OS such as network switches or VM hosts 
@@ -255,7 +266,7 @@ For both cases, hosts SHALL be configured in the dnsmasq service as follows.
   included. This is for DNS resolv, recording of hosts, and in case of 
   trouble (to assign IP address by DHCP for these hosts). 
 - All NICs on computing hardware SHALL be included in configuration files 
-  in `host-mac` directory. A hostname for additional NIC SHALL follow the 
+  in `macs-\<site\>` directory. A hostname for additional NIC SHALL follow the 
   main one, such like `vmhost1b` for a host named as `vmhost1`. 
 - A hostname SHALL be fixed to function of target component but not hardware, 
   and SHALL be taken from its function. This means a hostname assigned to a 
@@ -271,18 +282,19 @@ Also these hostnames are RECOMMENDED to consider following points.
 - 'hostname' MAY contain '-' for separations between subparts, but SHALL NOT 
   use '_' for separations (RFC violation).
 - Subparts of 'hostname' is RECOMMENDED to be well defined name in the PFS 
-  product tree, such as `bcu1` but not just `b1`, to make hostname to be self 
+  product tree, such as `sm1` but not just `s1`, to make hostname to be self 
   described. 
 
-For configuration files in `hosts.\<site\>` directory, 
+For configuration files in `hosts-\<site\>` directory, 
 which contains pairs of hostname 
 and IP address in hosts format, every lines are RECOMMENDED to consider 
 following points.
 
-- Only one hostname, from which defined in `host-mac` as pairs of hostname and 
-  MAC address, is defined for one IP address. 'dnsmasq' takes first 
-  definition (first line or first item in a line), but ignores any of 
-  followings as double defined for fixed IP address assignments of DHCP. 
+- Only one hostname, from which defined in `macs-\<site\>` as pairs of 
+  hostname and MAC address, is defined for one IP address. 
+  'dnsmasq' takes first definition (first line or first item in a line), 
+  but ignores any of followings as double defined for 
+  fixed IP address assignments of DHCP. 
 - Multiple hostname MAY be defined for DNS to be used for having alternative 
   name of a target to be connected from control software. 
 - These configuration files SHALL NOT be changed on replacing hardware for 
@@ -299,5 +311,5 @@ configure as follows.
 - Every hosts are RECOMMENDED to be configured as static but not DHCP, 
   especially for bondX network interface. 
 - All MAC addresses of physical NICs SHALL be recorded into a corresponding 
-  `host-mac` configuration file. 
+  `macs-\<site\>` configuration file. 
 
