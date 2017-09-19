@@ -46,19 +46,25 @@ configurations in multiple `site specific` ones.
   rather than doing merge configuration files between branches at each time 
   of delivery. 
 
+Also PFS ICS project sets ansible for default and suggested deployment method 
+of dnsmasq daemon configuration, including modification of daemon startup 
+(e.g. `/etc/defaults/dnsmasq`), it is strongly RECOMMENDED to use ansible to 
+deploy daemon and its configuration. 
+
 Directory and file management
 ======
 
 The 'ics_dnsmasq' repository is organized to be deployed as `/etc/dnsmasq.d/` 
 and SHALL NOT contain any file or directory which causes syntax error by 
-dnsmasq daemon. Assumed deploy method and operation is to replace entire system 
+dnsmasq daemon. Assumed deploy method and operation, which is implemented in 
+ansible role of PFS ICS, is to replace entire system 
 default installed configuration at `/etc/dnsmasq.d/` into cloned one from 
-git repository, `.git/` directory (`/etc/dnsmasq.d/.git/`) will be ignored 
+git repository. The `.git/` directory (`/etc/dnsmasq.d/.git/`) will be ignored 
 by the dnsmasq daemon on parsing contents in `/etc/dnsmasq.d/` and this way 
 will work fine. We MAY have some notes or comments in files placed in the 
 repository, escaping or commenting out is REQUIRED for any file in the 
-repository even if the entire file is just a text file without any line for 
-configuration (like readme). Placing such files as dot filename, like 
+repository which could be lead by dnsmasq daemon, although we configure daemon 
+to load only `*.conf` file. Placing such files as dot filename, like 
 `.README.rst`, is NOT RECOMMENDED. 
 
 To have `site specific` configuration files and directories, system 
@@ -72,16 +78,24 @@ administrator of each instance SHALL
 
 In the 'ics_dnsmasq' repository, we SHALL place configuration files as:
 
-`host-mac` directory
+`macs` directory
   Place files in a name of 'target'.conf, which contain lines of a pair of 
   MAC address and its hostname as `xx:xx:xx:xx:xx:xx,hostname` format.
-  Only `global` configuration is allowed for this part, all paris used at 
-  every sites SHALL be placed here. 
-`hosts.\<site\>` directory
+  Only site `global` configuration lines, which will be delivered to Subaru, 
+  are allowed for this part, 
+  all paris used at every sites SHALL be placed here. 
+`macs-\<site\>` directory
+  Place files in a name of 'target'.conf, which contain lines of a pair of 
+  MAC address and its hostname as `xx:xx:xx:xx:xx:xx,hostname` format, 
+  and used for site specific AIT or development works but not be delivered to 
+  Subaru.
+`hosts-\<site\>` directory
   Place files in a name of 'target'.conf, which contain lines in a format 
   used for `hosts` file as `IP_address hostname(s)`.
   This directory SHALL be configured to be loaded by `dnsmasq-site.\<site\>` 
   file, but NOT by symlink. 
+  For Subaru, use `hosts-subaru` directory, and be read through 
+  `dnsmasq-site.subaru` configuration file.
 `dnsmasq.conf` file
   This file SHALL have all configurations specified in the 
   `Global dnsmasq configurations`_ section, and SHALL NOT have any configuration 
@@ -92,6 +106,8 @@ In the 'ics_dnsmasq' repository, we SHALL place configuration files as:
   This file SHALL have all configurations specified in the 
   `Site specific dnsmasq configurations`_ section, and SHALL NOT have any 
   configuration not described in the section. 
+  Also this file SHALL be symlined from `dnsmasq-site.conf` during deployment 
+  at each site.
 
 Any other directory or file with configurations SHALL NOT be added or 
 placed into the 'ics_dnsmasq' repository. 
@@ -99,14 +115,16 @@ As in `Global dnsmasq configurations`_ or
 `Site specific dnsmasq configurations`_ section, 
 it is possible to add new separated 
 file for groups of configurations, such as PXE as DHCP option for flagged 
-hosts, but such file SHALL be added in the list above before added into 
+hosts, but such file SHALL be added in the list below 
+(in `Contents (definitions in configuration files)`_ section) before added into 
 the `ics_dnsmasq` repository. 
 
 'target' name used for configuration files SHALL be based on acronyms listed 
 in the product tree of the PFS, such as PFI (Prime Focus Instrument), MCS 
 (Metrology Camera System), or RCU (Red Camera Unit), with number(s) attached 
-for identifying multiple instances. Commonly used shorter names like r1 for 
-RCU1 are NOT RECOMMENDED, not to confuse team members. 
+for identifying multiple instances. Commonly used shorter names 
+are NOT RECOMMENDED, except for special case of xcu (e.g. r1, b2, n3), 
+not to confuse team members. 
 Considering replacements by maintenance, especially for hardware replacement 
 consisted with several hardware and control boxes, it is RECOMMENDED to 
 break configurations into files by domains to be used, such as a set of 
@@ -115,12 +133,13 @@ each cryostat in SpS.
 
 'site' name used for `site specific` configuration files SHALL be a commonly 
 used short name of a site in all lower cases, such as 'subaru', 'ipmu', or 
-'jhu'. 
+'jhu', also leading part of CIDR like `10.1` is allowed only for transition 
+phase. 
 
-Files in two directories, `host-mac` and `hosts`, SHALL be the same file name 
+Files in two directories, `macs` and `hosts`, SHALL be the same file name 
 for the same target. Like, for host `mac` with `ab:cc:ef:01:23:45` and 
 `10.123.45.67` in `mac` target category, configurations will be done as 
-`ab:cc:ef:01:23:45,mac` in `host-mac/mac.conf` and `10.123.45.67 mac` in 
+`ab:cc:ef:01:23:45,mac` in `macs/mac.conf` and `10.123.45.67 mac` in 
 `hosts/mac.conf`. 
 
 Contents (definitions in configuration files)
