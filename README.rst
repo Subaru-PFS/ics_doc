@@ -5,7 +5,8 @@ ICS design and study documents.
 Make one directory per each document, include all resources into that directory,  such as figures.
 For tex sources, do not include output or intermediate files.
 
-Required style files are in pfs_misc repository. 
+Required [style files](https://github.com/Subaru-PFS/pfs_misc/tree/master/texsty) 
+are in the [pfs_misc repository](https://github.com/Subaru-PFS/pfs_misc). 
 
 ID assignment
 ======
@@ -13,10 +14,12 @@ ID assignment
 Add to the list below, push to the master.
 Do never recycle old IDs.
 
+* [Meeting minutes](memo-minutes/)
+
 Commissioning documents
 ------
 
-* commissioning_details: Detailed procedure of PFS commissioning
+* [commissioning_details](commissioning/): Detailed procedure of PFS commissioning
 
 SE-IPMU
 ------
@@ -24,7 +27,7 @@ SE-IPMU
 System Engineering related document by IPMU team.
 
 1. IR4 SpS chiller planning
-2. Note on PFS humidity control
+2. [Note on PFS humidity control](SE-IPMU-00002/)
 3. SpS power distribution box design
 4. PFI failure mode analysis
 5. System wide failure mode analysis
@@ -44,8 +47,8 @@ System Engineering related document by IPMU team.
 SSN (Software Study Note)
 ------
 
-1. Data rate from reading out detectors
-2. PFS ICS network connections (ICD 70)
+1. [Data rate from reading out detectors](SSN-00001/)
+2. [PFS ICS network connections (ICD 70)](SSN-00002/)
 3. Items to be discussed on science requirements on PFS software
 4. Study on PFS AutoGuider communication specification to Telescope (NDA)
 5. Study on PFS power failure modes
@@ -53,7 +56,7 @@ SSN (Software Study Note)
 7. Specifications on PFI lamp control system
 8. PFS Coordinate transformation
 9. PFS Integrated Database system
-10. PFS ICS network design note
+10. [PFS ICS network design note](SSN-00010/)
 11. Study on PFS Observation Sequence (I) - overall
 12. Study on PFS Observation Sequence (II) - From command next field to AutoGuide
 13. Study on definition of VMCS
@@ -63,14 +66,14 @@ SSN (Software Study Note)
 17. Message exchange internal of tron
 18. ICS on-site storage plan
 19. PFS Software status update
-20. Preparation at Subaru/Summit before delivery of subsystems
+20. [Preparation at Subaru/Summit before delivery of subsystems](SSN-00020/)
 21. Procedure to measure and store MPS configurations
 22. ICS on-site (summit/CB2F) rack design, restriction and unit registration
-23. AG/A&G control flow and interface
+23. [(AG/A&G control flow and interface](SSN-00023/)
 24. FITS file generation flow
-25. Collision detection during Cobra configuration
+25. [Collision detection during Cobra configuration](SSN-00025/)
 26. Cobra collision cases
-27. (TradeStudy) Cobra operational data (spot measurement, target) handling on MHS or DB
-28. ics_dnsmasq (ICS DHCP/DNS server) organization and item registration procedure
-29. (Material for review) PFS ICS infrastructure design and performance verification
+27. (TradeStudy) [Cobra operational data (spot measurement, target) handling on MHS or DB](SSN-00027/)
+28. [ics_dnsmasq (ICS DHCP/DNS server) organization and item registration procedure](SSN-00028/)
+29. (Material for review) [PFS ICS infrastructure design and performance verification](SSN-00029.pptx)
 
