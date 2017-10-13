@@ -1,20 +1,25 @@
-# ics_doc
+ics_doc
+******
+
 ICS design and study documents.
 Make one directory per each document, include all resources into that directory,  such as figures.
 For tex sources, do not include output or intermediate files.
 
 Required style files are in pfs_misc repository. 
 
-## ID assignment
+ID assignment
+======
 
 Add to the list below, push to the master.
 Do never recycle old IDs.
 
-### Commissioning documents
+Commissioning documents
+------
 
 * commissioning_details: Detailed procedure of PFS commissioning
 
-### SE-IPMU
+SE-IPMU
+------
 
 System Engineering related document by IPMU team.
 
@@ -36,7 +41,8 @@ System Engineering related document by IPMU team.
 16. SCR cabling design
 17. Exposure time control per camera (arm)
 
-### SSN (Software Study Note)
+SSN (Software Study Note)
+------
 
 1. Data rate from reading out detectors
 2. PFS ICS network connections (ICD 70)
