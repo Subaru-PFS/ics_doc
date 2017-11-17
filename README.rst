@@ -41,7 +41,7 @@ System Engineering related document by IPMU team.
 13. xCU vacuum line note
 14. Effects on Cobra operation from design and manufacture error
 15. AG conversion accuracy study
-16. SCR cabling design
+16. `SCR cabling design <SE-IPMU-00016.pptx>`_
 17. Exposure time control per camera (arm)
 
 SSN (Software Study Note)
