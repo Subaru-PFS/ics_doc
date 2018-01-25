@@ -8,18 +8,25 @@ For tex sources, do not include output or intermediate files.
 Required `style files <https://github.com/Subaru-PFS/pfs_misc/tree/master/texsty>`_ 
 are in the `pfs_misc repository <https://github.com/Subaru-PFS/pfs_misc>`_. 
 
-ID assignment
+List of contents
 ======
 
-Add to the list below, push to the master.
-Do never recycle old IDs.
-
+* `Bulk memos for ICS <memo/>`_
 * `Meeting minutes <memo-minutes/>`_
+* System Engineering related documents, see list in `SE-IPMU`_
+* SSN documents, see list in `SSN (Software Study Note)`_
 
 Commissioning documents
 ------
 
 * `commissioning_details <commissioning/>`_: Detailed procedure of PFS commissioning
+
+
+ID assignment for SE-IPMU and SSN
+======
+
+Add to the list below, push to the master.
+Do never recycle old IDs.
 
 SE-IPMU
 ------
