@@ -7,6 +7,10 @@ useful for running or development of tron and actors
 
 Add new memo into files in this directory listed below, or add a new file 
 with adding a short description into following list. 
+This directory is for unorganized memos, no formal review process is required 
+to push to the repository even for 'master', but it is recommended to update 
+whole one file with the latest information when update something (to make 
+checking the last updated date of contents easy just at a file listing page). 
 
 
 List of notes
