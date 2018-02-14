@@ -12,6 +12,14 @@ to push to the repository even for 'master', but it is recommended to update
 whole one file with the latest information when update something (to make 
 checking the last updated date of contents easy just at a file listing page). 
 
+Useful links
+======
+
+* `EUPS for PFS <http://ics-config.readthedocs.io/en/latest/eups.html>`_
+* From LSST
+
+  * `DM Development Workflow with Git, GitHub, JIRA and Jenkins 
+    <https://developer.lsst.io/processes/workflow.html>`_
 
 List of notes
 ======
