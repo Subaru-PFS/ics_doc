@@ -8,96 +8,139 @@ PFS ICS dnsmasq Configuration Conventions
 
 - `General`_
 
+  - `Branch and deployment management`_
   - `Directory and file management`_
-  - `Branch management`_
 
 - `Contents (definitions in configuration files)`_
 
-  - `Global configurations`_
+  - `Global dnsmasq configurations`_
+  - `Site specific dnsmasq configurations`_
   - `Host configurations`_
-
-- `IP address range assignments in master branch (real)`_
 
 General
 ******
 
 In this section, git repository configurations, such as directory, file, and branch, are defined. 
 
+Branch and deployment management
+======
+
+Not like normal git branch management way, the 'ics_dnsmasq' repository SHALL 
+have only `master` branch for all sites both the production, Subaru summit 
+environment as real, and and all AIT or development sites. 
+Files and directories of configurations SHALL be categorized into either 
+`global` or `site specific`, and `site specific` configuration files or 
+directories SHALL be loaded by the dnsmasq daemon using symlink configured 
+at each instance, following scheme defined in the 
+`Directory and file management`_ section. 
+
+With this scheme, merging contents in normal git branch management way will 
+not happen, but it is RECOMMENDED to store conflict free configurations, 
+such as pairs of MAC address and host name, in `global` ones not to duplicate 
+configurations in multiple `site specific` ones. 
+
+- Many sites have different regulation of IP address assignments, and 
+  configuration files in `hosts` directory could be different. 
+- Configuring daemon to load `site specific` configuration files or directories 
+  using symlink is a task just once per instance, and could be less harmful 
+  rather than doing merge configuration files between branches at each time 
+  of delivery. 
+
+Also PFS ICS project sets ansible for default and suggested deployment method 
+of dnsmasq daemon configuration, including modification of daemon startup 
+(e.g. `/etc/defaults/dnsmasq`), it is strongly RECOMMENDED to use ansible to 
+deploy daemon and its configuration. 
+
 Directory and file management
 ======
 
 The 'ics_dnsmasq' repository is organized to be deployed as `/etc/dnsmasq.d/` 
 and SHALL NOT contain any file or directory which causes syntax error by 
-dnsmasq daemon. Assumed deploy method and operation is to replace entire system 
+dnsmasq daemon. Assumed deploy method and operation, which is implemented in 
+ansible role of PFS ICS, is to replace entire system 
 default installed configuration at `/etc/dnsmasq.d/` into cloned one from 
-git repository, `.git/` directory (`/etc/dnsmasq.d/.git/`) will be ignored 
+git repository. The `.git/` directory (`/etc/dnsmasq.d/.git/`) will be ignored 
 by the dnsmasq daemon on parsing contents in `/etc/dnsmasq.d/` and this way 
 will work fine. We MAY have some notes or comments in files placed in the 
 repository, escaping or commenting out is REQUIRED for any file in the 
-repository even if the entire file is just a text file without any line for 
-configuration (like readme). Placing such files as dot filename, like 
+repository which could be lead by dnsmasq daemon, although we configure daemon 
+to load only `*.conf` file. Placing such files as dot filename, like 
 `.README.rst`, is NOT RECOMMENDED. 
+
+To have `site specific` configuration files and directories, system 
+administrator of each instance SHALL 
+
+- Configure dnsmasq to load `/etc/dnsmasq.d/*.conf` by editing 
+  `/etc/default/dnsmasq` file to have a line - 
+  `CONFIG_DIR=/etc/dnsmasq.d,*.conf`. 
+- Make symlink for `site specific` dnsmasq configuration, from 
+  `/etc/dnsmasq.d/dnsmasq-site.\<site\>` to `/etc/dnsmasq.d/dnsmasq-site.conf`.
 
 In the 'ics_dnsmasq' repository, we SHALL place configuration files as:
 
-`host-mac` directory
+`macs` directory
   Place files in a name of 'target'.conf, which contain lines of a pair of 
   MAC address and its hostname as `xx:xx:xx:xx:xx:xx,hostname` format.
-`hosts` directory
+  Only site `global` configuration lines, which will be delivered to Subaru, 
+  are allowed for this part, 
+  all paris used at every sites SHALL be placed here. 
+`macs-\<site\>` directory
+  Place files in a name of 'target'.conf, which contain lines of a pair of 
+  MAC address and its hostname as `xx:xx:xx:xx:xx:xx,hostname` format, 
+  and used for site specific AIT or development works but not be delivered to 
+  Subaru.
+`hosts-\<site\>` directory
   Place files in a name of 'target'.conf, which contain lines in a format 
   used for `hosts` file as `IP_address hostname(s)`.
+  This directory SHALL be configured to be loaded by `dnsmasq-site.\<site\>` 
+  file, but NOT by symlink. 
+  For Subaru, use `hosts-subaru` directory, and be read through 
+  `dnsmasq-site.subaru` configuration file.
 `dnsmasq.conf` file
   This file SHALL have all configurations specified in the 
-  `Global configurations`_ section, and SHALL NOT have any configuration 
+  `Global dnsmasq configurations`_ section, and SHALL NOT have any configuration 
   not described in the section. 
   In other words, any global configurations SHALL be described in the 
-  `Global configurations`_ section with its necessity. 
+  `Global dnsmasq configurations`_ section with its necessity. 
+`dnsmasq-site.\<site\>` file
+  This file SHALL have all configurations specified in the 
+  `Site specific dnsmasq configurations`_ section, and SHALL NOT have any 
+  configuration not described in the section. 
+  Also this file SHALL be symlined from `dnsmasq-site.conf` during deployment 
+  at each site.
 
 Any other directory or file with configurations SHALL NOT be added or 
-placed into the master branch of 'ics_dnsmasq' repository. 
-As in `Global configurations`_ section, it is possible to add new separated 
+placed into the 'ics_dnsmasq' repository. 
+As in `Global dnsmasq configurations`_ or 
+`Site specific dnsmasq configurations`_ section, 
+it is possible to add new separated 
 file for groups of configurations, such as PXE as DHCP option for flagged 
-hosts, but such file SHALL be added in the list above before added into 
+hosts, but such file SHALL be added in the list below 
+(in `Contents (definitions in configuration files)`_ section) before added into 
 the `ics_dnsmasq` repository. 
 
 'target' name used for configuration files SHALL be based on acronyms listed 
 in the product tree of the PFS, such as PFI (Prime Focus Instrument), MCS 
 (Metrology Camera System), or RCU (Red Camera Unit), with number(s) attached 
-for identifying multiple instances. Commonly used shorter names like r1 for 
-RCU1 are NOT RECOMMENDED, not to confuse team members. 
+for identifying multiple instances. Commonly used shorter names 
+are NOT RECOMMENDED, except for special case of xcu (e.g. r1, b2, n3), 
+not to confuse team members. 
 Considering replacements by maintenance, especially for hardware replacement 
 consisted with several hardware and control boxes, it is RECOMMENDED to 
 break configurations into files by domains to be used, such as a set of 
 control computers and hardware for cameras (like FCC) in PFI, or a piepan of 
 each cryostat in SpS. 
 
-Files in two directories, `host-mac` and `hosts`, SHALL be the same file name 
+'site' name used for `site specific` configuration files SHALL be a commonly 
+used short name of a site in all lower cases, such as 'subaru', 'ipmu', or 
+'jhu', also leading part of CIDR like `10.1` is allowed only for transition 
+phase. 
+
+Files in two directories, `macs` and `hosts`, SHALL be the same file name 
 for the same target. Like, for host `mac` with `ab:cc:ef:01:23:45` and 
 `10.123.45.67` in `mac` target category, configurations will be done as 
-`ab:cc:ef:01:23:45,mac` in `host-mac/mac.conf` and `10.123.45.67 mac` in 
+`ab:cc:ef:01:23:45,mac` in `macs/mac.conf` and `10.123.45.67 mac` in 
 `hosts/mac.conf`. 
-
-Branch management
-======
-
-Not like normal git branch management way, the 'ics_dnsmasq' repository makes 
-the `master` branch to be defined as the one used at the production - Subaru 
-summit environment as real. Other branches are to be used at each development 
-site with a name of each site, such as `LAM` and so on. 
-
-Merging from one branch to another SHOULD happen at points of hardware 
-deliveries, but can be performed well in advanced. It is RECOMMENDED to have 
-separated files in `host-mac` and `hosts` directory per each hardware 
-delivery. For most cases, actual procedure of merging will not be by normal 
-ways using git, but just copied and newly added to the new branch is 
-RECOMMENDED with including a commit hash and a branch name of the origin. 
-
-- Many sites have different regulation of IP address assignments, and 
-  configuration files in `hosts` directory could be different. 
-- Getting the exact files for one delivery with simple diff between two 
-  points of commit history is difficult for some instrument development sites, 
-  it is simple just to copy with modification into a branch for target of 
-  delivery rather than having complexed flow of git commands. 
 
 Contents (definitions in configuration files)
 ******
@@ -105,17 +148,15 @@ Contents (definitions in configuration files)
 Some of this section is RECOMMENDED for instrument development sites (or 
 branch in git repository) but is NOT REQUIRED. 
 
-Global configurations
+Global dnsmasq configurations
 ======
 
-Following configurations SHALL be included in the `master` branch, and SHOULD 
-be included in other branches. `xxx` in configurations SHALL be replaced with 
-real values. 
+Following configurations SHALL be included. 
+`xxx` in configurations SHALL be replaced with real values. 
 
 - `dnsmasq` configuration files' definitions
 
-  - `addn-hosts=/etc/dnsmasq.d/hosts`
-  - `dhcp-hostsfile=/etc/dnsmasq.d/host-mac`
+  - `dhcp-hostsfile=/etc/dnsmasq.d/macs`
 
 - DNS
 
@@ -126,23 +167,13 @@ real values.
   - `expand-hosts`: This is required to build FQDN from `addn-hosts` 
     configuration.
   - `domain-needed`: This is required not to break upstream DNS server.
-  - `txt-record=xxx,xxx`: This txt record is REQUIRED for operation of FITS 
-    name building (as for now). 
 
 - DHCP
 
   - `log-dhcp`: This makes dnsmasq to log all DHCP requests and replies, which 
     is useful for issue handling and trouble shooting. 
-  - `domain=xxx`: for default domain used in the site
-  - `dhcp-range=xxx`: for DHCP configurations. At least two lines are REQUIRED, 
-    one for all range of assignable IP addresses (for IP addresses, which are 
-    not included in any of lines, are not assigned even if specified in 
-    dnsmasq configurations), and one with `tag:!known` option to specify 
-    temporary IP addresses. 
-  - `dhcp-option=option:ntp-server,xxx`: for configuration of NTP server. The 
-    NTP server MAY be by Subaru but PFS could have its own. 
 
-Following configurations MAY be included in branches (also for `master`). 
+Following configurations MAY be included.
 
 - DNS
 
@@ -151,9 +182,6 @@ Following configurations MAY be included in branches (also for `master`).
   - `bogus-priv`: In production, IP address range is not in private IP ranges, 
     this configuration will not affect to anything nor is not harmful. 
     But could be useful in some development sites. 
-  - `no-resolv`, `server=xxx`: In production, by default, upstream DNS server 
-    configuration is to be specified in `/etc/resolv.conf`, but these two 
-    configurations could be added just in case. 
 
 - DHCP
 
@@ -165,9 +193,54 @@ Following configurations MAY be included in branches (also for `master`).
     one DHCP server on a network, and this should be set (but could work 
     without this configuration). 
 
+Site specific dnsmasq configurations
+======
+
+Following configurations SHALL be included. 
+`xxx` in configurations SHALL be replaced with real values. 
+
+- `dnsmasq` configuration files' definitions
+
+  - `addn-hosts=/etc/dnsmasq.d/hosts-\<site\>` to include hostname to IP 
+    address configuration. (multiple lines are possible, like `hosts-lam` for 
+    AIT site specific pairs and `hosts-subaru` for real pairs.) 
+  - `dhcp-hostsfile=/etc/dnsmasq.d/macs-\<site\>` to include MAC address to 
+    hostname configuration. 
+
+- DNS
+
+  - `txt-record=xxx,xxx`: This txt record is REQUIRED for operation of FITS 
+    name building (as for now) to identify at which site the system is working. 
+
+- DHCP
+
+  - `domain=xxx`: for default domain used in the site
+  - `dhcp-range=xxx`: for DHCP configurations. At least two lines are REQUIRED, 
+    one for all range of assignable IP addresses (for IP addresses, which are 
+    not included in any of lines, are not assigned even if specified in 
+    dnsmasq configurations), and one with `tag:!known` option to specify 
+    temporary IP addresses. 
+  - `dhcp-option=option:ntp-server,xxx`: for configuration of NTP server. The 
+    NTP server MAY be by Subaru but PFS could have its own. 
+
+Following configurations MAY be included.
+
+- `dnsmasq` configuration
+
+  - `interface` (with `bind-interfaces`): to limit interface to listen, 
+    if dnsmasq host is a gateway to external network.
+
+- DNS
+
+  - `no-resolv`, `server=xxx`: In production, by default, upstream DNS server 
+    configuration is to be specified in `/etc/resolv.conf`, but these two 
+    configurations could be added just in case. 
+
 Following configurations SHOULD be included when PXE/TFTP is required for 
 operation, such as SpS/BEE. These configurations MAY be added as a separated 
 configuration file at the top level directory in the `ics_dnsmasq` repository. 
+Note, having `tftp-root` configuration without real path existing, dnsmasq 
+will not start for missing directory error. 
 
 - `dhcp-option-force=xxx`
 - `dhcp-boot=tag:pxe,pxelinux.0`
@@ -175,10 +248,12 @@ configuration file at the top level directory in the `ics_dnsmasq` repository.
 - `tftp-root=/xxx`
 - `tftp-secure`
 
+
 Host configurations
 ======
 
-Host configurations are defined by two files in both `hosts` and `host-mac` 
+Host configurations are defined by two files in both `hosts-\<site\>` and 
+`macs-\<site\>` 
 directories, which define IP address and MAC address against hostname 
 respectively. Hosts are categorized into two, one SHALL NOT depend on DHCP 
 and SHALL be configured as static at OS such as network switches or VM hosts 
@@ -191,7 +266,7 @@ For both cases, hosts SHALL be configured in the dnsmasq service as follows.
   included. This is for DNS resolv, recording of hosts, and in case of 
   trouble (to assign IP address by DHCP for these hosts). 
 - All NICs on computing hardware SHALL be included in configuration files 
-  in `host-mac` directory. A hostname for additional NIC SHALL follow the 
+  in `macs-\<site\>` directory. A hostname for additional NIC SHALL follow the 
   main one, such like `vmhost1b` for a host named as `vmhost1`. 
 - A hostname SHALL be fixed to function of target component but not hardware, 
   and SHALL be taken from its function. This means a hostname assigned to a 
@@ -207,17 +282,19 @@ Also these hostnames are RECOMMENDED to consider following points.
 - 'hostname' MAY contain '-' for separations between subparts, but SHALL NOT 
   use '_' for separations (RFC violation).
 - Subparts of 'hostname' is RECOMMENDED to be well defined name in the PFS 
-  product tree, such as `bcu1` but not just `b1`, to make hostname to be self 
+  product tree, such as `sm1` but not just `s1`, to make hostname to be self 
   described. 
 
-For configuration files in `hosts` directory, which contains pairs of hostname 
+For configuration files in `hosts-\<site\>` directory, 
+which contains pairs of hostname 
 and IP address in hosts format, every lines are RECOMMENDED to consider 
 following points.
 
-- Only one hostname, from which defined in `host-mac` as pairs of hostname and 
-  MAC address, is defined for one IP address. 'dnsmasq' takes first 
-  definition (first line or first item in a line), but ignores any of 
-  followings as double defined for fixed IP address assignments of DHCP. 
+- Only one hostname, from which defined in `macs-\<site\>` as pairs of 
+  hostname and MAC address, is defined for one IP address. 
+  'dnsmasq' takes first definition (first line or first item in a line), 
+  but ignores any of followings as double defined for 
+  fixed IP address assignments of DHCP. 
 - Multiple hostname MAY be defined for DNS to be used for having alternative 
   name of a target to be connected from control software. 
 - These configuration files SHALL NOT be changed on replacing hardware for 
@@ -234,11 +311,5 @@ configure as follows.
 - Every hosts are RECOMMENDED to be configured as static but not DHCP, 
   especially for bondX network interface. 
 - All MAC addresses of physical NICs SHALL be recorded into a corresponding 
-  `host-mac` configuration file. 
-
-IP address range assignments in master branch (real)
-******
-
-PFS has assigned IP address range of 133.40.164.0/23 from Subaru. This section 
-is to define smaller IP address ranges to be assigned to PFS ICS subsystems. 
+  `macs-\<site\>` configuration file. 
 
