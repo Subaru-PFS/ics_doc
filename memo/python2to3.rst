@@ -31,3 +31,9 @@ If you do any io to devices, they probably want bytearrays and not strings.
 Find the read/write calls and add encode('latin-1')/decode('latin-1'). 
 latin-1 is used because it leaves all 256 unsigned char values unchanged.
 
+
+References
+------
+
+* `SQR-014 LSST Python 3 <https://sqr-014.lsst.io/>`_
+
