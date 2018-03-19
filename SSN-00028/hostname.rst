@@ -18,23 +18,26 @@ Naming hostname
   lower case alphabet with following numerical charactors for multiple 
   instances. 
 
-  - Following numerical charactors are just to indicate multiple instances 
-    like `sm1`, `sm2`, `sm3`, `sm4` for four spectrograph module instances, 
-    but not added for single instance ones like `pfi`.
+  - Numeric character(s) SHALL follow alphabetical characters only to 
+    indicate multiple instances such as four spectrograph modules 
+    (sm1, sm2, sm3, and sm4). Namely, any numeric character SHALL NOT follow 
+    alphabetical character(s) in case of single instance such as pfi.
   - Following numerical charactors MAY be 2 digits in `\<feature\>` for 
     largely multiplated devices, but SHALL be as short as possible. 
 
-- Alphabet part of `\<subsystem\>` SHALL be selected from listed in `Keywords`_ 
-  section, which are picked up from a list of PFS acronyms of subsystems.
+- Alphabet characters in `\<subsystem\>` SHALL be selected from ones listed 
+  in `Keywords`_ section which are the acronyms of PFS subsystems.
 - Alphabet part of `\<feature\>` is RECOMMENDED to be selected from acronyms 
   listed in the PFS product tree.
 
 Keywords
 ======
 
-This section lists keywords to be used as `\<subsystem\>` part, and following 
-`\[1-4\]` part in definitions are possible range of multiple instances. 
-(If something missing, one SHALL be added to this list before using.)
+This section lists keywords to be used in the `\<subsystem\>` part, 
+and the following `\[1-4\]` part defines the possible range of digit to 
+indicate multiple instances. 
+If this list does not include a keyword that needs to be used, 
+one SHALL add it to this list before using it.
 
 pfi
   Prime Focus Instrument, including control software module at CB2F.
