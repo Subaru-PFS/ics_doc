@@ -83,4 +83,5 @@ SSN (Software Study Note)
 27. (TradeStudy) `Cobra operational data (spot measurement, target) handling on MHS or DB <SSN-00027/>`_
 28. `ics_dnsmasq (ICS DHCP/DNS server) organization and item registration procedure <SSN-00028/>`_
 29. (Material for review) `PFS ICS infrastructure design and performance verification <SSN-00029.pptx>`_
+30. `PFS ICS production configuration <SSN-00030/>`_
 
