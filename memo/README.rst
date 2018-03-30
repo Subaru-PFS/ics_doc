@@ -16,6 +16,9 @@ Useful links
 ======
 
 * `EUPS for PFS <http://ics-config.readthedocs.io/en/latest/eups.html>`_
+* tron
+  * `APO Instrument Control Computer Design 
+    <https://www.apo.nmsu.edu/35m_operations/ICCDesign/>`_
 * From LSST
 
   * `DM Development Workflow with Git, GitHub, JIRA and Jenkins 
