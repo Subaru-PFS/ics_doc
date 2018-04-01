@@ -3,6 +3,8 @@ Shared storage service for PFS ICS production
 
 This note covers configurations on FC/iSCSI storage device and NFS services. 
 
+* `Storage device configuration`_
+* `NFS service configuration`_
 
 Storage device configuration
 ======
@@ -80,4 +82,48 @@ Memo
 NFS service configuration
 ======
 
+Overview
+------
+
+One physical host is planned to mount storage via FC (4Gbps or 8Gbps), and 
+to provide shared storage via NFS (v4 in target, v3 for now). Depends on its 
+performance or resource management, this host could be a VM host and some 
+NFS server might be operated as VM guest mounting block device via VM layer. 
+
+Access
+------
+
+To make client configuration stable even when infrastructure decides to devide 
+NFS server using VM layer, a dedicated hostname is to be assigned to each 
+block device as following, and it is recommended to mount via a pair of 
+hostname and mount point. 
+
+- nfs-ics: Alias for physical host itself
+- nfsv-ics: Alias for 'VMGuest' area
+- nfsp-ics: Alias for 'ProdData' area
+- nfso-ics: Alias for 'OperData' area
+- nfsb-ics: Alias for 'Backup' area
+
+Memo
+----
+
+- Physical host of NFS service will have connection via FC to storage and 
+  bonded ethernet to NFS client hosts, data flow to two (categories of) targets 
+  will flow through different path and will not cause degradation from flow 
+  duplication at storage device connection point. 
+
+  - Note, in case of trouble, like FC card broken, we need to switch FC 
+    connection to iSCSI, and it will make theoretical maximum data flow into 
+    half. 
+  - Requirement to storage device performance is 3-4Gbps in sequential block 
+    read/write, connection of both FC and bonded ethernet for NFS could be ok 
+    with 4Gbps although we have options to upgrade to 8Gbps FC or 10Gbps 
+    metal ethernet by hardware upgrade. 
+
+- One LUN is assigned to one storage mount point exposed to NFS. 
+
+  - This enable us to divide NFS server one mount point by one if we have some 
+    performance issue like both data flow and node operation at host. 
+  - Each LUN will be shown up as a block device to a physical host, and can 
+    be exposed to VM guest (with directsync). 
 
