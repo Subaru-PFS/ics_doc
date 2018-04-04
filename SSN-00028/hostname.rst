@@ -72,7 +72,8 @@ This section lists various remarks and typical exceptions from listed above.
 
     - nfs-ics: master alias as physical host which proxy the largest total 
       bandwidth disk IO stream
-    - nfsv-ics: for /virt
-    - nfss-ics: for general purpose storage
-    - nfsd-ics: for detector data storage
+    - nfsv-ics: for /virt (virt NFS storage)
+    - nfso-ics: for general purpose (operational, /home, etc.) storage
+    - nfsp-ics: for detector data storage
+    - nfsb-ics: for /backup (backup target)
 
