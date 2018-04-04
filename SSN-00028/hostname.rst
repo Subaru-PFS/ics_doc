@@ -8,6 +8,7 @@ PFS ICS hostname Conventions
 
 - `Naming hostname`_
 - `Keywords`_
+- `Remarks and exceptions`_
 
 Naming hostname
 ======
@@ -59,4 +60,20 @@ ics
   ICS operational infrastructure, including MHS, DB server, support services.
 infra
   ICS hardware infrastructure, including PDU, KVM, iSCSI storage.
+
+Remarks and exceptions
+======
+
+This section lists various remarks and typical exceptions from listed above. 
+
+- NFS service is assumed to be capable reorganizing into separated hosts. 
+  Adding individual target hostname for each target (directory) is assumed, as 
+  listed below:
+
+    - nfs-ics: master alias as physical host which proxy the largest total 
+      bandwidth disk IO stream
+    - nfsv-ics: for /virt (virt NFS storage)
+    - nfso-ics: for general purpose (operational, /home, etc.) storage
+    - nfsp-ics: for detector data storage
+    - nfsb-ics: for /backup (backup target)
 
