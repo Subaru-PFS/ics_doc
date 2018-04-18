@@ -102,7 +102,7 @@ In this section, the brief summary of I\&T of subsystems are described.
 See the documents by collaborators (TBA) for detailed procedure of I\&T.
 
 Table \ref{tbl:SubSysIandT} summarizes schedule and place of I\&T of subsystems.
-The validated functions before shipping (or before commissioning) is listed in table \ref{tbl:subfuncs}.
+The validated functions before shipping (or before commissioning) is listed in Table \ref{tbl:subfuncs}.
 The file named {\tt PFS\_AIT\_Subaru.pptx}\footnote{http://sumire.pbworks.com/w/file/111633073/PFS\_AIT\_Subaru.pptx} summarizes The required sources, layout of working space and other configurations of I\&T process in Hawaii
 
 %---------------------------------------------------
@@ -114,19 +114,19 @@ The file named {\tt PFS\_AIT\_Subaru.pptx}\footnote{http://sumire.pbworks.com/w/
 %\footnotesize
 \caption{Subsystem I\&T time and place.
 In column 1 is listed subsystem.
-In column 2 is described the latest schedule of A\&I in Hawaii.
+In column 2 is described the latest schedule (April 2018) of A\&I in Hawaii.
 In columns 3 and 4 are listed working place at Hilo base and at the summit, respectively.
 }
 \label{tbl:SubSysIandT} 
 \begin{tabular}{*{4}{c}} \hline
 Subsystem	& Year/Month & I\&T Place (Hilo) & I\&T Place (Summit) \\ \hline \hline
-PFI	& 2018/10--2019/01		& Simulator lab.	& Instrument Lab. \& Observation floor \\
-MCS	& 2017/12--2018/01	& Simulator lab.	& Observation floor \\
-SpS-SM1	& 2018/02--2018/03		& -- 	& IR4 (SCR) \\
-SpS-SM2	& 2018/11--2018/12		& --	 	& IR4 (SCR) \\
-SpS-SM3	& 2018/11--2018/12		& -- 	& IR4 (SCR) \\
-SpS-SM4	& 2019/07--2019/08		& -- 	& IR4 (SCR) \\
-Cable B	&	2018/06--2018/08	& TBD	&TBD \\ \hline
+PFI	& 2019/04--2019/07		& Simulator lab.	& Instrument Lab. \& Observation floor \\
+MCS	& 2018/04--2018/05	& Simulator lab.	& Observation floor \\
+SpS-SM1	& 2019/03--2019/04		& -- 	& IR4 (SCR) \\
+SpS-SM2	& 2019/04--2020/04		& --	 	& IR4 (SCR) \\
+SpS-SM3	& 2020/02--2020/04		& -- 	& IR4 (SCR) \\
+SpS-SM4	& 2020/08--2019/09		& -- 	& IR4 (SCR) \\
+Cable B	&	early 2019	& TBD	&TBD \\ \hline
 \end{tabular} 
 \end{center}
 \end{table}
@@ -161,14 +161,15 @@ Also, telemetry system, communication among PFI software actors, SAS, and STS wi
 After AIT at ASIAA, MCS will be shipped to Subaru without disassembling.
 The optical alignment of the subsystem will be checked using laser at Hilo base, then the subsystem will be transported to the Summit.
 
-At the Summit, the image quality will be checked with the pinhole array.
+At the Summit, the image quality will be checked with the pinhole array, the achromatic lens will be installed, and MCS will be installed MCBox.
 ASIAA will also adjust the alignment of MCS with respect to the prime focus, because MCS will be mounted to CsBox only ``mechanically".
 Such a test enables us to use time efficiently before PFI arrival, and to save time after PFI arrival, which is expected one year later than MCS arrival, because we should align MCS with the prime focus firstly.
 After the alignment, the image quality will be also checked under the more realistic observational condition (e.g. dome seeing).
 This test will be performed using the pinhole array can be equipped on POpt2.
 Note that the I\&T process using Popt2 with pinhole array will be done combining to MCS commissioning process (\ref{secflow:prestudy}).
 
-As the same as PFI, MCS software module is also integrated and tested.
+Because MCS is the first subsystem delivered to Subaru, the ICS infrastructure will be prepared to accommodate MHS and ICS actors.
+MCS software modules are hooked up to the MHS running on the summit infrastructure.
 
 \paragraph{SpS}
 After AIT at LAM, four modules are shipped to Subaru separately.
