@@ -1,0 +1,37 @@
+\subsection{Required Tools}\label{sec:required_tools}
+As shown the above, a various tools are requires, some of which is used for scientific operation and other of which is designated for the commissioning (or engineering).
+Table \ref{tbl:tools} summarizes input and output of individual tools.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Table of Compliance Matrix
+
+
+%--------------------------------------------------------------
+%  Table: expected runs and nights
+%--------------------------------------------------------------
+%\setlength{\tabcolsep}{1mm}{
+%\begin{landscape}
+\begin{longtable}{p{40mm}|p{40mm}|p{40mm}|p{35mm}}
+%\begin{center}
+\caption{
+The list of tools used for PFS commissioning.}
+\label{tbl:tools} 
+%\scriptsize
+\footnotesize
+\\ \hline
+Input	& Output & Success Criteria & Notes \\ \hline \hline
+\endhead
+%\hline
+\endfoot
+\multicolumn{4}{c}{ \ref{secflow:MCSoff} and \ref{secflow:MCSon}: Initial check of MCS} \\ \hline
+%%% M--1
+Gen2 command to open/close shutter 	&  Shutter movement	& Shutter opens/closes	&  	\\  \hline
+Gen2 command to acquire MCS image 	&  Shutter movement and MCS image.	& Image is acquired with name and headers along with datamodel, and archived. &  \\  \hline
+Gen2 command to read MCS temperatures 	&  Value of temperature sensors 	& Read temperature correctly.	&  \\  \hline
+Gen2 command to read MCS flow meter 	&  Value of flow meter	& Read flow correctly.	&  \\  \hline
+(Command to listen microphone) 	&  Sound from microphone	& Sound transferred correctly.	& How to transfer audio is under discussion.  \\  \hline
+Gen 2 command to execute the above 	&  Result of commands	& Command is executed properly	&  	\\ \hline
+%...	& ...	& ...	& ...	& ...	& ... \\ \hline \hline
+%\end{center}
+\end{longtable}
+%\end{landscape}
