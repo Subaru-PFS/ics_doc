@@ -30,7 +30,8 @@ including non-merged branches.
 
 - **06:50:00:A5:00:\[ab\]X**: PFI
 - **06:50:00:A5:00:cX**: MCS
-- **06:50:00:A5:00:\[d-f\]X**: (kept as spare)
+- **06:50:00:A5:00:dX**: Landfill
+- **06:50:00:A5:00:\[ef\]X**: (kept as spare)
 - **06:50:00:A5:01:XX**: AIT and development site specific tools
 
   - Assuming not to be delivered to the production
