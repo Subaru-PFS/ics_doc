@@ -14,24 +14,37 @@ Table \ref{tbl:tools} summarizes input and output of individual tools.
 \begin{longtable}{p{40mm}|p{40mm}|p{40mm}|p{35mm}}
 %\begin{center}
 \caption{
-The list of tools used for PFS commissioning.}
+The list of tools used for PFS commissioning (TBW). The tools in the blue row are designated for the engineering.}
 \label{tbl:tools} 
 %\scriptsize
 \footnotesize
-\\ \hline
-Input	& Output & Success Criteria & Notes \\ \hline \hline
+%\\ \hline
+%\multicolumn{4}{c}{ Process Name and Summary} \\ \hline
+%Inputs	& Outputs & Success Criteria & Notes \\ \hline \hline
 \endhead
 %\hline
 \endfoot
+\hline
+%%% M--1, M--3
 \multicolumn{4}{c}{ \ref{secflow:MCSoff} and \ref{secflow:MCSon}: Initial check of MCS} \\ \hline
-%%% M--1
-Gen2 command to open/close shutter 	&  Shutter movement	& Shutter opens/closes	&  	\\  \hline
-Gen2 command to acquire MCS image 	&  Shutter movement and MCS image.	& Image is acquired with name and headers along with datamodel, and archived. &  \\  \hline
-Gen2 command to read MCS temperatures 	&  Value of temperature sensors 	& Read temperature correctly.	&  \\  \hline
-Gen2 command to read MCS flow meter 	&  Value of flow meter	& Read flow correctly.	&  \\  \hline
-(Command to listen microphone) 	&  Sound from microphone	& Sound transferred correctly.	& How to transfer audio is under discussion.  \\  \hline
-Gen 2 command to execute the above 	&  Result of commands	& Command is executed properly	&  	\\ \hline
+Inputs	& Outputs & Success Criteria & Notes \\ \arrayrulecolor[rgb]{0.63,0.79,0.95}\hline \hline \arrayrulecolor{black}
+Gen2 command to open/close MCS shutter. 	&  Shutter moves and its status returns.	& Shutter movement and status are consistent.	&  	\\  \hline
+Gen2 command to acquire MCS image. 	&  Shutter moves (if needed) and MCS image is saved.	& Image is acquired with name and headers along with datamodel, and is archived. &  \\  \hline
+Gen2 command to read MCS temperatures. 	&  Values of the temperature sensors return. 	& The temperature values are correct.	&  \\  \hline
+Gen2 command to read MCS coolant flow. 	&  Value of the flow meter returns.	& The flow value is correct.	&  \\  \hline
+(Gen2 command to listen microphone?) 	&  Sound from microphone.	& Sound is transferred correctly.	& How to transfer audio is under discussion.  \\  \hline
+Gen 2 command to execute the above in sequence. 	&  Outputs of individual commands.	& Individual commands succeeded.	&  	\\ \hline \hline
+%%% M--4
+\multicolumn{4}{c}{ \ref{secflow:prestudy} : Study of the prime focal plane } \\ \hline
+Inputs	& Outputs & Success Criteria & Notes \\ \arrayrulecolor[rgb]{0.63,0.79,0.95}\hline \hline \arrayrulecolor{black}
+Gen2 command to acquire a series of MCS images. 	&  Shutter moves and MCS images are saved.	& Images are acquired with name and headers along with datamodel, and is archived. &  \\  \hline
+(Gen2) command to measure the spot centroids. 	&  Spots are identified and their centroids are measured.	& Centroids are measured and saved with IDs. &  \\  \hline
+Gen2 command to change telescope El. and InR.		&  Telescope move and its status returns	& Telescope movement and status are consistent. &  \\  \hline
+ \rowcolor[rgb]{0.94, 0.97, 1.0}
+A series of ($\sim$ 100 frames) measured centroids. 	&  Average of the centroids.	& Average are obtained. &  \\  \hline
+Position on MCS.  	&  Position on F3C.	& Coordinates are transformed within accuracy of TBC um.  & Coordinates transformation function will be developed in analyzing the data. \\  \hline
 %...	& ...	& ...	& ...	& ...	& ... \\ \hline \hline
 %\end{center}
 \end{longtable}
 %\end{landscape}
+
