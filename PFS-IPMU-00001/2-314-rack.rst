@@ -42,6 +42,7 @@ Following table is an unit assignment of 2-314 PFS rack as of 2018/07/23.
 | 39 |         rcc1-vm | apc1 |    n | dbsim                       |
 +----+-----------------+------+------+-----------------------------+
 | 38 |         rpb1-vm |   AC |    n | storage test bench          |
++----+                 +      +      +                             +
 | 37 |                 |      |      |                             |
 +----+-----------------+------+------+                             +
 | 36 |         dla1-vm |   AC |    n |                             |
@@ -57,14 +58,17 @@ Following table is an unit assignment of 2-314 PFS rack as of 2018/07/23.
 | 31 |         dlb4-vm | apc1 |    n |                             |
 +----+-----------------+------+------+-----------------------------+
 | 30 | HP storageworks | apc1 | apc2 | SAS storage connected to    |
++----+                 +      +      +                             +
 | 29 |                 |      |      | dlb8-vm (U 28)              |
 +----+-----------------+------+------+-----------------------------+
 | 28 |         dlb8-vm | apc1 | apc2 | master storage server (VM)  |
 +----+-----------------+------+------+-----------------------------+
 | 27 | iSCSI storage   | ups2 | ups2 | controller side             |
++----+                 +      +      +                             +
 | 26 |                 |      |      |                             |
 +----+-----------------+------+------+-----------------------------+
 | 25 | iSCSI storage   | ups2 | ups2 | JBOD side                   |
++----+                 +      +      +                             +
 | 24 |                 |      |      |                             |
 +----+-----------------+------+------+-----------------------------+
 | 23 |                 |      |      |                             |
@@ -106,9 +110,11 @@ Following table is an unit assignment of 2-314 PFS rack as of 2018/07/23.
 |  5 |                 |      |      |                             |
 +----+-----------------+------+------+-----------------------------+
 |  4 | apc3            |   AC |    x |                             |
++----+                 +      +      +                             +
 |  3 |                 |      |      |                             |
 +----+-----------------+------+------+-----------------------------+
 |  2 | apc2            |   AC |    x |                             |
++----+                 +      +      +                             +
 |  1 |                 |      |      |                             |
 +----+-----------------+------+------+-----------------------------+
 
@@ -119,6 +125,6 @@ Power source category and name
 ======
 
 * AC : direct AC from outlet
-* apc? : rack mount type APC UPS (1500VA)
+* apc? : rack mount type APC UPS (1200VA)
 * ups? : desktop type APC UPS (750VA)
 
