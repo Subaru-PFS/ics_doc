@@ -9,6 +9,10 @@ Cold start
 
 Start backends first, and end point to external. 
 
+* UPS and network switches will come up automatically after power back
+
+  * Check these are up by checking status LEDs
+
 * Power on storage server
 
   * iSCSI server need to be started from JBOD, and controller follows
@@ -28,9 +32,11 @@ Start backends first, and end point to external.
   * jirapipe
   * landfill
 
-* Start external servers (pfs, pfspipe, pfsarch)
+* Start external servers (pfssrv, pfspipe, pfsarch)
 * Start monitoring services (prometheus, influxdb)
 * Start internal services
+
+  * Start jira server manually via systemd
 
 Full shutdown
 ======
