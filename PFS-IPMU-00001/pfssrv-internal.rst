@@ -42,22 +42,6 @@ Simulator rack
 - Fujitsu SR-S324TC1 (24-4SFP; f24a .196) for master
 - Cisco 2950 (48port 100M; c48a .195) for low speed hosts
 
-Place of physical host
-======
-
-Server system at wall side, on floor
-
-- pfsdisk: storage for services
-- pfscalc: storage for internal use
-- extVM2: host for external service VMs (port to global has no IP address)
-
-Server system at wall side, on work desk
-
-- r410-2: VM host for external services
-- dl360-1, dl360-4: Windows host (physical)
-
-At work desk (simulator services)
-
 Administration
 ******
 
@@ -73,38 +57,6 @@ libvirt VM panel
   Still TBD
 mail lists
   Admin (pfs_pfs.ipmu.jp), munin (munin_pfs.ipmu.jp)
-
-Hardware computing resources
-======
-
-Base configurations at https://pfs.ipmu.jp/wiki/System/install/linux-base
-
-Bridges for physical ethernet ports (to make virt live migration possible)
-
-- br0 : PFS-LAN
-- br1 : external
-- br2 : IPMU internal
-
-Hosts
-
-- See list at https://pfs.ipmu.jp/wiki/System/hardware
-- external server (br0 to PFS-LAN, br1 to internal) run only VMs requires 
-  global address: extvm2(.5)
-- internal server (br0 to PFS-LAN, br2 to IPMU) run only VMs requires IPMU 
-  network: r410-2 (external services)
-- service hosts: pfsdisk(.3), pfscalc(.4)
-
-VM management
-======
-
-Virt disk storage on NFS
-
-- /virt at pfsdisk (RAID1 3TB)
-- Local storage only for host operation
-- VM operation via virsh interface, remote monitoring via libvirt feature 
-  under testing
-- VM hosts could be easily replaced, no configuration difference among hosts, 
-  except for network bridge (existence of bridges to IPMU or global)
 
 Service
 ******
@@ -147,61 +99,5 @@ landfill (.32)
   landfill services
 db2 (.37)
   pgsql and mysql database service, and daily backup for every databases
-
-System startup procedure
-======
-
-- Power on (at panel) and wait for startup of network switch
-- Power on pfsdisk, system health check (on KVM)
-- Power on extvm2, system health check (on KVM)
-- Power on mgmt-dhcp, pfssrv, pfspipe on extvm2, and check services (apache, 
-  mailman) on pfssrv
-- Restart ntp service on pfsdisk, extvm2
-- Check LDAP loading on pfsdisk (LDAP server at pfssrv)
-- Power on pfscalc, check eth ar up
-- Power on VM host servers (no order)
-- Bootup service VMs. Mostly no order, that services rely on DB will resume 
-  their connection on db startup
-
-PFS instrument simulator
-======
-
-iSCSI storage server (.170-.179)
-  About 100TB RAID6 iSCSI storage, connected by iSCSI device multipath 
-  (.170-.177), and server admin IF (.178, .179)
-Axis PTX surveillance camera (.180)
-  Testbed for SpS/SCR
-Cisco switches
-  CB2F (24+4SFPx2, FlexStack; .191, .192),
-  SpS (24+4SFP; .193)
-KVM
-  simulator (10.100.200.203, 192.168.156.33), 
-  server (10.100.200.212, 192.168.156.32)
-PDU
-  simulator (.204), server (.211)
-
-Service for IPMU internal
-******
-
-Shared storage
-======
-
-Shared storage service is provided as 192.168.156.70 (10.100.200.4) in RAID1 
-4TB and 6TB.
-
-NFS, samba (4TB)
-  Access 192.168.156.70:/data1, samba user/pass set at pfscalc by smbpasswd. 
-  All data are backed up to /data2 per weekly.
-Backup (6TB)
-  "rsync" to 192.168.156.70:/data2, e.g. 
-  ``rsync -a -delete --link-dest=<priv> <orig> <backup>``
-
-Bots
-======
-
-Dropbox
-  CIT dropbox running at jessie (by account ``atsushi.shimono``) and 
-  syncing to ``192.168.156.70:/data1/cit-dropbox/Dropbox``.
-  Check status via ``dropbox status``.
 
 
