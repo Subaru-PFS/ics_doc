@@ -36,6 +36,7 @@ Two VM guests are for:
 
   * Storage is exposed to outside via NFS (to be used by pfs.ipmu.jp server) 
     and httpd. 
+  * This archive is for archive of raw data from real hardware or simulation. 
 
 * PFS internal backup (backup)
 
