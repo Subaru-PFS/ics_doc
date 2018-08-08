@@ -25,60 +25,62 @@ much as possible to separate hardware configuration and operational software.
 
 1. key infrastructure
 
-  * System wide shared storage services and their end points (like NFS, WebDAV) 
-    are categorized into this layer.
-  * At minimum N+2 configuration is required for storage space, 
-    like RAID1 with hot spare (N+2), RAID6 with hot spare (N+3). 
-    Controller box is better to be in redundant configuration (but currently 
-    no).
-  * Hosting computer(s) are better to be configured as redundant, especially 
-    for power supply (redundant with connecting to different UPS), system 
-    storage (RAID1), and are required to be configured using automated system 
-    like ansible.
-  * Storage service end points shall be VM guests and configured using 
-    automated system like ansible, to make relocation (at hardware failure) or 
-    reinstallation/reconfiguration (at the most serious case) work easy and 
-    quick without consulting to detailed manual etc. 
+   * System wide shared storage services and their end points 
+     (like NFS, WebDAV) are categorized into this layer.
+   * At minimum N+2 configuration is required for storage space, 
+     like RAID1 with hot spare (N+2), RAID6 with hot spare (N+3). 
+     Controller box is better to be in redundant configuration (but currently 
+     no).
+   * Hosting computer(s) are better to be configured as redundant, especially 
+     for power supply (redundant with connecting to different UPS), system 
+     storage (RAID1), and are required to be configured using automated system 
+     like ansible.
+   * Storage service end points shall be VM guests and configured using 
+     automated system like ansible, to make relocation (at hardware failure) or 
+     reinstallation/reconfiguration (at the most serious case) work easy and 
+     quick without consulting to detailed manual etc. 
 
 2. computing nodes
 
-  * Conputing resources to run VM guests are categorized into this layer.
-  * Any hardware shall be replacable without special software configuration 
-    for VM guests running on them (like just by virt hot migration). 
-  * Hardware configuration is better to be redundant in the simplest way, 
-    like RAID1 for its system disk, dual power supply, ECC memory, but not 
-    a requirement. (mostly, RAID1 and ECC are used, but one of dual power 
-    supply is connected.)
-  * Operating system configuration shall be performed using automated system 
-    like ansible. 
+   * Conputing resources to run VM guests are categorized into this layer.
+   * Any hardware shall be replacable without special software configuration 
+     for VM guests running on them (like just by virt hot migration). 
+   * Hardware configuration is better to be redundant in the simplest way, 
+     like RAID1 for its system disk, dual power supply, ECC memory, but not 
+     a requirement. (mostly, RAID1 and ECC are used, but one of dual power 
+     supply is connected.)
+   * Operating system configuration shall be performed using automated system 
+     like ansible. 
 
 3. remaining important single point of failure (SPOF)
 
-  * This category is a collection of SPOF which are not easy to be implemented 
-    as redundant. 
-  * SPOFs in the system are listed with possible (implemented) mitigation(s). 
-  * Network switch: spare switches are in storage
-  * iSCSI storage controller (RAID6): no mitigation for now. hardware is 
-    configured as single backplane and single controller.
-  * Main storage box (RAID1): backup box with 10x 3.5in HDD is in storage, HP 
-    RAID controller keeps RAID configuration in HDD so no reconfiguration is 
-    required on replacing control computer. 
+   * This category is a collection of SPOF which are not easy to be implemented 
+     as redundant. 
+   * SPOFs in the system are listed with possible (implemented) mitigation(s). 
+   * Network switch: spare switches are in storage
+   * iSCSI storage controller (RAID6): no mitigation for now. hardware is 
+     configured as single backplane and single controller.
+   * Main storage box (RAID1): backup box with 10x 3.5in HDD slots is in 
+     storage, HP
+     RAID controller keeps RAID configuration in HDD so no reconfiguration is 
+     required on replacing control computer. 
 
 Storage service
 ------
 
 PFS infrastructure provides six storage resources as follows:
 
-* /virt: VM guest disk image pool. Exposed as NFS and all disk images are in 
-  raw format (no qcow2 etc. is allowed). 
-* /server: Service data storage. Exposed as NFS.
-* /simdata: Instrument development use, like ICS or observation simulation. 
+* ``/virt``: VM guest disk image pool. Exposed as NFS and all disk images are 
+  in raw format (no qcow2 etc. is allowed). 
+* ``/server``: Service data storage. Exposed as NFS.
+* ``/simdata``: Instrument development use, like ICS or observation simulation. 
   Exposed as NFS. 
-* /data1: IPMU internal general storage service. Exposed as NFS and smb. 
-* /backup: Periodic differential backup storage, offline from normal servers 
-  and only accessible from VM guest for backup operation due to security reason 
+* ``/data1``: IPMU internal general storage service. Exposed as NFS and smb. 
+* ``/backup``: Periodic differential backup storage, offline from normal 
+  servers and only accessible from VM guest for backup operation due to 
+  security reason 
   (not to be affected by malware etc. through shared channel). 
-* /arch1: development archive storage. Exposed as web or webdav (and NFS 
+* ``/arch1``: development archive storage. Exposed as web or webdav (and NFS 
   internally).
 
 First four areas are critical for system operation, so 

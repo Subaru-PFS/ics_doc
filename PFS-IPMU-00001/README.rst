@@ -23,3 +23,18 @@ and divided into following notes.
 
   * `Making CD/DVD <cdburn.rst>`_
 
+
+Legends in this document
+------
+
+* ``inline literal`` means canonical service name, like ``ntp``, or ``pfsdisk``
+* *emphasis* means hostname without tailing revision number of VM guest 
+  reinitialization (or switching to new one), like *stretch*, or *pd*
+
+  * VM hostname has tailing `-vm`, so digit before it is hardware component ID
+  * Tailing digits could be more than two, like version number of hosted 
+    service like JIRA
+  * In configurations, need to be referenced by canonical service name
+
+* `solid text` means command or option
+
