@@ -7,7 +7,6 @@ ToC
 * `Public servers`_
 * `Backend services`_
 * `Service or API providers`_
-* `Current status on ansible`_ 
 
 
 Installation and configuration
@@ -79,31 +78,23 @@ Service or API providers
 ------
 
 Services and APIs provided through web reverse proxy are hosted by backend 
-servers. Configurations of reverse proxy are on version tracked repository, 
+servers. Configurations of reverse proxy are on version tracked repository 
+as a part of web server configuration, 
 and service configurations and reverse proxy configurations shall be updated 
 in consistent. 
 
-Current status on ansible
-------
+* ``pfs`` (under re-deployment)
 
-Following hosts are fully configured by ansible playbook (real ones are 
-configured by ansible without any manual operation): 
+  * /etherpad/: (etherpad)
+  * /ipython/: (ipython)
+  * /jupyter-spt/: (jupyter-spt)
+  * /prometheus/: (``prometheus``)
+  * /grafana/: (``prometheus``)
+  * /ethercalc/: (ethercalc)
+  * /landfill/: (landfill)
+  * /notification/: (landfill)
 
-* storage hosts (*pd*, *pc*, *sd*)
-* landfill services (only for template)
-* ``rsyslog``
+* ``pfspipe``
 
-Following hosts are fully configurable by ansible playbook, but need some 
-manual operation: 
-
-* (TBC)
-
-Following hosts are currently under development and/or confirmation:
-
-* external servers (``pfs``, ``pfspipe``, ``pfsarch``)
-* database servers (``mysql``, ``pgsql``)
-
-Following hosts are not planned yet: 
-
-* JIRA
+  * /jira/: ``jirapipe``
 
