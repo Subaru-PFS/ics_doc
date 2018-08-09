@@ -48,6 +48,29 @@ Two VM guests are for:
   * Some exclusions are defined for backup of server storage, like binary data 
     store (database). 
 
+======
+Directory assignments
+======
+
+------
+/server
+------
+
+/server/admin
+  Administrative files
+/server/archive
+  Archive of downloaded package or old data
+/server/backup
+  Backup of service data (like ldap, mysql, pgsql)
+/server/home
+  To be mounted as /home
+/server/httpd
+  Web storage, http-* and https-* are mostly mounted directly as web
+/server/services
+  Service data storage, each service shall have its own sub-directory
+/server/storage
+  Internal use data store, to be open at internal website
+
 VM host configuration
 ------
 
