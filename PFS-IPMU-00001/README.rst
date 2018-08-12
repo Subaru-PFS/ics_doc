@@ -19,6 +19,7 @@ and divided into following notes.
 
   * `Service cold start and full shutdown <startdown.rst>`_
   * `Service setup and configuration <setup.rst>`_
+  * `Configurations and maintenance <maintenance.rst>`_
 
 * Misc documents (from old internal wiki)
 

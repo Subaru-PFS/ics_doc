@@ -74,6 +74,10 @@ Note:
   without DHCP/DNS server. 
 * Canonical hostnmaes are registered in dnsmasq repository.
 
+On replacing host with different hostname / IP address, also refer 
+`Special cases on replacing host` in 
+`Configurations and maintenance <maintenance.rst>`_ page. 
+
 Service or API providers
 ------
 
