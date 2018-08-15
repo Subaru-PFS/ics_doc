@@ -1,6 +1,13 @@
 Configurations and maintenance
 ======
 
+ToC
+
+* `LDAP account`_
+* `LDAP server`_
+* `JIRA`_
+* `Special cases on replacing host`_
+
 LDAP account
 ------
 
