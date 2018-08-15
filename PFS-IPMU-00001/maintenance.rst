@@ -7,6 +7,7 @@ ToC
 * `LDAP server`_
 * `JIRA`_
 * `Special cases on replacing host`_
+* `Let's encrypt / certbot`_
 
 LDAP account
 ------
@@ -73,4 +74,20 @@ address, which will require additional modification(s) on existing services.
   configured as mounting ``/virt`` with IP address but not service canonical 
   hostname. Therefore, change ansible configuration and switch NFS mount 
   configuration in fstab with new IP address. 
+
+Let's encrypt / certbot
+------
+
+Server certificates for PFS servers at IPMU are acquired using certbot from 
+`Let's Encrypt <https://letsencrypt.org/>`_, and used by httpd and mail 
+systems. 
+Certifications are automatically updated via periodic execution of certbot 
+(configured into cron by its package). Although httpd(s) could be configured to 
+be auto-reloaded through update process, mail systems are not, so we need to 
+force reload to mail systems (and so on, if any addition we will introduce). 
+For these, we configure cron job(s) to reload certification(s) instead of by 
+certbot. Updates are performed per ~2 monthes, and certificates have 3 monthes 
+period, cron job(s) are configured twice per month. 
+
+
 
