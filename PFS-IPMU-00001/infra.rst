@@ -5,6 +5,7 @@ ToC
 
 * `Storage service configuration`_
 * `VM host configuration`_
+* `VM guest configuration`_
 
 Storage service configuration
 ------
@@ -106,4 +107,45 @@ guests among available VM host servers, including assignment of br0/1/2.
 In PFS server system, only a few VM guests have connection to ``Global-LAN``, 
 so ``br1`` network connection is not a requirement over system-wide (we can run 
 these VM guests with small number of physical hosts). 
+
+VM guest configuration
+------
+
+VM guests are configured as:
+
+* Have disk image and (initial) libvirt configuration in xml format at ``/virt``
+
+  * disk image files are named as ``*.disk``
+  * landfills have ``*.tmpl`` to be copied and used for configured disk image
+  * libvirt configuration shall be virt migrate capable
+
+* MAC address shall be as 52:54:00:xx:00:yy with xx as system category, 
+  yy as sequence number (not as HEX but as DEC) for PFS and IPMU LAN. 
+  Use ones from physical cards for Global-LAN (keep hardwares). 
+
+  * List of system categories
+
+    * 10: external server
+    * 11: service hosts for external
+    * 12: service hosts used internally
+    * 20: interface to IPMU LAN
+    * 40: landfill
+    * 80: ICS simulators
+
+  * Spice port number is 3xxyy.
+  * Registration shall be in dnsmasq configuration repository.
+
+* Select CPU/Memory allocation from following templates or use dedicated for 
+  special ones which requires large allocations. Names in () are corresponding 
+  AWS types.
+
+  * 1 vCPU, 0.5GB memory (t2.nano): for small batch system
+  * 1 vCPU, 2GB memory (t2.small): for small normal system (landfills are this)
+  * 2 vCPU, 4GB memory (t2.medium): for normal system (backend service host)
+  * 2 vCPU, 8GB memory (t2.large): for memory intensive services
+
+Some old VM guests does not follow MAC address scheme above. 
+
+* 02:00:01 etherpad
+* 02:00:02 landfill (landfill for external server)
 
