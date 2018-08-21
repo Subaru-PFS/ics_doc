@@ -8,6 +8,7 @@ ToC
 * `JIRA`_
 * `Special cases on replacing host`_
 * `Let's encrypt / certbot`_
+* `Updating web services`_
 
 LDAP account
 ------
@@ -88,6 +89,26 @@ force reload to mail systems (and so on, if any addition we will introduce).
 For these, we configure cron job(s) to reload certification(s) instead of by 
 certbot. Updates are performed per ~2 monthes, and certificates have 3 monthes 
 period, cron job(s) are configured twice per month. 
+These cron job(s) are implemented in ansible with service linked flags. 
 
+Updating web services
+------
 
+Wordpress (for blog) and MediaWiki (for internal wiki) are used and require 
+manual update at some point (not solid requirement, but better for recovery 
+or backup). 
+There is some tools and procedures within PFS IPMU servers to make works easy. 
+
+* Wordpress
+
+  * Download package of updated version from official site to a directory for 
+    each service
+  * Extract as `wp-<version>`
+  * Execute `links.sh` in a directory of extracted new version
+  * Re-link `blog` to a directory of new version
+
+* MediaWiki
+
+  * Do similar to wordpress
+  * No `links.sh` is provided yet, do manual operation...
 
