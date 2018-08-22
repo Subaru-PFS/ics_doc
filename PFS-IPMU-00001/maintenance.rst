@@ -9,6 +9,7 @@ ToC
 * `Special cases on replacing host`_
 * `Let's encrypt / certbot`_
 * `Updating web services`_
+* `Mailman`_
 
 LDAP account
 ------
@@ -111,4 +112,29 @@ There is some tools and procedures within PFS IPMU servers to make works easy.
 
   * Do similar to wordpress
   * No `links.sh` is provided yet, do manual operation...
+
+Mailman
+------
+
+Operations of mail lists, especially to change something, are better to be 
+performed through web. If you modified something locally via shell, you need 
+to check permissions of list configuration files to make web and/or mail 
+server priviledge can read/modify these configuration files. 
+
+To change the last post ID (added to subject):
+
+::
+
+  $ sudo -u list bin/withlist allhands
+  >>> m.Lock()
+  >>> m.post_id = <newid>
+  >>> m.Save()
+
+On permission error:
+
+::
+
+  $ sudo -u list bin/check_perms -f
+
+
 
