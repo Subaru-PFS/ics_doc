@@ -63,6 +63,27 @@ Alerting
 are pushed to `alertmanager <https://pfs.ipmu.jp/internal/monitors/alertmanager/>`_, 
 and delivered to alert targets. 
 Alertmanager site lists active alerts, and administrator can add/manage 
-silence of alerts. 
+silence of alerts using alertmanager. 
 
+Syslog monitoring
+------
+
+rsyslog server does not save any syslog line (except for locally generated) 
+to local storage, but just proxy all syslog lines to elasticsearch for now. 
+To query syslog lines for trouble shooting, use grafana panel for syslog or 
+send query to elasticsearch API. 
+
+Note, to enable file based output of syslog lines for future, it is better to 
+mount remote storage and write to there, to have some script to compress old 
+log files (current output is by host/category/severity/date, but not using 
+logrotate), and to have separate stream for local and remote not to have 
+local loop. 
+
+Misc
+----
+
+* DHCP leased IP/host pairs are listed in `/var/lib/misc/dnsmasq.leases`
+* Database statuses are gathered into prometheus, also 
+
+  * slow log for mysql is out to local file `/var/log/mysql/mysql-slow.log`
 
