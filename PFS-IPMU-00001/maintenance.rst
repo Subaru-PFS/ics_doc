@@ -21,6 +21,8 @@ UID number registration (listing) file is required for new account generation,
 use one at `/server/admin/github-scripts/pfs_infra_ipmu/ldap-admin/`. 
 
 * Create target list file (see command help below)
+* Place photo jpg file as username.jpg
+  (automatically loaded into ldif file for adding new user)
 * Execute `create-ldif.pl` script
 * Execute `.cmd` file generated to run ldapadd/ldapmodify
 * Load on services
