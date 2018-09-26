@@ -60,6 +60,10 @@ ics
   ICS operational infrastructure, including MHS, DB server, support services.
 infra
   ICS hardware infrastructure, including PDU, KVM, iSCSI storage.
+lf
+  Landfill hosts.
+  Sets of MAC (00:dX), hostname (\*-lf), IP address (.164.224/28) 
+  will be prepared.
 
 Remarks and exceptions
 ======
