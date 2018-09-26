@@ -22,10 +22,9 @@
 
 This note is overview of communications around AG camera, such as command and 
 its flow or sequence, data management including status, and data conversion. 
-Also refer SSN-00006 (rev.2) for details of individual interface details to 
-external of PFS systems, both to Gen2 and MLP1. And refer PFS-SE-IPMU-00015 
-(rev.1) for calculations on propagation of errors, on measuring InR angle and 
-positioner bench tilt.
+Also refer PFS-SE-IPMU-00015 
+(rev.1; under preparation) for calculations on propagation of errors, 
+on measuring InR angle and positioner bench tilt.
 
 \section{Overview}
 
@@ -124,6 +123,136 @@ software.
   \caption{Schematic diagram for coordinates and their conversions on AG}
   \label{fig:coord_conv}
 \end{figure}
+
+\subsection{External interface}
+
+PFS AG and A\&G have four major external interfaces: 
+command from/to Gen2, guide error signal to MLP1 (telescope), 
+image transfer for operator monitoring to V-LAN (Video-LAN), 
+and FITS image transfer to Gen2 for operation use
+\footnote{This section is from SSN-00006-002, which has been obsoleted by 
+this document.}. 
+
+\subsubsection{Command from/to Gen2}
+
+Corrections from measurement of field acquisition, InR (Instrument Rotator) 
+angle, or field depth (z) and tilt (by the hexapod of the POpt2) are to be 
+sent to Gen2 for application. 
+This will be done using 'callback' liked procedure, by setting specific 
+instrument statuses defined per each to apply correction and then return an 
+issued command from Gen2 to PFS OBCP for this 'callback'. 
+Following the end of such command (named as 'DD command' in Gen2), PFS skelton 
+procedure
+\footnote{'skelton' is a simple custom shell liked language used in Gen2. 
+Every line, except for control procedure such as loop or interlock, are 
+build using 'DD command' defined from each OBCP or telescope control system. }
+will execute correction command following statuses set by and pushed from 
+OBCP (PFS) to target telescope control system, and call suitable callback 
+command to PFS OBCP immediately. 
+
+The implementation of this 'callback' liked procedure in PFS will be in g2t 
+actor, which is a bridge between Gen2 (or its client library -- g2cam) and 
+tron (codename of server system used for the MHS; or its client library -- 
+tron\_actorcore), and sending corrections from actors in PFS could be 
+done as a command to g2t actor. 
+
+\subsubsection{MLP1}
+
+The MLP1 is a real-time telescope hardware controller, made with Sequencers 
+\footnote{A type of PLC made by melco. }
+directly controlling telescope motion controllers, and accepts error signal 
+inputs for telescope movelemnt realtime correction (guiding correction). 
+The MLP1 sends telescope status etc. to connected devices via serial connection 
+in 1Hz continuously, and accepts replies from a guide camera in action 
+as error information for closed loop control of telescope movement. 
+
+Messages between MLP1 and each guide camera differ by each guide camera, 
+following statuses and control signals are included in each direction. 
+\begin{itemize}
+  \item From MLP1 to PFS
+  \begin{itemize}
+    \item Telescope status: EL, Az, InR with timestamp
+    \item Status of communication from MLP1: Telescope mount, InR, PFS-MLP1
+    \item V-LAN image output control: on/off, interval for sending images
+  \end{itemize}
+  \item From PFS to MLP1
+  \begin{itemize}
+    \item Calibration lamp status: on/off for each Halogen, Arc1, Arc2
+    \item AGC control status: exposure time, in exposure, in calculation, any 
+      error. One per entire PFS AGC not per camera, so composited value is 
+      required, such as on = at lease one is under operation
+    \item Auto Guide error signal: $\Delta (x, y)_{mas}$,
+      $\Delta (Az, EL)_{arcsec}$
+    \item Auto guide target object status: peak, flux, size, AG ready, AG delay 
+      for image acquisition, and their timestamp
+    \item Status of communication from PFS: MLP1, V-LAN
+    \item V-LAN sending status: on/off, sending interval
+  \end{itemize}
+\end{itemize}
+
+\subsubsection{V-LAN}
+
+V-LAN (named as Video LAN) is a single direction RPC over TCP/IP on a dedicated 
+local network, and its data format has an instrument ID, headers, and image 
+(maximum 16bit and size of 512x512 for AG)
+\footnote{Ref. TM-N57208 attachment 3 (p25-).}.
+Images sent over this V-LAN will only be used for display on VGW
+\footnote{VGW was a dedicated system former, but now one submodule in Gen2. }
+or TWS (Telescope WorkStation), and sample as Figure.~\ref{fig:vlan-image}. 
+
+\begin{figure}[htb]
+  \begin{center}
+    \includegraphics{VLAN-image.png}
+  \end{center}
+  \caption{Sample image data to be sent to V-LAN.
+    Charactors in the top part is composited as image, but its format of 
+    information or items is not defined yet, measured individual centroids 
+    are assumed to be included at least. 
+    Six panels are image for each AG camera, with '+' as a measured centroid 
+    of a spot, 'x' as a target position. 
+  }
+  \label{fig:vlan-image}
+\end{figure}
+
+Since a visual format of the image is not a single object but composited 
+from multiple cameras, images over this protocol for PFS is considered just 
+for visual monitoring windows, but not for saving nor archive. 
+Although VGW is now (fully) integrated into Gen2 and VGW window may gain many 
+functionalities for online image processing or overlays (or all of these 
+functionalities assume a single object on an image), to apply these on an 
+image format of PFS is not simple. For such analysis or saving for later use, 
+FITS image transfer via Gen2--OBCP interface in a special way is proposed. 
+\footnote{The composited image format (Figure.~\ref{fig:vlan-image}) is 
+mainly defined by strong limitation of TWS display design. V-LAN RPC has 
+two identifications allocated on PFS, which defines a source and a target of 
+RPC data packet: source AG(PFS) and target VGW (ID 0x20000038) 
+and source AG(PFS) and target TWS1/2 (ID 0x20000039), and it could be possible 
+to use different image format for these two targets. 
+But considering simplicity of operation not to make operator confused by 
+different display on windows and small maximum pixel size of an image over 
+V-LAN, rather than having different format of composition to two targets, 
+we would be better to have another way to do such purpose.}
+
+
+\subsubsection{FITS image to Gen2}
+
+For Normal FITS image transfer to Gen2 from OBCP, 
+Gen2 issues ID (or header of IDs) for files as XXXY\%08d (XXX is an identifier 
+of an instrument, Y is a category type like A for normal science image or Q 
+for field acquisition, and OBCP sends FITS file (via FTP queried from Gen2, 
+or data trasnfer over g2cam) with ID specified by Gen2, but this is not the 
+case for AG image transfer, such that we may not want to archive every image 
+taken for AG, or simple composited format is fine for normal operation like 
+checking existence of object or background level. 
+
+Therefore, we are planning to add new channel to send FITS image from OBCP 
+to Gen2 without any ID. Detailed design is not yet defined, but assuming: 
+\begin{itemize}
+  \item Be capable for both on-demand and at all times image transfer.
+  \item Image in FITS format, and set image parameters in FITS header.
+  \item On request by operator, FITS file will be archived as XXXY\%08d name.
+  \item Show and quick analysis by Ginga image viewer.
+\end{itemize}
 
 
 \section{Requirements, Conditions, and Tradeoffs}
