@@ -1,0 +1,94 @@
+\documentclass[a4paper,notitlepage]{article}
+\usepackage{ssn-format}
+\title{FITS file generation flow}
+\author{Atsushi Shimono}
+%\date{2016--05--18}
+\begin{document}
+
+\drafttrue
+\SSNID{00024}
+\SSNREV{001}
+\SSNCATEGORY{ICS}
+\SSNChangeRecord{
+}
+\SSNReference{(none)}
+\SSNAttachment{(none)}
+\SSNWritten{Atsushi Shimono}
+
+\ssnhead
+
+\section{Abstract}
+
+This note is a reference document on how PFS ICS actors collect information for 
+FITS files, save as FITS files, and transfer to Gen2.
+
+
+\section{Backgrounds and constraints}
+
+PFS ICS summit system has one iSCSI storage system for file storage, with multiple
+iSCSI partition by purpose, such as NFS storage or NCU up-the-ramp storage. One iSCSI
+partition will be mounted by a physical host (TBD\footnote{Refer SSN-00018 for ICS 
+on-site storage plan}) to be provided as NFS storage for
+the entire PFS ICS summit system network. Every FITS files shall be saved into this
+storage by each camera control actor both for PFS internal archive (backup) and for
+the official data archive (via Gen2). Sending FITS files to Gen2 will be handled by
+g2t actor or dedicated actor(s) \footnote{Gen2 does accept multiple file transfer requests
+from multiple starting points}, via FTP pull or direct data transfer in a connection.
+For FTP pull request, following a request post from instrument to Gen2 with a pair
+of a Gen2 ID and a full path for file on a FTP server \footnote{one FTP server definition per
+instrument?; TBC} for normal FITS filetransfer, or only a full path without Gen2 ID
+for AG FITS image transfer, Gen2 initiates FTP connection to pull a file specified
+in the request. PFS ICS will have one FTP server for this data transfer.
+
+Gen2 has a dictionaly of status to be pushed and pulled from instruments, named
+as SBR.INSROT (SBR = telescope status, INSROT = InR angle) or PFS.FRAMEID (PFS =
+instrument name, FRAMEID = current frame ID like in PFSA%08d) which keeps only the
+current values pushed from instruments, and any instrument can pull values pushed
+from telescope or any instrument. Some FITS header keywords have --STR (start of
+exposure), --END (end of exposure), --MIN (minimum within exposure; like detector
+temperature), or --MAX (maximum wihtin exposure), instrument need to keep values
+for them by each instrument itself. PFS has similar mechanism of a dictionaly of
+status within actorcore (client library of tron), statuses are pushed from
+subsystems including g2t for values from a dictionaly of status of Gen2 (assuming
+periodical pull from Gen2 and push to MHS for pre-defined list of keys) and camera
+actors will use them for FITS header.
+
+
+\section{CCD FITS file generation by [BRN]CU}
+
+Information required for FITS file generation are all in hand in [BR]CU, image
+data is read out from CCD under control of [BR]CU, and values for FITS header are
+in a dictionaly of status in actorcore. Once a FITS file successfully saved into
+the NFS storage, [BR]CU actor will return its exposure call with pushing FITS
+file name as a status (so any actor can get an event from actorcore library when
+a target FITS file was saved).
+
+Only interface as a sequence of detector operation will be timings, especially
+with shutters.
+
+
+\section{ToDo}
+
+\subsection{Add note for NCU (H4RG), AGCC (AG camera), and MCS}
+
+\subsection{identify a way to keep value for --STR, --END, --MIN, or --MAX}
+  We may need similar routine in many actor code, might be better to have some API
+for this within actorcore or shared library.
+
+\subsection{write a formal ICD for directory organization of NFS storage}
+  e.g. \verb|<mount_path>/xCUy/YYYY-MM-DD/PFSA%08d.fits|, just first \verb|<mount_path>/xCUy| part
+could be enough, following part will not corride among actors.
+
+\subsection{develop a way for target list in [BRN]CU FITS file}
+  (Only?) two ways are possible: as extHDU in binary table in each image FITS files,
+as one dedicated FITS file with only one binary table. IIC (or FPS) will write Cobra
+positioning results as a binary table FITS file in shared NFS storage and push its
+full path  as a status, [BRN]CU actor can get information required (full binary table
+from FITS file for additional extHDU, or just an ID as FITS header - could be just
+a %06d visit ID) and again FITS file generation process is closed within each actor. 
+
+
+
+
+\end{document}
+
