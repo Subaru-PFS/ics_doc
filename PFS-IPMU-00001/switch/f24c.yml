@@ -1,0 +1,35 @@
+---
+- device
+     name: "f24c"
+     units: 24
+     class: "switch"
+     description: "switch for global-lan"
+- assign:
+   - id: 5
+     name: "uplink"
+     port: 1
+   - id: 6
+     name: "TVconf"
+     port: 1
+   - id: 9
+     name: "dlb7"
+     port: 3
+   - id: 10
+     name: "dlb3"
+     port: 3
+   - id: 11
+     name: "dlc2"
+     port: 3
+   - id: 12
+     name: "dlc3"
+     port: 3
+   - id: 13
+     name: "rea2"
+     port: 3
+   - id: 14
+     name: "dlc4"
+     port: 3
+   - id: 24
+     name: "f24b"
+     port: 24
+

@@ -1,0 +1,59 @@
+---
+- device:
+     name: "c24a"
+     units: 24
+     class: "switch"
+     description: "sub network switch for pfs-lan"
+- assign:
+   - id: 1
+     name: "f24b"
+     port: 1
+   - id: 2
+     name: "f24b"
+     port: 2
+   - id: 3
+     name: "arch"
+     port: 1
+   - id: 4
+     name: "arch"
+     port: 3
+   - id: 5
+     name: "dlb2"
+     port: 1
+   - id: 6
+     name: "rca3"
+     port: 1
+   - id: 7
+     name: "dbsim"
+     port: 1
+   - id: 8
+     name: "rea1"
+     port: 1
+   - id: 10
+     name: "dlc4"
+     port: 1
+   - id: 11
+     name: "dlb8"
+     port: 1
+   - id: 12
+     name: "dlb8"
+     port: 2
+   - id: 13
+     name: "dla3"
+     port: 1
+   - id: 14
+     name: "dla2"
+     port: 1
+   - id: 15
+     name: "dla1"
+     port: 1
+   - id: 16
+     name: "p2950a"
+     port: 1
+   - id: 17
+     name: "dlb5"
+     port: 1
+   - id: 18
+     name: "dlc2"
+     port: 1
+

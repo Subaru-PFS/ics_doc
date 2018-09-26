@@ -1,0 +1,38 @@
+---
+- device:
+     name: ng72a
+     units: 26
+     class: "switch"
+     description: "management switch for PFS-lan"
+- assign:
+   - id: 1
+     name: "kvm"
+     port: 1
+   - id: 2
+     name: "sato"
+     port: 1
+   - id: 3
+     name: "apc2"
+     port: 1
+   - id: 4
+     name: "apc1"
+     port: 1
+   - id: 5
+     name: "arch"
+     port: "i"
+   - id: 7
+     name: "dlb8"
+     port: "i"
+   - id: 18
+     name: "dlc2"
+     port: "i"
+   - id: 20
+     name: "dlc4"
+     port: "i"
+   - id: 24
+     name: "apc3"
+     port: 1
+   - id: 25
+     name: "f24b"
+     port: 16
+

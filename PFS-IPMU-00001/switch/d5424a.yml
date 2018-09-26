@@ -1,0 +1,65 @@
+---
+- device
+     name: "d5424a"
+     units: 28
+     class: "switch"
+     description: "switch for ipmu-lan"
+- assign:
+   - id: 1
+     name: "uplink"
+     port: 1
+   - id: 2
+     name: "simulator"
+     port: 1
+   - id: 3
+     name: "mtgdesk"
+     port: 1
+   - id: 4
+     name: "office"
+     port: 1
+   - id: 5
+     name: "printer"
+     port: 1
+   - id: 6
+     name: "dlb4"
+     port: 2
+   - id: 7
+     name: "dlb3"
+     port: 2
+   - id: 8
+     name: "dlb8"
+     port: 2
+   - id: 9
+     name: "kvm"
+     port: 2
+   - id: 10
+     name: "dlb5"
+     port: 2
+   - id: 11
+     name: "dla4"
+     port: 2
+   - id: 12
+     name: "dlb2"
+     port: 2
+   - id: 13
+     name: "dlb7"
+     port: 2
+   - id: 14
+     name: "dbsim"
+     port: 2
+   - id: 15
+     name: "rea2"
+     port: 2
+   - id: 16
+     name: "dlc4"
+     port: 2
+   - id: 17
+     name: "dlc3"
+     port: 2
+   - id: 18
+     name: "dlc2"
+     port: 2
+   - id: 24
+     name: "f24b"
+     port: 22
+
