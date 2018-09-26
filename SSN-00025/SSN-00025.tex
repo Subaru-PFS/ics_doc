@@ -19,20 +19,25 @@
 
 \section{Abstract}
 
-Regarding recent hardware development and constraints found during these 
-development, we now have many new foundings and uncertainties, which may 
-have an impact on control of Cobra operation for entire PFS software 
-packages but not only MPS and FPS.
-From uncertainties of Cobra movement, it is quite difficult to simulate 
-behaviors of Cobra motors which makes a collision avoidance in advance from 
-the operation inaccurate and makes blocked region within acceptable level. 
+In the recent hardware development and characterizations, we have found 
+new foundings on operations and uncertainties such that 
+the motor maps of individual Cobras have significant uncertainties and 
+also are assumed to be updated from time to time as data are collected from 
+operations. 
+These newly found charactristics have significant impacts on strategies 
+discussed and designed for Cobra operation over entire PFS software packages 
+but not only MPS and FPS. 
+From uncertainties of Cobra movement, detections of collisions by simulation 
+in advance at target assignment by ETS are turned into impossible, which 
+can only be simulated stochastically or may point unacceptable level of 
+blocked region. 
 Although implementation could be possible, but this makes overall strategy 
 of software operation quite complex, which will make survey operation 
 inefficient. 
-This proposal is not taking such way to check as much as possible in advance, 
-but to perform only a simple check on target assignment with detecting 
-collision on the fly. 
 
+This note is to point possible mitigations dealing with collisions of 
+Cobras, with having only simple check on target assignment and detecting 
+collision on the fly. 
 In this note, these new foundings are summarized and described, and 
 discussions which may affect to the operation of hardware from software 
 point of view to make us possible dealing with new constraints and conditions. 
