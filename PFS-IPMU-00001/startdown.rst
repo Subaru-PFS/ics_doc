@@ -45,6 +45,7 @@ Start backends first, end point to external, and monitoring systems.
     * Start jira server instance manually via systemd
 
 	ssh pfs@jirapipe-77
+
 	sudo systemctl start jira
 
   * *jupyter-spt*, *jupyter1*
