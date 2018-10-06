@@ -21,13 +21,10 @@
      name: "dlb2"
      port: 1
    - id: 6
-     name: "rca3"
+     name: "rca4"
      port: 1
    - id: 7
      name: "dbsim"
-     port: 1
-   - id: 8
-     name: "rea1"
      port: 1
    - id: 10
      name: "dlc4"
@@ -39,13 +36,13 @@
      name: "dlb8"
      port: 2
    - id: 13
-     name: "dla3"
+     name: "dlc7"
      port: 1
    - id: 14
-     name: "dla2"
+     name: "dlc6"
      port: 1
    - id: 15
-     name: "dla1"
+     name: "dlc5"
      port: 1
    - id: 16
      name: "p2950a"
@@ -55,5 +52,8 @@
      port: 1
    - id: 18
      name: "dlc2"
+     port: 1
+   - id: 19
+     name: "rca3"
      port: 1
 

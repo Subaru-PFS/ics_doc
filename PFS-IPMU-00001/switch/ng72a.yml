@@ -15,23 +15,56 @@
      name: "apc2"
      port: 1
    - id: 4
-     name: "apc1"
+     name: "usp2"
      port: 1
    - id: 5
-     name: "arch"
+     name: "apc3"
+     port: 1
+   - id: 6
+     name: "p2950a"
      port: "i"
    - id: 7
+     name: "apc1"
+     port: 1
+   - id: 8
+     name: "dbsim"
+     port: "i"
+   - id: 11
+     name: "dlb3"
+     port: "i"
+   - id: 12
+     name: "dlb4"
+     port: "i"
+   - id: 13
+     name: "dlb5"
+     port: "i"
+   - id: 15
+     name: "dlb7"
+     port: "i"
+   - id: 16
      name: "dlb8"
+     port: "i"
+   - id: 17
+     name: "dlc1"
      port: "i"
    - id: 18
      name: "dlc2"
      port: "i"
+   - id: 19
+     name: "dlc3"
+     port: "i"
    - id: 20
      name: "dlc4"
      port: "i"
-   - id: 24
-     name: "apc3"
-     port: 1
+   - id: 21
+     name: "dlc5"
+     port: "i"
+   - id: 22
+     name: "dlc6"
+     port: "i"
+   - id: 23
+     name: "dlc7"
+     port: "i"
    - id: 25
      name: "f24b"
      port: 16
