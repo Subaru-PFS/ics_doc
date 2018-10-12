@@ -34,10 +34,16 @@ Start backends first, end point to external, and monitoring systems.
   * ``Database`` : *db3*
   * ``rsyslog`` : *rsyslog*
   * Elasticsearch (log target of rsyslog) :*elasticsearch*
-  * ``backup`` : *backup*
+  * ``pfsarch`` : *pfsarch* (one area exported from this NFS server is mounted at *pfssrv* for archive storage export point)
 
-* Start external servers (``pfs``, ``pfspipe``, ``pfsarch``)
-  * *pfssrv*, *pfspipe2*, *pfsarch*
+* Start backup service (``backup``)
+
+  * *backup*
+
+* Start external servers (``pfs``, ``pfspipe``)
+
+  * *pfssrv*, *pfspipe2*
+
 * Start service VM guests
 
   * ``jirapipe`` : *jira-pipe-7.7*
@@ -70,7 +76,7 @@ shutdown backends.
 See the section `Start & shutdown VM guest with virsh`_ for the virsh command to shutdown the VM guests.
 Refer the mail (subject: \"List of virt VMs\") sent to admin weekly for VM guests running on individual hosts.
 
-* Shutdown monitoring services (e.g. ``prometheus``, ``influxdb``)
+* Shutdown monitoring services (e.g. ``prometheus``, ``influxdb``) not to get unwanted (or obvious) warnings from hosts shut down.
 
   * *prometheus*, *influxdb*, *prometheus-snmp*
 
@@ -81,6 +87,10 @@ Refer the mail (subject: \"List of virt VMs\") sent to admin weekly for VM guest
 * Shutdown external servers (``pfs``, ``pfspipe``, ``pfsarch``)
 
   * *pfssrv*, *pfspipe2*, *pfsarch*
+
+* Shutdown backup service (``backup`` )
+
+  * *backup*
 
 * Shutdown iSCSI storage for pfsarch via web admin panel
 
@@ -94,7 +104,7 @@ Refer the mail (subject: \"List of virt VMs\") sent to admin weekly for VM guest
 
 * Shutdown backend services
 
-  * *db2*, *db3*, *backup*, *mgmt3*, *elasticsearch*, *rsyslog*
+  * *db2*, *db3*, *mgmt3*, *elasticsearch*, *rsyslog*
 
 * Shutdown VM host server (except for one running core management guest)
 * Shutdown core management guest (DHCP, LDAP) and its host (*dlb5-vm*)
