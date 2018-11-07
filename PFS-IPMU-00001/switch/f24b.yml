@@ -17,21 +17,24 @@
    - id: 5
      name: "dlc1"
      port: 1
+   - id: 6
+     name: "dmb1"
+     port: 1
    - id: 7
      name: "dlb7"
      port: 1
-   - id: 10
-     name: "simlator"
-     port: 2
    - id: 11
      name: "dlc3"
      port: 1
    - id: 12
-     name: "dla4"
+     name: "dla3"
      port: 1
    - id: 14
      name: "dlb4"
      port: 1
+   - id: 15
+     name: "arch"
+     port: "s"
    - id: 16
      name: "ng72a"
      port: 25
@@ -41,13 +44,10 @@
    - id: 18
      name: "arch"
      port: 2
-   - id: 19
-     name: "pfsdisk"
-     port: 1
-   - id: 22
-     name: "d5224a"
-     port: 24
-   - id: 24
+   - id: 23
      name: "f24c"
+     port: 23
+   - id: 24
+     name: "d5224a"
      port: 24
 

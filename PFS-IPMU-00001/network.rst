@@ -12,9 +12,16 @@ In the rack for services, five switches are used and configured as follows:
 * ``PFS-LAN``/management: *ng72a* 
   (all ``PFS-LAN``, only management connection like iLO)
 * ``IPMU-LAN``: *d5424a* 
-  (ports 1-20 as ``IPMU-LAN``, port 24 as ``PFS-LAN``)
+
+  * ports 1-20 : ``IPMU-LAN``
+  * ports 21-22 : trunk
+  * port 23 : ``IPMU-LAM``
+  * port 24 : ``PFS-LAN``
+
 * ``Global-LAN``: *f24c* 
-  (ports 1-20 as ``Global-LAN``, ports 21-24 as ``PFS-LAN``)
+
+  * ports 1-12 : ``Global-LAN``
+  * ports 13-22 : ``PFS-LAN``
 
 LACP configurations
 ------
