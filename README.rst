@@ -15,6 +15,7 @@ List of contents
 * `Meeting minutes <memo-minutes/>`_
 * System Engineering related documents, see list in `SE-IPMU`_
 * SSN documents, see list in `SSN (Software Study Note)`_
+* Software Test Cases
 
 Commissioning documents
 ------
@@ -85,3 +86,7 @@ SSN (Software Study Note)
 29. (Material for review) `PFS ICS infrastructure design and performance verification <SSN-00029.pptx>`_
 30. `PFS ICS production configuration <SSN-00030/>`_
 
+Software Test Cases
+------
+
+1. `SPS Software Test Cases <PFS-SPS-PRU300005/>`_
