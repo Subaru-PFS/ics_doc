@@ -1,0 +1,44 @@
+\section{Test Case SPS-ALERT-TLOW-020: Test Temperature Drops Below Limit Alarm}
+
+\subsection{Description}
+
+Checks that expected alarm is raised when temperature drops below a given limit.
+
+\subsection{Pass/Fail Condition(s)}
+
+\begin{description}
+\item [Pass] Expected alert seen on GUI and written to log when temperature drops below X Kelvin
+\item [Fail] Any result otherwise. For example:
+
+\begin{enumerate}
+    \item Unexpected alert raised when temperature drops below X Kelvin
+    \item No alert raised when temp drops below X Kelvin
+    \item Any alert raised when temperature higher than X Kelvin
+\end{enumerate}
+\end{description}
+
+\subsection{Hardware constraints}
+
+Cryostat is cooled?
+
+\subsection{Initial conditions}
+
+SM module and temperature board deactivated. AlertsActor deactivated.
+
+\subsection{Procedure}
+
+\begin{table}[H]
+    \begin{tabular}{|l| p{5cm} |l| p{5cm} |}
+    \hline
+    {\bf Step} & {\bf Description} & {\bf Pass/FAIL} & {\bf Comment}  \\ \hline
+    1 & Configure alerts actor to raise alarm with temp X Kelvin &  &  \\ \hline
+    2 & Start alerts actor and SM module with temperature board activated &  & \\ \hline
+    3 & Start temperature at a value greater than X-10 K &  & \\ \hline
+    4 & Drop temperature to temp X-10 K, in steps of 5 K &  & \\ \hline
+    5 & Monitor alerts &  & \\ \hline
+    \end{tabular}
+\end{table}
+
+\subsection{Additional Notes}
+
+None.
