@@ -1,38 +1,36 @@
-\section{Test Case SPS-REXM-130: Red exchange mechanism movement}
+\section{Test Case SPS-TPROBE-130: Check temperature probes}
 
 \subsection{Description}
 
-Checks that the red exchange mechanism moves as expected.
+Checks that the temperature probes for the CCD, cryostat and OBA are functioning.
 
 \subsection{Pass/Fail Condition(s)}
 
 \begin{description}
-\item [Pass] The REXM switches to the expected mode.
-\item [Fail] Any result otherwise. 
+\item [Pass] Temperature values read from the probes are in the expected range (1-100 K)
+\item [Fail] If the temperature reads \texttt{NaN} or zero.
 \end{description}
 
 \subsection{Hardware constraints}
 
-None?
+None.
 
 \subsection{Initial conditions}
 
-None.
+TBW.
 
 \subsection{Procedure}
+
+For each probe:
 
 \begin{table}[H]
     \begin{tabular}{|l| p{5cm} |l| p{5cm} |}
     \hline
     {\bf Step} & {\bf Description} & {\bf Pass/FAIL} & {\bf Comment}  \\ \hline
-    1 & Move REXM to low resolution mode &  &  \\ \hline
-    2 & Check position &  &  \\ \hline
-    3 & Move REXM to high resolution mode &  &  \\ \hline
-    4 & Check position &  &  \\ \hline
+    1 & On GUI check temperature value. &  &  \\ \hline
     \end{tabular}
 \end{table}
 
-
 \subsection{Additional Notes}
 
-None..
+None.

@@ -1,35 +1,39 @@
-\section{Test Case SPS-CCD-150: Check CCD bias/darks}
+\section{Test Case SPS-SHUTTER-150: Shutter control}
 
 \subsection{Description}
 
-None.
+Checks the SpS shutter movement
 
 \subsection{Pass/Fail Condition(s)}
 
 \begin{description}
-\item [Pass] The CCD bias and darks are processed correctly.
-\item [Fail] Processing fails.
+\item [Pass] Shutters open/close as expected
+\item [Fail] Any result otherwise. 
 \end{description}
 
 \subsection{Hardware constraints}
 
-None?
+None.
 
 \subsection{Initial conditions}
 
-None.
+All shutter are in the closed position.
 
 \subsection{Procedure}
+
+For each shutter:
 
 \begin{table}[H]
     \begin{tabular}{|l| p{5cm} |l| p{5cm} |}
     \hline
     {\bf Step} & {\bf Description} & {\bf Pass/FAIL} & {\bf Comment}  \\ \hline
-    1 & Take the bias and dark exposures. &  &  \\ \hline
-    2 & Check the FITS headers of the bias and dark files for any non-conformance. &  &  \\ \hline
-    3 & Process the CCD bias and darks against the 2D DRP pipeline. &  &  \\ \hline
+    1 & Open Shutter &  &  \\ \hline
+    2 & Check that monitor shows that the shutter door is open &  &  \\ \hline
+    3 & Close shutter &  &  \\ \hline
+    4 & Check that the monitor confirms that the shutter door is closed &  &  \\ \hline
     \end{tabular}
 \end{table}
+
 
 \subsection{Additional Notes}
 

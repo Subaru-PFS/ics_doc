@@ -1,0 +1,48 @@
+\section{Test Case SPS-SLIT-160: Slit movement}
+
+\subsection{Description}
+
+Check the slit movement such that the expected positions are reached.
+
+\subsection{Pass/Fail Condition(s)}
+
+\begin{description}
+\item [Pass] The slit position is as intended, within the given tolerance.
+\item [Fail] Any result otherwise. 
+\end{description}
+
+\subsection{Hardware constraints}
+
+None?
+
+\subsection{Initial conditions}
+
+None.
+
+\subsection{Procedure}
+
+\begin{enumerate}
+    \item for each position A, B, C, D, E:
+    \begin{enumerate}
+        \item command slit to be moved to that position
+        \item check whether the expected position is reached within tolerance 1 micron
+        \item monitor slit movement throughout.
+    \end{enumerate}
+\end{enumerate}
+
+\begin{table}[H]
+    \begin{tabular}{|l| p{5cm} |l| p{5cm} |}
+    \hline
+    {\bf Step} & {\bf Description} & {\bf Pass/FAIL} & {\bf Comment}  \\ \hline
+    1 & Position A &  &  \\ \hline
+    2 & Position B &  &  \\ \hline
+    3 & Position C &  &  \\ \hline
+    4 & Position D &  &  \\ \hline
+    5 & Position E &  &  \\ \hline
+    \end{tabular}
+\end{table}
+
+
+\subsection{Additional Notes}
+
+None..
