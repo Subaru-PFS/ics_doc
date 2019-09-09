@@ -1,19 +1,18 @@
-\section{Test Case SPS-ALERT-VHIGH-050: Test Voltage Exceeds Limit Alarm}
+\section{Test Case SPS-ALERT-TURBO-050: Turbo Speed Outside Range}
 
 \subsection{Description}
 
-Checks that expected alarm is raised when the cryostat voltage exceeds a given limit.
+Checks that expected alarm is raised when the turbo speed is outside range.
 
 \subsection{Pass/Fail Condition(s)}
 
 \begin{description}
-\item [Pass] Expected alert seen on GUI and written to log when voltage exceeded X Volts
+\item [Pass] Expected alert seen on GUI and written to log when turbo speed is outside range
 \item [Fail] Any result otherwise. For example:
 
 \begin{enumerate}
-    \item Unexpected alert raised when voltage exceeded X Volts
-    \item No alert raised when voltage exceeded X Volts
-    \item Any alert raised when voltage is lower than X Volts
+    \item No alert raised when turbo speed is outside range
+    \item Unexpected alert raised while turbo speed is in fact {\it within} allowed range
 \end{enumerate}
 \end{description}
 
@@ -23,23 +22,12 @@ Cryostat is cooled?
 
 \subsection{Initial conditions}
 
-SM module and voltage board deactivated. AlertsActor deactivated.
+SM module and temperature board deactivated. AlertsActor deactivated.
 
 \subsection{Procedure}
 
-\begin{table}[H]
-    \begin{tabular}{|l| p{5cm} |l| p{5cm} |}
-    \hline
-    {\bf Step} & {\bf Description} & {\bf Pass/FAIL} & {\bf Comment}  \\ \hline
-    1 & Configure alerts actor to raise alarm when voltage is above X Volts &  &  \\ \hline
-    2 & Start alerts actor and SM module with roughing pump activated &  & \\ \hline
-    3 & Start voltage at a value lower than X-0.05 Volts &  & \\ \hline
-    4 & Raise voltage to X+0.05 Volts, in steps of 0.01 Volts &  & \\ \hline
-    5 & Monitor alerts &  & \\ \hline
-    \end{tabular}
-\end{table}
-
+Repeat procedure described in~\ref{sec:alerts-proc}, with \texttt{key=turboSpeed} and \texttt{limits=89000, 
+null}.
 
 \subsection{Additional Notes}
-
 None.

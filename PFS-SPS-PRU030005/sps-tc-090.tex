@@ -1,36 +1,32 @@
-\section{Test Case SPS-TPROBE-090: Check temperature probes}
+\section{Test Case SPS-ALERT-CPOWER-090: Cooler Power Outside Range}
 
 \subsection{Description}
 
-Checks that the temperature probes for the CCD, cryostat and OBA are functioning.
+Checks that expected alarm is raised when the cooler power is outside range.
 
 \subsection{Pass/Fail Condition(s)}
 
 \begin{description}
-\item [Pass] Temperature values read from the probes are in the expected range (1-100 K)
-\item [Fail] If the temperature reads \texttt{NaN} or zero.
+\item [Pass] Expected alert seen on GUI and written to log when the cooler power is outside range
+\item [Fail] Any result otherwise. For example:
+
+\begin{enumerate}
+    \item No alert raised when cooler power is outside range
+    \item Unexpected alert raised while cooler power is in fact {\it within} allowed range
+\end{enumerate}
 \end{description}
 
 \subsection{Hardware constraints}
 
-None.
+Cryostat is cooled?
 
 \subsection{Initial conditions}
 
-TBW.
+SM module and temperature board deactivated. AlertsActor deactivated.
 
 \subsection{Procedure}
 
-For each probe:
-
-\begin{table}[H]
-    \begin{tabular}{|l| p{5cm} |l| p{5cm} |}
-    \hline
-    {\bf Step} & {\bf Description} & {\bf Pass/FAIL} & {\bf Comment}  \\ \hline
-    1 & On GUI check temperature value. &  &  \\ \hline
-    \end{tabular}
-\end{table}
+Repeat procedure described in~\ref{sec:alerts-proc}, with \texttt{key=coolerPowerXX} and range \texttt{XX, XX}.
 
 \subsection{Additional Notes}
-
 None.

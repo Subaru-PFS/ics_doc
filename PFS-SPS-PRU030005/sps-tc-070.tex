@@ -1,36 +1,32 @@
-\section{Test Case SPS-LOG-070: Process logging}
+\section{Test Case SPS-ALERT-ION2-070: Ion Pump 2 Outside Range}
 
 \subsection{Description}
 
-Checks that logging is active for a typical process.
+Checks that expected alarm is raised when the ion pump 2 is outside range.
 
 \subsection{Pass/Fail Condition(s)}
 
 \begin{description}
-\item [Pass] Logging of INFO, FAIL and WARN messages are correctly written to the expected log file
-\item [Fail] Any result otherwise. 
+\item [Pass] Expected alert seen on GUI and written to log when ion pump 2 is outside range
+\item [Fail] Any result otherwise. For example:
+
+\begin{enumerate}
+    \item No alert raised when ion pump is outside range
+    \item Unexpected alert raised while ion pump is in fact {\it within} allowed range
+\end{enumerate}
 \end{description}
 
 \subsection{Hardware constraints}
 
-None.
+Cryostat is cooled?
 
 \subsection{Initial conditions}
 
-\texttt{/data} and \texttt{/software} volumes are created.
+SM module and temperature board deactivated. AlertsActor deactivated.
 
 \subsection{Procedure}
 
-None..
-
-\begin{table}[H]
-    \begin{tabular}{|l| p{5cm} |l| p{5cm} |}
-    \hline
-    {\bf Step} & {\bf Description} & {\bf Pass/FAIL} & {\bf Comment}  \\ \hline
-    1 & TBW &  &  \\ \hline
-    \end{tabular}
-\end{table}
+Repeat procedure described in~\ref{sec:alerts-proc}, with \texttt{key=ionpump2} and \texttt{1e-10, 1e-05}.
 
 \subsection{Additional Notes}
-
-A test script installed in the \texttt{/software} folder would address this test effectively.
+None.

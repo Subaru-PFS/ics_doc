@@ -1,36 +1,38 @@
-\section{Test Case SPS-LOG-110: Process logging}
+\section{Test Case SPS-REXM-170: Red exchange mechanism movement}
 
 \subsection{Description}
 
-Checks that logging is active for a typical process.
+Checks that the red exchange mechanism moves as expected.
 
 \subsection{Pass/Fail Condition(s)}
 
 \begin{description}
-\item [Pass] Logging of INFO, FAIL and WARN messages are correctly written to the expected log file
+\item [Pass] The REXM switches to the expected mode.
 \item [Fail] Any result otherwise. 
 \end{description}
 
 \subsection{Hardware constraints}
 
-None.
+None?
 
 \subsection{Initial conditions}
 
-\texttt{/data} and \texttt{/software} volumes are created.
+None.
 
 \subsection{Procedure}
-
-None..
 
 \begin{table}[H]
     \begin{tabular}{|l| p{5cm} |l| p{5cm} |}
     \hline
     {\bf Step} & {\bf Description} & {\bf Pass/FAIL} & {\bf Comment}  \\ \hline
-    1 & TBW &  &  \\ \hline
+    1 & Move REXM to low resolution mode &  &  \\ \hline
+    2 & Check position &  &  \\ \hline
+    3 & Move REXM to high resolution mode &  &  \\ \hline
+    4 & Check position &  &  \\ \hline
     \end{tabular}
 \end{table}
 
+
 \subsection{Additional Notes}
 
-A test script installed in the \texttt{/software} folder would address this test effectively.
+None..
