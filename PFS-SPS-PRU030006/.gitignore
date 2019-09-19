@@ -1,0 +1,14 @@
+.deps
+*.acn
+*.acr
+*.alg
+*.aux
+*.fdb_latexmk
+*.fls
+*.glg
+*.glo
+*.gls
+*.log
+*.out
+*.xdy
+*.toc
