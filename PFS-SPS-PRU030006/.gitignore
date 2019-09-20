@@ -12,3 +12,5 @@
 *.out
 *.xdy
 *.toc
+*.synctex.gz
+
