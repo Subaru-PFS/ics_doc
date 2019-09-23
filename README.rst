@@ -1,15 +1,16 @@
 ics_doc
-******
+*******
 
 ICS design and study documents.
-Make one directory per each document, include all resources into that directory,  such as figures.
+Make one directory per each document,
+include all resources into that directory, such as figures.
 For tex sources, do not include output or intermediate files.
 
-Required `style files <https://github.com/Subaru-PFS/pfs_misc/tree/master/texsty>`_ 
-are in the `pfs_misc repository <https://github.com/Subaru-PFS/pfs_misc>`_. 
+Required `style files <https://github.com/Subaru-PFS/pfs_misc/tree/master/texsty>`_
+are in the `pfs_misc repository <https://github.com/Subaru-PFS/pfs_misc>`_.
 
 List of contents
-======
+================
 
 * `Bulk memos for ICS <memo/>`_
 * `Meeting minutes <memo-minutes/>`_
@@ -18,19 +19,19 @@ List of contents
 * Software Test Cases
 
 Commissioning documents
-------
+-----------------------
 
 * `commissioning_details <commissioning/>`_: Detailed procedure of PFS commissioning
 
 
 ID assignment for SE-IPMU and SSN
-======
+=================================
 
 Add to the list below, push to the master.
 Do never recycle old IDs.
 
 SE-IPMU
-------
+-------
 
 System Engineering related document by IPMU team.
 
@@ -53,7 +54,7 @@ System Engineering related document by IPMU team.
 17. Exposure time control per camera (arm)
 
 SSN (Software Study Note)
-------
+-------------------------
 
 1. `Data rate from reading out detectors <SSN-00001/>`_
 2. `PFS ICS network connections (ICD 70) <SSN-00002/>`_
@@ -66,7 +67,8 @@ SSN (Software Study Note)
 9. PFS Integrated Database system
 10. `PFS ICS network design note <SSN-00010/>`_
 11. Study on PFS Observation Sequence (I) - overall
-12. Study on PFS Observation Sequence (II) - From command next field to AutoGuide
+12. Study on PFS Observation Sequence (II) -
+    From command next field to AutoGuide
 13. Study on definition of VMCS
 14. Requirements and interfaces on ETS (Exposure Targeting Software)
 15. Requirements on on-site DRP
@@ -87,6 +89,7 @@ SSN (Software Study Note)
 30. `PFS ICS production configuration <SSN-00030/>`_
 
 Software Test Cases
-------
+-------------------
 
-1. `SPS Software Test Cases <PFS-SPS-PRU300005/>`_
+1. `SPS Software Test Cases <PFS-SPS-PRU030005/>`_
+2. `SPS Software Test Report <PFS-SPS-PRU030006/>`_
