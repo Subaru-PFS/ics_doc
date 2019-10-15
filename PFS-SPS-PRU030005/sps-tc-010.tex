@@ -16,16 +16,21 @@ A command is sent to testsActor to generate out of range values and therefore tr
 \subsection{Pass/Fail Condition(s)}
 
 \begin{description}
-\item [Pass] Expected alerts seen STS server side and written to log when the alerts are triggered.
-\item [Fail] Any result otherwise. For example:
+\item [Pass] Expected alerts seen on STS server side and written to log when the alerts are triggered.
 
 \begin{enumerate}
     \item an expected alert is raised when all keytest1 values are not within 160-166
     \item an expected alert is raised when keytest2 value is above 1.0e-6
     \item an expected alert is raised when keytest3[1] is not "OK"
 \end{enumerate}
+
+
+\item [Fail] no alerts are raised .
 \end{description}
 
+\subsection{Hardware constraints}
+
+None.
 
 \subsection{Initial conditions}
 
@@ -40,3 +45,6 @@ alertsActor and testsActor started
     \item TestsActor : trigger the alerts: \texttt{tests alerts trigger}
     \item AlertsActor : disconnect tests controller: \texttt{alerts disconnect controller=tests}
 \end{enumerate}
+
+\subsection{Additional Notes}
+None.

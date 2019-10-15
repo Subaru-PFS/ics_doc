@@ -5,20 +5,22 @@
 Checks that an expected alarm is raised when keyword values are no longer generated with \texttt{TIMELIM=180 secs}.
 Since dedicated testsActor keywords are tracked by alertsActor,a command is sent to testsActor to stop to keyword generation and therefore trigger the alerts.
 
-
-
 \subsection{Pass/Fail Condition(s)}
 
 \begin{description}
-\item [Pass] Expected alerts seen STS server side and written to log when the alerts are triggered.
-\item [Fail] Any result otherwise. For example:
+\item [Pass] Expected alerts seen on STS server side and written to log when the alerts are triggered.
 
 \begin{enumerate}
-    \item an expected TIMEOUT alert is raised after 180 seconds
+    \item  an expected TIMEOUT alert is raised after 180 seconds
 
 \end{enumerate}
+\item [Fail] no alerts are raised
+
 \end{description}
 
+\subsection{Hardware constraints}
+
+None.
 
 \subsection{Initial conditions}
 
@@ -34,3 +36,6 @@ alertsActor and testsActor started
     \item wait 180 seconds, keywords are no longer generated, alerts should be raised
     \item AlertsActor : disconnect tests controller: \texttt{alerts disconnect controller=tests}
 \end{enumerate}
+
+\subsection{Additional Notes}
+None.
