@@ -1,40 +1,42 @@
-\section{Test Case SPS-ALERT-CTHIGH-010: Cooler Temperature Too High}
+\section{Test Case SPS-ALERT-TRIGGER-010: Alerts trigger mechanism}
 
 \subsection{Description}
 
-Checks that expected alarm is raised when the cooler temperature exceeds the allowed upper limit.
+Checks an expected alarm is raised using different alert mechanisms :
+\begin{enumerate}
+    \item LIMITS ALERT :  value within bounds.
+    \item REGEXP ALERT : regular expression.
+    \item Callback : dedicated python function.
+\end{enumerate}
+
+Dedicated testsActor keywords are tracked by alertsActor.
+A command is sent to testsActor to generate out of range values and therefore trigger the alerts.
+
 
 \subsection{Pass/Fail Condition(s)}
 
 \begin{description}
-\item [Pass] Expected alert seen on GUI and written to log when temperature is above the allowed limit.
+\item [Pass] Expected alerts seen STS server side and written to log when the alerts are triggered.
 \item [Fail] Any result otherwise. For example:
 
 \begin{enumerate}
-    \item The expected alert is {\it not} raised when the temperature exceeds the limit.
-    \item An unexpected alert raised when temperature is in fact {\it within} the allowed range.
+    \item an expected alert is raised when all keytest1 values are not within 160-166
+    \item an expected alert is raised when keytest2 value is above 1.0e-6
+    \item an expected alert is raised when keytest3[1] is not "OK"
 \end{enumerate}
 \end{description}
 
-\subsection{Hardware constraints}
-
-Cryostat is cooled?
 
 \subsection{Initial conditions}
 
-SM module and temperature board deactivated. AlertsActor deactivated.
+alertsActor and testsActor started
 
 \subsection{Procedure}
 \label{sec:alerts-proc}
 
 \begin{enumerate}
-    \item Set temporary range override: \texttt{alerts override key=coolerTemps field=0 limits=null,20} 
-    (see notes below)
-    \item Start alerts actor and SM module with temperature board activated
-    \item Monitor alerts
-    \item Restore nominal temperature range: \texttt{alerts dropOverride key=coolerTemps field=0}
+    \item AlertsActor : connect tests controller: \texttt{alerts connect controller=tests}
+    \item wait 30 seconds, keywords are generated within ranges, no alerts are raised yet
+    \item TestsActor : trigger the alerts: \texttt{tests alerts trigger}
+    \item AlertsActor : disconnect tests controller: \texttt{alerts disconnect controller=tests}
 \end{enumerate}
-
-\subsection{Additional Notes}
-The temperature range is temporarily overridden to allow the alarm to be triggered without 
-having to force a hardware change - ie., a change to the ambient temperature.

@@ -1,32 +1,35 @@
-\section{Test Case SPS-ALERT-PPOWER1-020: PCM UPS Input Power Outside Range}
+\section{Test Case SPS-ALERT-INVALID-020: Alerts invalid values mechanism}
 
 \subsection{Description}
 
-Checks that expected alarm is raised when the PCM UPS Input Power is outside range.
+Checks that an expected alarm is raised when an invalid value is generated. Since dedicated testsActor keywords are tracked by alertsActor,
+a command is sent to testsActor to generate invalid values and therefore trigger the alerts.
+
 
 \subsection{Pass/Fail Condition(s)}
 
 \begin{description}
-\item [Pass] Expected alert seen on GUI and written to log when power is outside range
+\item [Pass] Expected alerts seen STS server side and written to log when the alerts are triggered.
 \item [Fail] Any result otherwise. For example:
 
 \begin{enumerate}
-    \item No alert raised when voltage is outside range
-    \item Unexpected alert raised while power is in fact {\it within} allowed range
+    \item an expected alert is raised when at least one keytest1 field value is invalid
+    \item an expected alert is raised when keytest2 value is invalid
+
 \end{enumerate}
 \end{description}
 
-\subsection{Hardware constraints}
-
-Cryostat is cooled?
 
 \subsection{Initial conditions}
 
-SM module and temperature board deactivated. AlertsActor deactivated.
+alertsActor and testsActor started
 
 \subsection{Procedure}
+\label{sec:alerts-proc}
 
-Repeat procedure described in~\ref{sec:alerts-proc}, with \texttt{key=pcmPower1} and \texttt{limits=27,null}.
-
-\subsection{Additional Notes}
-None.
+\begin{enumerate}
+    \item AlertsActor : connect tests controller: \texttt{alerts connect controller=tests}
+    \item wait 30 seconds, keywords are generated within ranges, no alerts are raised yet
+    \item TestsActor : trigger the alerts: \texttt{tests alerts invalid}
+    \item AlertsActor : disconnect tests controller: \texttt{alerts disconnect controller=tests}
+\end{enumerate}
