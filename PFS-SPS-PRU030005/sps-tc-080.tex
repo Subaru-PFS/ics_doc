@@ -1,32 +1,35 @@
-\section{Test Case SPS-ALERT-CTEMP-080: Cooler temperature Outside Range}
+\section{Test Case SPS-XCU-GAUGE-080: Cryostat Gauge}
 
 \subsection{Description}
 
-Checks that expected alarm is raised when the cooler temperature is outside range.
+Check the communication with the gauge of a given camera, check that the value is valid
 
 \subsection{Pass/Fail Condition(s)}
 
 \begin{description}
-\item [Pass] Expected alert seen on GUI and written to log when the cooler temperature is outside range
-\item [Fail] Any result otherwise. For example:
+\item [Pass] Gauge dataset will be generated and command should finish with \texttt{'test=gauge-cam,OK'}
+\item [Fail] If the sensor reads NaN or zero or if an exception is raised \texttt{'test=gauge-cam,FAILED'} will be generated
 
-\begin{enumerate}
-    \item No alert raised when cooler temperature is outside range
-    \item Unexpected alert raised while cooler temperature is in fact {\it within} allowed range
-\end{enumerate}
 \end{description}
 
 \subsection{Hardware constraints}
 
-Cryostat is cooled?
+\begin{enumerate}
+    \item SPS RACK powered up
+    \item BEE powered up.
+    \item Gauge powered up.
+\end{enumerate}
 
 \subsection{Initial conditions}
 
-SM module and temperature board deactivated. AlertsActor deactivated.
+xcuActor and testsActor started
 
 \subsection{Procedure}
 
-Repeat procedure described in~\ref{sec:alerts-proc}, with \texttt{key=coolerTemps} and \texttt{null, 32}.
+\begin{enumerate}
+    \item AlertsActor : send gauge test command: \texttt{tests gauge cam=r1} .
+    \item wait for the command to end.
+\end{enumerate}
 
 \subsection{Additional Notes}
 None.

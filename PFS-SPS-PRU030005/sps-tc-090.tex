@@ -1,32 +1,36 @@
-\section{Test Case SPS-ALERT-CPOWER-090: Cooler Power Outside Range}
+\section{Test Case SPS-XCU-COOLER-090: Cryostat Cooler}
 
 \subsection{Description}
 
-Checks that expected alarm is raised when the cooler power is outside range.
+Check the communication with the cooler of a given camera, check that the statuses are correct.
+Retrieves and generates Cryocooler telemetry.
 
 \subsection{Pass/Fail Condition(s)}
 
 \begin{description}
-\item [Pass] Expected alert seen on GUI and written to log when the cooler power is outside range
-\item [Fail] Any result otherwise. For example:
+\item [Pass] Cooler dataset will be generated and command should finish with \texttt{'test=cooler-cam,OK'}
+\item [Fail] If an exception is raised \texttt{'test=cooler-cam,FAILED'} will be generated with its full trace.
 
-\begin{enumerate}
-    \item No alert raised when cooler power is outside range
-    \item Unexpected alert raised while cooler power is in fact {\it within} allowed range
-\end{enumerate}
 \end{description}
 
 \subsection{Hardware constraints}
 
-Cryostat is cooled?
+\begin{enumerate}
+    \item SPS RACK powered up
+    \item BEE powered up.
+    \item Cooler controller powered up.
+\end{enumerate}
 
 \subsection{Initial conditions}
 
-SM module and temperature board deactivated. AlertsActor deactivated.
+xcuActor and testsActor started
 
 \subsection{Procedure}
 
-Repeat procedure described in~\ref{sec:alerts-proc}, with \texttt{key=coolerPowerXX} and range \texttt{XX, XX}.
+\begin{enumerate}
+    \item AlertsActor : send cooler test command: \texttt{tests cooler cam=r1} .
+    \item wait for the command to end.
+\end{enumerate}
 
 \subsection{Additional Notes}
 None.
