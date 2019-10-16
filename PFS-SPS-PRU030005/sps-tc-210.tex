@@ -1,0 +1,31 @@
+\section{Test Case SPS-IIS-210: Check Internal Illumination Sources}
+
+\subsection{Description}
+
+Turn on each lamp of Internal Illumination Sources and check its power consumption.
+\subsection{Pass/Fail Condition(s)}
+
+\begin{description}
+\item [Pass] The power consumption are measured as expected. {'test=iis-smId,OK'}
+\item [Fail] If an exception is raised \texttt{'test=iis-smId,FAILED'} will be generated with its full trace.
+\end{description}
+
+\subsection{Hardware constraints}
+
+Enu rack powered up and connected to the PFS network
+
+\subsection{Initial conditions}
+enuActor and testsActor started
+
+\subsection{Procedure}
+
+\begin{enumerate}
+    \item testsActor : send iis test command: \texttt{tests iis sm1} .
+    \item wait for the command to end.
+\end{enumerate}
+
+
+
+\subsection{Additional Notes}
+
+None..

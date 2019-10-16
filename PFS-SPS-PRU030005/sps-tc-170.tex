@@ -1,36 +1,52 @@
-\section{Test Case SPS-REXM-170: Red exchange mechanism movement}
+\section{Test Case SPS-SLIT-170: Slit movement}
 
 \subsection{Description}
 
-Checks that the red exchange mechanism moves as expected.
+Check the communication with the slit hexapod, check that the statuses are correct.
+Check slit movement such that the expected positions are reached:
 
-\subsection{Pass/Fail Condition(s)}
-
-\begin{description}
-\item [Pass] The REXM switches to the expected mode.
-\item [Fail] Any result otherwise. 
-\end{description}
-
-\subsection{Hardware constraints}
-
-None?
-
-\subsection{Initial conditions}
-
-None.
-
-\subsection{Procedure}
+\begin{enumerate}
+    \item for each position A, B, C, D, E, F:
+    \begin{enumerate}
+        \item command slit to be moved to that position
+        \item check whether the expected position is reached with total absolute error below 50 microns
+    \end{enumerate}
+\end{enumerate}
 
 \begin{table}[H]
     \begin{tabular}{|l| p{5cm} |l| p{5cm} |}
     \hline
-    {\bf Step} & {\bf Description} & {\bf Pass/FAIL} & {\bf Comment}  \\ \hline
-    1 & Move REXM to low resolution mode &  &  \\ \hline
-    2 & Check position &  &  \\ \hline
-    3 & Move REXM to high resolution mode &  &  \\ \hline
-    4 & Check position &  &  \\ \hline
+    {\bf Step} & {\bf Description}  \\ \hline
+    1 & Position A (1,0,0,0,0,0) \\ \hline
+    2 & Position B (0,1,0,0,0,0) \\ \hline
+    3 & Position C (0,0,1,0,0,0) \\ \hline
+    4 & Position D (0,0,0,1,0,0) \\ \hline
+    5 & Position E (0,0,0,0,1,0) \\ \hline
+    6 & Position F (0,0,0,0,0,1) \\ \hline
     \end{tabular}
 \end{table}
+
+\subsection{Pass/Fail Condition(s)}
+
+\begin{description}
+\item [Pass] Slit movement as expected {'test=slit-smId,OK'}
+\item [Fail] If an exception is raised \texttt{'test=slit-smId,FAILED'} will be generated with its full trace.
+\end{description}
+
+\subsection{Hardware constraints}
+
+Slit hexapod controller powered up and connected to the PFS network
+
+\subsection{Initial conditions}
+enuActor and testsActor started
+
+\subsection{Procedure}
+
+\begin{enumerate}
+    \item testsActor : send slit test command: \texttt{tests slit sm1} .
+    \item wait for the command to end.
+\end{enumerate}
+
 
 
 \subsection{Additional Notes}

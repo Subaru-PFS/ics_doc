@@ -1,46 +1,42 @@
-\section{Test Case SPS-SLIT-160: Slit movement}
+\section{Test Case SPS-SHUTTER-160: Shutter control}
 
 \subsection{Description}
 
-Check the slit movement such that the expected positions are reached.
+Check the communication with the shutters, check that the statuses are correct.
+
+Check movement for each shutter :
+\begin{table}[H]
+    \begin{tabular}{|l| p{10cm} |l| p{10cm} |}
+    \hline
+    {\bf Step} & {\bf Description}   \\ \hline
+    1 & Ask for a 5 seconds exposure     \\ \hline
+    2 & Check the exptime error is below 0.1 sec     \\ \hline
+    3 & Check that the transient time is below 1 sec     \\ \hline
+    \end{tabular}
+\end{table}
+
 
 \subsection{Pass/Fail Condition(s)}
 
 \begin{description}
-\item [Pass] The slit position is as intended, within the given tolerance.
-\item [Fail] Any result otherwise. 
+\item [Pass] Shutters open/close as expected, with the correct speed \texttt{'test=shutters-smId,OK'}
+\item [Fail] If an exception is raised \texttt{'test=shutters-smId,FAILED'} will be generated with its full trace.
 \end{description}
 
 \subsection{Hardware constraints}
 
-None?
+Enu rack powered up and connected to the PFS network
 
 \subsection{Initial conditions}
-
-None.
+enuActor and testsActor started
 
 \subsection{Procedure}
 
 \begin{enumerate}
-    \item for each position A, B, C, D, E:
-    \begin{enumerate}
-        \item command slit to be moved to that position
-        \item check whether the expected position is reached within tolerance 1 micron
-        \item monitor slit movement throughout.
-    \end{enumerate}
+    \item testsActor : send shutters test command: \texttt{tests shutters sm1} .
+    \item wait for the command to end.
 \end{enumerate}
 
-\begin{table}[H]
-    \begin{tabular}{|l| p{5cm} |l| p{5cm} |}
-    \hline
-    {\bf Step} & {\bf Description} & {\bf Pass/FAIL} & {\bf Comment}  \\ \hline
-    1 & Position A &  &  \\ \hline
-    2 & Position B &  &  \\ \hline
-    3 & Position C &  &  \\ \hline
-    4 & Position D &  &  \\ \hline
-    5 & Position E &  &  \\ \hline
-    \end{tabular}
-\end{table}
 
 
 \subsection{Additional Notes}
