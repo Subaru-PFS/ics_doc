@@ -3,32 +3,49 @@
 \subsection{SPS-ALERT-TRIGGER-010}
 \label{sec:tc-010}
 
-
-\texttt{2019-10-10T11:40:40.635 sent alerts connect controller=tests}
-\texttt{2019-10-10T11:40:40.710 alerts : controllers="tests" }
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+2019-10-10T11:40:40.635 sent alerts connect controller=tests
+2019-10-10T11:40:40.710 alerts : controllers="tests" 
+\end{verbatim}
+\end{tiny}
+\end{quote}
 
 keywords are generated within ranges, no alerts are raised yet :
 
-\texttt{2019-10-10 13:40:53,082 [INFO] Datum(id=2010, format=4, timestamp=1570707653, value=(163.2, 'OK'))}
-\texttt{2019-10-10 13:40:53,133 [INFO] Datum(id=2011, format=4, timestamp=1570707653, value=(165.35, 'OK'))}
-\texttt{2019-10-10 13:40:53,180 [INFO] Datum(id=2012, format=4, timestamp=1570707653, value=(1.3e-07, 'OK'))}
-\texttt{2019-10-10 13:40:53,247 [INFO] Datum(id=2013, format=4, timestamp=1570707653, value=(nan, 'OK'))}
-\texttt{2019-10-10 13:40:53,335 [INFO] Datum(id=2014, format=4, timestamp=1570707653, value=(nan, 'OK'))}
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+2019-10-10 13:40:53,082 [INFO] Datum(id=2010, format=4, timestamp=1570707653, value=(163.2, 'OK'))
+2019-10-10 13:40:53,133 [INFO] Datum(id=2011, format=4, timestamp=1570707653, value=(165.35, 'OK'))
+2019-10-10 13:40:53,180 [INFO] Datum(id=2012, format=4, timestamp=1570707653, value=(1.3e-07, 'OK'))
+2019-10-10 13:40:53,247 [INFO] Datum(id=2013, format=4, timestamp=1570707653, value=(nan, 'OK'))
+2019-10-10 13:40:53,335 [INFO] Datum(id=2014, format=4, timestamp=1570707653, value=(nan, 'OK'))
+\end{verbatim}
+\end{tiny}
+\end{quote}
 
 send tests alerts trigger :
 
-\texttt{2019-10-10T11:40:57.503 sent tests alerts trigger}
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+2019-10-10T11:40:57.503 sent tests alerts trigger
 
-\texttt{2019-10-10T11:40:57.507 tests i keytest1=210.89,180.65}
-\texttt{2019-10-10T11:40:57.509 tests i keytest2="10.2"}
-\texttt{2019-10-10T11:40:57.510 tests i keytest3=Open,"Status is not OK !! "}
-\texttt{2019-10-10T11:40:57.510 tests : test=alerts-trigger,OK}
+2019-10-10T11:40:57.507 tests i keytest1=210.89,180.65
+2019-10-10T11:40:57.509 tests i keytest2="10.2"
+2019-10-10T11:40:57.510 tests i keytest3=Open,"Status is not OK !! "
+2019-10-10T11:40:57.510 tests : test=alerts-trigger,OK
 
-\texttt{2019-10-10 13:40:57,630 [INFO] Datum(id=2010, format=4, timestamp=1570707657, value=(210.89, 'tests keytest1[0] : 210.89K out of range'))}
-\texttt{2019-10-10 13:40:57,689 [INFO] Datum(id=2011, format=4, timestamp=1570707657, value=(180.65, 'tests keytest1[1] : 180.65K out of range'))}
-\texttt{2019-10-10 13:40:57,737 [INFO] Datum(id=2012, format=4, timestamp=1570707657, value=(10.2, 'keytest3 is too high!!: 10.2'))}
-\texttt{2019-10-10 13:40:57,788 [INFO] Datum(id=2013, format=4, timestamp=1570707657, value=(nan, 'OK'))}
-\texttt{2019-10-10 13:40:57,838 [INFO] Datum(id=2014, format=4, timestamp=1570707657, value=(nan, 'test regexp : Status is not OK !!  !!'))}
+2019-10-10 13:40:57,630 [INFO] Datum(id=2010, format=4, timestamp=1570707657, value=(210.89, 'tests keytest1[0] : 210.89K out of range'))
+2019-10-10 13:40:57,689 [INFO] Datum(id=2011, format=4, timestamp=1570707657, value=(180.65, 'tests keytest1[1] : 180.65K out of range'))
+2019-10-10 13:40:57,737 [INFO] Datum(id=2012, format=4, timestamp=1570707657, value=(10.2, 'keytest3 is too high!!: 10.2'))
+2019-10-10 13:40:57,788 [INFO] Datum(id=2013, format=4, timestamp=1570707657, value=(nan, 'OK'))
+2019-10-10 13:40:57,838 [INFO] Datum(id=2014, format=4, timestamp=1570707657, value=(nan, 'test regexp : Status is not OK !!  !!'))
+\end{verbatim}
+\end{tiny}
+\end{quote}
 
 alerts are correctly generated
 
