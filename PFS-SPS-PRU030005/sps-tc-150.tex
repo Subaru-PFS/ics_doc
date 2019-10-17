@@ -2,15 +2,15 @@
 
 \subsection{Description}
 
-Take a 10 seconds dark on a given detector, check that the file is created correctly and fits header critical keys are set.
-Check that IMAGETYP==DARK and exptime==10
-
+Take a 10 seconds dark on a given detector, check that the file is created correctly 
+and FITS header-critical keys are set.
+Check that \texttt{IMAGETYP==DARK} and \texttt{exptime==10}
 
 \subsection{Pass/Fail Condition(s)}
 
 \begin{description}
-\item [Pass] filepath and fits header keys be generated and command should finish with \texttt{'test=dark-cam,OK'}
-\item [Fail] If an exception is raised \texttt{'test=dark-cam,FAILED'} will be generated with its full trace.
+\item [Pass] filepath and fits header keys be generated and command should finish with `\texttt{test=dark-cam,OK}'
+\item [Fail] If an exception is raised `\texttt{test=dark-cam,FAILED}' will be generated with its full trace.
 
 \end{description}
 

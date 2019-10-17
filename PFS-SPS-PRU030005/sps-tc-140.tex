@@ -3,14 +3,14 @@
 \subsection{Description}
 
 Take a bias on a given detector, check that the file is created correctly and fits header critical keys are set.
-Check that IMAGETYP==BIAS and exptime==0
+Check that \texttt{IMAGETYP==BIAS} and \texttt{exptime==0}
 
 
 \subsection{Pass/Fail Condition(s)}
 
 \begin{description}
-\item [Pass] filepath and fits header keys be generated and command should finish with \texttt{'test=bias-cam,OK'}
-\item [Fail] If an exception is raised \texttt{'test=bias-cam,FAILED'} will be generated with its full trace.
+\item [Pass] filepath and fits header keys be generated and command should finish with `\texttt{test=bias-cam,OK}'
+\item [Fail] If an exception is raised `\texttt{test=bias-cam,FAILED}' will be generated with its full trace.
 
 \end{description}
 
