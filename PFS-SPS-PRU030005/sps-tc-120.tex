@@ -1,15 +1,14 @@
-\section{Test Case SPS-IO-120: Test File I/O}
+\section{Test Case SPS-LOG-120: Process logging}
 
 \subsection{Description}
 
-Checks that data can be read and written from the input and output directories.
+Checks that logging is active for a typical process.
 
 \subsection{Pass/Fail Condition(s)}
 
 \begin{description}
-\item [Pass] Data can be written to and read from the /data volume, 
-and software can be written to and read from the /software volume.
-\item [Fail] Any result otherwise. 
+\item [Pass] Logging of INFO, FAIL and WARN messages are correctly written to the expected log file
+\item [Fail] Any result otherwise.
 \end{description}
 
 \subsection{Hardware constraints}
@@ -18,23 +17,20 @@ None.
 
 \subsection{Initial conditions}
 
-/data and /software volumes are created.
+\texttt{/data} and \texttt{/software} volumes are created.
 
 \subsection{Procedure}
 
-For each volume:
+None.
 
 \begin{table}[H]
     \begin{tabular}{|l| p{5cm} |l| p{5cm} |}
     \hline
     {\bf Step} & {\bf Description} & {\bf Pass/FAIL} & {\bf Comment}  \\ \hline
-    1 & Create small files &  &  \\ \hline
-    2 & Read those files &  &  \\ \hline
-    3 & Copy those files to new locations within same volume and check that they are readable. &  &  \\ \hline
+    1 & TBW &  &  \\ \hline
     \end{tabular}
 \end{table}
 
-
 \subsection{Additional Notes}
 
-A test script installed in the /software folder would address this test effectively.
+A test script installed in the \texttt{/software} folder would address this test effectively.

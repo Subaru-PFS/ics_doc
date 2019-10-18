@@ -1,37 +1,37 @@
-\section{Test Case SPS-PGAUGE-140: Check pressure gauge probes}
+\section{Test Case SPS-BIAS-140: Detector Bias}
 
 \subsection{Description}
 
-Checks that the pressure gauge is functioning correctly.
+Take a bias on a given detector, check that the file is created correctly and fits header critical keys are set.
+Check that \texttt{IMAGETYP==BIAS} and \texttt{exptime==0}
+
 
 \subsection{Pass/Fail Condition(s)}
 
 \begin{description}
-\item [Pass] The pressure gauge reads a realistic value.
-\item [Fail] If the pressur reads \texttt{NaN} or zero.
+\item [Pass] filepath and fits header keys be generated and command should finish with `\texttt{test=bias-cam,OK}'
+\item [Fail] If an exception is raised `\texttt{test=bias-cam,FAILED}' will be generated with its full trace.
+
 \end{description}
 
 \subsection{Hardware constraints}
 
-None.
+\begin{enumerate}
+    \item SPS RACK powered up
+    \item \acrshort{BEE} powered up.
+    \item Fee powered up
+\end{enumerate}
 
 \subsection{Initial conditions}
 
-TBW.
+ccdActor and testsActor started
 
 \subsection{Procedure}
 
-For each probe:
-
-\begin{table}[H]
-    \begin{tabular}{|l| p{5cm} |l| p{5cm} |}
-    \hline
-    {\bf Step} & {\bf Description} & {\bf Pass/FAIL} & {\bf Comment}  \\ \hline
-    1 & On GUI check pressure gauge value. &  &  \\ \hline
-    \end{tabular}
-\end{table}
-
+\begin{enumerate}
+    \item testsActor : send bias test command: \texttt{tests bias cam=r1} .
+    \item wait for the command to end.
+\end{enumerate}
 
 \subsection{Additional Notes}
-
 None.

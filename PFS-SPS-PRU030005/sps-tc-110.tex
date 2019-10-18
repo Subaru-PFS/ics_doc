@@ -1,36 +1,35 @@
-\section{Test Case SPS-LOG-110: Process logging}
+\section{Test Case SPS-XCU-HEATERS-110: Cryostat Heaters}
 
 \subsection{Description}
 
-Checks that logging is active for a typical process.
+Check the communication with the heaters of a given camera, check that the statuses are correct.
 
 \subsection{Pass/Fail Condition(s)}
 
 \begin{description}
-\item [Pass] Logging of INFO, FAIL and WARN messages are correctly written to the expected log file
-\item [Fail] Any result otherwise. 
+\item [Pass] Heaters dataset will be generated and command should finish with `\texttt{test=heaters-cam,OK}'
+\item [Fail] If an exception is raised `\texttt{test=heaters-cam,FAILED}' will be generated with its full trace.
+
 \end{description}
 
 \subsection{Hardware constraints}
 
-None.
+\begin{enumerate}
+    \item SPS RACK powered up
+    \item \acrshort{BEE} powered up.
+    \item Temperature board powered up.
+\end{enumerate}
 
 \subsection{Initial conditions}
 
-\texttt{/data} and \texttt{/software} volumes are created.
+xcuActor and testsActor started
 
 \subsection{Procedure}
 
-None..
-
-\begin{table}[H]
-    \begin{tabular}{|l| p{5cm} |l| p{5cm} |}
-    \hline
-    {\bf Step} & {\bf Description} & {\bf Pass/FAIL} & {\bf Comment}  \\ \hline
-    1 & TBW &  &  \\ \hline
-    \end{tabular}
-\end{table}
+\begin{enumerate}
+    \item testsActor : send heaters test command: \texttt{tests heaters cam=r1} .
+    \item wait for the command to end.
+\end{enumerate}
 
 \subsection{Additional Notes}
-
-A test script installed in the \texttt{/software} folder would address this test effectively.
+None.

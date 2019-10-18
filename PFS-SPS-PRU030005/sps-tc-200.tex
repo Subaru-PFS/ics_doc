@@ -1,0 +1,26 @@
+\section{Test Case SPS-TEMPS-200: Check SPS Temperature}
+
+\subsection{Description}
+
+Check the communication with the temperature controller, check that the values are valids
+
+\subsection{Pass/Fail Condition(s)}
+
+\begin{description}
+\item [Pass] Temps dataset will be generated and command should finish with `\texttt{test=temps-smId,OK}'
+\item [Fail] If a sensor reads NaN or zero or if an exception is raised `\texttt{test=temps-smId,FAILED}' will be generated
+\end{description}
+
+\subsection{Hardware constraints}
+
+Temperature controller powered up and connected to the PFS network
+
+\subsection{Initial conditions}
+enuActor and testsActor started
+
+\subsection{Procedure}
+
+\begin{enumerate}
+    \item testsActor : send temps test command: \texttt{tests temps sm1} .
+    \item wait for the command to end.
+\end{enumerate}
