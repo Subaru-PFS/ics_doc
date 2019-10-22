@@ -5,7 +5,7 @@
 # -interaction=nonstopmode keeps the pdflatex backend from stopping at a
 # missing file reference and interactively asking you for an alternative.
 
-TARGETS = SPS-SW-TestCases.pdf
+TARGETS = PFS-SPS-LAMPRC1072_SW-TestCases.pdf
 DEPS_DIR = .deps
 #  -silent 
 LATEXMK = latexmk -recorder -use-make -deps \
