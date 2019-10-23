@@ -4,7 +4,7 @@
 
 Check the communication with the shutters, check that the statuses are correct.
 
-Check movement for each shutter :
+\noindent Check movement for each shutter :
 \begin{table}[H]
     \begin{tabular}{|l| p{10cm} |l| p{10cm} |}
     \hline
@@ -14,12 +14,12 @@ Check movement for each shutter :
     3 & Check that the transient time is below 1 sec     \\ \hline
     \end{tabular}
 \end{table}
-
+\noindent Open each shutter and check BIA interlock.
 
 \subsection{Pass/Fail Condition(s)}
 
 \begin{description}
-\item [Pass] Shutters open/close as expected, with the correct speed `\texttt{test=shutters-smId,OK}'
+\item [Pass] Shutters open/close as expected with the correct speed, turning BIA on is forbidden `\texttt{test=shutters-smId,OK}'
 \item [Fail] If an exception is raised `\texttt{test=shutters-smId,FAILED}' will be generated with its full trace.
 \end{description}
 
