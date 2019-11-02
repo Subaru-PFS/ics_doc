@@ -36,7 +36,7 @@ SE-IPMU
 System Engineering related document by IPMU team.
 
 1. IR4 SpS chiller planning
-2. `Note on PFS humidity control <SE-IPMU-00002/>`_
+2. `Note on PFS humidity control <SE-IPMU/SE-IPMU-00002/>`_
 3. SpS power distribution box design
 4. PFI failure mode analysis
 5. System wide failure mode analysis
@@ -50,14 +50,14 @@ System Engineering related document by IPMU team.
 13. xCU vacuum line note
 14. Effects on Cobra operation from design and manufacture error
 15. AG conversion accuracy study
-16. `SCR cabling design <SE-IPMU-00016.pptx>`_
+16. `SCR cabling design <SE-IPMU/SE-IPMU-00016/SE-IPMU-00016.pptx>`_
 17. Exposure time control per camera (arm)
 
 SSN (Software Study Note)
 -------------------------
 
-1. `Data rate from reading out detectors <SSN-00001/>`_
-2. `PFS ICS network connections (ICD 70) <SSN-00002/>`_
+1. `Data rate from reading out detectors <SSN/SSN-00001/>`_
+2. `PFS ICS network connections (ICD 70) <SSN/SSN-00002/>`_
 3. Items to be discussed on science requirements on PFS software
 4. Study on PFS AutoGuider communication specification to Telescope (NDA)
 5. Study on PFS power failure modes
@@ -65,31 +65,31 @@ SSN (Software Study Note)
 7. Specifications on PFI lamp control system
 8. PFS Coordinate transformation
 9. PFS Integrated Database system
-10. `PFS ICS network design note <SSN-00010/>`_
+10. `PFS ICS network design note <SSN/SSN-00010/>`_
 11. Study on PFS Observation Sequence (I) - overall
 12. Study on PFS Observation Sequence (II) -
     From command next field to AutoGuide
 13. Study on definition of VMCS
-14. Requirements and interfaces on ETS (Exposure Targeting Software)
-15. Requirements on on-site DRP
+14. `Requirements and interfaces on ETS (Exposure Targeting Software) <SSN/SSN-00014/SSN-00014-001+-ETS-IF.pptx>`_
+15. `Requirements on on-site DRP <SSN/SSN-00015/SSN-00015-001+-on-site-DRP.pptx>`_
 16. Connection from PFS ICS to Gen2
 17. Message exchange internal of tron
 18. ICS on-site storage plan
 19. PFS Software status update
-20. `Preparation at Subaru/Summit before delivery of subsystems <SSN-00020/>`_
+20. `Preparation at Subaru/Summit before delivery of subsystems <SSN/SSN-00020/>`_
 21. Procedure to measure and store MPS configurations
 22. ICS on-site (summit/CB2F) rack design, restriction and unit registration
-23. `(AG/A&G control flow and interface <SSN-00023/>`_
+23. `(AG/A&G control flow and interface <SSN/SSN-00023/>`_
 24. FITS file generation flow
-25. `Collision detection during Cobra configuration <SSN-00025/>`_
+25. `Collision detection during Cobra configuration <SSN/SSN-00025/>`_
 26. Cobra collision cases
-27. (TradeStudy) `Cobra operational data (spot measurement, target) handling on MHS or DB <SSN-00027/>`_
-28. `ics_dnsmasq (ICS DHCP/DNS server) organization and item registration procedure <SSN-00028/>`_
-29. (Material for review) `PFS ICS infrastructure design and performance verification <SSN-00029.pptx>`_
-30. `PFS ICS production configuration <SSN-00030/>`_
+27. (TradeStudy) `Cobra operational data (spot measurement, target) handling on MHS or DB <SSN/SSN-00027/>`_
+28. `ics_dnsmasq (ICS DHCP/DNS server) organization and item registration procedure <SSN/SSN-00028/>`_
+29. (Material for review) `PFS ICS infrastructure design and performance verification <SSN/SSN-00029/SSN-00029.pptx>`_
+30. `PFS ICS production configuration <SSN/SSN-00030/>`_
 
 Software Test Cases
 -------------------
 
-1. `SPS Software Test Cases <PFS-SPS-PRU030005/>`_
-2. `SPS Software Test Report <PFS-SPS-PRU030006/>`_
+1. `SPS Software Test Cases <SPS/TestCases/>`_
+2. `SPS Software Test Report <SPS/TestReports/>`_
