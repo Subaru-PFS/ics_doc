@@ -160,25 +160,25 @@ Start & shutdown VM guest with virsh
 
 * To start ``vm guest`` on **vm host**,
 
-	virsh -c qemu+tls://**vm host**/system start ``vm guest``  (from other host) 
+  virsh -c qemu+tls://**vm host**/system start ``vm guest``  (from other host) 
 
   sudo virsh start ``vm guest`` (on **vm host**)
 
 * To shutdown ``vm guest`` on **vm host**,
 
-	virsh -c qemu+tls://**vm host**/system shutdown ``vm guest``  (from other host) 
+  virsh -c qemu+tls://**vm host**/system shutdown ``vm guest``  (from other host) 
 
   sudo virsh shutdown ``vm guest`` (on **vm host**)
 
 * If ``vm guest`` won't shutdown (most likely when a trouble happens), use
 
-	virsh -c qemu+tls://**vm host**/system destroy ``vm guest``  (from other host) 
+  virsh -c qemu+tls://**vm host**/system destroy ``vm guest``  (from other host) 
 
   sudo virsh destroy ``vm guest`` (on **vm host**)
 
 * To list the VM guests running on **vm host**,
 
-	virsh -c qemu+tls://**vm host**/system list --all  (from other host) 
+  virsh -c qemu+tls://**vm host**/system list --all  (from other host) 
 
   sudo virsh list --all (on **vm host**)
 
