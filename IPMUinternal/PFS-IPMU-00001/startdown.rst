@@ -1,7 +1,7 @@
 Service cold start and full shutdown procedures
 ------
 
-The startup and shutdown procedure of all infrastructures is described below.
+The startup and shutdown procedure of all infrastructures are described below.
 The following notation is used in this memo unless otherwise noted:
 
 * **VM host name** (e.g., **dlb8-vm**)
@@ -10,7 +10,7 @@ The following notation is used in this memo unless otherwise noted:
 
 * *Service name* (e.g., *pfsdisk*)
 
-Note: before and after carry out the procedure, send an announcement e-mail to the PFS tech team.
+Note: before and after carrying out the procedure, send an announcement e-mail to the PFS tech team.
 
 Cold start
 ======
@@ -95,6 +95,8 @@ See `Start & shutdown VM guest with virsh` section for the `virsh` command to st
 Full shutdown
 ======
 
+**See in advance PO internal wiki page for sign-in information (especially iSCSI storage)** before you shutdown ``pfssrv``.
+
 Shutdown the end-point to the external services to prevent unwanted connection first, and 
 then back-end services. 
 See `Start & shutdown VM guest with virsh` section for the `virsh` command to shutdown the VM guests.
@@ -109,8 +111,6 @@ Refer the mail (subject: \"List of virt VMs\") sent to admin weekly for VM guest
 * Shutdown internal services (like working shell host, simulator)
 
   * ``jessie-main``, ``landfill``, and ``stretch`` on **dlb3-vm**
-  * ``nfs??`` on **dlb2-vm** (disused)
-  * ``lf??`` on **dlb7-vm** (disused)
 
 * Shutdown external servers
 
@@ -125,7 +125,6 @@ Refer the mail (subject: \"List of virt VMs\") sent to admin weekly for VM guest
 * Shutdown iSCSI storage for pfsarch via web admin panel
 
   * On browser type IP of *pfsarch* server (`pas-srv`, see `dnsmasq<https://github.com/Subaru-PFS/ics_dnsmasq/blob/master/hosts-ipmu/srv.conf>`_), then shutdown
-  * See PO internal wiki page for sign-in information
 
 * Shutdown service VM guests (*jupyter*, *jirapipe*, *Windows*, etc.)
 
