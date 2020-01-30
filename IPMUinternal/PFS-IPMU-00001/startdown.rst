@@ -87,6 +87,7 @@ See `Start & shutdown VM guest with virsh` section for the `virsh` command to st
 * Start internal services
 
   * ``landfill``, ``stretch``, and ``jessie-main`` on **dlb3-vm**
+  * (optional) ``lf??`` on **dlb7-vm** if we use it
   * *Windows* : ``WinP1``, ``WinVSdev`` (and CAD?) on **dlb4-vm**
 
 * Check the above VM guests running
@@ -111,6 +112,7 @@ Refer the mail (subject: \"List of virt VMs\") sent to admin weekly for VM guest
 * Shutdown internal services (like working shell host, simulator)
 
   * ``jessie-main``, ``landfill``, and ``stretch`` on **dlb3-vm**
+  * (optional) ``lf??`` on **dlb7-vm** if it is running
 
 * Shutdown external servers
 
