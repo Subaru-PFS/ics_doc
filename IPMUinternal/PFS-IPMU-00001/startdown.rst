@@ -1,13 +1,22 @@
 Service cold start and full shutdown procedures
 ------
 
-This memo shows procedure to start the all infrastructres from cold and to shutdown the all, with points 
-in consideration or taken cared of.
+The startup and shutdown procedure of all infrastructures are described below.
+The following notation is used in this memo unless otherwise noted:
+
+* **VM host name** (e.g., **dlb8-vm**)
+
+* ``VM guest name``  (e.g., ``pd2``)
+
+* *Service name* (e.g., *pfsdisk*)
+
+Note: before and after carrying out the procedure, send an announcement e-mail to the PFS tech team.
 
 Cold start
 ======
 
-Start backends first, end point to external, and monitoring systems. 
+Start back-ends first, then end-points to external, and monitoring systems.
+See `Start & shutdown VM guest with virsh` section for the `virsh` command to startup the VM guests.
 
 * UPS and network switches will come up automatically after power back
 
@@ -17,53 +26,69 @@ Start backends first, end point to external, and monitoring systems.
 * Power on storage server
 
   * iSCSI server needs to be started with JBOD, and controller follows
+
+    * Turn on the switches in the bottom first, and then those in the top
+
   * Just power on SAS storage box
 
-* Power on VM host for NFS servers (*dlb8-vm*)
+    * Press switch for a few second (TBC)
+
+* Power on VM host for NFS servers (**dlb8-vm**)
+
 * Start VM guests of NFS servers
-  (``pfsdisk``, ``pfscalc``, ``simdata``; no order)
+  (*pfsdisk*, *pfscalc*, *simdata*; no order)
 
-  * *pd2*, *pc2*, *sd2*
+  * ``pd2``, ``pc2``, ``sd2`` on **dlb8-vm**
 
-* Start core management service (*mgmt3*, including DHCP, LDAP)
+* Power on other host servers (**dlb3-vm**, **dlb5-vm**, **dlc2-vm**, ...)
 
-  * The host is *dlb5-vm*
+* Start core management service (``mgmt3``, including DHCP, LDAP)
+
+  * ``mgmt3`` on **dlb5-vm**
 
 * Start backend services (no order)
 
-  * ``Database`` : *db3*
-  * ``rsyslog`` : *rsyslog*
-  * Elasticsearch (log target of rsyslog) :*elasticsearch*
-  * ``pfsarch`` : *pfsarch* (one area exported from this NFS server is mounted at *pfssrv* for archive storage export point)
+  * *database* : ``db3`` on **dlb5-vm**
+  * *rsyslog* : ``rsyslog`` on **dlb5-vm**
+  * *elasticsearch* : ``elasticsearch`` on **dlb3-vm** (log target of ``rsyslog``)
+  * *pfsarch* : ``pfsarch`` on **dlc2-vm** (one area exported from this NFS server is mounted at ``pfssrv`` for archive storage export point)
 
-* Start backup service (``backup``)
+* Start backup service
 
-  * *backup*
+  * *backup* : ``backup`` on **dlb5-vm**
 
-* Start external servers (``pfs``, ``pfspipe``)
+* Start external servers
 
-  * *pfssrv*, *pfspipe2*
+  * *pfs* : ``pfssrv`` on **dlc2-vm**
+  * *pfspipe* : ``pfspipe2`` on **dlc2-vm**
 
 * Start service VM guests
 
-  * ``jirapipe`` : *jira-pipe-7.7*
+  * *jirapipe* : ``jira-pipe-8.3`` on **dlb3-vm**
 
     * Start jira server instance manually via systemd
 
-	ssh pfs@jirapipe-77
+	ssh pfs@jirapipe-83
 
 	sudo systemctl start jira
 
-  * *jupyter-spt*, *jupyter1*
+  check on browser whether JIRA is starting up
 
-* Start monitoring services (``prometheus``, ``influxdb``)
+  * *jupyter-spt* : ``jupyter-spt`` on **dlc3-vm**
+  * *jupyter1* : ``jupyter1`` on **dlb4-vm**
+  * *dbsim2* : ``dbsim2-spt`` on **rcc1-vm**
 
-  * *prometheus*, *influxdb*, *prometheus-snmp*
+* Start monitoring services
+
+  * *prometheus* : ``prometheus`` on **dlb5-vm**
+  * *influxdb* : ``influxdb`` on **dlb3-vm**
+  * *prometheus-snmp* : ``prometheus-snmp`` on **dlb5-vm**
 
 * Start internal services
 
-  * *landfill*, *stretch*, *jessie-main*
-  * ``Windows`` : *WinP1*, *WinVSdev* and CAD
+  * ``landfill``, ``stretch``, and ``jessie-main`` on **dlb3-vm**
+  * (optional) ``lf??`` on **dlb7-vm** if we use it
+  * *Windows* : ``WinP1``, ``WinVSdev`` (and CAD?) on **dlb4-vm**
 
 * Check the above VM guests running
 * Check internal services up by accessing them.
@@ -71,66 +96,90 @@ Start backends first, end point to external, and monitoring systems.
 Full shutdown
 ======
 
-Shutdown end point to external to prevent unwanted connection first, and 
-shutdown backends. 
-See the section `Start & shutdown VM guest with virsh`_ for the virsh command to shutdown the VM guests.
-Refer the mail (subject: \"List of virt VMs\") sent to admin weekly for VM guests running on individual hosts.
+**See in advance PO internal wiki page for sign-in information (especially iSCSI storage)** before you shutdown ``pfssrv``.
 
-* Shutdown monitoring services (e.g. ``prometheus``, ``influxdb``) not to get unwanted (or obvious) warnings from hosts shut down.
+Shutdown the end-point to the external services to prevent unwanted connection first, and 
+then back-end services. 
+See `Start & shutdown VM guest with virsh` section for the `virsh` command to shutdown the VM guests.
+Refer the mail (subject: \"List of virt VMs\") sent to admin weekly for VM guests running on individual hosts just in case.
 
-  * *prometheus*, *influxdb*, *prometheus-snmp*
+* Shutdown monitoring services (e.g. *prometheus*, *influxdb*) not to get unwanted (or obvious) warnings from hosts shut down.
 
-* Shutdown internal servicse (like working shell host, simulator)
+  * *prometheus* : ``prometheus`` on **dlb5-vm**
+  * *influxdb* : ``influxdb`` on **dlb3-vm**
+  * *prometheus-snmp* : ``prometheus-snmp`` on **dlb5-vm**
 
-  * *lf??*, *landfill*, *nfs??*, *stretch*, *jessie-main*
+* Shutdown internal services (like working shell host, simulator)
 
-* Shutdown external servers (``pfs``, ``pfspipe``, ``pfsarch``)
+  * ``jessie-main``, ``landfill``, and ``stretch`` on **dlb3-vm**
+  * (optional) ``lf??`` on **dlb7-vm** if it is running
 
-  * *pfssrv*, *pfspipe2*, *pfsarch*
+* Shutdown external servers
 
-* Shutdown backup service (``backup`` )
+  * *pfs* : ``pfssrv`` on **dlc2-vm**
+  * *pfspipe* : ``pfspipe2`` on **dlc2-vm**
+  * *pfsarch* : ``pfsarch`` on **dlc2-vm**
 
-  * *backup*
+* Shutdown backup service
+
+  * *backup* : ``backup`` on **dlb5-vm**
 
 * Shutdown iSCSI storage for pfsarch via web admin panel
 
-  * On browser type IP of pfsarch server (pas-srv, see `dnsmasq<https://github.com/Subaru-PFS/ics_dnsmasq/blob/master/hosts-ipmu/srv.conf>`_), then shutdown
-  * See PO internal wiki for sign-in information
+  * On browser type IP of *pfsarch* server (`pas-srv`, see `dnsmasq<https://github.com/Subaru-PFS/ics_dnsmasq/blob/master/hosts-ipmu/srv.conf>`_), then shutdown
 
-* Shutdown service VM guests (``jupyter``, ``jirapipe``, ``windows``)
+* Shutdown service VM guests (*jupyter*, *jirapipe*, *Windows*, etc.)
 
-  * *jupyter-spt*, *jupyter1*, *jira-pipe-7.7*
-  * For Windows (*WinP1*, *WinVSdev*, and CAD), connect via e.g. Remode Desktop to apply updates before shutdown.
+  * *jupyter-spt* : ``jupyter-spt`` on **dlc3-vm**
+  * *jupyter1* : ``jupyter1`` on **dlb4-vm**
+  * *dbsim2* : ``dbsim2-spt`` on **rcc1-vm**
+  * *jirapipe* : ``jira-pipe-8.3`` on **dlb3-vm**
+  * *Windows* : ``WinP1``, ``WinVSdev`` and CAD? on **dlb4-vm** 
+    * Note: connect via e.g. Remote Desktop to apply updates before shutdown.
 
-* Shutdown backend services
+* Shutdown back-end services
 
-  * *db2*, *db3*, *mgmt3*, *elasticsearch*, *rsyslog*
+  * *database* : ``db3`` on **dlb5-vm**
+  * *management* : ``mgmt3`` on **dlb5-vm**
+  * *elasticsearch* : ``elasticsearch`` on **dlb3-vm**
+  * *rsyslog* : ``rsyslog`` on **dlb5-vm**
 
-* Shutdown VM host server (except for one running core management guest)
-* Shutdown core management guest (DHCP, LDAP) and its host (*dlb5-vm*)
-  * *mgmt3*
-* Shutdown NFS server VM guest
+* Shutdown VM host servers (except for **dlb5-vm** running core management guest)
+* Shutdown core management guest (DHCP, LDAP)
+  * ``mgmt3`` on **dlb5-vm**
+  * Shutdown the host server (**dlb5-vm**)
+* Shutdown the NFS server VM guests
 
-  * *pc2*, *sd2* (VM guests running on the same VM host as one for NFS server)
-  * *pd2*
+  * ``pc2``, ``sd2`` on **dlb8-vm** (VM guests running on the same VM host as one for NFS server)
+  * ``pd2`` on **dlb8-vm**
 
-* Shutdown NFS server VM host (*dlb8-vm*)
+* Shutdown the NFS server VM host (**dlb8-vm**)
+
 
 Start & shutdown VM guest with virsh
 =====
 
-* To start ``vm guest`` on ``vm host``,
+* To start ``vm guest`` on **vm host**,
 
-	virsh -c qemu+tls://``vm host``/system start ``vm guest``
+  virsh -c qemu+tls://**vm host**/system start ``vm guest``  (from other host) 
 
-* To shutdown ``vm guest`` on ``vm host``,
+  sudo virsh start ``vm guest`` (on **vm host**)
 
-	virsh -c qemu+tls://``vm host``/system shutdown ``vm guest``
+* To shutdown ``vm guest`` on **vm host**,
 
-* If ``vm guest`` won't shutdown, use
+  virsh -c qemu+tls://**vm host**/system shutdown ``vm guest``  (from other host) 
 
-	virsh -c qemu+tls://``vm host``/system destroy ``vm guest``
+  sudo virsh shutdown ``vm guest`` (on **vm host**)
 
-* To list the VM guests running on ``vm host``
+* If ``vm guest`` won't shutdown (most likely when a trouble happens), use
 
-	virsh -c qemu+tls://``vm guest``/system list --all
+  virsh -c qemu+tls://**vm host**/system destroy ``vm guest``  (from other host) 
+
+  sudo virsh destroy ``vm guest`` (on **vm host**)
+
+* To list the VM guests running on **vm host**,
+
+  virsh -c qemu+tls://**vm host**/system list --all  (from other host) 
+
+  sudo virsh list --all (on **vm host**)
+

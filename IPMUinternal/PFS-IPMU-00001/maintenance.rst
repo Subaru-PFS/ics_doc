@@ -44,6 +44,38 @@ use one at `/server/admin/github-scripts/pfs_infra_ipmu/ldap-admin/`.
     default gid is from opt_gid (2000)
     fullname is an option, from third to the end when defined
 
+Here is an example to create a new account:
+
+::
+
+  root@pfs:~# cd /server/admin/ldif
+  root@pfs:/server/admin/ldif# cat > yyyymmdd
+  <user e-mail address> <username> <Full Name>
+  ^D
+    # Note: ^D means ctrl+D
+    # If there is a picture to upload, place username.jpg in the same directory to run the script
+  root@pfs:/server/admin/ldif# ./create-ldif.pl --jira yyyymmdd
+    # if the user requires access to JIRA, use --jira option
+  root@pfs:/server/admin/ldif# source yyyymmdd.cmd
+    # Password is required (usually twice)
+  root@pfs:/server/admin/ldif# cd /server/httpd/bts/
+  root@pfs:/server/httpd/bts# ./contrib/syncLDAP.pl -d
+
+This is an example to reset a password:
+
+::
+
+  root@pfs:~# cd /server/admin/ldif
+  root@pfs:/server/admin/ldif# cat > yyyymmdd
+  <user e-mail address> <username> <Full Name>
+  ^D
+    # Note: ^D means ctrl+D
+  root@pfs:/server/admin/ldif# ./create-ldif.pl --reset yyyymmdd
+  root@pfs:/server/admin/ldif# source yyyymmdd.cmd
+    # Password is required (usually twice)
+  root@pfs:/server/admin/ldif# cd /server/httpd/bts/
+
+
 LDAP server
 ------
 
