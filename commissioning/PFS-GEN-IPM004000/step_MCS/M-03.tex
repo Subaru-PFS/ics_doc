@@ -28,8 +28,17 @@ These values are cited from the CDR slides ({\tt MCS camera system.pdf}).
 After the basic functions are confirmed to work, the calibration data (flat, bias and, dark?:TBC) of CMOS sensor shall be obtained, if they are not taken in the step of \ref{secflow:MCSoff}.
 The stability of calibration data can be examined using the data in multiple runs.
 
+From the viewpoint of software, this process opportunity  to demonstrate the ``callback" function, with which the IIC sends a signal to Gen2 to move the telescope at a given condition.
+For instance, we execute the following sequence by a single command:
+\begin{enumerate}
+\item Take MCS exposure,
+\item After MCS exposure done, IIC sends a signal Gen2 to move the telescope Az, and MCS to take another exposure simultaneously.
+\end{enumerate}
+
+
+
 \paragraph{Designated Tool for This Process}
-We will prepare commands to check MCS functions, the same as \ref{secflow:MCSoff}.
+We will prepare Gen2 commands to check MCS functions, the same as \ref{secflow:MCSoff}.
 
 %By sending command from gen2, we will also confirm communication between MCS and Gen2.
 
