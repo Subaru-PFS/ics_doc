@@ -1,0 +1,35 @@
+\section{Structure}
+
+\subsection{MCS, SPS and AGCC data}
+
+There will be one ZFS file system to manage the raw data from the MCS, SPS and AGCC systems.
+The subdirectories for the individual systems will have the following structure:
+
+\begin{verbatim}
+/data/raw/<DATE>/{mcs, sps, agcc}
+\end{verbatim}
+
+Where \verb!<DATE>! will have the form \verb!YYYY-MM-DD!, with \verb!YYYY! corresponding to the year,
+\verb!MM! the 2-digit representation of the month, and \verb!DD! the day\footnote{Note that 
+the day transition is set for UTC-10, or 2pm Hawaii-Aleutian Standard Time.} within that month. 
+Example: \verb!/data/raw/2020-09-20/mcs! would be the directory holding MCS data for day 2020-09-20.
+
+For all 3 filesystems, the user shall be \verb!pfs-data:pfs! with \verb!chmod! access 02755 . 
+And in all cases the default file compression will be switched off, as FITS compression will be used.  
+
+\subsection{DRP data}
+
+There will be an additional file system to store DRP-related data:
+
+\begin{verbatim}
+/data/drp 
+\end{verbatim}
+
+For this file system the user shall be \verb!pfs! with \verb!chmod! access 02775 . 
+Default file compression will be turned on in this case.
+
+
+\subsection{Other file systems}
+
+We may need additional file systems, for example to store log data (\verb!/data/log!), but these will be defined
+in due course.
