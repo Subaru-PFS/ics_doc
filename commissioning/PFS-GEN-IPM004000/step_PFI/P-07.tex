@@ -10,26 +10,30 @@ This alignment is carried out by Hexapod on POpt2 that can adjust the x/y/z and 
 In this process we optimize the Hexapod position for PFS.
 
 We use out-focused ($\Delta$D5=0.5mm) image of the bright star on AGCs to measure shift and tilt of WFC with respect to M1 and correct them.
-The shift and tilt are featured by ellipticity and 3-rd order moment vector, respectively.
-Measuring these values, we correct the shift and tilt of WFC.
-The goal of correction is that shift is less than 0.5mm, and that tilt is less than 1 arcmin, with which the spot size (RMS) is less than 15 um.
-[See Yoko Tanaka's report detailed procedure (WFC\_position.pdf: in Japanese)]
+Yoko Tanaka (Subaru) and Satoshi Kawanomoto (Mitaka) from NAOJ have developed to meaure shift and tilt of Hexapod.
+[See Tanaka's report (WFC\_position.pdf: in Japanese), and Kawanomoto's report (20190719.pdf: in Japanese) for detailed procedures.]
+
+%The shift and tilt are featured by ellipticity and 3-rd order moment vector, respectively.
+%Measuring these values, we correct the shift and tilt of WFC.
+%The goal of correction is that shift is less than 0.5mm, and that tilt is less than 1 arcmin, with which the spot size (RMS) is less than 15 um.
 
 The alignment procedure is as follows:
 \begin{enumerate}
 \item Check focus, and defocus by $\Delta$D5=0.5mm.
-\item Slew the telescope to bright stars.
-\item Acquire the image.
+\item Slew the telescope to a field where we have a few stars on AG.
+\item Acquire the image (120 sec and a couple of frames).
 To measure tilt and shift of WFC, 6 defocused image are needed on every AG camera.
-Since there is a constraint on position of the spot on the camera, and bright stars are needed to achieve S/N$\sim$100, we acquire 6 images by rotating the instrument or moving the telescope.
-\item Measure ellipticity and 3-rd order moment vector from 6 images, and estimate correction values.
-Apply correction.
+%Since there is a constraint on position of the spot on the camera, and bright stars are needed to achieve S/N$\sim$100, we acquire 6 images by rotating the instrument or moving the telescope.
+%\item Measure ellipticity and 3-rd order moment vector from 6 images, and estimate correction values.
+\item Measure Hexapod shift and tilt and apply correction.
 \item Repeat 3 and 4 a few times until shift and tilt meets the requirement.
 \end{enumerate}
 
-Assuming it takes about 3min including positioning, one iteration needs about 20 min.
-According to Yoko Tanaka's study, four iterations on average are needed to alignment.
-Therefore, it takes ~80min for one position.
+These agrithm have been tested using HSC.
+One iteration took about 20--30min by taking a fe 120-sec frames\footnote{Note: The data and command flow hasn't been matuared and some process was done ocally. We plan to improve procedure and test in May 2020.}.
+A few iterations are enough to align WFC.
+%According to Yoko Tanaka's study, four iterations on average are needed to alignment.
+Therefore, it takes ~80--90min for one position.
 
 The parameters of Hexapod for alignment is registered as a function or table with respect to the elevation.
 Therefore, we measure the Hexapd parameters at several elevations.
@@ -38,16 +42,17 @@ In the current plan, we will derive the function of Hexapod parameters with 2 se
 At the next run, we will execute the other 1 set to check the registered function, and modify if needed.
 Note that it will be fine visit apart of 5 positions above to check the alignment, but it will be better to modify the functions with measurement at all 5 positions.
 
+
 \smallskip
 \paragraph{Designated Tools for This Process}
 This process needs designated scripts
-(1) to get 100 x 100 pixels data from FITS image,
-(2) to measure shift and tilt and correct them, and
-(3) to determine the function of Hexapod's parameters with respect to the elevation, or create tables. 
-Yoko Tanaka from Subaru is preparing the script (2), and (3) [TBC].
-PFS is supposed to prepare the script (1).
+%(1) to get 100 x 100 pixels data from FITS image,
+(1) to measure shift and tilt and correct them, and
+(2) to determine the function of Hexapod's parameters with respect to the elevation, or create tables. 
+%Yoko Tanaka from Subaru is preparing the script (2), and (3) [TBC].
+%PFS is supposed to prepare the script (1).
 
-Note that performance of Tanaka algorithm will be tested before PFS engineering runs using HSC, in the S17B semester (run 0).
+%Note that performance of Tanaka algorithm will be tested before PFS engineering runs using HSC, in the S17B semester (run 0).
 
 \begin{itembox}[l]{\suctitle{Success Criteria}}
 Misalignment of  WFC and M1 is corrected (shift: 0.5mm and tilt 1 arcmin)
