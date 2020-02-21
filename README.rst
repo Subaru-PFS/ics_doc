@@ -56,8 +56,8 @@ System Engineering related document by IPMU team.
 SSN (Software Study Note)
 -------------------------
 
-1. `Data rate from reading out detectors <SSN/SSN-00001/>`_
-2. `PFS ICS network connections (ICD 70) <SSN/SSN-00002/>`_
+1. `Data rate from reading out detectors <SoftwareStudyNote/SSN-00001/>`_
+2. `PFS ICS network connections (ICD 70) <SoftwareStudyNote/SSN-00002/>`_
 3. Items to be discussed on science requirements on PFS software
 4. Study on PFS AutoGuider communication specification to Telescope (NDA)
 5. Study on PFS power failure modes
@@ -65,28 +65,28 @@ SSN (Software Study Note)
 7. Specifications on PFI lamp control system
 8. PFS Coordinate transformation
 9. PFS Integrated Database system
-10. `PFS ICS network design note <SSN/SSN-00010/>`_
+10. `PFS ICS network design note <SoftwareStudyNote/SSN-00010/>`_
 11. Study on PFS Observation Sequence (I) - overall
 12. Study on PFS Observation Sequence (II) -
     From command next field to AutoGuide
 13. Study on definition of VMCS
-14. `Requirements and interfaces on ETS (Exposure Targeting Software) <SSN/SSN-00014/SSN-00014-001+-ETS-IF.pptx>`_
-15. `Requirements on on-site DRP <SSN/SSN-00015/SSN-00015-001+-on-site-DRP.pptx>`_
+14. `Requirements and interfaces on ETS (Exposure Targeting Software) <SoftwareStudyNote/SSN-00014/SSN-00014-001+-ETS-IF.pptx>`_
+15. `Requirements on on-site DRP <SoftwareStudyNote/SSN-00015/SSN-00015-001+-on-site-DRP.pptx>`_
 16. Connection from PFS ICS to Gen2
 17. Message exchange internal of tron
 18. ICS on-site storage plan
 19. PFS Software status update
-20. `Preparation at Subaru/Summit before delivery of subsystems <SSN/SSN-00020/>`_
+20. `Preparation at Subaru/Summit before delivery of subsystems <SoftwareStudyNote/SSN-00020/>`_
 21. Procedure to measure and store MPS configurations
 22. ICS on-site (summit/CB2F) rack design, restriction and unit registration
-23. `(AG/A&G control flow and interface <SSN/SSN-00023/>`_
+23. `(AG/A&G control flow and interface <SoftwareStudyNote/SSN-00023/>`_
 24. FITS file generation flow
-25. `Collision detection during Cobra configuration <SSN/SSN-00025/>`_
+25. `Collision detection during Cobra configuration <SoftwareStudyNote/SSN-00025/>`_
 26. Cobra collision cases
-27. (TradeStudy) `Cobra operational data (spot measurement, target) handling on MHS or DB <SSN/SSN-00027/>`_
-28. `ics_dnsmasq (ICS DHCP/DNS server) organization and item registration procedure <SSN/SSN-00028/>`_
-29. (Material for review) `PFS ICS infrastructure design and performance verification <SSN/SSN-00029/SSN-00029.pptx>`_
-30. `PFS ICS production configuration <SSN/SSN-00030/>`_
+27. (TradeStudy) `Cobra operational data (spot measurement, target) handling on MHS or DB <SoftwareStudyNote/SSN-00027/>`_
+28. `ics_dnsmasq (ICS DHCP/DNS server) organization and item registration procedure <SoftwareStudyNote/SSN-00028/>`_
+29. (Material for review) `PFS ICS infrastructure design and performance verification <SoftwareStudyNoteSSN-00029/SSN-00029.pptx>`_
+30. `PFS ICS production configuration <SoftwareStudyNote/SSN-00030/>`_
 
 Software Test Cases
 -------------------
