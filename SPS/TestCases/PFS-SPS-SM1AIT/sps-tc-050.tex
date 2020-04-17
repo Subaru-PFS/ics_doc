@@ -1,0 +1,35 @@
+\section{Test Case SPS-XCU-GATEVALVE-050: Cryostat Gatevalve}
+
+\subsection{Description}
+
+Check the communication with the gatevalve of a given camera, check that the statuses are correct.
+Retrieve and generate gatevalve and interlock status.
+
+\subsection{Pass/Fail Condition(s)}
+
+\begin{description}
+\item [Pass] Gatevalve dataset will be generated and command should finish with `\texttt{test=gatevalve-cam,OK}'
+\item [Fail] If an exception is raised `\texttt{test=gatevalve-cam,FAILED}' will be generated with its full trace.
+
+\end{description}
+
+\subsection{Hardware constraints}
+
+\begin{enumerate}
+    \item SPS RACK powered up
+    \item \acrshort{BEE} powered up.
+\end{enumerate}
+
+\subsection{Initial conditions}
+
+xcuActor and testsActor started
+
+\subsection{Procedure}
+
+\begin{enumerate}
+    \item testsActor : send gatevalve test command: \texttt{tests gatevalve cam=r1} .
+    \item wait for the command to end.
+\end{enumerate}
+
+\subsection{Additional Notes}
+None.

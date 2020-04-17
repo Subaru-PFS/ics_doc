@@ -1,0 +1,34 @@
+\section{Test Case SPS-BIA-190: Check Back Illumination Assembly Photoresistance}
+
+\subsection{Description}
+
+Check the communication with biasha board, check that the statuses are correct.
+
+\noindent Turn on the BIA, check photoresistances values and check shutters interlock.
+
+\subsection{Pass/Fail Condition(s)}
+
+\begin{description}
+\item [Pass] The photoresistances are measured as expected. opening any shutter is forbidden `\texttt{test=bia-smId,OK}'
+\item [Fail] If an exception is raised `\texttt{test=bia-smId,FAILED}' will be generated with its full trace.
+\end{description}
+
+\subsection{Hardware constraints}
+
+Enu rack powered up and connected to the PFS network
+
+\subsection{Initial conditions}
+enuActor and testsActor started
+
+\subsection{Procedure}
+
+\begin{enumerate}
+    \item testsActor : send bia test command: \texttt{tests bia sm1} .
+    \item wait for the command to end.
+\end{enumerate}
+
+
+
+\subsection{Additional Notes}
+
+None.

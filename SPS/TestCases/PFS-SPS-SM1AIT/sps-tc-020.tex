@@ -1,0 +1,43 @@
+\section{Test Case SPS-ALERT-INVALID-020: Alerts invalid values mechanism}
+
+\subsection{Description}
+
+Checks that an expected alarm is raised when an invalid value is generated. Since dedicated testsActor keywords are tracked by alertsActor,
+a command is sent to testsActor to generate invalid values and therefore trigger the alerts.
+
+
+\subsection{Pass/Fail Condition(s)}
+
+\begin{description}
+\item [Pass] Expected alerts seen on STS server side and written to log when the alerts are triggered.
+
+\begin{enumerate}
+    \item an expected alert is raised when at least one keytest1 field value is invalid
+    \item an expected alert is raised when keytest2 value is invalid
+
+\end{enumerate}
+\item [Fail] no alerts are raised
+
+\end{description}
+
+\subsection{Hardware constraints}
+
+None.
+
+
+\subsection{Initial conditions}
+
+alertsActor and testsActor started
+
+\subsection{Procedure}
+\label{sec:alerts-proc}
+
+\begin{enumerate}
+    \item AlertsActor : connect tests controller: \texttt{alerts connect controller=tests}
+    \item wait 30 seconds, keywords are generated within ranges, no alerts are raised yet
+    \item TestsActor : trigger the alerts: \texttt{tests alerts invalid}
+    \item AlertsActor : disconnect tests controller: \texttt{alerts disconnect controller=tests}
+\end{enumerate}
+
+\subsection{Additional Notes}
+None.

@@ -1,0 +1,35 @@
+\section{Test Case SPS-XCU-GAUGE-080: Cryostat Gauge}
+
+\subsection{Description}
+
+Check the communication with the gauge of a given camera, check that the value is valid
+
+\subsection{Pass/Fail Condition(s)}
+
+\begin{description}
+\item [Pass] Gauge dataset will be generated and command should finish with `\texttt{test=gauge-cam,OK}'
+\item [Fail] If the sensor reads NaN or zero or if an exception is raised `\texttt{test=gauge-cam,FAILED}' will be generated
+
+\end{description}
+
+\subsection{Hardware constraints}
+
+\begin{enumerate}
+    \item SPS RACK powered up
+    \item \acrshort{BEE} powered up.
+    \item Gauge powered up.
+\end{enumerate}
+
+\subsection{Initial conditions}
+
+xcuActor and testsActor started
+
+\subsection{Procedure}
+
+\begin{enumerate}
+    \item testsActor : send gauge test command: \texttt{tests gauge cam=r1} .
+    \item wait for the command to end.
+\end{enumerate}
+
+\subsection{Additional Notes}
+None.

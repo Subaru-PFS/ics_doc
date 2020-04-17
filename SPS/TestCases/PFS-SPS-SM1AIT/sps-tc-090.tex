@@ -1,0 +1,36 @@
+\section{Test Case SPS-XCU-COOLER-090: Cryostat Cooler}
+
+\subsection{Description}
+
+Check the communication with the cooler of a given camera, check that the statuses are correct.
+Retrieves and generates Cryocooler telemetry.
+
+\subsection{Pass/Fail Condition(s)}
+
+\begin{description}
+\item [Pass] Cooler dataset will be generated and command should finish with `\texttt{test=cooler-cam,OK}'
+\item [Fail] If an exception is raised `\texttt{test=cooler-cam,FAILED}' will be generated with its full trace.
+
+\end{description}
+
+\subsection{Hardware constraints}
+
+\begin{enumerate}
+    \item SPS RACK powered up
+    \item \acrshort{BEE} powered up.
+    \item Cooler controller powered up.
+\end{enumerate}
+
+\subsection{Initial conditions}
+
+xcuActor and testsActor started
+
+\subsection{Procedure}
+
+\begin{enumerate}
+    \item testsActor : send cooler test command: \texttt{tests cooler cam=r1} .
+    \item wait for the command to end.
+\end{enumerate}
+
+\subsection{Additional Notes}
+None.

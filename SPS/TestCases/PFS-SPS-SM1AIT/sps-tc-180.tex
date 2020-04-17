@@ -1,0 +1,48 @@
+\section{Test Case SPS-REXM-180: Red exchange mechanism movement}
+\subsection{Description}
+
+Check the communication with rexm motor controller, check that the statuses are correct.
+Checks that the red exchange mechanism moves as expected:
+
+\begin{enumerate}
+    \item for each position : low resolution, medium resolution
+        \item command rexm to be moved to that position
+        \item check whether the expected position is reached with a correct timing
+\end{enumerate}
+
+\begin{table}[H]
+    \begin{tabular}{|l| p{5cm} |l| p{5cm} |}
+    \hline
+    {\bf Step} & {\bf Description}  \\ \hline
+    1 & Initialization, low position \\ \hline
+    2 & Go to med position \\ \hline
+    3 & Go back to low position \\ \hline
+    \end{tabular}
+\end{table}
+
+\subsection{Pass/Fail Condition(s)}
+
+\begin{description}
+\item [Pass] Rexm movement as expected `\texttt{test=rexm-smId,OK}'
+\item [Fail] If an exception is raised `\texttt{test=rexm-smId,FAILED}' will be generated with its full trace.
+\end{description}
+
+\subsection{Hardware constraints}
+
+Enu rack powered up and connected to the PFS network
+
+\subsection{Initial conditions}
+enuActor and testsActor started
+
+\subsection{Procedure}
+
+\begin{enumerate}
+    \item testsActor : send rexm test command: \texttt{tests rexm sm1} .
+    \item wait for the command to end.
+\end{enumerate}
+
+
+
+\subsection{Additional Notes}
+
+None.
