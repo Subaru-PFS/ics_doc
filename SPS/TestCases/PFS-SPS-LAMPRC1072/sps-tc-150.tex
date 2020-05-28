@@ -2,9 +2,19 @@
 
 \subsection{Description}
 
-Take a 10 seconds dark on a given detector, check that the file is created correctly 
-and FITS header-critical keys are set.
-Check that \texttt{IMAGETYP==DARK} and \texttt{exptime==10}
+Take a 10 seconds dark on a given detector, check that the file is created correctly, minimal check on fits header, data correctly tracked on opDB.
+\begin{itemize}
+\item \texttt{For duplicate keys}
+\item \texttt{hdr['DATA-TYP']==DARK}
+\item \texttt{hdr['EXPTIME']==10.0}
+\item \texttt{sequence\_type from sps\_sequence == darks}
+\item \texttt{pfs\_visit\_id from visit\_set match hdr['W\_VISIT']}
+\item \texttt{exp\_type from sps\_visit match dark}
+\item \texttt{exptime from sps\_exposure inner join sps\_visit match 10.0}
+\item \texttt{sps\_module\_id from sps\_exposure inner join sps\_visit inner join sps\_camera match hdr['W\_SPMOD']}
+\item \texttt{arm\_num from sps\_exposure inner join sps\_visit inner join sps\_camera match hdr['W\_ARM']}
+
+\end{itemize}
 
 Check that the operations database is correctly populated.
 
