@@ -1,24 +1,24 @@
-\section{Test Case SPS-DARK-150: Detector Dark}
+\section{Test Case SPS-ARC-155: Acquire arc exposure}
 
 \subsection{Description}
 
-Take a 10 seconds dark on a given detector, check that the file is created correctly 
-and FITS header-critical keys are set.
-Check that \texttt{IMAGETYP==DARK} and \texttt{exptime==10}
+Take a 15 second arc exposure on a given detector. Check that the file is created correctly
+and critical keys in the FITS header are set correctly. 
+(Specifically, check that \texttt{IMAGETYP==ARC} and \texttt{EXPTME==15})
+
 
 Check that the operations database is correctly populated.
+
 
 \subsection{Pass/Fail Condition(s)}
 
 \begin{description}
-\item [Pass] filepath and fits header keys be generated and command should finish with `\texttt{test=dark-cam,OK}', 
+\item [Pass] filepath and fits header keys be generated and command should finish with `\texttt{test=arc-cam,OK}', 
 and that the \texttt{sps\_exposure} table is correctly populated, 
 with the field \texttt{pfs\_visit\_id} set to the appropriate visit, \texttt{exptime}, 
-set to the exposure time (10 seconds), and the \texttt{time\_exp\_start} \texttt{time\_exp\_end} set appropriately.
-
-\item [Fail] If an exception is raised `\texttt{test=dark-cam,FAILED}' will be generated with its full trace, 
+set to the exposure time (15 seconds), and the \texttt{time\_exp\_start} \texttt{time\_exp\_end} set appropriately.
+\item [Fail] If an exception is raised `\texttt{test=arc-cam,FAILED}' will be generated with its full trace, 
 or that the operations database is not correctly populated.
-
 
 \end{description}
 
@@ -37,7 +37,7 @@ ccdActor and testsActor started
 \subsection{Procedure}
 
 \begin{enumerate}
-    \item testsActor : send dark test command: \texttt{tests dark cam=r1} .
+    \item testsActor : send arc test command: \texttt{tests arc cam=r1} .
     \item wait for the command to end.
 \end{enumerate}
 
