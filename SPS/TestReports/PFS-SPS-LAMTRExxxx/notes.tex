@@ -1,0 +1,769 @@
+\section{Additional notes}
+
+\subsection{SPS-ALERT-TRIGGER-010}
+\label{sec:tc-010}
+
+step 1 : keywords are generated within ranges, no alerts are raised yet
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+oneCmd.py   2019-10-10T11:40:40.635 sent alerts connect controller=tests
+oneCmd.py   2019-10-10T11:40:40.710 alerts : controllers="tests"
+
+testsActor-log  2019-10-10 11:40:53.008Z cmds             20 CommandLink.py:121 > 0 0 i keytest1=163.2,165.35
+testsActor-log  2019-10-10 11:40:53.009Z cmds             20 CommandLink.py:121 > 0 0 i keytest2=1.3e-7
+testsActor-log  2019-10-10 11:40:53.009Z cmds             20 CommandLink.py:121 > 0 0 i keytest3=Closed,OK
+
+STS-Server-log  2019-10-10 13:40:53,082 [INFO] Datum(id=2010, format=4, timestamp=1570707653, value=(163.2, 'OK'))
+STS-Server-log  2019-10-10 13:40:53,133 [INFO] Datum(id=2011, format=4, timestamp=1570707653, value=(165.35, 'OK'))
+STS-Server-log  2019-10-10 13:40:53,180 [INFO] Datum(id=2012, format=4, timestamp=1570707653, value=(1.3e-07, 'OK'))
+STS-Server-log  2019-10-10 13:40:53,247 [INFO] Datum(id=2013, format=4, timestamp=1570707653, value=(nan, 'OK'))
+STS-Server-log  2019-10-10 13:40:53,335 [INFO] Datum(id=2014, format=4, timestamp=1570707653, value=(nan, 'OK'))
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+\noindent step 2 : send tests alerts trigger
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+oneCmd.py   2019-10-10T11:40:57.503 sent tests alerts trigger
+oneCmd.py   2019-10-10T11:40:57.510 tests : test=alerts-trigger,OK
+
+testsActor-log  2019-10-10T11:40:57.507 tests i keytest1=210.89,180.65
+testsActor-log  2019-10-10T11:40:57.509 tests i keytest2="10.2"
+testsActor-log  2019-10-10T11:40:57.510 tests i keytest3=Open,"Status is not OK !! "
+
+STS-Server-log  2019-10-10 13:40:57,630 [INFO] Datum(id=2010, format=4, timestamp=1570707657, value=(210.89, 'tests keytest1[0] : 210.89K out of range'))
+STS-Server-log  2019-10-10 13:40:57,689 [INFO] Datum(id=2011, format=4, timestamp=1570707657, value=(180.65, 'tests keytest1[1] : 180.65K out of range'))
+STS-Server-log  2019-10-10 13:40:57,737 [INFO] Datum(id=2012, format=4, timestamp=1570707657, value=(10.2, 'keytest3 is too high!!: 10.2'))
+STS-Server-log  2019-10-10 13:40:57,788 [INFO] Datum(id=2013, format=4, timestamp=1570707657, value=(nan, 'OK'))
+STS-Server-log  2019-10-10 13:40:57,838 [INFO] Datum(id=2014, format=4, timestamp=1570707657, value=(nan, 'test regexp : Status is not OK !!  !!'))
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+\noindent As a conclusion, alerts are correctly generated
+
+
+\subsection{SPS-ALERT-INVALID-020}
+\label{sec:tc-020}
+
+step 1 :keywords are generated within ranges, no alerts are raised yet
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2019-10-10 11:41:08.010Z cmds             20 CommandLink.py:121 > 0 0 i keytest1=163.2,165.35
+testsActor-log  2019-10-10 11:41:08.010Z cmds             20 CommandLink.py:121 > 0 0 i keytest2=1.3e-7
+testsActor-log  2019-10-10 11:41:08.010Z cmds             20 CommandLink.py:121 > 0 0 i keytest3=Closed,OK
+
+STS-Server-log  2019-10-10 13:41:08,080 [INFO] Datum(id=2010, format=4, timestamp=1570707668, value=(163.2, 'OK'))
+STS-Server-log  2019-10-10 13:41:08,130 [INFO] Datum(id=2011, format=4, timestamp=1570707668, value=(165.35, 'OK'))
+STS-Server-log  2019-10-10 13:41:08,181 [INFO] Datum(id=2012, format=4, timestamp=1570707668, value=(1.3e-07, 'OK'))
+STS-Server-log  2019-10-10 13:41:08,231 [INFO] Datum(id=2013, format=4, timestamp=1570707668, value=(nan, 'OK'))
+STS-Server-log  2019-10-10 13:41:08,300 [INFO] Datum(id=2014, format=4, timestamp=1570707668, value=(nan, 'OK'))
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+\noindent step 2 : generate invalid values
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+oneCmd.py  2019-10-10T11:41:14.332 sent tests alerts invalid
+oneCmd.py  2019-10-10T11:41:14.338 tests : test=alerts-invalid,OK
+
+testsActor-log  2019-10-10T11:41:14.335 tests i keytest1=nan,nan
+testsActor-log  2019-10-10T11:41:14.335 tests i keytest2="nan"
+testsActor-log  2019-10-10T11:41:14.338 tests i keytest3=Closed,OK
+
+STS-Server-log  2019-10-10 13:41:14,412 [INFO] Datum(id=2010, format=4, timestamp=1570707674, value=(nan, 'tests keytest1[0] : is unknown'))
+STS-Server-log  2019-10-10 13:41:14,497 [INFO] Datum(id=2011, format=4, timestamp=1570707674, value=(nan, 'tests keytest1[1] : is unknown'))
+STS-Server-log  2019-10-10 13:41:14,538 [INFO] Datum(id=2012, format=4, timestamp=1570707674, value=(nan, 'tests keytest2[0] : is unknown'))
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+\noindent As a conclusion, alerts are correctly generated
+
+\subsection{SPS-ALERT-TIMEOUT-030}
+\label{sec:tc-030}
+
+Keyword generation is stopped
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+oneCmd.py  2019-10-10T11:41:31.149 sent tests alerts timeout
+oneCmd.py  2019-10-10T11:41:31.152 tests i text="stopping monitoring"
+oneCmd.py  2019-10-10T11:41:31.153 tests : test=alerts-timeout,OK
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+STS-Server-log  2019-10-10 13:44:40,759 [INFO] Datum(id=2010, format=4, timestamp=1570707880, value=(163.2, 'tests keytest1[0] NO DATA since 197 s'))
+STS-Server-log  2019-10-10 13:44:40,806 [INFO] Datum(id=2011, format=4, timestamp=1570707880, value=(165.35, 'tests keytest1[1] NO DATA since 197 s'))
+STS-Server-log  2019-10-10 13:44:40,852 [INFO] Datum(id=2012, format=4, timestamp=1570707880, value=(1.3e-07, 'tests keytest2[0] NO DATA since 197 s'))
+STS-Server-log  2019-10-10 13:44:40,898 [INFO] Datum(id=2013, format=4, timestamp=1570707880, value=(nan, 'tests keytest3[0] NO DATA since 197 s'))
+STS-Server-log  2019-10-10 13:44:40,940 [INFO] Datum(id=2014, format=4, timestamp=1570707880, value=(nan, 'tests keytest3[1] NO DATA since 197 s'))
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+\noindent After 180 sec NO DATA alerts are correctly raised
+
+
+\subsection{SPS-XCU-PCM-040}
+\label{sec:tc-040}
+
+
+test=\texttt{power-b1,OK}
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+
+testsActor-log  2019-10-09T18:10:28.363 sent tests power cam=b1
+testsActor-log  2019-10-09T18:10:28.367 tests i text="starting b1 power test"
+testsActor-log  2019-10-09T18:10:28.368 tests i text="checking pcm tcp server"
+testsActor-log  2019-10-09T18:10:28.869 tests i text="power status OK, retrieving data ..."
+testsActor-log  2019-10-09T18:10:39.608 tests i b1__24vupsvolts=27.6833,0.0288675
+testsActor-log  2019-10-09T18:10:39.609 tests i b1__24vupscurrent=1.26667,0.0057735
+testsActor-log  2019-10-09T18:10:39.610 tests i b1__24vupspower=35.0657,0.196299
+testsActor-log  2019-10-09T18:10:39.611 tests i b1__24vauxvolts=24.55,0
+testsActor-log  2019-10-09T18:10:39.612 tests i b1__24vauxcurrent=0.0933333,0.0208167
+testsActor-log  2019-10-09T18:10:39.614 tests i b1__24vauxpower=2.29133,0.510569
+testsActor-log  2019-10-09T18:10:39.615 tests i b1__motorsvolts=0.166667,0.0288675
+testsActor-log  2019-10-09T18:10:39.616 tests i b1__motorscurrent=0,0
+testsActor-log  2019-10-09T18:10:39.617 tests i b1__motorspower=0,0
+testsActor-log  2019-10-09T18:10:39.619 tests i b1__gaugevolts=27.65,4.35117e-15
+testsActor-log  2019-10-09T18:10:39.620 tests i b1__gaugecurrent=0.09,1.69967e-17
+testsActor-log  2019-10-09T18:10:39.621 tests i b1__gaugepower=2.49,0
+testsActor-log  2019-10-09T18:10:39.622 tests i b1__coolervolts=27.7,0
+testsActor-log  2019-10-09T18:10:39.623 tests i b1__coolercurrent=0.05,8.49837e-18
+testsActor-log  2019-10-09T18:10:39.625 tests i b1__coolerpower=1.39,0
+testsActor-log  2019-10-09T18:10:39.626 tests i b1__tempsvolts=27.75,0
+testsActor-log  2019-10-09T18:10:39.627 tests i b1__tempscurrent=0.156667,0.0057735
+testsActor-log  2019-10-09T18:10:39.628 tests i b1__tempspower=4.34667,0.161658
+testsActor-log  2019-10-09T18:10:39.629 tests i b1__beevolts=27.6167,0.0288675
+testsActor-log  2019-10-09T18:10:39.631 tests i b1__beecurrent=0.61,0
+testsActor-log  2019-10-09T18:10:39.632 tests i b1__beepower=16.85,0.0173205
+testsActor-log  2019-10-09T18:10:39.633 tests i b1__feevolts=27.7167,0.0288675
+testsActor-log  2019-10-09T18:10:39.634 tests i b1__feecurrent=0.27,0
+testsActor-log  2019-10-09T18:10:39.636 tests i b1__feepower=7.48333,0.0057735
+testsActor-log  2019-10-09T18:10:39.637 tests i b1__interlockvolts=27.6833,0.0288675
+testsActor-log  2019-10-09T18:10:39.638 tests i b1__interlockcurrent=0,0
+testsActor-log  2019-10-09T18:10:39.639 tests i b1__interlockpower=0,0
+testsActor-log  2019-10-09T18:10:39.641 tests i b1__heatersvolts=27.75,0
+testsActor-log  2019-10-09T18:10:39.642 tests i b1__heaterscurrent=0,0
+testsActor-log  2019-10-09T18:10:39.643 tests i b1__heaterspower=0,0
+testsActor-log  2019-10-09T18:10:39.648 tests : test=power-b1,OK
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+\noindent test=\texttt{power-r1,OK}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2019-10-09T18:11:06.801 sent tests power cam=r1
+testsActor-log  2019-10-09T18:11:06.805 tests i text="starting r1 power test"
+testsActor-log  2019-10-09T18:11:06.806 tests i text="checking pcm tcp server"
+testsActor-log  2019-10-09T18:11:07.301 tests i text="power status OK, retrieving data ..."
+testsActor-log  2019-10-09T18:11:17.686 tests i r1__24vupsvolts=27.7,0
+testsActor-log  2019-10-09T18:11:17.686 tests i r1__24vupscurrent=1.29,0
+testsActor-log  2019-10-09T18:11:17.687 tests i r1__24vupspower=35.733,0
+testsActor-log  2019-10-09T18:11:17.688 tests i r1__24vauxvolts=24.45,0
+testsActor-log  2019-10-09T18:11:17.689 tests i r1__24vauxcurrent=0.273333,0.011547
+testsActor-log  2019-10-09T18:11:17.689 tests i r1__24vauxpower=6.683,0.282324
+testsActor-log  2019-10-09T18:11:17.690 tests i r1__motorsvolts=24.45,0
+testsActor-log  2019-10-09T18:11:17.693 tests i r1__motorscurrent=0.16,0
+testsActor-log  2019-10-09T18:11:17.693 tests i r1__motorspower=3.91,0
+testsActor-log  2019-10-09T18:11:17.694 tests i r1__gaugevolts=27.6833,0.0288675
+testsActor-log  2019-10-09T18:11:17.695 tests i r1__gaugecurrent=0.08,0
+testsActor-log  2019-10-09T18:11:17.697 tests i r1__gaugepower=2.21667,0.0057735
+testsActor-log  2019-10-09T18:11:17.698 tests i r1__coolervolts=27.7167,0.0288675
+testsActor-log  2019-10-09T18:11:17.699 tests i r1__coolercurrent=0.0433333,0.0057735
+testsActor-log  2019-10-09T18:11:17.700 tests i r1__coolerpower=1.20333,0.161658
+testsActor-log  2019-10-09T18:11:17.702 tests i r1__tempsvolts=27.7,0
+testsActor-log  2019-10-09T18:11:17.703 tests i r1__tempscurrent=0.143333,0.0057735
+testsActor-log  2019-10-09T18:11:17.704 tests i r1__tempspower=3.97,0.155885
+testsActor-log  2019-10-09T18:11:17.705 tests i r1__beevolts=27.65,4.35117e-15
+testsActor-log  2019-10-09T18:11:17.707 tests i r1__beecurrent=0.62,0
+testsActor-log  2019-10-09T18:11:17.708 tests i r1__beepower=17.14,0
+testsActor-log  2019-10-09T18:11:17.709 tests i r1__feevolts=27.7,0
+testsActor-log  2019-10-09T18:11:17.710 tests i r1__feecurrent=0.26,0
+testsActor-log  2019-10-09T18:11:17.713 tests i r1__feepower=7.2,0
+testsActor-log  2019-10-09T18:11:17.713 tests i r1__interlockvolts=27.7833,0.0288675
+testsActor-log  2019-10-09T18:11:17.714 tests i r1__interlockcurrent=0,0
+testsActor-log  2019-10-09T18:11:17.715 tests i r1__interlockpower=0,0
+testsActor-log  2019-10-09T18:11:17.717 tests i r1__heatersvolts=27.7333,0.0288675
+testsActor-log  2019-10-09T18:11:17.718 tests i r1__heaterscurrent=0,0
+testsActor-log  2019-10-09T18:11:17.719 tests i r1__heaterspower=0,0
+testsActor-log  2019-10-09T18:11:18.149 tests : test=power-r1,OK
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+\subsection{SPS-XCU-GATEVALVE-050}
+\label{sec:tc-050}
+
+test=\texttt{gatevalve-b1,OK}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2019-10-09T18:10:41.486 sent tests gatevalve cam=b1
+testsActor-log  2019-10-09T18:10:41.491 tests i text="starting b1 gatevalve test"
+testsActor-log  2019-10-09T18:10:41.897 tests i b1__gatevalve=Closed,Closed
+testsActor-log  2019-10-09T18:10:41.897 tests i text="gatevalve status OK, retrieving data ..."
+testsActor-log  2019-10-09T18:10:52.726 tests i b1__cryostatpressure=-1.80333,0.011547
+testsActor-log  2019-10-09T18:10:52.727 tests i b1__roughingpressure=-1.04,0.052915
+testsActor-log  2019-10-09T18:10:52.772 tests : test=gatevalve-b1,OK
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+\noindent test=\texttt{gatevalve-r1,OK}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2019-10-09T18:11:20.001 sent tests gatevalve cam=r1
+testsActor-log  2019-10-09T18:11:20.006 tests i text="starting r1 gatevalve test"
+testsActor-log  2019-10-09T18:11:20.496 tests i r1__gatevalve=Closed,Closed
+testsActor-log  2019-10-09T18:11:20.497 tests i text="gatevalve status OK, retrieving data ..."
+testsActor-log  2019-10-09T18:11:31.476 tests i r1__cryostatpressure=-1.33333,0.0057735
+testsActor-log  2019-10-09T18:11:31.476 tests i r1__roughingpressure=-0.49,0.06
+testsActor-log  2019-10-09T18:11:31.524 tests : test=gatevalve-r1,OK
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+
+\subsection{SPS-XCU-TURBO-060}
+\label{sec:tc-060}
+
+test=\texttt{turbo-b1,OK}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2019-10-09T18:10:54.785 sent tests turbo cam=b1
+testsActor-log  2019-10-09T18:10:54.789 tests i text="starting b1 turbo test"
+testsActor-log  2019-10-09T18:10:54.791 tests i text="connecting turbo controller"
+testsActor-log  2019-10-09T18:10:54.982 tests i text="turbo status OK, retrieving data ..."
+testsActor-log  2019-10-09T18:11:06.029 tests i b1__turbospeed=0,0
+testsActor-log  2019-10-09T18:11:06.029 tests i b1__turbovolts=24.1,4.35117e-15
+testsActor-log  2019-10-09T18:11:06.030 tests i b1__turbocurrent=0,0
+testsActor-log  2019-10-09T18:11:06.031 tests i b1__turbopower=1,0
+testsActor-log  2019-10-09T18:11:06.032 tests i b1__turbobodytemp=20,0
+testsActor-log  2019-10-09T18:11:06.033 tests i b1__turbocontrollertemp=29,0
+testsActor-log  2019-10-09T18:11:06.080 tests : test=turbo-b1,OK
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+\noindent test=\texttt{turbo-r1,OK}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2019-10-09T18:11:33.313 sent tests turbo cam=r1
+testsActor-log  2019-10-09T18:11:33.317 tests i text="starting r1 turbo test"
+testsActor-log  2019-10-09T18:11:33.318 tests i text="connecting turbo controller"
+testsActor-log  2019-10-09T18:11:33.517 tests i text="turbo status OK, retrieving data ..."
+testsActor-log  2019-10-09T18:11:43.223 tests i r1__turbospeed=0,0
+testsActor-log  2019-10-09T18:11:43.224 tests i r1__turbovolts=24.1667,0.057735
+testsActor-log  2019-10-09T18:11:43.225 tests i r1__turbocurrent=0.2,3.39935e-17
+testsActor-log  2019-10-09T18:11:43.225 tests i r1__turbopower=4.2,0
+testsActor-log  2019-10-09T18:11:43.228 tests i r1__turbobodytemp=20,0
+testsActor-log  2019-10-09T18:11:43.229 tests i r1__turbocontrollertemp=29,0
+testsActor-log  2019-10-09T18:11:43.277 tests : test=turbo-r1,OK
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+\subsection{SPS-XCU-IONPUMP-070}
+\label{sec:tc-070}
+
+test=\texttt{ionpump-b1,OK}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2019-10-09T18:11:07.883 sent tests ionpump cam=b1
+testsActor-log  2019-10-09T18:11:07.887 tests i text="starting b1 ionpump test"
+testsActor-log  2019-10-09T18:11:24.897 tests i text="connecting ionpump controller"
+testsActor-log  2019-10-09T18:11:26.820 tests i text="ionpump status OK, retrieving data ..."
+testsActor-log  2019-10-09T18:11:37.093 tests i b1__ionpump1volts=7000,0
+testsActor-log  2019-10-09T18:11:37.094 tests i b1__ionpump1current=8.6e-05,1.65984e-20
+testsActor-log  2019-10-09T18:11:37.094 tests i b1__ionpump1temps=44,0
+testsActor-log  2019-10-09T18:11:37.094 tests i b1__ionpump1pressure=1.3e-07,0
+testsActor-log  2019-10-09T18:11:37.095 tests i b1__ionpump2volts=6900,0
+testsActor-log  2019-10-09T18:11:37.095 tests i b1__ionpump2current=9.3e-05,0
+testsActor-log  2019-10-09T18:11:37.095 tests i b1__ionpump2temps=43,0
+testsActor-log  2019-10-09T18:11:37.095 tests i b1__ionpump2pressure=1.4e-07,0
+testsActor-log  2019-10-09T18:11:44.653 tests : test=ionpump-b1,OK
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+\noindent test=\texttt{ionpump-r1,OK}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2019-10-09T18:11:45.141 sent tests ionpump cam=r1
+testsActor-log  2019-10-09T18:11:45.145 tests i text="starting r1 ionpump test"
+testsActor-log  2019-10-09T18:12:00.205 tests i text="connecting ionpump controller"
+testsActor-log  2019-10-09T18:12:03.976 tests i text="ionpump status OK, retrieving data ..."
+testsActor-log  2019-10-09T18:12:13.712 tests i r1__ionpump1volts=7000,0
+testsActor-log  2019-10-09T18:12:13.713 tests i r1__ionpump1current=0.00016,0
+testsActor-log  2019-10-09T18:12:13.714 tests i r1__ionpump1temps=47,0
+testsActor-log  2019-10-09T18:12:13.715 tests i r1__ionpump1pressure=2.5e-07,0
+testsActor-log  2019-10-09T18:12:13.717 tests i r1__ionpump2volts=7000,0
+testsActor-log  2019-10-09T18:12:13.718 tests i r1__ionpump2current=0.00017,0
+testsActor-log  2019-10-09T18:12:13.719 tests i r1__ionpump2temps=49,0
+testsActor-log  2019-10-09T18:12:13.720 tests i r1__ionpump2pressure=2.7e-07,0
+testsActor-log  2019-10-09T18:12:21.280 tests : test=ionpump-r1,OK
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+\subsection{SPS-XCU-GAUGE-080}
+\label{sec:tc-080}
+
+test=\texttt{gauge-b1,OK}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2019-10-09T18:11:46.514 sent tests gauge cam=b1
+testsActor-log  2019-10-09T18:11:46.519 tests i text="starting b1 gauge test"
+testsActor-log  2019-10-09T18:11:46.519 tests i text="checking pcm tcp server"
+testsActor-log  2019-10-09T18:11:48.348 tests i text="gauge status OK, retrieving data ..."
+testsActor-log  2019-10-09T18:11:58.204 tests i b1__gauge=2.10873e-07,3.24187e-23
+testsActor-log  2019-10-09T18:11:58.253 tests : test=gauge-b1,OK
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+\noindent test=\texttt{gauge-r1,OK}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2019-10-09T18:12:23.100 sent tests gauge cam=r1
+testsActor-log  2019-10-09T18:12:23.104 tests i text="starting r1 gauge test"
+testsActor-log  2019-10-09T18:12:23.105 tests i text="checking pcm tcp server"
+testsActor-log  2019-10-09T18:12:23.188 tests i text="gauge status OK, retrieving data ..."
+testsActor-log  2019-10-09T18:12:32.609 tests i r1__gauge=2.74604e-07,0
+testsActor-log  2019-10-09T18:12:32.657 tests : test=gauge-r1,OK
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+\subsection{SPS-XCU-COOLER-090}
+\label{sec:tc-090}
+
+test=\texttt{cooler-b1,OK}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2019-10-09T18:12:00.229 sent tests cooler cam=b1
+testsActor-log  2019-10-09T18:12:00.276 tests i text="starting b1 cooler test"
+testsActor-log  2019-10-09T18:12:00.278 tests i text="checking cooler tcp server"
+testsActor-log  2019-10-09T18:12:00.278 tests i text="connecting cooler controller"
+testsActor-log  2019-10-09T18:12:00.642 tests i text="cooler status OK, retrieving data ..."
+testsActor-log  2019-10-09T18:12:11.048 tests i b1__coolersetpoint=128.15,0
+testsActor-log  2019-10-09T18:12:11.049 tests i b1__coolerreject=20.98,0
+testsActor-log  2019-10-09T18:12:11.050 tests i b1__coolertip=128.143,0.0057735
+testsActor-log  2019-10-09T18:12:11.050 tests i b1__coolerpower=79.8467,0.0351188
+testsActor-log  2019-10-09T18:12:11.096 tests : test=cooler-b1,OK
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+\noindent test=\texttt{cooler-r1,OK}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2019-10-09T18:12:34.793 sent tests cooler cam=r1
+testsActor-log  2019-10-09T18:12:34.798 tests i text="starting r1 cooler test"
+testsActor-log  2019-10-09T18:12:34.799 tests i text="checking cooler tcp server"
+testsActor-log  2019-10-09T18:12:34.800 tests i text="connecting cooler controller"
+testsActor-log  2019-10-09T18:12:35.173 tests i text="cooler status OK, retrieving data ..."
+testsActor-log  2019-10-09T18:12:46.910 tests i r1__coolersetpoint=128.64,0
+testsActor-log  2019-10-09T18:12:46.911 tests i r1__coolerreject=20.92,0
+testsActor-log  2019-10-09T18:12:46.912 tests i r1__coolertip=128.637,0.0057735
+testsActor-log  2019-10-09T18:12:46.913 tests i r1__coolerpower=81.3167,0.0416333
+testsActor-log  2019-10-09T18:12:47.434 tests : test=cooler-r1,OK
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+\subsection{SPS-XCU-TEMPS-100}
+\label{sec:tc-100}
+
+test=\texttt{temps-b1,OK}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2019-10-09T18:12:12.905 sent tests temps cam=b1
+testsActor-log  2019-10-09T18:12:12.911 tests i text="starting b1 temps test"
+testsActor-log  2019-10-09T18:12:12.912 tests i text="checking temps tcp server"
+testsActor-log  2019-10-09T18:12:12.912 tests i text="connecting temps controller"
+testsActor-log  2019-10-09T18:12:12.977 tests i text="temps status OK, retrieving data ..."
+testsActor-log  2019-10-09T18:12:23.948 tests i b1__detectorbox=156.48,0.000450925
+testsActor-log  2019-10-09T18:12:23.949 tests i b1__mangin=289.244,0.000404145
+testsActor-log  2019-10-09T18:12:23.951 tests i b1__spider=148.233,0.000556776
+testsActor-log  2019-10-09T18:12:23.952 tests i b1__thermalspreader=139.286,0.000208167
+testsActor-log  2019-10-09T18:12:23.953 tests i b1__frontring=291.228,0.000321455
+testsActor-log  2019-10-09T18:12:23.954 tests i b1__detectorstrap1=162.094,0.0006
+testsActor-log  2019-10-09T18:12:23.956 tests i b1__detectorstrap2=163.066,0.000680686
+testsActor-log  2019-10-09T18:12:24.005 tests : test=temps-b1,OK
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+\noindent test=\texttt{temps-r1,OK}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2019-10-09T18:12:49.318 sent tests temps cam=r1
+testsActor-log  2019-10-09T18:12:49.321 tests i text="starting r1 temps test"
+testsActor-log  2019-10-09T18:12:49.322 tests i text="checking temps tcp server"
+testsActor-log  2019-10-09T18:12:49.322 tests i text="connecting temps controller"
+testsActor-log  2019-10-09T18:12:49.380 tests i text="temps status OK, retrieving data ..."
+testsActor-log  2019-10-09T18:12:58.523 tests i r1__detectorbox=162.883,0.000458258
+testsActor-log  2019-10-09T18:12:58.524 tests i r1__mangin=289.434,0.00064291
+testsActor-log  2019-10-09T18:12:58.530 tests i r1__spider=157.554,0.000288675
+testsActor-log  2019-10-09T18:12:58.532 tests i r1__thermalspreader=141.277,0.000251661
+testsActor-log  2019-10-09T18:12:58.533 tests i r1__frontring=291.621,0.00051316
+testsActor-log  2019-10-09T18:12:58.535 tests i r1__detectorstrap1=162.193,0.00061101
+testsActor-log  2019-10-09T18:12:58.536 tests i r1__detectorstrap2=162.275,0.000556776
+testsActor-log  2019-10-09T18:12:58.584 tests : test=temps-r1,OK
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+\subsection{SPS-XCU-HEATERS-110}
+\label{sec:tc-110}
+
+test=\texttt{temps-b1,OK}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2019-10-09T18:12:25.954 sent tests heaters cam=b1
+testsActor-log  2019-10-09T18:12:25.960 tests i text="starting b1 heaters test"
+testsActor-log  2019-10-09T18:12:25.981 tests i text="heaters status OK, retrieving data ..."
+testsActor-log  2019-10-09T18:12:35.369 tests i b1__heatersccdenabled=0,0
+testsActor-log  2019-10-09T18:12:35.369 tests i b1__heatersspreaderenabled=0,0
+testsActor-log  2019-10-09T18:12:35.369 tests i b1__heatersccdfraction=0,0
+testsActor-log  2019-10-09T18:12:35.370 tests i b1__heatersspreaderfraction=0,0
+testsActor-log  2019-10-09T18:12:35.417 tests : test=heaters-b1,OK
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+\noindent test=\texttt{temps-r1,OK}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2019-10-09T18:13:00.614 sent tests heaters cam=r1
+testsActor-log  2019-10-09T18:13:00.617 tests i text="starting r1 heaters test"
+testsActor-log  2019-10-09T18:13:02.189 tests i text="heaters status OK, retrieving data ..."
+testsActor-log  2019-10-09T18:13:11.563 tests i r1__heatersccdenabled=0,0
+testsActor-log  2019-10-09T18:13:11.564 tests i r1__heatersspreaderenabled=0,0
+testsActor-log  2019-10-09T18:13:11.565 tests i r1__heatersccdfraction=0,0
+testsActor-log  2019-10-09T18:13:11.566 tests i r1__heatersspreaderfraction=0,0
+testsActor-log  2019-10-09T18:13:11.612 tests : test=heaters-r1,OK
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+\subsection{SPS-LOG-120}
+\label{sec:tc-120}
+NOT IMPLEMENTED: However the majority of tests conducted do write log files and demonstrate the purpose
+of this test case. 
+
+\subsection{SPS-IO-130}
+\label{sec:tc-130}
+NOT IMPLEMENTED: SPS-BIAS-140 and SPS-DARK-150 partly cover it, because they create new files onto 
+\texttt{/data}
+
+\subsection{SPS-BIAS-140}
+\label{sec:tc-140}
+
+test=\texttt{bias-b1,OK}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2019-10-09T18:07:45.669 sent tests bias cam=b1
+testsActor-log  2019-10-09T18:07:45.675 tests i text="starting b1 bias test"
+testsActor-log  2019-10-09T18:08:39.589 tests i filepath="/data/pfs/pfs/2019-10-09/PFLA02324511.fits"
+testsActor-log  2019-10-09T18:08:39.590 tests i simple="True"
+testsActor-log  2019-10-09T18:08:39.590 tests i bitpix="16"
+testsActor-log  2019-10-09T18:08:39.591 tests i naxis="2"
+testsActor-log  2019-10-09T18:08:39.592 tests i naxis1="4416"
+testsActor-log  2019-10-09T18:08:39.592 tests i naxis2="4300"
+testsActor-log  2019-10-09T18:08:39.592 tests i headvers="1"
+testsActor-log  2019-10-09T18:08:39.592 tests i specnum="1"
+testsActor-log  2019-10-09T18:08:39.593 tests i dewarnam="blue"
+testsActor-log  2019-10-09T18:08:39.593 tests i arm="blue"
+testsActor-log  2019-10-09T18:08:39.593 tests i detnum="2"
+testsActor-log  2019-10-09T18:08:39.595 tests i imagetyp="bias"
+testsActor-log  2019-10-09T18:08:39.595 tests i exptime="0.0"
+testsActor-log  2019-10-09T18:08:39.595 tests i darktime="0.0"
+testsActor-log  2019-10-09T18:08:39.596 tests i w_pfdsgn="72057594037927936"
+testsActor-log  2019-10-09T18:08:39.596 tests i w_visit="23245"
+testsActor-log  2019-10-09T18:08:39.596 tests : test=bias-b1,OK
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+\noindent test=\texttt{bias-r1,OK}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2019-10-09T18:07:01.449 sent tests bias cam=r1
+testsActor-log  2019-10-09T18:07:01.453 tests i text="starting r1 bias test"
+testsActor-log  2019-10-09T18:07:54.866 tests i filepath="/data/pfs/pfs/2019-10-09/PFLA02324414.fits"
+testsActor-log  2019-10-09T18:07:54.866 tests i simple="True"
+testsActor-log  2019-10-09T18:07:54.867 tests i bitpix="16"
+testsActor-log  2019-10-09T18:07:54.867 tests i naxis="2"
+testsActor-log  2019-10-09T18:07:54.868 tests i naxis1="4416"
+testsActor-log  2019-10-09T18:07:54.868 tests i naxis2="4300"
+testsActor-log  2019-10-09T18:07:54.870 tests i headvers="1"
+testsActor-log  2019-10-09T18:07:54.870 tests i specnum="1"
+testsActor-log  2019-10-09T18:07:54.870 tests i dewarnam="red"
+testsActor-log  2019-10-09T18:07:54.870 tests i arm="red"
+testsActor-log  2019-10-09T18:07:54.871 tests i detnum="2"
+testsActor-log  2019-10-09T18:07:54.871 tests i imagetyp="bias"
+testsActor-log  2019-10-09T18:07:54.871 tests i exptime="0.0"
+testsActor-log  2019-10-09T18:07:54.871 tests i darktime="0.0"
+testsActor-log  2019-10-09T18:07:54.871 tests i w_pfdsgn="72057594037927936"
+testsActor-log  2019-10-09T18:07:54.871 tests i w_visit="23244"
+testsActor-log  2019-10-09T18:07:54.873 tests : test=bias-r1,OK
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+\subsection{SPS-DARK-150}
+\label{sec:tc-150}
+
+test=\texttt{dark-b1,OK}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2019-10-09T18:08:41.595 sent tests dark cam=b1
+testsActor-log  2019-10-09T18:08:41.599 tests i text="starting b1 dark test"
+testsActor-log  2019-10-09T18:09:45.967 tests i filepath="/data/pfs/pfs/2019-10-09/PFLA02324711.fits"
+testsActor-log  2019-10-09T18:09:45.968 tests i simple="True"
+testsActor-log  2019-10-09T18:09:45.968 tests i bitpix="16"
+testsActor-log  2019-10-09T18:09:45.968 tests i naxis="2"
+testsActor-log  2019-10-09T18:09:45.968 tests i naxis1="4416"
+testsActor-log  2019-10-09T18:09:45.969 tests i naxis2="4300"
+testsActor-log  2019-10-09T18:09:45.969 tests i headvers="1"
+testsActor-log  2019-10-09T18:09:45.969 tests i specnum="1"
+testsActor-log  2019-10-09T18:09:45.969 tests i dewarnam="blue"
+testsActor-log  2019-10-09T18:09:45.969 tests i arm="blue"
+testsActor-log  2019-10-09T18:09:45.970 tests i detnum="2"
+testsActor-log  2019-10-09T18:09:45.971 tests i imagetyp="dark"
+testsActor-log  2019-10-09T18:09:45.973 tests i exptime="10.0"
+testsActor-log  2019-10-09T18:09:45.973 tests i darktime="10.001"
+testsActor-log  2019-10-09T18:09:45.973 tests i w_pfdsgn="72057594037927936"
+testsActor-log  2019-10-09T18:09:45.973 tests i w_visit="23247"
+testsActor-log  2019-10-09T18:09:45.974 tests : test=dark-b1,OK
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+\noindent test=\texttt{dark-r1,OK}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2019-10-09T18:07:56.683 sent tests dark cam=r1
+testsActor-log  2019-10-09T18:07:56.688 tests i text="starting r1 dark test"
+testsActor-log  2019-10-09T18:09:01.052 tests i filepath="/data/pfs/pfs/2019-10-09/PFLA02324614.fits"
+testsActor-log  2019-10-09T18:09:01.053 tests i simple="True"
+testsActor-log  2019-10-09T18:09:01.053 tests i bitpix="16"
+testsActor-log  2019-10-09T18:09:01.053 tests i naxis="2"
+testsActor-log  2019-10-09T18:09:01.054 tests i naxis1="4416"
+testsActor-log  2019-10-09T18:09:01.054 tests i naxis2="4300"
+testsActor-log  2019-10-09T18:09:01.054 tests i headvers="1"
+testsActor-log  2019-10-09T18:09:01.056 tests i specnum="1"
+testsActor-log  2019-10-09T18:09:01.056 tests i dewarnam="red"
+testsActor-log  2019-10-09T18:09:01.057 tests i arm="red"
+testsActor-log  2019-10-09T18:09:01.057 tests i detnum="2"
+testsActor-log  2019-10-09T18:09:01.057 tests i imagetyp="dark"
+testsActor-log  2019-10-09T18:09:01.057 tests i exptime="10.0"
+testsActor-log  2019-10-09T18:09:01.057 tests i darktime="10.0"
+testsActor-log  2019-10-09T18:09:01.057 tests i w_pfdsgn="72057594037927936"
+testsActor-log  2019-10-09T18:09:01.059 tests i w_visit="23246"
+testsActor-log  2019-10-09T18:09:01.059 tests : test=dark-r1,OK
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+\subsection{SPS-SHUTTER-160}
+\label{sec:tc-160}
+
+test=\texttt{shutters-sm1,OK}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2019-10-09T18:38:39.707 sent tests shutters sm1
+testsActor-log  2019-10-09T18:38:39.710 tests i text="starting shutters-sm1 test"
+testsActor-log  2019-10-09T18:38:47.836 tests i text="shutters status OK, testing exposure..."
+testsActor-log  2019-10-09T18:38:50.840 tests i text="testing  shutter"
+testsActor-log  2019-10-09T18:38:56.366 tests i text="exptime error = 0.001 s"
+testsActor-log  2019-10-09T18:38:59.370 tests i text="testing blue shutter"
+testsActor-log  2019-10-09T18:39:04.798 tests i text="exptime error = 0.003 s"
+testsActor-log  2019-10-09T18:39:07.802 tests i text="testing red shutter"
+testsActor-log  2019-10-09T18:39:13.321 tests i text="exptime error = 0.001 s"
+testsActor-log  2019-10-09T18:39:13.322 tests : test=shutters-sm1,OK
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+
+\subsection{SPS-SLIT-170}
+\label{sec:tc-170}
+
+test=\texttt{slit-sm1,OK}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2019-10-09T18:32:27.758 sent tests slit sm1
+testsActor-log  2019-10-09T18:32:27.762 tests i text="starting slit-sm1 test"
+testsActor-log  2019-10-09T18:32:34.395 tests i text="slit status OK, testing motion ..."
+testsActor-log  2019-10-09T18:32:37.399 tests i text="moving to X=1.0  Y=0.0  Z=0.0  U=0.0  V=0.0  W=0.0"
+testsActor-log  2019-10-09T18:32:38.113 tests i text="cumulate error=3.999999999997449e-05"
+testsActor-log  2019-10-09T18:32:41.117 tests i text="moving to X=0.0  Y=1.0  Z=0.0  U=0.0  V=0.0  W=0.0"
+testsActor-log  2019-10-09T18:32:42.065 tests i text="cumulate error=9.99999999995449e-06"
+testsActor-log  2019-10-09T18:32:45.069 tests i text="moving to X=0.0  Y=0.0  Z=1.0  U=0.0  V=0.0  W=0.0"
+testsActor-log  2019-10-09T18:32:46.733 tests i text="cumulate error=1.999999999995449e-05"
+testsActor-log  2019-10-09T18:32:49.738 tests i text="moving to home"
+testsActor-log  2019-10-09T18:32:50.899 tests : test=slit-sm1,OK
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+
+\subsection{SPS-REXM-180}
+\label{sec:tc-180}
+
+test=\texttt{rexm-sm1,OK}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2019-10-09T18:32:52.796 sent tests rexm sm1
+testsActor-log  2019-10-09T18:32:52.799 tests i text="starting rexm-sm1 test"
+testsActor-log  2019-10-09T18:33:24.903 tests i text="rexm status OK, testing motion..."
+testsActor-log  2019-10-09T18:33:27.907 tests i text="going to med position"
+testsActor-log  2019-10-09T18:36:00.927 tests i text="rexm motion completed in 152.7 s"
+testsActor-log  2019-10-09T18:36:03.931 tests i text="going to low position"
+testsActor-log  2019-10-09T18:38:37.352 tests i text="rexm motion completed in 153.1 s"
+testsActor-log  2019-10-09T18:38:37.353 tests : test=rexm-sm1,OK
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+\subsection{SPS-BIA-190}
+\label{sec:tc-190}
+
+test=\texttt{bia-sm1,FAILED}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2019-10-09T18:39:15.187 sent tests bia sm1
+testsActor-log  2019-10-09T18:39:15.190 tests i text="starting bia-sm1 test"
+testsActor-log  2019-10-09T18:39:23.051 tests i text="bia status OK, turning it on ..."
+testsActor-log  2019-10-09T18:39:32.448 tests i sm1__biaphoto1=0,0
+testsActor-log  2019-10-09T18:39:32.449 tests i sm1__biaphoto2=0,0
+testsActor-log  2019-10-09T18:39:32.518 tests w test=bia-sm1,FAILED
+testsActor-log  2019-10-09T18:39:32.520 tests f text="command failed: RuntimeError('sm1__biaPhoto1 is not detecting light',) in bia()
+at /software/mhs/devel/ics_testsActor/python/testsActor/Controllers/enu.py:119"
+\end{verbatim}
+\end{tiny}
+\end{quote}
+\noindent BIA was not wired in, the test failed but it was expected .
+
+\subsection{SPS-TEMPS-200}
+\label{sec:tc-200}
+
+test=\texttt{temps-sm1,FAILED}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2019-10-09T18:32:02.112 sent tests temps sm1
+testsActor-log  2019-10-09T18:32:02.117 tests i text="starting temps-sm1 test"
+testsActor-log  2019-10-09T18:32:10.288 tests i text="temps status OK, retrieving data ..."
+testsActor-log  2019-10-09T18:32:25.923 tests i sm1__motor_rda=31.455,0.049689
+testsActor-log  2019-10-09T18:32:25.925 tests w sm1__motor_shutter_b=nan,nan
+testsActor-log  2019-10-09T18:32:25.925 tests w sm1__motor_shutter_r=nan,nan
+testsActor-log  2019-10-09T18:32:25.926 tests w sm1__bia_box_upper=nan,nan
+testsActor-log  2019-10-09T18:32:25.927 tests w sm1__bia_box_lower=nan,nan
+testsActor-log  2019-10-09T18:32:25.928 tests i sm1__fiber_unit_bench_level=19.3143,0.00057735
+testsActor-log  2019-10-09T18:32:25.929 tests w sm1__fiber_unit_hexapod_top=nan,nan
+testsActor-log  2019-10-09T18:32:25.930 tests w sm1__fiber_unit_fiber_frame_top=nan,nan
+testsActor-log  2019-10-09T18:32:25.930 tests i sm1__collimator_frame_bench_level=19.0467,0.00208167
+testsActor-log  2019-10-09T18:32:25.931 tests i sm1__collimator_frame_top=19.1497,0.00208167
+testsActor-log  2019-10-09T18:32:25.932 tests i sm1__bench_left_top=19.0403,0.00057735
+testsActor-log  2019-10-09T18:32:25.933 tests i sm1__bench_left_bottom=19.0867,0.00152753
+testsActor-log  2019-10-09T18:32:25.934 tests i sm1__bench_right_top=19.1527,0.00208167
+testsActor-log  2019-10-09T18:32:25.934 tests i sm1__bench_right_bottom=19.4223,0.00057735
+testsActor-log  2019-10-09T18:32:25.935 tests i sm1__bench_far_top=18.9313,0.00057735
+testsActor-log  2019-10-09T18:32:25.936 tests i sm1__bench_far_bottom=19.1127,0.00404145
+testsActor-log  2019-10-09T18:32:25.937 tests i sm1__bench_near_top=19.403,0.001
+testsActor-log  2019-10-09T18:32:25.938 tests i sm1__bench_near_bottom=19.8817,0.00152753
+testsActor-log  2019-10-09T18:32:25.938 tests i sm1__bench_central_bottom=19.116,0
+testsActor-log  2019-10-09T18:32:25.939 tests w test=temps-sm1,FAILED
+testsActor-log  2019-10-09T18:32:25.940 tests f text="command failed: RuntimeError('sm1__MOTOR_SHUTTER_B, sm1__MOTOR_SHUTTER_R, sm1__BIA_BOX_UPPER,
+sm1__BIA_BOX_LOWER, sm1__FIBER_UNIT_HEXAPOD_TOP, sm1__FIBER_UNIT_FIBER_FRAME_TOP are invalid',) in genSample() at python/testsActor/main.py:89"
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+\noindent when FCA3 was replaced by FCA2, some sensors has been deconnected but never been connected again. As a result the test failed
+
+\subsection{SPS-IIS-210}
+\label{sec:tc-210}
+
+test=\texttt{iis-sm1,OK}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2019-10-09T18:39:34.369 sent tests iis sm1
+testsActor-log  2019-10-09T18:39:34.373 tests i text="starting iis-sm1 test"
+testsActor-log  2019-10-09T18:39:39.818 tests i text="iis status OK, warming up lamp..."
+testsActor-log  2019-10-09T18:40:10.424 tests i sm1__iishgarvolts=239.74,0.155242
+testsActor-log  2019-10-09T18:40:10.425 tests i sm1__iishgarcurrent=0.07,0
+testsActor-log  2019-10-09T18:40:10.428 tests i sm1__iishgarpower=4.18667,0.080829
+testsActor-log  2019-10-09T18:40:10.753 tests : test=iis-sm1,OK
+\end{verbatim}
+\end{tiny}
+\end{quote}
