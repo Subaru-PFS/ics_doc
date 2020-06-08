@@ -1,0 +1,78 @@
+\documentclass[12pt]{article}
+\usepackage{graphicx}
+%
+\usepackage{color}
+\usepackage[colorlinks=true, citecolor=blue, linktocpage=true]{hyperref} % glossary colour is set in style
+\usepackage{xspace}
+\usepackage{import}
+\usepackage[titletoc,title]{appendix}
+\usepackage[margin=1.0in,nohead,nofoot]{geometry}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{float}
+%\usepackage[titletoc,title]{appendix}
+%\usepackage[style=authoryear, uniquename=false, backend=bibtex]{biblatex}
+%\usepackage{journals}
+\usepackage[acronym,nonumberlist,toc,xindy]{glossaries}
+%\bibliography{XXX}
+%------------------------------------------------------------------------------
+
+\renewcommand{\c}{\textit{c.}\xspace}
+\newcommand{\cf}{\textit{cf.}\xspace}
+\newcommand{\eg}{\textit{e.g.}\xspace}
+\newcommand{\etc}{\textit{etc.}\xspace}
+\newcommand{\ie}{\textit{i.e.}\xspace}
+\newcommand{\nb}{\textit{n.b.}\xspace}
+\newcommand{\Nb}{\textit{N.b.}\xspace}
+
+%
+% Convenient (but unnecessary) abbreviations
+%
+\newcommand{\ICS}{\gls{ICS}\xspace}
+\newcommand{\MHS}{\gls{MHS}\xspace}
+\newcommand{\PFS}{\gls{PFS}\xspace}
+\newcommand{\SPS}{\gls{SPS}\xspace}
+\newcommand{\TBD}{\gls{TBD}\xspace}
+
+\newcommand{\jupyter}{\gls{jupyter}\xspace}
+\newcommand{\ssh}{\gls{ssh}\xspace}
+
+%------------------------------------------------------------------------------
+
+\newcommand{\XXX}[1]{\textbf{XXX: #1}}
+\newcommand{\appRef}[1]{Appendix \ref{sec:#1}} % n.b. same prefix (sec:) as \secRef
+\newcommand{\secRef}[1]{Section \ref{sec:#1}}
+
+%------------------------------------------------------------------------------
+
+\import{.}{initializeGlossary}
+% \import{../misc/}{PFS_Abbreviations}
+\import{.}{glossaryEntries}
+
+%------------------------------------------------------------------------------
+
+\begin{document}
+\title{\acrshort{SPS} Software Test Report \\ \large PFS-SPS-LAMTRE1073-02
+\footnote{Previous document code assigned was PFS-SPS-PRU0300006}}
+\author{Arnaud Le Fur, Fabrice Madec, Craig Loomis, Hassan Siddiqui}
+\date{2020-06-08\\Issue 1.1}
+\maketitle
+
+\tableofcontents
+\newpage
+
+%
+% Introduction
+%
+\import{.}{changelog}
+\import{.}{intro}
+\import{.}{summary-02}
+\import{.}{notes-02}
+
+%------------------------------------------------------------------------------
+%
+% Print acronyms/glossaries
+%
+\printglossary[type=\acronymtype]
+\printglossary
+
+\end{document}
