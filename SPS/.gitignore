@@ -1,16 +1,12 @@
-.deps
 *.acn
 *.acr
 *.alg
-*.aux
 *.fdb_latexmk
-*.fls
+*.flsi
 *.glg
 *.glo
 *.gls
-*.log
-*.out
-*.xdy
 *.toc
-*.synctex.gz
+*.xdy
+*.fls
 

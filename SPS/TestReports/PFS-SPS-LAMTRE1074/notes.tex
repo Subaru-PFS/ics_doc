@@ -1,0 +1,689 @@
+\section{Additional notes}
+
+\subsection{SPS-ALERT-TRIGGER-010}
+\label{sec:tc-010}
+alertsActor has been running for six months, no further test is required.
+
+\subsection{SPS-ALERT-INVALID-020}
+\label{sec:tc-020}
+
+alertsActor has been running for six months, no further test is required.
+
+\subsection{SPS-ALERT-TIMEOUT-030}
+\label{sec:tc-030}
+
+alertsActor has been running for six months, no further test is required.
+
+\subsection{SPS-XCU-PCM-040}
+\label{sec:tc-040}
+
+test=\texttt{b1,power,OK}
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+
+testsActor-log  2020-05-28T18:01:00.560 sent tests power cam=b1
+testsActor-log  2020-05-28T18:01:00.575 tests i text="starting b1 power test"
+testsActor-log  2020-05-28T18:01:00.577 tests i text="checking pcm tcp server"
+testsActor-log  2020-05-28T18:01:01.098 tests i text="power status OK, retrieving data ..."
+testsActor-log  2020-05-28T18:01:13.154 tests i b1__24vupsvolts=28.1667,0.0288675
+testsActor-log  2020-05-28T18:01:13.158 tests i b1__24vupscurrent=1.28333,0.0208167
+testsActor-log  2020-05-28T18:01:13.158 tests i b1__24vupspower=36.1473,0.612539
+testsActor-log  2020-05-28T18:01:13.169 tests i b1__24vauxvolts=24.5333,0.0288675
+testsActor-log  2020-05-28T18:01:13.170 tests i b1__24vauxcurrent=0.26,0
+testsActor-log  2020-05-28T18:01:13.170 tests i b1__24vauxpower=6.37867,0.00750555
+testsActor-log  2020-05-28T18:01:13.178 tests i b1__motorsvolts=24.4833,0.0288675
+testsActor-log  2020-05-28T18:01:13.178 tests i b1__motorscurrent=0.176667,0.0057735
+testsActor-log  2020-05-28T18:01:13.179 tests i b1__motorspower=4.32667,0.135769
+testsActor-log  2020-05-28T18:01:13.182 tests i b1__gaugevolts=28.1833,0.0288675
+testsActor-log  2020-05-28T18:01:13.188 tests i b1__gaugecurrent=0.09,1.69967e-17
+testsActor-log  2020-05-28T18:01:13.192 tests i b1__gaugepower=2.53667,0.0057735
+testsActor-log  2020-05-28T18:01:13.219 tests i b1__coolervolts=28.2667,0.0288675
+testsActor-log  2020-05-28T18:01:13.220 tests i b1__coolercurrent=0.06,0
+testsActor-log  2020-05-28T18:01:13.220 tests i b1__coolerpower=1.69333,0.0057735
+testsActor-log  2020-05-28T18:01:13.221 tests i b1__tempsvolts=28.25,0
+testsActor-log  2020-05-28T18:01:13.221 tests i b1__tempscurrent=0.153333,0.0057735
+testsActor-log  2020-05-28T18:01:13.221 tests i b1__tempspower=4.33333,0.161658
+testsActor-log  2020-05-28T18:01:13.222 tests i b1__beevolts=28.15,4.35117e-15
+testsActor-log  2020-05-28T18:01:13.222 tests i b1__beecurrent=0.59,0.01
+testsActor-log  2020-05-28T18:01:13.222 tests i b1__beepower=16.61,0.28
+testsActor-log  2020-05-28T18:01:13.224 tests i b1__feevolts=28.2167,0.0288675
+testsActor-log  2020-05-28T18:01:13.225 tests i b1__feecurrent=0.31,0
+testsActor-log  2020-05-28T18:01:13.227 tests i b1__feepower=8.74667,0.011547
+testsActor-log  2020-05-28T18:01:13.243 tests i b1__interlockvolts=28.15,4.35117e-15
+testsActor-log  2020-05-28T18:01:13.244 tests i b1__interlockcurrent=0,0
+testsActor-log  2020-05-28T18:01:13.244 tests i b1__interlockpower=0,0
+testsActor-log  2020-05-28T18:01:13.244 tests i b1__heatersvolts=28.25,0
+testsActor-log  2020-05-28T18:01:13.245 tests i b1__heaterscurrent=0.00333333,0.0057735
+testsActor-log  2020-05-28T18:01:13.246 tests i b1__heaterspower=0.0933333,0.161658
+testsActor-log  2020-05-28T18:01:13.257 tests : test=b1,power,OK
+
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+\noindent test=\texttt{r1,power,OK}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2020-05-28T18:09:45.062 sent tests power cam=r1
+testsActor-log  2020-05-28T18:09:45.090 tests i text="connecting model for actor xcu_r1"
+testsActor-log  2020-05-28T18:09:45.144 tests i text="starting r1 power test"
+testsActor-log  2020-05-28T18:09:45.144 tests i text="checking pcm tcp server"
+testsActor-log  2020-05-28T18:09:45.660 tests i text="power status OK, retrieving data ..."
+testsActor-log  2020-05-28T18:09:56.114 tests i r1__24vupsvolts=28.3,0
+testsActor-log  2020-05-28T18:09:56.115 tests i r1__24vupscurrent=1.26667,0.0057735
+testsActor-log  2020-05-28T18:09:56.122 tests i r1__24vupspower=35.8467,0.16339
+testsActor-log  2020-05-28T18:09:56.124 tests i r1__24vauxvolts=24.65,4.35117e-15
+testsActor-log  2020-05-28T18:09:56.128 tests i r1__24vauxcurrent=0.28,0
+testsActor-log  2020-05-28T18:09:56.129 tests i r1__24vauxpower=6.902,0
+testsActor-log  2020-05-28T18:09:56.136 tests i r1__motorsvolts=24.65,4.35117e-15
+testsActor-log  2020-05-28T18:09:56.140 tests i r1__motorscurrent=0.17,0
+testsActor-log  2020-05-28T18:09:56.141 tests i r1__motorspower=4.19,0
+testsActor-log  2020-05-28T18:09:56.147 tests i r1__gaugevolts=28.3167,0.0288675
+testsActor-log  2020-05-28T18:09:56.147 tests i r1__gaugecurrent=0.0833333,0.0057735
+testsActor-log  2020-05-28T18:09:56.154 tests i r1__gaugepower=2.35667,0.167432
+testsActor-log  2020-05-28T18:09:56.157 tests i r1__coolervolts=28.3333,0.0288675
+testsActor-log  2020-05-28T18:09:56.158 tests i r1__coolercurrent=0.0466667,0.0057735
+testsActor-log  2020-05-28T18:09:56.166 tests i r1__coolerpower=1.32333,0.167432
+testsActor-log  2020-05-28T18:09:56.167 tests i r1__tempsvolts=28.25,0
+testsActor-log  2020-05-28T18:09:56.172 tests i r1__tempscurrent=0.15,0.01
+testsActor-log  2020-05-28T18:09:56.173 tests i r1__tempspower=4.24,0.28
+testsActor-log  2020-05-28T18:09:56.181 tests i r1__beevolts=28.25,0
+testsActor-log  2020-05-28T18:09:56.181 tests i r1__beecurrent=0.61,0.01
+testsActor-log  2020-05-28T18:09:56.187 tests i r1__beepower=17.2333,0.285015
+testsActor-log  2020-05-28T18:09:56.191 tests i r1__feevolts=28.2667,0.0288675
+testsActor-log  2020-05-28T18:09:56.195 tests i r1__feecurrent=0.306667,0.0057735
+testsActor-log  2020-05-28T18:09:56.196 tests i r1__feepower=8.67,0.155885
+testsActor-log  2020-05-28T18:09:56.203 tests i r1__interlockvolts=28.3833,0.0288675
+testsActor-log  2020-05-28T18:09:56.205 tests i r1__interlockcurrent=0,0
+testsActor-log  2020-05-28T18:09:56.209 tests i r1__interlockpower=0,0
+testsActor-log  2020-05-28T18:09:56.212 tests i r1__heatersvolts=28.35,4.35117e-15
+testsActor-log  2020-05-28T18:09:56.216 tests i r1__heaterscurrent=0,0
+testsActor-log  2020-05-28T18:09:56.217 tests i r1__heaterspower=0,0
+testsActor-log  2020-05-28T18:09:56.227 tests : test=r1,power,OK
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+\subsection{SPS-XCU-GATEVALVE-050}
+\label{sec:tc-050}
+
+test=\texttt{b1,gatevalve,OK}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2020-05-28T18:01:15.237 sent tests gatevalve cam=b1
+testsActor-log  2020-05-28T18:01:15.248 tests i text="starting b1 gatevalve test"
+testsActor-log  2020-05-28T18:01:15.728 tests i b1__gatevalve=Closed,Closed
+testsActor-log  2020-05-28T18:01:15.728 tests i text="gatevalve status OK, retrieving data ..."
+testsActor-log  2020-05-28T18:01:28.365 tests i b1__cryostatpressure=0,0
+testsActor-log  2020-05-28T18:01:28.367 tests i b1__roughingpressure=0,0
+testsActor-log  2020-05-28T18:01:28.421 tests : test=b1,gatevalve,OK
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+\noindent test=\texttt{r1,gatevalve,OK}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2020-05-28T18:09:58.180 sent tests gatevalve cam=r1
+testsActor-log  2020-05-28T18:09:58.194 tests i text="starting r1 gatevalve test"
+testsActor-log  2020-05-28T18:09:58.683 tests i r1__gatevalve=Closed,Closed
+testsActor-log  2020-05-28T18:09:58.691 tests i text="gatevalve status OK, retrieving data ..."
+testsActor-log  2020-05-28T18:10:10.988 tests i r1__cryostatpressure=0,0
+testsActor-log  2020-05-28T18:10:10.990 tests i r1__roughingpressure=0,0
+testsActor-log  2020-05-28T18:10:11.045 tests : test=r1,gatevalve,OK
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+
+\subsection{SPS-XCU-TURBO-060}
+\label{sec:tc-060}
+
+test=\texttt{b1,turbo,OK}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2020-05-28T18:01:30.373 sent tests turbo cam=b1
+testsActor-log  2020-05-28T18:01:30.383 tests i text="starting b1 turbo test"
+testsActor-log  2020-05-28T18:01:30.385 tests i text="connecting turbo controller"
+testsActor-log  2020-05-28T18:01:30.598 tests i text="turbo status OK, retrieving data ..."
+testsActor-log  2020-05-28T18:01:40.352 tests i b1__turbospeed=0,0
+testsActor-log  2020-05-28T18:01:40.354 tests i b1__turbovolts=24.0667,0.057735
+testsActor-log  2020-05-28T18:01:40.359 tests i b1__turbocurrent=0,0
+testsActor-log  2020-05-28T18:01:40.363 tests i b1__turbopower=0.9,0
+testsActor-log  2020-05-28T18:01:40.363 tests i b1__turbobodytemp=10,0
+testsActor-log  2020-05-28T18:01:40.363 tests i b1__turbocontrollertemp=17.6667,0.57735
+testsActor-log  2020-05-28T18:01:40.417 tests : test=b1,turbo,OK
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+\noindent test=\texttt{r1,turbo,OK}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2020-05-28T18:10:12.994 sent tests turbo cam=r1
+testsActor-log  2020-05-28T18:10:13.010 tests i text="starting r1 turbo test"
+testsActor-log  2020-05-28T18:10:13.015 tests i text="connecting turbo controller"
+testsActor-log  2020-05-28T18:10:13.215 tests i text="turbo status OK, retrieving data ..."
+testsActor-log  2020-05-28T18:10:22.974 tests i r1__turbospeed=0,0
+testsActor-log  2020-05-28T18:10:22.976 tests i r1__turbovolts=24.3,0
+testsActor-log  2020-05-28T18:10:22.976 tests i r1__turbocurrent=0.2,3.39935e-17
+testsActor-log  2020-05-28T18:10:22.988 tests i r1__turbopower=3.9,0
+testsActor-log  2020-05-28T18:10:22.989 tests i r1__turbobodytemp=9,0
+testsActor-log  2020-05-28T18:10:22.989 tests i r1__turbocontrollertemp=16,0
+testsActor-log  2020-05-28T18:10:23.045 tests : test=r1,turbo,OK
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+\subsection{SPS-XCU-IONPUMP-070}
+\label{sec:tc-070}
+
+test=\texttt{b1,ionpump,OK}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2020-05-28T18:01:42.330 sent tests ionpump cam=b1
+testsActor-log  2020-05-28T18:01:42.351 tests i text="starting b1 ionpump test"
+testsActor-log  2020-05-28T18:01:57.375 tests i text="connecting ionpump controller"
+testsActor-log  2020-05-28T18:01:58.867 tests i text="ionpump status OK, retrieving data ..."
+testsActor-log  2020-05-28T18:02:09.469 tests i b1__ionpump1volts=5000,0
+testsActor-log  2020-05-28T18:02:09.470 tests i b1__ionpump1current=9.83333e-06,5.7735e-08
+testsActor-log  2020-05-28T18:02:09.477 tests i b1__ionpump1temps=17,0
+testsActor-log  2020-05-28T18:02:09.480 tests i b1__ionpump1pressure=2.3e-08,4.05234e-24
+testsActor-log  2020-05-28T18:02:09.480 tests i b1__ionpump2volts=5100,0
+testsActor-log  2020-05-28T18:02:09.481 tests i b1__ionpump2current=9.76667e-06,5.7735e-08
+testsActor-log  2020-05-28T18:02:09.482 tests i b1__ionpump2temps=18,0
+testsActor-log  2020-05-28T18:02:09.491 tests i b1__ionpump2pressure=2.2e-08,0
+testsActor-log  2020-05-28T18:02:17.065 tests : test=b1,ionpump,OK
+
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+\noindent test=\texttt{r1,ionpump,OK}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2020-05-28T18:10:25.008 sent tests ionpump cam=r1
+testsActor-log  2020-05-28T18:10:25.046 tests i text="starting r1 ionpump test"
+testsActor-log  2020-05-28T18:10:40.116 tests i text="connecting ionpump controller"
+testsActor-log  2020-05-28T18:10:41.563 tests i text="ionpump status OK, retrieving data ..."
+testsActor-log  2020-05-28T18:10:52.063 tests i r1__ionpump1volts=5000,0
+testsActor-log  2020-05-28T18:10:52.064 tests i r1__ionpump1current=1.5e-05,0
+testsActor-log  2020-05-28T18:10:52.070 tests i r1__ionpump1temps=18,0
+testsActor-log  2020-05-28T18:10:52.070 tests i r1__ionpump1pressure=3.2e-08,0
+testsActor-log  2020-05-28T18:10:52.073 tests i r1__ionpump2volts=5100,0
+testsActor-log  2020-05-28T18:10:52.077 tests i r1__ionpump2current=1.5e-05,0
+testsActor-log  2020-05-28T18:10:52.078 tests i r1__ionpump2temps=18,0
+testsActor-log  2020-05-28T18:10:52.082 tests i r1__ionpump2pressure=3.2e-08,0
+testsActor-log  2020-05-28T18:10:59.657 tests : test=r1,ionpump,OK
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+\subsection{SPS-XCU-GAUGE-080}
+\label{sec:tc-080}
+
+test=\texttt{b1,gauge,OK}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2020-05-28T18:02:19.274 sent tests gauge cam=b1
+testsActor-log  2020-05-28T18:02:19.319 tests i text="starting b1 gauge test"
+testsActor-log  2020-05-28T18:02:19.321 tests i text="checking pcm tcp server"
+testsActor-log  2020-05-28T18:02:21.171 tests i text="gauge status OK, retrieving data ..."
+testsActor-log  2020-05-28T18:02:30.514 tests i b1__gauge=3.71856e-08,0
+testsActor-log  2020-05-28T18:02:30.569 tests : test=b1,gauge,OK
+
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+\noindent test=\texttt{r1,gauge,OK}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2020-05-28T18:11:01.957 sent tests gauge cam=r1
+testsActor-log  2020-05-28T18:11:01.968 tests i text="starting r1 gauge test"
+testsActor-log  2020-05-28T18:11:01.970 tests i text="checking pcm tcp server"
+testsActor-log  2020-05-28T18:11:02.057 tests i text="gauge status OK, retrieving data ..."
+testsActor-log  2020-05-28T18:11:11.499 tests i r1__gauge=5.63112e-08,0
+testsActor-log  2020-05-28T18:11:11.557 tests : test=r1,gauge,OK
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+\subsection{SPS-XCU-COOLER-090}
+\label{sec:tc-090}
+
+test=\texttt{b1,cooler,OK}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2020-05-28T18:02:32.581 sent tests cooler cam=b1
+testsActor-log  2020-05-28T18:02:32.602 tests i text="starting b1 cooler test"
+testsActor-log  2020-05-28T18:02:32.609 tests i text="checking cooler tcp server"
+testsActor-log  2020-05-28T18:02:32.609 tests i text="connecting cooler controller"
+testsActor-log  2020-05-28T18:02:33.001 tests i text="cooler status OK, retrieving data ..."
+testsActor-log  2020-05-28T18:02:43.479 tests i b1__coolersetpoint=123,0
+testsActor-log  2020-05-28T18:02:43.481 tests i b1__coolerreject=15.73,2.17558e-15
+testsActor-log  2020-05-28T18:02:43.482 tests i b1__coolertip=122.997,0.0057735
+testsActor-log  2020-05-28T18:02:43.485 tests i b1__coolerpower=73.9767,0.0321455
+testsActor-log  2020-05-28T18:02:43.537 tests : test=b1,cooler,OK
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+\noindent test=\texttt{r1,cooler,OK}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2020-05-28T18:11:13.511 sent tests cooler cam=r1
+testsActor-log  2020-05-28T18:11:13.521 tests i text="starting r1 cooler test"
+testsActor-log  2020-05-28T18:11:13.522 tests i text="checking cooler tcp server"
+testsActor-log  2020-05-28T18:11:13.527 tests i text="connecting cooler controller"
+testsActor-log  2020-05-28T18:11:13.915 tests i text="cooler status OK, retrieving data ..."
+testsActor-log  2020-05-28T18:11:25.792 tests i r1__coolersetpoint=123,0
+testsActor-log  2020-05-28T18:11:25.794 tests i r1__coolerreject=15.73,2.17558e-15
+testsActor-log  2020-05-28T18:11:25.794 tests i r1__coolertip=123,0
+testsActor-log  2020-05-28T18:11:25.796 tests i r1__coolerpower=74.1567,0.011547
+testsActor-log  2020-05-28T18:11:25.849 tests : test=r1,cooler,OK
+
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+\subsection{SPS-XCU-TEMPS-100}
+\label{sec:tc-100}
+
+test=\texttt{b1,temps,OK}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2020-05-28T18:02:45.448 sent tests temps cam=b1
+testsActor-log  2020-05-28T18:02:45.467 tests i text="starting b1 temps test"
+testsActor-log  2020-05-28T18:02:45.468 tests i text="checking temps tcp server"
+testsActor-log  2020-05-28T18:02:45.475 tests i text="connecting temps controller"
+testsActor-log  2020-05-28T18:02:45.554 tests i text="temps status OK, retrieving data ..."
+testsActor-log  2020-05-28T18:02:54.726 tests i b1__detectorbox=149.129,0.00252389
+testsActor-log  2020-05-28T18:02:54.727 tests i b1__mangin=277.236,0.000251661
+testsActor-log  2020-05-28T18:02:54.727 tests i b1__spider=140.936,0.000321455
+testsActor-log  2020-05-28T18:02:54.735 tests i b1__thermalspreader=132.617,0.000655744
+testsActor-log  2020-05-28T18:02:54.735 tests i b1__frontring=279.21,0.000173205
+testsActor-log  2020-05-28T18:02:54.735 tests i b1__detectorstrap1=158.812,0.0199001
+testsActor-log  2020-05-28T18:02:54.743 tests i b1__detectorstrap2=159.764,0.0197008
+testsActor-log  2020-05-28T18:02:54.796 tests : test=b1,temps,OK
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+\noindent test=\texttt{r1,temps,OK}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2020-05-28T18:11:27.788 sent tests temps cam=r1
+testsActor-log  2020-05-28T18:11:27.808 tests i text="starting r1 temps test"
+testsActor-log  2020-05-28T18:11:27.810 tests i text="checking temps tcp server"
+testsActor-log  2020-05-28T18:11:27.811 tests i text="connecting temps controller"
+testsActor-log  2020-05-28T18:11:27.898 tests i text="temps status OK, retrieving data ..."
+testsActor-log  2020-05-28T18:11:37.054 tests i r1__detectorbox=154.539,0.00245832
+testsActor-log  2020-05-28T18:11:37.055 tests i r1__mangin=276.886,0.000208167
+testsActor-log  2020-05-28T18:11:37.057 tests i r1__spider=149.244,0.000818535
+testsActor-log  2020-05-28T18:11:37.063 tests i r1__thermalspreader=134.008,0.000264575
+testsActor-log  2020-05-28T18:11:37.067 tests i r1__frontring=278.946,0.00023094
+testsActor-log  2020-05-28T18:11:37.067 tests i r1__detectorstrap1=157.618,0.0172541
+testsActor-log  2020-05-28T18:11:37.071 tests i r1__detectorstrap2=157.703,0.0171677
+testsActor-log  2020-05-28T18:11:37.124 tests : test=r1,temps,OK
+
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+\subsection{SPS-XCU-HEATERS-110}
+\label{sec:tc-110}
+
+test=\texttt{b1,heaters,OK}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2020-05-28T18:02:56.716 sent tests heaters cam=b1
+testsActor-log  2020-05-28T18:02:56.727 tests i text="starting b1 heaters test"
+testsActor-log  2020-05-28T18:02:56.765 tests i text="heaters status OK, retrieving data ..."
+testsActor-log  2020-05-28T18:03:06.170 tests i b1__heatersccdenabled=1,0
+testsActor-log  2020-05-28T18:03:06.171 tests i b1__heatersspreaderenabled=0,0
+testsActor-log  2020-05-28T18:03:06.174 tests i b1__heatersccdfraction=0.64,0
+testsActor-log  2020-05-28T18:03:06.180 tests i b1__heatersspreaderfraction=0,0
+testsActor-log  2020-05-28T18:03:06.233 tests : test=b1,heaters,OK
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+\noindent test=\texttt{r1,heaters,OK}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2020-05-28T18:11:39.086 sent tests heaters cam=r1
+testsActor-log  2020-05-28T18:11:39.104 tests i text="starting r1 heaters test"
+testsActor-log  2020-05-28T18:11:39.150 tests i text="heaters status OK, retrieving data ..."
+testsActor-log  2020-05-28T18:11:48.776 tests i r1__heatersccdenabled=1,0
+testsActor-log  2020-05-28T18:11:48.777 tests i r1__heatersspreaderenabled=0,0
+testsActor-log  2020-05-28T18:11:48.780 tests i r1__heatersccdfraction=0.66,0
+testsActor-log  2020-05-28T18:11:48.782 tests i r1__heatersspreaderfraction=0,0
+testsActor-log  2020-05-28T18:11:48.841 tests : test=r1,heaters,OK
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+\subsection{SPS-LOG-120}
+\label{sec:tc-120}
+NOT IMPLEMENTED: However the majority of tests conducted do write log files and demonstrate the purpose
+of this test case. 
+
+\subsection{SPS-IO-130}
+\label{sec:tc-130}
+NOT IMPLEMENTED: SPS-BIAS-140 and SPS-DARK-150 partly cover it, because they create new files onto 
+\texttt{/data}
+
+\subsection{SPS-BIAS-140}
+\label{sec:tc-140}
+
+test=\texttt{b1,bias,OK}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2020-05-27T20:47:57.112 sent tests bias cam=b1
+testsActor-log  2020-05-27T20:47:57.124 tests i text="connecting model for actor ccd_b1"
+testsActor-log  2020-05-27T20:47:57.202 tests i text="starting b1 bias test"
+testsActor-log  2020-05-27T20:48:48.625 tests i filepath="/data/raw/2020-05-27/sps/PFSA01778511.fits"
+testsActor-log  2020-05-27T20:48:48.628 tests i simple="True"
+testsActor-log  2020-05-27T20:48:48.629 tests i bitpix="16"
+testsActor-log  2020-05-27T20:48:48.630 tests i naxis="0"
+testsActor-log  2020-05-27T20:48:48.631 tests i detector="b1"
+testsActor-log  2020-05-27T20:48:48.635 tests i w_visit="17785"
+testsActor-log  2020-05-27T20:48:48.636 tests i w_arm="1"
+testsActor-log  2020-05-27T20:48:48.636 tests i w_spmod="1"
+testsActor-log  2020-05-27T20:48:48.637 tests i w_site="S"
+testsActor-log  2020-05-27T20:48:48.637 tests i exptime="0.0"
+testsActor-log  2020-05-27T20:48:48.637 tests i darktime="0.0"
+testsActor-log  2020-05-27T20:48:48.637 tests i w_pfdsgn="1099528409104"
+testsActor-log  2020-05-27T20:48:48.638 tests i w_rvxcu="1.9.7"
+testsActor-log  2020-05-27T20:48:48.638 tests i w_rvccd="1.6.2"
+testsActor-log  2020-05-27T20:48:48.638 tests i w_rvenu="1.0.4"
+testsActor-log  2020-05-27T20:48:48.661 tests i text="opDB book-keeping OK"
+testsActor-log  2020-05-27T20:48:48.661 tests : test=b1,bias,OK
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+\noindent test=\texttt{r1,bias,OK}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2020-05-27T20:44:26.073 sent tests bias cam=r1
+testsActor-log  2020-05-27T20:44:26.098 tests i text="connecting model for actor ccd_r1"
+testsActor-log  2020-05-27T20:44:26.155 tests i text="starting r1 bias test"
+testsActor-log  2020-05-27T20:45:17.584 tests i filepath="/data/raw/2020-05-27/sps/PFSA01778312.fits"
+testsActor-log  2020-05-27T20:45:17.585 tests i simple="True"
+testsActor-log  2020-05-27T20:45:17.585 tests i bitpix="16"
+testsActor-log  2020-05-27T20:45:17.585 tests i naxis="0"
+testsActor-log  2020-05-27T20:45:17.586 tests i detector="r1"
+testsActor-log  2020-05-27T20:45:17.586 tests i w_visit="17783"
+testsActor-log  2020-05-27T20:45:17.589 tests i w_arm="2"
+testsActor-log  2020-05-27T20:45:17.589 tests i w_spmod="1"
+testsActor-log  2020-05-27T20:45:17.590 tests i w_site="S"
+testsActor-log  2020-05-27T20:45:17.590 tests i exptime="0.0"
+testsActor-log  2020-05-27T20:45:17.590 tests i darktime="0.0"
+testsActor-log  2020-05-27T20:45:17.599 tests i w_pfdsgn="1099528409104"
+testsActor-log  2020-05-27T20:45:17.599 tests i w_rvxcu="1.9.7"
+testsActor-log  2020-05-27T20:45:17.600 tests i w_rvccd="1.6.2"
+testsActor-log  2020-05-27T20:45:17.601 tests i w_rvenu="1.0.4"
+testsActor-log  2020-05-27T20:45:17.623 tests i text="opDB book-keeping OK"
+testsActor-log  2020-05-27T20:45:17.623 tests : test=r1,bias,OK
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+\subsection{SPS-DARK-150}
+\label{sec:tc-150}
+
+test=\texttt{b1,dark,OK}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2020-05-27T20:48:50.611 sent tests dark cam=b1
+testsActor-log  2020-05-27T20:48:50.625 tests i text="starting b1 dark test"
+testsActor-log  2020-05-27T20:49:52.034 tests i filepath="/data/raw/2020-05-27/sps/PFSA01778611.fits"
+testsActor-log  2020-05-27T20:49:52.035 tests i simple="True"
+testsActor-log  2020-05-27T20:49:52.035 tests i bitpix="16"
+testsActor-log  2020-05-27T20:49:52.035 tests i naxis="0"
+testsActor-log  2020-05-27T20:49:52.036 tests i detector="b1"
+testsActor-log  2020-05-27T20:49:52.036 tests i w_visit="17786"
+testsActor-log  2020-05-27T20:49:52.036 tests i w_arm="1"
+testsActor-log  2020-05-27T20:49:52.043 tests i w_spmod="1"
+testsActor-log  2020-05-27T20:49:52.044 tests i w_site="S"
+testsActor-log  2020-05-27T20:49:52.044 tests i exptime="10.001"
+testsActor-log  2020-05-27T20:49:52.044 tests i darktime="10.001"
+testsActor-log  2020-05-27T20:49:52.045 tests i w_pfdsgn="1099528409104"
+testsActor-log  2020-05-27T20:49:52.045 tests i w_rvxcu="1.9.7"
+testsActor-log  2020-05-27T20:49:52.045 tests i w_rvccd="1.6.2"
+testsActor-log  2020-05-27T20:49:52.045 tests i w_rvenu="1.0.4"
+testsActor-log  2020-05-27T20:49:52.068 tests i text="opDB book-keeping OK"
+testsActor-log  2020-05-27T20:49:52.070 tests : test=b1,dark,OK
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+\noindent test=\texttt{r1,dark,OK}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2020-05-27T20:45:19.647 sent tests dark cam=r1
+testsActor-log  2020-05-27T20:45:19.653 tests i text="starting r1 dark test"
+testsActor-log  2020-05-27T20:46:21.065 tests i filepath="/data/raw/2020-05-27/sps/PFSA01778412.fits"
+testsActor-log  2020-05-27T20:46:21.066 tests i simple="True"
+testsActor-log  2020-05-27T20:46:21.067 tests i bitpix="16"
+testsActor-log  2020-05-27T20:46:21.067 tests i naxis="0"
+testsActor-log  2020-05-27T20:46:21.075 tests i detector="r1"
+testsActor-log  2020-05-27T20:46:21.076 tests i w_visit="17784"
+testsActor-log  2020-05-27T20:46:21.076 tests i w_arm="2"
+testsActor-log  2020-05-27T20:46:21.076 tests i w_spmod="1"
+testsActor-log  2020-05-27T20:46:21.077 tests i w_site="S"
+testsActor-log  2020-05-27T20:46:21.077 tests i exptime="10.0"
+testsActor-log  2020-05-27T20:46:21.077 tests i darktime="10.0"
+testsActor-log  2020-05-27T20:46:21.080 tests i w_pfdsgn="1099528409104"
+testsActor-log  2020-05-27T20:46:21.080 tests i w_rvxcu="1.9.7"
+testsActor-log  2020-05-27T20:46:21.080 tests i w_rvccd="1.6.2"
+testsActor-log  2020-05-27T20:46:21.080 tests i w_rvenu="1.0.4"
+testsActor-log  2020-05-27T20:46:21.100 tests i text="opDB book-keeping OK"
+testsActor-log  2020-05-27T20:46:21.102 tests : test=r1,dark,OK
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+\subsection{SPS-SHUTTER-160}
+\label{sec:tc-160}
+
+test=\texttt{sm1,shutters,OK}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2020-05-28T15:49:15.181 sent tests shutters sm1
+testsActor-log  2020-05-28T15:49:15.190 tests i text="starting shutters-sm1 test"
+testsActor-log  2020-05-28T15:49:23.309 tests i text="shutters status OK, testing exposure..."
+testsActor-log  2020-05-28T15:49:26.311 tests i text="testing  shutter"
+testsActor-log  2020-05-28T15:49:31.843 tests i text="exptime error = 0.003 s"
+testsActor-log  2020-05-28T15:49:34.842 tests i text="testing blue shutter"
+testsActor-log  2020-05-28T15:49:40.327 tests i text="exptime error = 0.001 s"
+testsActor-log  2020-05-28T15:49:43.321 tests i text="testing red shutter"
+testsActor-log  2020-05-28T15:49:48.857 tests i text="exptime error = 0.002 s"
+testsActor-log  2020-05-28T15:49:48.857 tests i text="Exposure OK, testing interlock..."
+testsActor-log  2020-05-28T15:49:51.858 tests i text="opening  shutter"
+testsActor-log  2020-05-28T15:49:52.317 tests i text="turning BIA ON"
+testsActor-log  2020-05-28T15:49:52.344 tests w text="enu_sm1 bia failed: FysomError('event bia_on inappropriate in current state EXPOSING',) in fn() at /software/conda/lib/python3.6/site-packages/fysom/__init__.py:272"
+testsActor-log  2020-05-28T15:49:52.344 tests i text="INTERLOCK OK"
+testsActor-log  2020-05-28T15:49:55.799 tests i text="opening blue shutter"
+testsActor-log  2020-05-28T15:49:56.190 tests i text="turning BIA ON"
+testsActor-log  2020-05-28T15:49:56.230 tests w text="enu_sm1 bia failed: FysomError('event bia_on inappropriate in current state OPENBLUE',) in fn() at /software/conda/lib/python3.6/site-packages/fysom/__init__.py:272"
+testsActor-log  2020-05-28T15:49:56.230 tests i text="INTERLOCK OK"
+testsActor-log  2020-05-28T15:49:59.610 tests i text="opening red shutter"
+testsActor-log  2020-05-28T15:50:00.072 tests i text="turning BIA ON"
+testsActor-log  2020-05-28T15:50:00.118 tests w text="enu_sm1 bia failed: FysomError('event bia_on inappropriate in current state OPENRED',) in fn() at /software/conda/lib/python3.6/site-packages/fysom/__init__.py:272"
+testsActor-log  2020-05-28T15:50:00.119 tests i text="INTERLOCK OK"
+testsActor-log  2020-05-28T15:50:00.712 tests : test=sm1,shutters,OK
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+
+\subsection{SPS-SLIT-170}
+\label{sec:tc-170}
+
+test=\texttt{sm1,slit,OK}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2020-05-28T15:43:03.718 sent tests slit sm1
+testsActor-log  2020-05-28T15:43:03.761 tests i text="starting slit-sm1 test"
+testsActor-log  2020-05-28T15:43:35.782 tests i text="slit status OK, testing motion ..."
+testsActor-log  2020-05-28T15:43:38.790 tests i text="moving to X=1.0  Y=0.0  Z=0.0  U=0.0  V=0.0  W=0.0"
+testsActor-log  2020-05-28T15:43:39.550 tests i text="cumulate error=1e-05"
+testsActor-log  2020-05-28T15:43:42.554 tests i text="moving to X=0.0  Y=1.0  Z=0.0  U=0.0  V=0.0  W=0.0"
+testsActor-log  2020-05-28T15:43:43.557 tests i text="cumulate error=9.99999999995449e-06"
+testsActor-log  2020-05-28T15:43:46.561 tests i text="moving to X=0.0  Y=0.0  Z=1.0  U=0.0  V=0.0  W=0.0"
+testsActor-log  2020-05-28T15:43:48.282 tests i text="cumulate error=1e-05"
+testsActor-log  2020-05-28T15:43:51.279 tests i text="moving to home"
+testsActor-log  2020-05-28T15:43:52.469 tests : test=sm1,slit,OK
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+
+\subsection{SPS-REXM-180}
+\label{sec:tc-180}
+
+test=\texttt{sm1,rexm,OK}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2020-05-28T15:43:54.936 sent tests rexm sm1
+testsActor-log  2020-05-28T15:43:54.959 tests i text="starting rexm-sm1 test"
+testsActor-log  2020-05-28T15:44:19.825 tests i text="rexm status OK, testing motion..."
+testsActor-log  2020-05-28T15:44:22.825 tests i text="going to med position"
+testsActor-log  2020-05-28T15:46:46.346 tests i text="rexm motion completed in 143.2 s"
+testsActor-log  2020-05-28T15:46:49.343 tests i text="going to low position"
+testsActor-log  2020-05-28T15:49:12.427 tests i text="rexm motion completed in 142.8 s"
+testsActor-log  2020-05-28T15:49:12.428 tests : test=sm1,rexm,OK
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+\subsection{SPS-BIA-190}
+\label{sec:tc-190}
+
+test=\texttt{sm1,bia,OK}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2020-05-28T15:50:02.710 sent tests bia sm1
+testsActor-log  2020-05-28T15:50:02.733 tests i text="starting bia-sm1 test"
+testsActor-log  2020-05-28T15:50:13.507 tests i text="bia status OK, turning it on ..."
+testsActor-log  2020-05-28T15:50:23.006 tests i sm1__biaphoto1=945.667,3.51188
+testsActor-log  2020-05-28T15:50:23.007 tests i sm1__biaphoto2=965.333,1.52753
+testsActor-log  2020-05-28T15:50:23.007 tests i text="BIA OK, testing interlock..."
+testsActor-log  2020-05-28T15:50:26.009 tests i text="opening  shutter"
+testsActor-log  2020-05-28T15:50:26.041 tests w text="enu_sm1 shutters failed: FysomError('event shut_open inappropriate in current state BIA',) in fn() at /software/conda/lib/python3.6/site-packages/fysom/__init__.py:272"
+testsActor-log  2020-05-28T15:50:26.041 tests i text="INTERLOCK OK"
+testsActor-log  2020-05-28T15:50:29.032 tests i text="opening blue shutter"
+testsActor-log  2020-05-28T15:50:29.046 tests w text="enu_sm1 shutters failed: FysomError('event blue_open inappropriate in current state BIA',) in fn() at /software/conda/lib/python3.6/site-packages/fysom/__init__.py:272"
+testsActor-log  2020-05-28T15:50:29.047 tests i text="INTERLOCK OK"
+testsActor-log  2020-05-28T15:50:32.052 tests i text="opening red shutter"
+testsActor-log  2020-05-28T15:50:32.076 tests w text="enu_sm1 shutters failed: FysomError('event red_open inappropriate in current state BIA',) in fn() at /software/conda/lib/python3.6/site-packages/fysom/__init__.py:272"
+testsActor-log  2020-05-28T15:50:32.076 tests i text="INTERLOCK OK"
+testsActor-log  2020-05-28T15:50:32.193 tests : test=sm1,bia,OK
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+\subsection{SPS-TEMPS-200}
+\label{sec:tc-200}
+
+test=\texttt{sm1,temps,OK}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2020-05-28T15:42:34.772 sent tests temps sm1
+testsActor-log  2020-05-28T15:42:34.800 tests i text="connecting model for actor enu_sm1"
+testsActor-log  2020-05-28T15:42:34.875 tests i text="starting temps-sm1 test"
+testsActor-log  2020-05-28T15:42:46.532 tests i text="temps status OK, retrieving data ..."
+testsActor-log  2020-05-28T15:43:01.682 tests i sm1__motor_rda=4.458,0.001
+testsActor-log  2020-05-28T15:43:01.682 tests i sm1__motor_shutter_b=4.896,0.00173205
+testsActor-log  2020-05-28T15:43:01.683 tests i sm1__motor_shutter_r=4.62033,0.00152753
+testsActor-log  2020-05-28T15:43:01.683 tests i sm1__bia_box_top=4.628,0.001
+testsActor-log  2020-05-28T15:43:01.683 tests i sm1__bia_box_bottom=4.69133,0.00057735
+testsActor-log  2020-05-28T15:43:01.685 tests i sm1__fiber_unit_hexapod_bottom=4.532,0.001
+testsActor-log  2020-05-28T15:43:01.687 tests i sm1__fiber_unit_hexapod_top=4.535,0.001
+testsActor-log  2020-05-28T15:43:01.689 tests i sm1__fiber_unit_fiber_frame_top=4.53433,0.00057735
+testsActor-log  2020-05-28T15:43:01.690 tests i sm1__collimator_frame_bottom=4.222,0.001
+testsActor-log  2020-05-28T15:43:01.693 tests i sm1__collimator_frame_top=4.328,0.001
+testsActor-log  2020-05-28T15:43:01.695 tests i sm1__bench_left_top=4.38333,0.00152753
+testsActor-log  2020-05-28T15:43:01.696 tests i sm1__bench_left_bottom=4.32033,0.00057735
+testsActor-log  2020-05-28T15:43:01.698 tests i sm1__bench_right_top=4.43733,0.00152753
+testsActor-log  2020-05-28T15:43:01.703 tests i sm1__bench_right_bottom=4.93967,0.00152753
+testsActor-log  2020-05-28T15:43:01.703 tests i sm1__bench_far_top=4.265,0.00173205
+testsActor-log  2020-05-28T15:43:01.703 tests i sm1__bench_far_bottom=4.432,0
+testsActor-log  2020-05-28T15:43:01.708 tests i sm1__bench_near_top=4.395,0.001
+testsActor-log  2020-05-28T15:43:01.708 tests i sm1__bench_near_bottom=4.602,0.001
+testsActor-log  2020-05-28T15:43:01.710 tests i sm1__bench_central_top=4.50067,0.00057735
+testsActor-log  2020-05-28T15:43:01.711 tests : test=sm1,temps,OK
+\end{verbatim}
+\end{tiny}
+\end{quote}
+
+\subsection{SPS-IIS-210}
+\label{sec:tc-210}
+
+test=\texttt{sm1,iis,OK}
+
+\begin{quote}
+\begin{tiny}
+\begin{verbatim}
+testsActor-log  2020-05-28T18:21:59.599 sent tests iis sm1
+testsActor-log  2020-05-28T18:21:59.610 tests i text="starting iis-sm1 test"
+testsActor-log  2020-05-28T18:22:09.875 tests i text="iis status OK, warming up lamp..."
+testsActor-log  2020-05-28T18:22:42.212 tests i sm1__iishgarvolts=119.86,0.0655744
+testsActor-log  2020-05-28T18:22:42.213 tests i sm1__iishgarcurrent=0.13,0
+testsActor-log  2020-05-28T18:22:42.218 tests i sm1__iishgarpower=13.11,0
+testsActor-log  2020-05-28T18:22:46.009 tests : test=sm1,iis,OK
+\end{verbatim}
+\end{tiny}
+\end{quote}
