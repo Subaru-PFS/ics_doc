@@ -15,7 +15,7 @@ To enable these functions, in this process we validate basic functions of AG cam
 
 \paragraph{Focusing}
 Firstly, we seek on-focus position.
-The focusing procedure is proposed by Jim Gunn (PFI:336).
+The focusing procedure is proposed by Jim Gunn (PFI:336)\footnote{As of February 2020, Satoshi Kawanomoto from NAOJ is thinking algorithm too. This process may change following to discussion in the future}.
 With a glass plate covering half area of the detector, AG camera has two focus positions.
 Hence, the cameras can take out-focus/ in-focus image simultaneously, when the PFI is at focus.
 Measuring the spot size of stars at the area with and without glass plate, $s_+$ and $s_-$, we calculate focus positions.
@@ -31,8 +31,9 @@ Here either area with or without position is used.
 \item Move focus position by 1.40 mm, then measure spot sizes ($s_+$ and $s_-$).
 In the current design, AG camera detectors locate 1.40mm back-ward from the best position of scientific fibers (see reference for {\tt REQ-SYS-1390}).
 \item Repeating step 1.--3. at a various telescope position, derive $\alpha$.
-\item After deriving $\alpha$, slew telescope to a given field, and seek focus position using AG camera.
+\item After deriving $\alpha$, slew telescope to a given field, configure fibers to stars somehow, and seek focus position using AG camera.
 Changing the focus position around on-focus position, estimate position accuracy.
+By taking spectra, check the consistency of the on-focus position between the science fibers and the AG cameras.
 \end{enumerate}
 
 Assuming 10-sec exposure, it will take$\sim$ 10 minutes to execute step 1.--3. for a given field.
@@ -42,6 +43,18 @@ If we visit three fields every 15$\degree$ from El.=30$\degree$ to E.l=75$\degre
 Another 40 minutes are needed to measure focusing accuracy.
 Therefore, $\sim$ 3 hours are required for this step, including time for analysis.
 %We slew telescope to a bright stars and let them into the AG camera FoV.
+
+\paragraph{Focal plane characterization}
+$z$-position of eash AG camera needs to be checked to make sure every AG camera makes the same plane when we rotate the instrument rotator.
+The prcedure is:
+\begin{enumerate}
+\item Slew the telescope to a given field.
+\item Check focus position on each camera.
+\item Rotate the instrument rotator and check focus on each camera.
+\item Repeat item 3. and compare the planes which each AG camera travels.
+\end{enumerate}
+
+Note that this test can be done with data taken below (``Pixel scale and orientation on the sky").
 
 \paragraph{Pixel scale and orientation on the sky}
 Secondary, we measure pixel scale and orientation of the AGCs in the following steps.
@@ -93,7 +106,7 @@ Because in this sequence we have star image on AGCs  and control the telescope a
 \paragraph{Designated Tool for This Process}
 Spot size and spot position are measured by ICS module (Auto Guide Camera Controller).
 Using these values, a script is needed for seeking on-focus position using either in-focus or out-focus area.
-Also, a script to measure the orientation of the camera is needed.
+Also, a script to measure the orientation of the camera and an analyzer for brightness of spectra are needed.
 Astrometry should be done using specified script.
 
 \begin{itembox}[l]{\suctitle{Success Criteria}}

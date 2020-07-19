@@ -1,14 +1,21 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Validation of MCS performance [Daytime]}\label{secflow:MCSperf}
 
-\milestone{MCS reads fiducial/science fiber image for the first time.}
+\milestone{MCS takes fiducial/science fiber image for the first time.}
 
 After PFI and MCS are installed to the Prime Focus and the Cassegrain  Focus, respectively, the image quality of the MCS is validated finally, because at this point MCS can take the image of ``fibers" in the entire field of view for the first time.
-We check the intensity of the spots of fiducial fibers, and confirm the S/N meets the requirement ($>$ several hundreds, according to CDR).
-We validate the MCS exposure and centroid measurement sequence; taking image and calculating the positions of fibers with expected time ($<5$ seconds, according to CDR).
-Here, we need to somehow illuminate the science fibers if SpS and Cable B is not ready\footnote{According to the latest schedule, Cable B and SM1,2, and 3 will be delivered before the PFI arrival. We will use these SMs, and shall back-illuminate the rest of science fibers at the other end of Cable B (on IR4 floor) in some way.}.
+
+We check the intensity of the spots of the fiducial fibers and the science fibers, and confirm the S/N meets the requirement ($>$ several hundreds, according to CDR).
+We assume the science fibers, even though partly, can be back-illuminated, that is, the Back Illumination Assembly in the SpS subsystem does work (see \ref{secflow:PFIon}, where we can do this step alternatively) \footnote{According to the latest schedule (as of December 2019), Cable B1 and SM1,2, will be delivered before the PFI arrival. We will use B1 and SM1 for this process.}.
+
+At the beginning, we regulate the brightness of back-illumination.
+The brightness of back-illuminated fibers are set based on that of the science fibers illuminated in the strobe mode, whose brightness is fixed ($1 \; \mathrm{[W\;m^{-2} \; sr^{-1}]} \pm 20 \%$).
+Firstly, we shall regulate the brightness the brightness of the fiducial fibers comparing with that of science fibers illuminated in the strobe mode.
+Secondary, we shall adjust the brightness of science fibers back-lit in the normal mode to that of fiducial fibers. 
+
 
 After we confirm MCS can take fibers image with required S/N, we validate the MCS performance.
+%We validate the MCS exposure and centroid measurement sequence; taking image and calculating the positions of fibers with expected time ($<5$ seconds, according to CDR).
 MCS is designed to have uniform PSF with FWHM of 8.5um, or 2.6 pixel, in the entire field of view of PFI.
 For the accuracy of the position of the spots, the requirement is less than 5um (0.08 pixel) rms, 
 The validation will be processed as follows:
@@ -19,8 +26,12 @@ The validation will be processed as follows:
 \end{enumerate}
 
 If we take 50 frames for a given elevation and rotator angle, it will take $\sim$10 minutes (see also \ref{secflow:prestudy}).
-Assuming we test at 6 rotator angles (with 60$\degree$ step from EL$=-180\degree$ to 180$\degree$) for every 5 elevation (with 15$\degree$ step from EL$=30\degree$ to 90$\degree$), 5 hours are required for this test.
+Assuming we test at 6 rotator angles (with 60$\degree$ step from InR$=-180\degree$ to 180$\degree$) for every 5 elevation (with 15$\degree$ step from EL$=30\degree$ to 90$\degree$), 5 hours are required for this test.
 Hence, 0.5 day is enough for this process, including the time for verifying the S/N of the spots.
+
+Engineering run using the pin-hole mask showed a possibility that spot brightness may affect measured centroids, although it is small\footnote{PFS-MCS-ASI000115-03\_MCSCentroidAlgorithmtReport.pdf}.
+The images of different brightness can check this effect.
+
 
 \paragraph{Designated Tool for This Process}
 Nothing except for statistics of the measured values.

@@ -1,7 +1,9 @@
+% use ptex2pdf
 \documentclass[11pt]{article}
 \usepackage[sectionbib,numbers]{natbib}
 \usepackage{fancyhdr}
 \usepackage{url}
+%\usepackage[colorlinks=true,linkcolor=blue,filecolor=blue,urlcolor=blue,dvipdfmx]{hyperref}
 \usepackage[colorlinks=true,linkcolor=blue,filecolor=blue,urlcolor=blue,dvipdfmx]{hyperref}
 \usepackage[top=30truemm,bottom=30truemm,left=25truemm,right=25truemm]{geometry}
 
@@ -11,21 +13,24 @@
 \lhead{PFS Commissioning Workflow}
 \rfoot{}
 
-\usepackage[dvipdfmx]{graphicx} 
+\usepackage[dvipdfmx]{graphicx}
 \usepackage{amsmath,amssymb}
-\usepackage[usenames]{color} 
+\usepackage[usenames]{color}
 \usepackage{ascmac,fancybox}
 % bounding box
 \usepackage{mediabb}
 
 % package for vector
 \usepackage{bm}
-% package for longtable
+% package for long table and coloured table
 \usepackage{longtable}
 \usepackage{lscape}
+\usepackage{colortbl}
 %caption package
 \usepackage{caption}
-\captionsetup[longtable]{width=0.80\textwidth}
+\captionsetup[longtable]{width=0.90\textwidth}
+\captionsetup[table]{width=0.90\textwidth}
+\captionsetup[figure]{width=0.90\textwidth}
 
 %spreadsheet table
 %\usepackage{spreadtab}
@@ -50,11 +55,12 @@
 %  * step: working step of each process and/or sequence
 % *** a dictionary (End) *** %
 
-\title{PFS Commissioning Work Flow}
+\title{PFS Commissioning Work Flow \\
+\large{Reference ID: PFS-GEN-IPM004000-01 }}
 \author{Yuki Moritani, Kiyoto Yabe, Naoyuki Tamura, and Atsushi Shimono \\
 (PFS Project Office, Kavli IPMU)}
 \date{
-ver. 6: \today}
+Issue 01, ver. 8: \today }
 %\date{\today \\ ver. 1 September 2, 2015}
 
 \begin{document}
@@ -81,7 +87,7 @@ ver. 6: \today}
 \renewcommand{\thesubsubsection}{P-\;\arabic{subsubsection}}
 \subsection{Validation of PFI}\label{sec:PFI}
 MCS will be delivered to the Subaru telescope one year before PFI delivery.
-Hence, working process for PFI validation are considered assuming that we can install MCS to the Cassecrain focus.
+Hence, working process for PFI validation are considered assuming that we can install MCS to the Cassegrain focus.
 \input{step_PFI/P-01}
 \input{step_PFI/P-02}
 \input{step_PFI/P-03}
@@ -120,6 +126,10 @@ Hence, working process for PFI validation are considered assuming that we can in
 \input{step_All/A-04}
 \input{step_All/A-05}
 \input{step_All/A-06}
+\input{step_All/A-07}
+
+\input{details_tools}
+\clearpage
 
 % Raster Fields
 \input{starcatalog.tex}
@@ -127,7 +137,7 @@ Hence, working process for PFI validation are considered assuming that we can in
 \clearpage
 
 % Coordinates systems
-\input{coordinates.tex}
+%\input{coordinates.tex}
 
 \clearpage
 
@@ -139,18 +149,23 @@ Hence, working process for PFI validation are considered assuming that we can in
 
 \section*{Change log.}
 \begin{itemize}
-\item ver. 1: October 7, 2015 \\
+\item ver. 1: 7 October, 2015 \\
 --- Released for informal meeting in Princeton.
 \item ver. 2:  March 15, 2016
-\item ver. 3: May 10, 2016
+\item ver. 3: 10 May, 2016
 --- Released for discussion with Subaru
-\item ver. 4: October 5, 2016 \\
+\item ver. 4: 5 October, 2016 \\
 --- Updates from informal meeting, and software collaboration meeting.
-\item ver. 5: January 7, 2017 \\
+\item ver. 5: 7 January, 2017 \\
 --- Update schedules of runs following the latest to-level schedule (as of Dec. 2016)
-\item ver. 6: \today \\
---- Update schedules of runs following discussion with Subaru in Jan. 2017.\\
+\item ver. 6: 1 May, 2018 \\
+--- Update schedules of runs following discussion with Subaru in Jan. 2017., and the latest top-level schedule \\
 --- Update following suggestion by J. Gunn in May 2017.
+\item ver. 7: December 2019 \\
+--- Change document structure \\
+--- Update schedules based on project schedule as of 2019 July.
+\item ver. 8: 11 February 2020 \\
+--- Update process following the results of the Runs 0--2.
 \end{itemize}
 
 \end{document}
