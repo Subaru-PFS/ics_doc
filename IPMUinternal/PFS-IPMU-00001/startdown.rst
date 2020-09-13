@@ -1,5 +1,5 @@
 Service cold start and full shutdown procedures
-------
+-----------------------------------------------
 
 The startup and shutdown procedure of all infrastructures are described below.
 The following notation is used in this memo unless otherwise noted:
@@ -13,7 +13,7 @@ The following notation is used in this memo unless otherwise noted:
 Note: before and after carrying out the procedure, send an announcement e-mail to the PFS tech team.
 
 Cold start
-======
+==========
 
 Start back-ends first, then end-points to external, and monitoring systems.
 See `Start & shutdown VM guest with virsh` section for the `virsh` command to startup the VM guests.
@@ -86,15 +86,15 @@ See `Start & shutdown VM guest with virsh` section for the `virsh` command to st
 
 * Start internal services
 
-  * ``landfill``, ``stretch``, and ``jessie-main`` on **dlb3-vm**
+  * ``landfill``, ``stretch`` on **dlb3-vm**
   * (optional) ``lf??`` on **dlb7-vm** if we use it
-  * *Windows* : ``WinP1``, ``WinVSdev`` (and CAD?) on **dlb4-vm**
+  * *Windows* : ``WinP1``, (optional) ``WinVSdev`` (and CAD?) on **dlb4-vm**
 
 * Check the above VM guests running
 * Check internal services up by accessing them.
 
 Full shutdown
-======
+=============
 
 **See in advance PO internal wiki page for sign-in information (especially iSCSI storage)** before you shutdown ``pfssrv``.
 
@@ -157,7 +157,7 @@ Refer the mail (subject: \"List of virt VMs\") sent to admin weekly for VM guest
 
 
 Start & shutdown VM guest with virsh
-=====
+====================================
 
 * To start ``vm guest`` on **vm host**,
 
