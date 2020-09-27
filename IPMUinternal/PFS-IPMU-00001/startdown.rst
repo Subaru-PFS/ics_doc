@@ -88,7 +88,7 @@ See `Start & shutdown VM guest with virsh` section for the `virsh` command to st
 
   * ``landfill``, ``stretch`` on **dlb3-vm**
   * (optional) ``lf??`` on **dlb7-vm** if we use it
-  * *Windows* : ``WinP1``, (optional) ``WinVSdev`` (and CAD?) on **dlb4-vm**
+  * *Windows* : ``WinP1``, and POWwindows(=dla3-vm) on **dlb4-vm**
 
 * Check the above VM guests running
 * Check internal services up by accessing them.
@@ -111,7 +111,7 @@ Refer the mail (subject: \"List of virt VMs\") sent to admin weekly for VM guest
 
 * Shutdown internal services (like working shell host, simulator)
 
-  * ``jessie-main``, ``landfill``, and ``stretch`` on **dlb3-vm**
+  * ``landfill``, and ``stretch`` on **dlb3-vm**
   * (optional) ``lf??`` on **dlb7-vm** if it is running
 
 * Shutdown external servers
@@ -126,7 +126,7 @@ Refer the mail (subject: \"List of virt VMs\") sent to admin weekly for VM guest
 
 * Shutdown iSCSI storage for pfsarch via web admin panel
 
-  * On browser type IP of *pfsarch* server (`pas-srv`, see `dnsmasq<https://github.com/Subaru-PFS/ics_dnsmasq/blob/master/hosts-ipmu/srv.conf>`_), then shutdown
+  * On browser type IP of *pfsarch* server (`pas-srv`, see `dnsmasq <https://github.com/Subaru-PFS/ics_dnsmasq/blob/master/hosts-ipmu/srv.conf>`_), then shutdown
 
 * Shutdown service VM guests (*jupyter*, *jirapipe*, *Windows*, etc.)
 
@@ -134,7 +134,7 @@ Refer the mail (subject: \"List of virt VMs\") sent to admin weekly for VM guest
   * *jupyter1* : ``jupyter1`` on **dlb4-vm**
   * *dbsim2* : ``dbsim2-spt`` on **rcc1-vm**
   * *jirapipe* : ``jira-pipe-8.3`` on **dlb3-vm**
-  * *Windows* : ``WinP1``, ``WinVSdev`` and CAD? on **dlb4-vm** 
+  * *Windows* : ``WinP1`` on **dlb4-vm** , and POwindows    
     * Note: connect via e.g. Remote Desktop to apply updates before shutdown.
 
 * Shutdown back-end services
