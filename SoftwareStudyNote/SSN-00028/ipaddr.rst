@@ -37,12 +37,13 @@ CIDR assignments
   - ICS MHS and support services
   - CB2F non-hardware actors (SSC, STH, MAC etc.)
 
-- **.164.96/27 (.164.96 - .164.127)**: PFI
+- **.164.96/27 (.164.96 - .164.127)**: PFI and truss
 
   - Device in PFI
   - Cal-lamp
   - Cobra FPGA (1st stage)
   - CB2F hosts, incl FPS, MPS, AGCC
+  - SuNSS
 
 - **.164.128/26 (.164.128 - .164.191)**: (kept as spare)
 - **.164.192/28 (.164.192 - .164.207)**: (kept as spare)
