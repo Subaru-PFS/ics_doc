@@ -29,6 +29,9 @@
    - id: 12
      name: "dla3"
      port: 1
+   - id: 13
+     name: "proc-spt"
+     port: 1
    - id: 14
      name: "dlb4"
      port: 1

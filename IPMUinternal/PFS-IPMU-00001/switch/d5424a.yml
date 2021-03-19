@@ -9,8 +9,8 @@
      name: "uplink"
      port: 1
    - id: 3
-     name: "mtgdesk"
-     port: 1
+     name: "roc-spt"
+     port: 2
    - id: 4
      name: "office"
      port: 1

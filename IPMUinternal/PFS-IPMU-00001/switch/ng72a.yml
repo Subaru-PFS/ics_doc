@@ -9,7 +9,7 @@
      name: "kvm"
      port: 1
    - id: 2
-     name: "sato"
+     name: "apc6"
      port: 1
    - id: 3
      name: "apc2"
@@ -37,6 +37,9 @@
      port: "i"
    - id: 13
      name: "dlb5"
+     port: "i"
+   - id: 14
+     name: "proc-spt"
      port: "i"
    - id: 15
      name: "dlb7"
