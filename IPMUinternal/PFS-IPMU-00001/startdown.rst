@@ -114,6 +114,12 @@ Refer the mail (subject: \"List of virt VMs\") sent to admin weekly for VM guest
   * ``landfill``, and ``stretch`` on **dlb3-vm**
   * (optional) ``lf??`` on **dlb7-vm** if it is running
 
+* Shutdown JIRA service
+
+  JIRA needs to shutdown **before** pfspipe is down. Otherwise, shutdown process hangs up.
+
+  * *jirapipe* : ``jira-pipe-8.3`` on **dlb3-vm**
+
 * Shutdown external servers
 
   * *pfs* : ``pfssrv`` on **dlc2-vm**
@@ -133,7 +139,6 @@ Refer the mail (subject: \"List of virt VMs\") sent to admin weekly for VM guest
   * *jupyter-spt* : ``jupyter-spt`` on **dlc3-vm**
   * *jupyter1* : ``jupyter1`` on **dlb4-vm**
   * *dbsim2* : ``dbsim2-spt`` on **rcc1-vm**
-  * *jirapipe* : ``jira-pipe-8.3`` on **dlb3-vm**
   * *Windows* : ``WinP1`` on **dlb4-vm** , and POwindows    
     * Note: connect via e.g. Remote Desktop to apply updates before shutdown.
 
