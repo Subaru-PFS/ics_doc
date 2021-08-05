@@ -118,7 +118,7 @@ Following table is an unit assignment of 2-314 PFS rack as of 2018/07/23.
 |  1 |                 |      |      |                             |
 +----+-----------------+------+------+-----------------------------+
 
-* UPS ups2 (block type), and dmb1 are placed on floor
+* UPS ups2 (block type), and dmb1 (cold) are placed on floor ---  to be discontinued
 
 Power source category and name
 ==============================
