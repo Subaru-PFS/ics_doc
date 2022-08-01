@@ -11,14 +11,17 @@
    - id: 2
      name: "c24a"
      port: 2
+   - id: 3
+     name: "pdun2"
+     port: 1
    - id: 4
      name: "dlb3"
      port: 1
    - id: 5
-     name: "dlc1"
+     name: "pdun3"
      port: 1
    - id: 6
-     name: "dmb1"
+     name: "pdun1"
      port: 1
    - id: 7
      name: "dlb7"
