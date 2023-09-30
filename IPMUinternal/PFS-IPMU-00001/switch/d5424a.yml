@@ -14,9 +14,6 @@
    - id: 4
      name: "office"
      port: 1
-   - id: 5
-     name: "printer"
-     port: 1
    - id: 6
      name: "dlb4"
      port: 2
@@ -35,9 +32,6 @@
    - id: 11
      name: "dla3"
      port: 2
-   - id: 12
-     name: "dlb2"
-     port: 2
    - id: 13
      name: "dlb7"
      port: 2
@@ -52,9 +46,6 @@
      port: 2
    - id: 18
      name: "dlc2"
-     port: 2
-   - id: 20
-     name: "rca4"
      port: 2
    - id: 23
      name: "f24c"
