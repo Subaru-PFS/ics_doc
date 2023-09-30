@@ -8,9 +8,6 @@
    - id: 1
      name: "uplink"
      port: 1
-   - id: 2
-     name: "TVconf"
-     port: 1
    - id: 3
      name: "dlb7"
      port: 3
@@ -28,9 +25,6 @@
      port: 3
    - id: 13
      name: "dlc5"
-     port: 2
-   - id: 14
-     name: "dlc6"
      port: 2
    - id: 15
      name: "dlc7"

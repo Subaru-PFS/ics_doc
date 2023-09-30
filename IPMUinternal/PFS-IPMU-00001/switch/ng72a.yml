@@ -62,9 +62,6 @@
    - id: 21
      name: "dlc5"
      port: "i"
-   - id: 22
-     name: "dlc6"
-     port: "i"
    - id: 23
      name: "dlc7"
      port: "i"

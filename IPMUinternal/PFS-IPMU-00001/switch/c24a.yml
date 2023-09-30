@@ -17,12 +17,6 @@
    - id: 4
      name: "arch"
      port: 3
-   - id: 5
-     name: "dlb2"
-     port: 1
-   - id: 6
-     name: "rca4"
-     port: 1
    - id: 7
      name: "dbsim"
      port: 1
@@ -37,9 +31,6 @@
      port: 2
    - id: 13
      name: "dlc7"
-     port: 1
-   - id: 14
-     name: "dlc6"
      port: 1
    - id: 15
      name: "dlc5"
